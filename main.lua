@@ -5,6 +5,16 @@ SMODS.Atlas {
 	py = 95
 }
 
+-- This is in preparation for file splitting. I'll do that later. - Jogla
+
+local mod_contents = {
+
+}
+
+for k, v in pairs(mod_contents) do -- Load this mod's files
+	assert(SMODS.load_file('/content/'..v..'.lua'))()
+  end
+
 -- 
 -- NOT Flipped Script im SLOW 
 --
