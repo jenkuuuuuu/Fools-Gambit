@@ -1,0 +1,17 @@
+{
+	"id": "foolsGambit",
+	"name": "Fool's Gambit",
+	"display_name": "FG",
+	"author": ["GoldenLeaf","jenku"],
+	"description": "fools ganbtui ",
+	"prefix": "-",
+	"main_file": "main.lua",
+	"priority": 0,
+	"badge_colour": "#6fa0e8",
+	"badge_text_colour": "#e6eaf0",
+	"version": "1.0.0",
+	"dependencies": [
+        "Steamodded (>=1.*)",
+		"Lovely (>=0.6)"
+        ]
+}
