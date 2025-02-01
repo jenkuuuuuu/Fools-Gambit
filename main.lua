@@ -28,10 +28,10 @@ SMODS.Joker {
 		}
 	},
 	config = { extra = {} },
-	rarity = 1,
+	rarity = 3,
 	atlas = 'jokers',
 	pos = { x = 1, y = 0 },
-	cost = 20,
+	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self then
 			G.E_MANAGER:add_event(Event({
