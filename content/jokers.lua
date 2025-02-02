@@ -5,6 +5,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+
+-- All joker equivalents. Format is: original <> alternate
+local joker_equivalents = {
+	["j_fg_t1"] = "j_fg_t2"
+}
+
+
 -- 
 -- NOT Flipped Script im SLOW 
 --
@@ -52,6 +59,47 @@ SMODS.Joker {
 					return true
 				end
 			}))
+		end
+	end
+}
+
+
+-- Testing jokers. Will be removed in a future version.
+
+SMODS.Joker {
+	key = 't1',
+	loc_txt = {
+		name = 'Test 1',
+		text = {
+			"Should become Test 2 when sold"
+		}
+	},
+	config = { extra = {} },
+	rarity = 1,
+	atlas = 'jokers',
+	pos = { x = 1, y = 0 },
+	cost = 0,
+	calculate = function(self, card, context)
+		if context.selling_self then
+			alternate_card(self,joker_equivalents,"k")
+		end
+	end
+}
+
+SMODS.Joker {
+	key = 't2',
+	loc_txt = {
+		name = 'Test 2',
+		text = {
+			"Should become Test 1 when sold"
+		}
+	},
+	config = { extra = {} },
+	rarity = 1,
+	cost = 0,
+	calculate = function(self, card, context)
+		if context.selling_self then
+			alternate_card(self,joker_equivalents,"v")
 		end
 	end
 }
