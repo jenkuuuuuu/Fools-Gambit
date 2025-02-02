@@ -1,14 +1,8 @@
-SMODS.Atlas {
-	key = "jokers",
-	path = "jokers.png",
-	px = 71,
-	py = 95
-}
-
 -- This is in preparation for file splitting. I'll do that later. - Jogla
-
+-- im splitting jokers and stuff into sections to make this easier later - jenku
 local mod_contents = {
-
+	"jokers",
+	"editions"
 }
 
 for k, v in pairs(mod_contents) do -- Load this mod's files
