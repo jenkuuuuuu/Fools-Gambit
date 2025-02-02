@@ -1,3 +1,15 @@
+function is_alternate(card,table)
+    for k, v in pairs(table) do
+        if card == v then
+            return "v"
+		elseif card == tostring(k) then
+			return "k"
+        end
+    end
+    return "no"
+end
+
+
 --[[
 key is the provided card key.
 table is the reference table to look up.
@@ -16,8 +28,8 @@ function get_equivalent(key,table,passing)
 end
 
 -- Alternates between this card and the associated alternative card.
-function alternate_card(card,table,passing) 
-	local convert = get_equivalent(card.key,table,passing)
+function alternate_card(key,table) 
+	local convert = get_equivalent(key,table,is_alternate(key,table))
 	local card = create_card('Joker', G.jokers, false, nil, true, false, convert, nil)
 	card:add_to_deck()
 	G.jokers:emplace(card)
