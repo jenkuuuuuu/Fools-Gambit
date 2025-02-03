@@ -7,13 +7,84 @@ SMODS.Atlas {
 
 
 -- All joker equivalents. Format is: original <> alternate
-local joker_equivalents = {
-	["j_fg_t1"] = "j_fg_t2"
+joker_equivalents = {
+	["j_fg_t1"] = "j_fg_t2",
+	["flippedscript"] = "flippedscriptALT",
+	["scriptflipped"] = "scriptflipped"
+}
+
+--
+-- Flipped Script (Normal and Alternate)
+--
+
+SMODS.Joker {
+	key = 'flippedscript',
+	loc_txt = {
+		name = 'Flipped Script',
+		text = {
+			"When sold, changes all {C:purple}Alternate{}",
+			"{C:attention}Jokers{} to their {C:red}Original{}"
+		}
+	},
+	config = { extra = {} },
+	rarity = 3,
+	atlas = 'jokers',
+	pos = { x = 0, y = 0 },
+	cost = 8,
+	calculate = function(self, card, context)
+		if context.selling_self then
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					
+					for i in ipairs(G.jokers.cards) do
+						local currentCard = G.jokers.cards[i]
+                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "v" then
+                            alternate_card(currentCard.config.center_key, joker_equivalents)
+                            currentCard:start_dissolve(nil,false,0,true)
+                        end
+					end
+					return true
+				end
+			}))
+		end
+	end
 }
 
 
+SMODS.Joker {
+	key = 'flippedscriptALT',
+	loc_txt = {
+		name = 'Flipped Script',
+		text = {
+			"When sold, changes all {C:red}Original{}",
+			"{C:attention}Jokers{} to their {C:purple}Alternate{}"
+		}
+	},
+	config = { extra = {} },
+	rarity = 2,
+	atlas = 'jokers',
+	pos = { x = 0, y = 0 },
+	cost = 4,
+	calculate = function(self, card, context)
+		if context.selling_self then
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					for i in ipairs(G.jokers.cards) do
+						local currentCard = G.jokers.cards[i]
+                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "k" then
+                            alternate_card(currentCard.config.center_key, joker_equivalents)
+                            currentCard:start_dissolve(nil,false,0,true)
+                        end
+					end
+					return true
+				end
+			}))
+		end
+	end
+}
+
 -- 
--- NOT Flipped Script im SLOW 
+-- Script Flipped
 --
 
 SMODS.Joker {
@@ -81,7 +152,7 @@ SMODS.Joker {
 	cost = 0,
 	calculate = function(self, card, context)
 		if context.selling_self then
-			alternate_card(self,joker_equivalents,"k")
+			alternate_card(self.key,joker_equivalents)
 		end
 	end
 }
@@ -99,7 +170,7 @@ SMODS.Joker {
 	cost = 0,
 	calculate = function(self, card, context)
 		if context.selling_self then
-			alternate_card(self,joker_equivalents,"v")
+			alternate_card(self.key,joker_equivalents)
 		end
 	end
 }
