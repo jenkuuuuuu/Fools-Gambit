@@ -5,12 +5,6 @@ SMODS.Atlas {
 	py = 95
 }
 
-joker_equivalents = {
-	["j_fg_t1"] = "j_fg_t2",
-	["flippedscript"] = "flippedscriptALT",
-	["scriptflipped"] = "scriptflipped"
-}
-
 
 SMODS.ConsumableType{
     key = "abberation",
@@ -49,8 +43,7 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                    alternate_card(G.jokers.highlighted[1].config.center_key,joker_equivalents)
-                    G.jokers.highlighted[1]:start_dissolve(nil,false,0,true)
+                    alternate_card(G.jokers.highlighted[1].config.center_key, G.jokers.highlighted[1], joker_equivalents)
                 return true
             end
         }))
@@ -84,8 +77,7 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                    alternate_card(G.jokers.highlighted[1].config.center_key,joker_equivalents)
-                    G.jokers.highlighted[1]:start_dissolve(nil,false,0,true)
+                    alternate_card(G.jokers.highlighted[1].config.center_key, G.jokers.highlighted[1], joker_equivalents)
                 return true
             end
         }))

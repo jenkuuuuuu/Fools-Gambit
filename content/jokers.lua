@@ -5,12 +5,18 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+	key = "jokers_alt",
+	path = "jokers_alt.png",
+	px = 71,
+	py = 95
+}
 
 -- All joker equivalents. Format is: original <> alternate
 joker_equivalents = {
 	["j_fg_t1"] = "j_fg_t2",
-	["flippedscript"] = "flippedscriptALT",
-	["scriptflipped"] = "scriptflipped"
+	["j_fg_flippedscript"] = "j_fg_flippedscriptALT",
+	["j_joker"] = "j_fg_joker"
 }
 
 --
@@ -35,7 +41,6 @@ SMODS.Joker {
 		if context.selling_self then
 			G.E_MANAGER:add_event(Event({
 				func = function()
-					
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
                         if is_alternate(currentCard.config.center_key, joker_equivalents) == "v" then
@@ -73,7 +78,7 @@ SMODS.Joker {
 						local currentCard = G.jokers.cards[i]
                         if is_alternate(currentCard.config.center_key, joker_equivalents) == "k" then
                             alternate_card(currentCard.config.center_key, joker_equivalents)
-                            currentCard:start_dissolve(nil,false,0,true)
+                            currentCard:start_dissolve(nil,false,0,true)		
                         end
 					end
 					return true
@@ -170,7 +175,30 @@ SMODS.Joker {
 	cost = 0,
 	calculate = function(self, card, context)
 		if context.selling_self then
-			alternate_card(self.key,joker_equivalents)
+			alternate_card(self.key,card,joker_equivalents)
+		end
+	end
+}
+
+
+SMODS.Joker {
+	key = 'joker',
+	loc_txt = {
+		name = 'Joker?',
+		text = {
+			"???"
+		}
+	},
+	config = { extra = {} },
+	rarity = 1,
+	cost = 0,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			
+		end
+		if context.selling_self then
+			print(self.key)
+			alternate_card(self.key,card,joker_equivalents)
 		end
 	end
 }

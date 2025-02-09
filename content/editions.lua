@@ -21,7 +21,7 @@ SMODS.Shader {
 }
 
 SMODS.Edition({
-    key = "Polished",
+    key = "polished",
     loc_txt = {
         name = "Polished",
         label = "polished",
