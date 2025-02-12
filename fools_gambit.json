@@ -2,7 +2,7 @@
 	"id": "foolsGambit",
 	"name": "Fool's Gambit",
 	"display_name": "FG",
-	"author": ["GoldenLeaf", "jenku", "Jogla"],
+	"author": ["GoldenLeaf", "jenku", "Jogla", "deathmodereal"],
 	"description": "A mod that adds alternative version of a lot of cards.",
 	"prefix": "fg",
 	"main_file": "main.lua",
