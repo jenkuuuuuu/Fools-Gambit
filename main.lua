@@ -6,7 +6,7 @@ local mod_contents = {
 	"jokers",
 	"editions",
 	"consumeables",
-	"boosterpacks"
+	"booster_packs"
 }
 
 for k, v in pairs(mod_contents) do -- Load this mod's files
