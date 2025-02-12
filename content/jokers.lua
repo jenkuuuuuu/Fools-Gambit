@@ -16,11 +16,11 @@ SMODS.Atlas {
 joker_equivalents = {
 	["j_fg_t1"] = "j_fg_t2",
 	["j_fg_flippedscript"] = "j_fg_flippedscriptALT",
-	["j_joker"] = "j_fg_joker?",
-	["j_misprint"] = "j_fg_misprint?",
-	["j_banner"] = "j_fg_banner?",
+	["j_joker"] = "j_fg_joker",
+	["j_misprint"] = "j_fg_misprint",
+	["j_banner"] = "j_fg_banner",
 	["j_scary_face"] = "j_fg_face",
-	["j_mystic_summit"] = "j_fg_summit?",
+	["j_mystic_summit"] = "j_fg_summit",
 	["j_ceremonial"] = "j_fg_dagger",
 }
 
@@ -145,7 +145,7 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-	key = 'joker?',
+	key = 'joker',
 	loc_txt = {
 		name = 'Joker?',
 		text = {
@@ -173,7 +173,7 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-	key = 'dagger?',
+	key = 'dagger',
 	loc_txt = {
 		name = 'Ceremonial Dagger?',
 		text = {
@@ -223,7 +223,7 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-	key = 'banner?',
+	key = 'banner',
 	loc_txt = {
 		name = 'Banner?',
 		text = {
@@ -257,7 +257,7 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-	key = 'summit?',
+	key = 'summit',
 	loc_txt = {
 		name = 'Mystic Summit?',
 		text = {
@@ -292,7 +292,7 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
-  key = 'misprint?',
+  key = 'misprint',
   rarity = 2,
   cost = 6,
   atlas = "jokers_alt",
