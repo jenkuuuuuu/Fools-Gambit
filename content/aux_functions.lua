@@ -38,6 +38,8 @@ function alternate_card(key,card,table)
 	G.jokers:emplace(new_card)
 	if card.edition then
 		new_card:set_edition(tostring(card.edition.key),true,true)
+	else
+		new_card:set_edition(nil,true,true)
 	end
 	card:start_dissolve(nil,false,0,true)
 end
