@@ -12,6 +12,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+    key = 'deathmodereal',
+	path = 'deathmodereal2.png',
+	px = 71,
+	py = 95
+}
+
 -- All joker equivalents. Format is: original <> alternate
 joker_equivalents = {
 	["j_fg_t1"] = "j_fg_t2",
@@ -359,6 +366,48 @@ SMODS.Joker {
       }
     end
 end
+}
+
+SMODS.Joker {
+  key = 'deathmodereal',
+  rarity = "fg_collective",
+  cost = 6,
+  atlas = "deathmodereal",
+  pos = { x = 0 , y = 0},
+  config = {  extra = { Xmult = 20, blindchipmult = 2 } },
+  loc_txt = {
+  name = 'Deathmodereal',
+  text = {
+  "He's {X:black,C:white}cool(ish){}",
+  '{X:mult,C:white}X#1#{} mult.'
+  },
+  },
+  loc_vars = function(self, info_queue, card)
+    return { vars = {
+        card.ability.extra.Xmult
+    } }
+  end,
+  calculate = function (self, card, context)
+  	if G.jokers then
+              if context.before then
+		G.E_MANAGER:add_event(Event({func = function()
+	   	G.GAME.blind.chips = G.GAME.blind.chips * card.ability.extra.blindchipmult
+	    G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+		G.FUNCS.blind_chip_UI_scale(G.hand_text_area.blind_chips)
+        G.HUD_blind:recalculate() 
+		return true end }))
+		return {
+		message = "hehehehehe....",
+		colour = G.C.WHITE
+		}
+		end
+		end
+     if context.joker_main then
+      return {
+        Xmult = card.ability.extra.Xmult
+      }
+    end
+  end
 }
 
 -- Testing jokers. Will be removed in a future version.
