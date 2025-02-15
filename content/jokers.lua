@@ -19,6 +19,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+    key = 'deathmoderealalt',
+	path = 'deathmodereal2a.png',
+	px = 71,
+	py = 95
+}
+
 -- All joker equivalents. Format is: original <> alternate
 joker_equivalents = {
 	["j_fg_t1"] = "j_fg_t2",
@@ -29,6 +36,23 @@ joker_equivalents = {
 	["j_scary_face"] = "j_fg_face",
 	["j_mystic_summit"] = "j_fg_summit",
 	["j_ceremonial"] = "j_fg_dagger",
+	["j_8_ball"] = "j_fg_8ball",
+	["j_abstract"] = "j_fg_abstract",
+	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
+	["j_jolly"] = "j_fg_jolly",
+	["j_zany"] = "j_fg_zany",
+	["j_mad"] = "j_fg_mad",
+	["j_crazy"] = "j_fg_crazy",
+	["j_droll"] = "j_fg_droll",
+	["j_sly"] = "j_fg_sly",
+	["j_wily"] = "j_fg_wily",
+	["j_clever"] = "j_fg_clever",
+	["j_devious"] = "j_fg_devious",
+	["j_crafty"] = "j_fg_crafty",
+	["j_duo"] = "j_fg_duo",
+	["j_trio"] = "j_fg_trio",
+	["j_family"] = "j_fg_family",
+	["j_order"] = "j_fg_order",
 }
 
 --
@@ -369,6 +393,540 @@ end
 }
 
 SMODS.Joker {
+  key = '8ball',
+  rarity = 1,
+  cost = 2,
+  atlas = 'jokers_alt',
+  pos = { x = 0 , y = 5},
+  config = {  extra = { chips = 0, chip_gain = 15 } },
+  loc_txt = {
+  name = '8 Ball?',
+  text = {
+                    "Each played {C:attention}8{} creates a",
+                    "{C:tarot}Tarot{} card when scored",
+                    "{C:inactive}(Must have room)",
+  },
+  },
+  calculate = function (self, card, context)
+     if context.cardarea == G.play and context.individual and (context.other_card:get_id() == 8) then
+                        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                        return {
+                            extra = {focus = card, message = localize('k_plus_tarot'), func = function()
+                                G.E_MANAGER:add_event(Event({
+                                    trigger = 'before',
+                                    delay = 0.0,
+                                    func = (function()
+                                            local card = create_card('Tarot',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                                            card:add_to_deck()
+                                            G.consumeables:emplace(card)
+                                            G.GAME.consumeable_buffer = 0
+                                        return true
+                                    end)}))
+                            end},
+                            colour = G.C.SECONDARY_SET.Tarot,
+                            card = card
+                        }
+                    end
+				end
+}
+
+SMODS.Joker {
+  key = 'abstract',
+  rarity = 1,
+  cost = 2,
+  atlas = 'jokers_alt',
+  pos = { x = 3 , y = 3},
+  config = {  extra = { mult_gain = 10, mult = 0, sold = 0 } },
+  loc_txt = {
+  name = 'Abstract Joker?',
+  text = {
+  "{C:mult}+#1#{} Mult for",
+  "each {C:attention}Joker{} card Sold",
+  "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+  },
+  },
+  loc_vars = function(self, info_queue, card)
+    return { vars = {
+        card.ability.extra.mult_gain,
+		card.ability.extra.mult
+    } }
+  end,
+  calculate = function (self, card, context)
+    if context.selling_card and not context.repetition then
+	card.ability.extra.sold = card.ability.extra.sold + 1
+	card.ability.extra.mult = card.ability.extra.mult_gain * card.ability.extra.sold
+	end
+	if context.joker_main then
+	return {
+	mult = card.ability.extra.mult
+	}
+	end
+end
+}
+
+SMODS.Joker {
+	key = 'jolly',
+	loc_txt = {
+		 name = 'Jolly Joker?',
+         text = {
+     "{C:red}+#1#{} Mult and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_mult = 4, type = 'Pair', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 2, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'zany',
+	loc_txt = {
+		 name = 'Zany Joker?',
+         text = {
+     "{C:red}+#1#{} Mult and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_mult = 6, type = 'Three of a Kind', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 3, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'mad',
+	loc_txt = {
+		 name = 'Mad Joker?',
+         text = {
+     "{C:red}+#1#{} Mult and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_mult = 5, type = 'Two Pair', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 4, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'crazy',
+	loc_txt = {
+		 name = 'Crazy Joker?',
+         text = {
+     "{C:red}+#1#{} Mult and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_mult = 6, type = 'Straight', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 5, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'droll',
+	loc_txt = {
+		 name = 'Droll Joker?',
+         text = {
+     "{C:red}+#1#{} Mult and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_mult = 5, type = 'Flush', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 6, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'sly',
+	loc_txt = {
+		 name = 'Sly Joker?',
+         text = {
+     "{C:chips}+#1#{} Chips and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_chips = 25, type = 'Pair', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 0, y = 14 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'wily',
+	loc_txt = {
+		 name = 'Wily Joker?',
+         text = {
+     "{C:chips}+#1#{} Chips and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_chips = 50, type = 'Three of a Kind', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 1, y = 14 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'clever',
+	loc_txt = {
+		 name = 'Clever Joker?',
+         text = {
+     "{C:chips}+#1#{} Chips and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_chips = 40, type = 'Two Pair', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 2, y = 14 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'devious',
+	loc_txt = {
+		 name = 'Devious Joker?',
+         text = {
+     "{C:chips}+#1#{} Chips and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_chips = 50, type = 'Straight', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 3, y = 14 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'crafty',
+	loc_txt = {
+		 name = 'Crafty Joker?',
+         text = {
+     "{C:chips}+#1#{} Chips and",
+	 "retrigger scoring cards {C:attention}#3#{} time",
+     "if played hand contains",
+     "a {C:attention}#2#",
+		}
+	},
+	config = {t_chips = 40, type = 'Flush', extra = { repetitions = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 4, y = 14 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.repetition and context.cardarea == G.play then
+	if (next(context.poker_hands[card.ability.type])) then
+	return {
+	message = localize('k_again_ex'),
+    repetitions = card.ability.extra.repetitions,
+    card = card
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'duo',
+	loc_txt = {
+		 name = 'The Duo?',
+         text = {
+    "Gains {X:mult,C:white}X#1#{} Mult if played",
+    "hand contains",
+    "a {C:attention}#2#",
+	"{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+		}
+	},
+	config = {type = 'Pair', extra = { Xmult_mod = 0.1, Xmult = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 5, y = 4 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.before and context.cardarea == G.jokers and not context.repetition then
+	if (next(context.poker_hands[card.ability.type])) then
+	card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+	end
+	end
+	if context.joker_main then
+	if card.ability.extra.Xmult > 0 then
+	return {
+	Xmult = card.ability.extra.Xmult
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'trio',
+	loc_txt = {
+		 name = 'The Trio?',
+         text = {
+    "Gains {X:mult,C:white}X#1#{} Mult if played",
+    "hand contains",
+    "a {C:attention}#2#",
+	"{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+		}
+	},
+	config = {type = 'Three of a Kind', extra = { Xmult_mod = 0.15, Xmult = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 6, y = 4 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.before and context.cardarea == G.jokers and not context.repetition then
+	if (next(context.poker_hands[card.ability.type])) then
+	card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+	end
+	end
+	if context.joker_main then
+	if card.ability.extra.Xmult > 0 then
+	return {
+	Xmult = card.ability.extra.Xmult
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'family',
+	loc_txt = {
+		 name = 'The Family?',
+         text = {
+    "Gains {X:mult,C:white}X#1#{} Mult if played",
+    "hand contains",
+    "a {C:attention}#2#",
+	"{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+		}
+	},
+	config = {type = 'Four of a Kind', extra = { Xmult_mod = 0.2, Xmult = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 7, y = 4 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.before and context.cardarea == G.jokers and not context.repetition then
+	if (next(context.poker_hands[card.ability.type])) then
+	card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+	end
+	end
+	if context.joker_main then
+	if card.ability.extra.Xmult > 0 then
+	return {
+	Xmult = card.ability.extra.Xmult
+	}
+	end
+	end
+	end
+}
+
+SMODS.Joker {
+	key = 'order',
+	loc_txt = {
+		 name = 'The Order?',
+         text = {
+    "Gains {X:mult,C:white}X#1#{} Mult if played",
+    "hand contains",
+    "a {C:attention}#2#",
+	"{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+		}
+	},
+	config = {type = 'Straight', extra = { Xmult_mod = 0.15, Xmult = 1}},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult}}
+	end,
+	rarity = 1,
+	atlas = 'jokers_alt',
+	pos = { x = 8, y = 4 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.before and context.cardarea == G.jokers and not context.repetition then
+	if (next(context.poker_hands[card.ability.type])) then
+	card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+	end
+	end
+	if context.joker_main then
+	if card.ability.extra.Xmult > 0 then
+	return {
+	Xmult = card.ability.extra.Xmult
+	}
+	end
+	end
+	end
+}
+
+----------- Collectives
+
+SMODS.Joker {
   key = 'deathmodereal',
   rarity = "fg_collective",
   cost = 6,
@@ -376,7 +934,7 @@ SMODS.Joker {
   pos = { x = 0 , y = 0},
   config = {  extra = { Xmult = 20, blindchipmult = 2 } },
   loc_txt = {
-  name = 'Deathmodereal',
+  name = 'deathmodereal',
   text = {
   "He's {X:black,C:white}cool(ish){}",
   '{X:mult,C:white}X#1#{} mult.'
@@ -408,6 +966,33 @@ SMODS.Joker {
       }
     end
   end
+}
+
+SMODS.Joker {
+	key = 'deathmoderealalt',
+	loc_txt = {
+		 name = 'deathmodereal',
+         text = {
+     "He's {X:white,C:black}cool{}",
+     'each scored card gives',
+	 '{X:mult,C:white}X#1#{} mult.'
+		}
+	},
+	config = { extra = {Xmult = 1.25} },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.Xmult } }
+	end,
+	rarity = "fg_collective",
+	atlas = 'deathmoderealalt',
+	pos = { x = 0, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play then
+			return {
+				Xmult = card.ability.extra.Xmult
+			}
+		end
+	end
 }
 
 -- Testing jokers. Will be removed in a future version.
