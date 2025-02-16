@@ -22,6 +22,7 @@ joker_equivalents = {
 	["j_scary_face"] = "j_fg_face",
 	["j_mystic_summit"] = "j_fg_summit",
 	["j_ceremonial"] = "j_fg_dagger",
+	["j_fibonacci"] = "j_fg_fibonacci"
 }
 
 --
@@ -361,65 +362,169 @@ SMODS.Joker {
 end
 }
 
--- Testing jokers. Will be removed in a future version.
-
 SMODS.Joker {
-	key = 't1',
-	loc_txt = {
-		name = 'Test 1',
-		text = {
-			"Should become Test 2 when sold"
-		}
-	},
-	config = { extra = {} },
-	rarity = 1,
-	atlas = 'jokers',
-	pos = { x = 1, y = 0 },
-	cost = 0,
-	calculate = function(self, card, context)
-		if context.selling_self then
-			alternate_card(self.key,joker_equivalents)
-		end
+    key = 'fist',
+    loc_txt = {
+        name = 'Raised Fist?',
+        text = {
+            "Adds {C:attention}#1#{} the rank",
+            "of {C:attention}highest{} ranked card",
+            "held in hand to Mult",
+        }
+    },
+    config = { extra = {mult = 0.5} },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult } }
+    end,
+    rarity = 1,
+    atlas = 'jokers_alt',
+    pos = { x = 8, y = 2 },
+    cost = 2,
+    calculate = function(self, card, context)
+        if context.cardarea == G.hand then
+            local temp_Mult = 1
+			local temp_ID = 1
+			local raised_card = nil
+			for i=1, #G.hand.cards do
+					if temp_ID <= G.hand.cards[i].base.id and G.hand.cards[i].ability.effect ~= 'Stone Card' then 
+					temp_Mult = G.hand.cards[i].base.nominal
+					temp_ID = G.hand.cards[i].base.id 
+					raised_card = G.hand.cards[i]
+				end
+			end
+			if raised_card and context.repetition and context.cardarea == G.play then
+				return {
+					h_mult = card.ability.extra.mult/2,
+					card = card,
+				}
+        	end
+    	end
 	end
 }
 
 SMODS.Joker {
-	key = 't2',
-	loc_txt = {
-		name = 'Test 2',
-		text = {
-			"Should become Test 1 when sold"
-		}
-	},
-	config = { extra = {} },
+	key = 'fibonacci',
 	rarity = 1,
-	cost = 0,
-	calculate = function(self, card, context)
-		if context.selling_self then
-			alternate_card(self.key,card,joker_equivalents)
+	cost = 2,
+	atlas = 'jokers_alt',
+	pos = { x = 1 , y = 5 },
+	config = { extra = { retriggers = 1 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = {
+		  card.ability.extra.retriggers
+		  } }
+	end,
+	loc_txt = {
+		name = 'Fibonacci?',
+		text = {
+			"Retrigger each played {C:attention}Ace{},",
+			"{C:attention}2{}, {C:attention}3{}, {C:attention}5{}, or {C:attention}8{}",
+			"{C:attention}1{} time and permanently",
+			"upgrades to next rank when scored",
+		},
+	},
+	calculate = function (self, card, context)
+		if context.repetition and context.cardarea == G.play and
+			(context.other_card:get_id() == 14 or -- ACE
+			context.other_card:get_id() == 2 or
+			context.other_card:get_id() == 3 or
+			context.other_card:get_id() == 5 or
+			context.other_card:get_id() == 8 or
+			context.other_card:get_id() == 12) then
+			return {
+				repetitions = 1,
+				card = card
+			}
 		end
-	end
+		if context.after then
+			for k,v in ipairs(context.scoring_hand) do
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = .1,
+					func = function()
+						if v.base.value == "Ace" then SMODS.change_base(v,v.base.suit,"2") v:flip() 
+						elseif v.base.value == "2" then SMODS.change_base(v,v.base.suit,"3") v:flip()
+						elseif v.base.value == "3" then SMODS.change_base(v,v.base.suit,"5") v:flip()
+						elseif v.base.value == "5" then SMODS.change_base(v,v.base.suit,"8") v:flip()
+						elseif v.base.value == "8" then v:flip()
+						end
+						return true
+					end
+				}))
+			end
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				delay = .4,
+				func = function() return true end
+			}))
+			for _,v in ipairs(context.scoring_hand) do
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 0.1,
+					func = function()
+						if v.base.value == "Ace" or
+						v.base.value == "2" or
+						v.base.value == "3" or
+						v.base.value == "5" or
+						v.base.value == "8" then
+							v:flip()
+						end
+						return true
+					end
+				}))
+			end
+			G.E_MANAGER:add_event(Event({
+				trigger = 'after',
+				delay = 1,
+				func = function() return true end
+			}))
+		end
+  	end
 }
 
+-- STILL NEEDS WORK. DO NOT UNCOMMENT -Jogla
 
+--[[ 
 SMODS.Joker {
-	key = 'joker',
+	key = 'mr_bones',
+	rarity = 3,
+	cost = 2,
+	atlas = 'jokers_alt',
+	pos = { x = 3 , y = 4 },
+	config = {  extra = {
+		destroy_chance = 1,
+		total_chance = 2,
+	} },
 	loc_txt = {
-		name = 'Joker?',
-		text = {
-			"???"
-		}
+	name = 'Mr. Bones?',
+	text = {
+		"Gives {C:chips}+1{} hand and {C:mult}+1{} discard",
+		"if chips scored are at least {C:attention}25%{} of",
+		"required chips when playing final hand.",
+		"{C:green}1 in 2{} chance this card ",
+		"gets destroyed when triggered."
 	},
-	config = { extra = {} },
-	rarity = 1,
-	cost = 0,
-	calculate = function(self, card, context)
-		if context.joker_main then
-			
+	},
+	calculate = function (self, card, context)
+		if context.joker_main and G.GAME.current_round.hands_left == 0 then
+			print("TEST!")
+			G.GAME.current_round.discards_left = G.GAME.current_round.discards_left + 1
+			G.GAME.current_round.hands_left = G.GAME.current_round.hands_left + 1
+			return {
+				message = localize('k_saved_ex'),
+				colour = G.C.RED
+			}
 		end
-		if context.selling_self then
-			print(self.key)
-			alternate_card(self.key,card,joker_equivalents)
+		if context.after and context.cardarea == G.jokers and G.GAME.chips < G.GAME.blind.chips then
+			print(G.GAME.chips)
+			print(G.GAME.blind.chips)
+			local dissolve = 2
+			dissolve = pseudorandom('sans', 1, 2)
+			print (dissolve)
+			if dissolve == 1 then card:start_dissolve() end
 		end
-	end
+		if context.end_of_round and G.GAME.chips < G.GAME.blind.chips then
+		end
+  	end
 }
+]]
