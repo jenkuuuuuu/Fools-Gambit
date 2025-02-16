@@ -59,6 +59,7 @@ joker_equivalents = {
 	["j_lusty_joker"] = "j_fg_lusty",
 	["j_wrathful_joker"] = "j_fg_wrathful",
 	["j_gluttenous_joker"] = "j_fg_gluttenous",
+	["j_egg"] = "j_fg_egg"
 }
 
 --
@@ -1286,36 +1287,63 @@ SMODS.Joker {
 	loc_txt = {
 		name = 'Fibonacci?',
 		text = {
-			"Retrigger each played {C:attention}Ace{},",
-			"{C:attention}2{}, {C:attention}3{}, {C:attention}5{}, or {C:attention}8{}",
-			"{C:attention}1{} time and permanently",
-			"upgrades to next rank when scored",
+			"Retrigger each scored {C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{},",
+			"{C:attention}8{} and {C:attention}King{}{C:attention}1{} time and permanently",
+			"upgrades it to next rank when scored",
+			"{C:inactive}(ex: 2 to 3, 5 to 8, King to Ace){}",
 		},
 	},
 	calculate = function (self, card, context)
+		local has_fired = false
+		if context.before then has_fired = false end
 		if context.repetition and context.cardarea == G.play and
 			(context.other_card:get_id() == 14 or -- ACE
 			context.other_card:get_id() == 2 or
 			context.other_card:get_id() == 3 or
 			context.other_card:get_id() == 5 or
 			context.other_card:get_id() == 8 or
-			context.other_card:get_id() == 12) then
+			context.other_card:get_id() == 13) then
 			return {
 				repetitions = 1,
 				card = card
 			}
 		end
-		if context.after then
+		if context.after and not has_fired then
+			local sound_pitch = 0.8
 			for k,v in ipairs(context.scoring_hand) do
 				G.E_MANAGER:add_event(Event({
 					trigger = 'after',
-					delay = .1,
+					delay = 0,
 					func = function()
-						if v.base.value == "Ace" then SMODS.change_base(v,v.base.suit,"2") v:flip() 
-						elseif v.base.value == "2" then SMODS.change_base(v,v.base.suit,"3") v:flip()
-						elseif v.base.value == "3" then SMODS.change_base(v,v.base.suit,"5") v:flip()
-						elseif v.base.value == "5" then SMODS.change_base(v,v.base.suit,"8") v:flip()
-						elseif v.base.value == "8" then v:flip()
+						if v.base.value == "Ace" or
+						v.base.value == "2" or
+						v.base.value == "3" or
+						v.base.value == "5" or
+						v.base.value == "8" or
+						v.base.value == "King" then
+							v:flip()
+							play_sound("tarot2",sound_pitch)
+							sound_pitch = sound_pitch + 0.1
+						end
+						return true
+					end
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = .25,
+					func = function()
+						if v.base.value == "Ace" then 
+							SMODS.change_base(v,v.base.suit,"2")
+						elseif v.base.value == "2" then 
+							SMODS.change_base(v,v.base.suit,"3")
+						elseif v.base.value == "3" then 
+							SMODS.change_base(v,v.base.suit,"5")
+						elseif v.base.value == "5" then
+							SMODS.change_base(v,v.base.suit,"8")
+						elseif v.base.value == "8" then
+							SMODS.change_base(v,v.base.suit,"King")
+						elseif v.base.value == "King" then
+							SMODS.change_base(v,v.base.suit,"Ace")
 						end
 						return true
 					end
@@ -1329,14 +1357,17 @@ SMODS.Joker {
 			for _,v in ipairs(context.scoring_hand) do
 				G.E_MANAGER:add_event(Event({
 					trigger = 'after',
-					delay = 0.1,
+					delay = 0.25,
 					func = function()
 						if v.base.value == "Ace" or
 						v.base.value == "2" or
 						v.base.value == "3" or
 						v.base.value == "5" or
-						v.base.value == "8" then
+						v.base.value == "8" or
+						v.base.value == "King" then
 							v:flip()
+							play_sound("tarot2",sound_pitch)
+							sound_pitch = sound_pitch + 0.1
 						end
 						return true
 					end
@@ -1344,12 +1375,44 @@ SMODS.Joker {
 			end
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
-				delay = 1,
+				delay = 2,
 				func = function() return true end
 			}))
 		end
   	end
 }
+
+SMODS.Joker {
+	key = 'egg',
+	rarity = 1,
+	cost = 2,
+	atlas = 'jokers_alt',
+	pos = { x = 0 , y = 10 },
+	config = { extra = { sell_value = 50, hands = -1, discards = -1} },
+	loc_vars = function(self, info_queue, card)
+		return { vars = {
+		  card.ability.extra.sell_value,
+		  card.ability.extra.hands,
+		  card.ability.extra.discards
+		  } }
+	end,
+	loc_txt = {
+		name = 'Egg?',
+		text = {
+			"Has {C:money}$#1#{} sell value.",
+			"when sold lose",
+			"{C:mult}#2#{} hand and {C:mult}#3#{} discard"
+		},
+	},
+	calculate = function (self, card, context)
+		if context.selling_self then
+			card.sell_cost = 50
+			ease_hands_played(-card.ability.extra.hands)
+			ease_discard(-card.ability.extra.discards)
+		end
+	end
+}
+
 
 -- STILL NEEDS WORK. DO NOT UNCOMMENT -Jogla
 
