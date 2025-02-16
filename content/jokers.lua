@@ -54,6 +54,10 @@ joker_equivalents = {
 	["j_family"] = "j_fg_family",
 	["j_order"] = "j_fg_order",
 	["j_loyalty_card"] = "j_fg_loyalty",
+	["j_greedy_joker"] = "j_fg_greedy",
+	["j_lusty_joker"] = "j_fg_lusty",
+	["j_wrathful_joker"] = "j_fg_wrathful",
+	["j_gluttenous_joker"] = "j_fg_gluttenous",
 }
 
 --
@@ -986,6 +990,170 @@ SMODS.Joker {
     end
  end
 end
+}
+
+SMODS.Joker {
+    key = 'greedy',
+    loc_txt = {
+        name = 'Greedy Joker?',
+        text = {
+            "Each played card with {C:diamonds}Diamond{} suit",
+            "temporarily gains {C:mult}+#1#{} mult, resets",
+            "when {C:attention}Boss Blind{} is defeated",
+            "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+        }
+    },
+    config = { extra = { mult_gain = 1, currentMult = 0 } },
+    rarity = 1,
+    cost = 0,
+	atlas = 'jokers_alt',
+    pos = { x = 6, y = 1 },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult }}
+    end,
+    calculate = function(self, card, context)
+            if context.cardarea == G.play and context.individual then
+                playingCard = context.other_card
+                if playingCard:is_suit('Diamonds') then
+                    card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
+					return {
+                    message = "Increased!"
+					}
+                end
+            end
+			if context.joker_main and card.ability.extra.currentMult > 0 then
+			return {
+                    mult = card.ability.extra.currentMult
+				   }
+			end
+            if context.end_of_round and G.GAME.blind.boss and context.cardarea ~= G.hand then
+                    card.ability.extra.currentMult = 0
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Reset!"})
+            end
+    end
+}
+
+SMODS.Joker {
+    key = 'lusty',
+    loc_txt = {
+        name = 'Lusty Joker?',
+        text = {
+            "Each played card with {C:hearts}Heart{} suit",
+            "temporarily gains {C:mult}+#1#{} mult, resets",
+            "when {C:attention}Boss Blind{} is defeated",
+            "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+        }
+    },
+    config = { extra = { mult_gain = 1, currentMult = 0 } },
+    rarity = 1,
+    cost = 0,
+	atlas = 'jokers_alt',
+    pos = { x = 7, y = 1 },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult }}
+    end,
+    calculate = function(self, card, context)
+            if context.cardarea == G.play and context.individual then
+                playingCard = context.other_card
+                if playingCard:is_suit('Hearts') then
+                    card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
+					return {
+                    message = "Increased!"
+					}
+                end
+            end
+			if context.joker_main and card.ability.extra.currentMult > 0 then
+			return {
+                    mult = card.ability.extra.currentMult
+				   }
+			end
+            if context.end_of_round and G.GAME.blind.boss and context.cardarea ~= G.hand then
+                    card.ability.extra.currentMult = 0
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Reset!"})
+            end
+    end
+}
+
+SMODS.Joker {
+    key = 'wrathful',
+    loc_txt = {
+        name = 'Wrathful Joker?',
+        text = {
+            "Each played card with {C:spades}Spade{} suit",
+            "temporarily gains {C:mult}+#1#{} mult, resets",
+            "when {C:attention}Boss Blind{} is defeated",
+            "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+        }
+    },
+    config = { extra = { mult_gain = 1, currentMult = 0 } },
+    rarity = 1,
+    cost = 0,
+	atlas = 'jokers_alt',
+    pos = { x = 8, y = 1 },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult }}
+    end,
+    calculate = function(self, card, context)
+            if context.cardarea == G.play and context.individual then
+                playingCard = context.other_card
+                if playingCard:is_suit('Spades') then
+                    card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
+					return {
+                    message = "Increased!"
+					}
+                end
+            end
+			if context.joker_main and card.ability.extra.currentMult > 0 then
+			return {
+                    mult = card.ability.extra.currentMult
+				   }
+			end
+            if context.end_of_round and G.GAME.blind.boss and context.cardarea ~= G.hand then
+                    card.ability.extra.currentMult = 0
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Reset!"})
+            end
+    end
+}
+
+SMODS.Joker {
+    key = 'gluttenous',
+    loc_txt = {
+        name = "Gluttonous Joker?",
+        text = {
+            "Each played card with {C:clubs}Club{} suit",
+            "temporarily gains {C:mult}+#1#{} mult, resets",
+            "when {C:attention}Boss Blind{} is defeated",
+            "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+        }
+    },
+    config = { extra = { mult_gain = 1, currentMult = 0 } },
+    rarity = 1,
+    cost = 0,
+	atlas = 'jokers_alt',
+    pos = { x = 9, y = 1 },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult }}
+    end,
+    calculate = function(self, card, context)
+            if context.cardarea == G.play and context.individual then
+                playingCard = context.other_card
+                if playingCard:is_suit('Clubs') then
+                    card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
+					return {
+                    message = "Increased!"
+					}
+                end
+            end
+			if context.joker_main and card.ability.extra.currentMult > 0 then
+			return {
+                    mult = card.ability.extra.currentMult
+				   }
+			end
+            if context.end_of_round and G.GAME.blind.boss and context.cardarea ~= G.hand then
+                    card.ability.extra.currentMult = 0
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Reset!"})
+            end
+    end
 }
 
 ----------- Collectives
