@@ -53,6 +53,7 @@ joker_equivalents = {
 	["j_trio"] = "j_fg_trio",
 	["j_family"] = "j_fg_family",
 	["j_order"] = "j_fg_order",
+	["j_loyalty_card"] = "j_fg_loyalty",
 }
 
 --
@@ -922,6 +923,69 @@ SMODS.Joker {
 	end
 	end
 	end
+}
+
+SMODS.Joker {
+    key = 'loyalty',
+    loc_txt = {
+        name = 'Loyalty Card?',
+        text = {
+             "Every {C:attention}#1#{} items",
+             "purchased from the {C:attention}shop{} makes",
+             "the next one {C:money}free{}",
+             "{C:inactive}#2#",
+        }
+    },
+    config = { loyalty_remaining = 10, extra = {item_amount = 10} },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.item_amount, localize{type = 'variable', key = (card.ability.loyalty_remaining == 0 and 'loyalty_active' or 'loyalty_inactive'), vars = {card.ability.loyalty_remaining} } }}
+    end,
+    rarity = 1,
+    atlas = 'jokers_alt',
+    pos = { x = 4, y = 2 },
+    cost = 2,
+    calculate = function(self, card, context)
+        if context.buying_card then
+         card.ability.loyalty_remaining = ((card.ability.loyalty_remaining - 1)%(card.ability.extra.item_amount+1))
+         end
+		if context.open_booster then
+         card.ability.loyalty_remaining = ((card.ability.loyalty_remaining - 1)%(card.ability.extra.item_amount+1))
+         end
+         if G.jokers then
+         if card.ability.loyalty_remaining == 0 then
+		 local eval = function(card) return (card.ability.loyalty_remaining == 0) end
+         juice_card_until(card, eval, true)
+         G.E_MANAGER:add_event(Event({func = function()
+         if G.shop_jokers and G.shop_booster then 
+                        for k, v in pairs(G.shop_jokers.cards) do
+                            v.ability.couponed = true
+                            v:set_cost()
+                        end
+                        for k, v in pairs(G.shop_booster.cards) do
+                            v.ability.couponed = true
+                            v:set_cost()
+                        end
+                    end
+                    return true
+                end}))
+        end
+		if card.ability.extra.items_bought == card.ability.extra.item_amount then
+		G.E_MANAGER:add_event(Event({func = function()
+         if G.shop_jokers and G.shop_booster then 
+                        for k, v in pairs(G.shop_jokers.cards) do
+                            v.ability.couponed = false
+                            v:set_cost()
+                        end
+                        for k, v in pairs(G.shop_booster.cards) do
+                            v.ability.couponed = false
+                            v:set_cost()
+                        end
+                    end
+                    return true
+                end}))
+    end
+ end
+end
 }
 
 ----------- Collectives
