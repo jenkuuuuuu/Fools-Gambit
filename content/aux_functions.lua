@@ -45,3 +45,21 @@ function alternate_card(key,card,table)
 	end
 	card:start_dissolve(nil,false,0,true)
 end
+
+function flip_editions(card)
+	if card.edition then
+		if card.edition.negative then
+			card:set_edition(nil, true)
+		elseif card.edition.polychrome then
+			card:set_edition("e_fg_polished", true)
+		elseif card.edition.fg_polished then
+			card:set_edition("e_polychrome", true)
+		elseif card.edition.holo then
+			card:set_edition("e_foil", true)
+		elseif card.edition.foil then
+			card:set_edition("e_holo", true)
+		end							
+	else
+		card:set_edition("e_negative", true)
+	end
+end

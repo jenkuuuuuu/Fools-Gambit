@@ -13,8 +13,8 @@ SMODS.Booster {
     loc_txt = { 
         name = 'Abberation Pack',
         group_name = 'abberation',
-        text = { "Choose {C:attention}1{} of up to ",
-        "{C:attention}3{} {C:purple}Abberation{} cards to",
+        text = { "Choose {C:attention}#2#{} of up to ",
+        "{C:attention}#1#{} {C:purple}Abberation{} cards to",
         "be used instantly." }
         },
     pos = { x = 0, y = 0 },

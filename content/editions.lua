@@ -4,13 +4,10 @@
 --
 
 function polishChips()
-	sendInfoMessage("called polish chips yippe", "MyInfoLogger")
 	if hand_chips then
-		sendInfoMessage("hand_chips exists", "MyInfoLogger")
 		hand_chips = hand_chips*1.5
 		return 
 	else
-		sendInfoMessage("this vexes me", "MyInfoLogger")
 		return 0
 	end
 end
@@ -51,5 +48,45 @@ SMODS.Edition({
 	end,
     loc_vars = function(self)
         return { vars = { self.config.chips, self.config.mult, self.config.x_mult } }
+    end
+})
+
+
+SMODS.Shader {
+    key = 'negative',
+    path = 'negative.fs'
+}
+
+SMODS.Edition({
+    key = "negative",
+    loc_txt = {
+        name = "Negative",
+        label = "Negative",
+        text = {
+            "{C:edition}+1{} Consumeable Slot",
+            "{C:edition}+1{} Hand Size"
+        }
+    },
+
+    shader = "negative",
+    discovered = true,
+    unlocked = true,
+    config = { chips = 200, mult = 10, x_mult = 2 },
+    in_shop = true,
+    weight = 8,
+    extra_cost = 6,
+    apply_to_float = true,
+    on_apply = function(card)
+        G.consumeables.config.card_limit = G.consumeables.config.card_limit+1
+        G.hand.config.card_limit = G.hand.config.card_limit+1
+    end,
+    
+    on_load = function(card)
+        G.consumeables.config.card_limit = G.consumeables.config.card_limit+1
+        G.hand.config.card_limit = G.hand.config.card_limit+1
+    end,
+    on_remove = function(card)
+        G.consumeables.config.card_limit = G.consumeables.config.card_limit-1
+        G.hand.config.card_limit = G.hand.config.card_limit-1
     end
 })
