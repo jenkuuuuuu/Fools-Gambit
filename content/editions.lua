@@ -1,3 +1,9 @@
+edition_equivalents = {
+	["e_polychrome"] = "e_fg_polychrome",
+	["e_negative"] = "e_fg_negative",
+	["e_holographic"] = "e_fg_holographic",
+	["e_foil"] = "e_fg_foil"
+} -- use for alternating later
 
 --
 -- POLISHED
@@ -67,7 +73,7 @@ SMODS.Edition({
             "{C:edition}+1{} Hand Size"
         }
     },
-
+    -- this needs to be made to have different effects depending on whether its on a card or a consumeable
     shader = "negative",
     discovered = true,
     unlocked = true,

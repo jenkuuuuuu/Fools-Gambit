@@ -1,3 +1,5 @@
+
+
 SMODS.Atlas {
 	key = "vouchers",
 	path = "vouchers.png",
@@ -5,22 +7,37 @@ SMODS.Atlas {
 	py = 95
 }
 
+
+
 SMODS.Voucher{
 	key = 'violin',
 	loc_txt = {
 		name = 'Violin',
 		text = {
-			"+1 option and +1 select in every",
+			"{C:attention}+1{} option and {C:attention}+1{} select in every",
 			"{C:purple}Abberation{} pack."
 		}
 	},
+    atlas = "vouchers",
+    pos = { x = 2, y = 0 },
     redeem = function(self,card)
-        -- i have no idea how to do this. i cant find anyone else who has done it. Currently 3:27am. will update when finished
-        -- 1 minute in i started writing js instead of lua
-        -- 4am i have literally written 0 working lines
-        -- 4:13 i have given up and shall find the most scuffed workaround known to man.
+        abberation1.config.choose = abberation1.config.choose + 1
+        abberation2.config.extra = abberation2.config.extra + 1
+        abberation2.config.choose = abberation2.config.choose + 1
+        jumbo_abberation.config.extra = jumbo_abberation.config.extra + 1
+        jumbo_abberation.config.choose = jumbo_abberation.config.choose + 1
+        mega_abberation.config.extra = mega_abberation.config.extra + 1
+        mega_abberation.config.choose = mega_abberation.config.choose + 1
 
-        -- 4:17 scuffed way diddnt work i am losing my mind
-        -- 4:33 i have given up. This is not the last you will see of me violin voucher. I will best you.
+        local card_open_ref = Card.open
+        function Card:open()
+            sendInfoMessage("card open", "MyInfoLogger")
+            sendInfoMessage(self.ability.name, "MyInfoLogger")
+            if self.ability.name:find('abberation') then
+                sendInfoMessage("abberation", "MyInfoLogger")
+                self.ability.extra = self.ability.extra + 1
+            end
+            card_open_ref(self)
+        end
     end
 }

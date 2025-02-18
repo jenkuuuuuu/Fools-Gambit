@@ -63,3 +63,18 @@ function flip_editions(card)
 		card:set_edition("e_negative", true)
 	end
 end
+
+-- UNFINISHED !!!
+function change_pace()
+	if commonalt.default_weight > 0 then
+		sendInfoMessage("Regular", "MyInfoLogger")
+	commonalt.default_weight = 0
+	uncommonalt.default_weight = 0
+	rarealt.default_weight= 0
+	else
+		sendInfoMessage("Alternate", "MyInfoLogger")
+		commonalt.default_weight = .70
+		uncommonalt.default_weight = .25
+		rarealt.default_weight= .05
+	end
+end

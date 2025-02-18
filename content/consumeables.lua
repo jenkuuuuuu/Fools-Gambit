@@ -1,46 +1,17 @@
-
--- All joker equivalents. Format is: original <> alternate
-joker_equivalents = {
-	["j_fg_t1"] = "j_fg_t2",
-	["j_fg_flippedscript"] = "j_fg_flippedscriptALT",
-	["j_joker"] = "j_fg_joker",
-	["j_misprint"] = "j_fg_misprint",
-	["j_banner"] = "j_fg_banner",
-	["j_scary_face"] = "j_fg_face",
-	["j_mystic_summit"] = "j_fg_summit",
-	["j_ceremonial"] = "j_fg_dagger",
-	["j_fibonacci"] = "j_fg_fibonacci",
-	["j_8_ball"] = "j_fg_8ball",
-	["j_abstract"] = "j_fg_abstract",
-	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
-	["j_jolly"] = "j_fg_jolly",
-	["j_zany"] = "j_fg_zany",
-	["j_mad"] = "j_fg_mad",
-	["j_crazy"] = "j_fg_crazy",
-	["j_droll"] = "j_fg_droll",
-	["j_sly"] = "j_fg_sly",
-	["j_wily"] = "j_fg_wily",
-	["j_clever"] = "j_fg_clever",
-	["j_devious"] = "j_fg_devious",
-	["j_crafty"] = "j_fg_crafty",
-	["j_duo"] = "j_fg_duo",
-	["j_trio"] = "j_fg_trio",
-	["j_family"] = "j_fg_family",
-	["j_order"] = "j_fg_order",
-	["j_loyalty_card"] = "j_fg_loyalty",
-	["j_greedy_joker"] = "j_fg_greedy",
-	["j_lusty_joker"] = "j_fg_lusty",
-	["j_wrathful_joker"] = "j_fg_wrathful",
-	["j_gluttenous_joker"] = "j_fg_gluttenous",
-	["j_egg"] = "j_fg_egg"
-}
-
 SMODS.Atlas {
 	key = "abberations",
 	path = "abberationcards.png",
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas {
+	key = "PLACEHOLDERS",
+	path = "abberationcardsPLACEHOLDERS.png",
+	px = 71,
+	py = 95
+} -- added placeholder sprites before the actual ones are finished just so they can be differentiated in packs
+
 
 
 SMODS.ConsumableType{
@@ -56,13 +27,14 @@ SMODS.ConsumableType{
 SMODS.Consumable{
     key = "tonal",
     set = "abberation",
-    atlas = "abberations",
+    atlas = "PLACEHOLDERS",
 	pos = { x = 0, y = 0 },
     loc_txt ={
         name = "Tonal",
         text = {
-            "Converts {C:attention}3{} selected Jokers",
-            "to their {C:red}Original{} form"
+            "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+            "to their {C:red}Original{} form",
+            "{C:inactive}Placeholder Sprite{}"
         }
     },
 
@@ -90,13 +62,14 @@ SMODS.Consumable{
 SMODS.Consumable{
     key = "atonal",
     set = "abberation",
-    atlas = "abberations",
+    atlas = "PLACEHOLDERS",
 	pos = { x = 1, y = 0 },
     loc_txt ={
         name = "Atonal",
         text = {
-            "Converts {C:attention}3{} selected Jokers",
-            "to their {C:purple}Alternate{} form"
+            "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+            "to their {C:purple}Alternate{} form",
+            "{C:inactive}Placeholder Sprite{}"
         }
     },
 
@@ -124,21 +97,22 @@ SMODS.Consumable{
 SMODS.Consumable{
     key = "accelerando",
     set = "abberation",
-    atlas = "abberations",
-	pos = { x = 1, y = 0 },
+    atlas = "PLACEHOLDERS",
+	pos = { x = 2, y = 0 },
     loc_txt ={
         name = "Accelerando",
         text = {
             "Changes {C:attention}3{} selected cards",
             "and turns their editions, seals and,",
-            "enhancements to their {C:purple}Alternate{} form"
+            "enhancements to their {C:purple}Alternate{} form",
+            "{C:inactive}Placeholder Sprite{}"
         }
     },
 
     can_use = function(self, card)
         if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
             any_state then
-            if #G.hand.highlighted == 3 then
+            if #G.hand.highlighted <= 3 then
                 return true
             end
         end
@@ -150,7 +124,7 @@ SMODS.Consumable{
             delay = 0.4,
             func = function()
                     for i in ipairs(G.hand.highlighted) do
-                        flip_editions(G.hand.highlighted[i])
+                        flip_editions(G.hand.highlighted[i]) -- change to alternate editions when theyre implemented
                     end
                 return true
             end
