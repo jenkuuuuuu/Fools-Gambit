@@ -83,8 +83,10 @@ SMODS.Edition({
     extra_cost = 6,
     apply_to_float = true,
     on_apply = function(card)
+        if G.jokers then
         G.consumeables.config.card_limit = G.consumeables.config.card_limit+1
         G.hand.config.card_limit = G.hand.config.card_limit+1
+        end
     end,
     
     on_load = function(card)
