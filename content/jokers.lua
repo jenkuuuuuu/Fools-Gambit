@@ -26,6 +26,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+	key = 'collective',
+	path = 'collective.png',
+	px = 71,
+	py = 95
+}
+
 -- All joker equivalents. Format is: original <> alternate
 joker_equivalents = {
 	["j_fg_t1"] = "j_fg_t2",
@@ -1230,8 +1237,8 @@ SMODS.Joker {
   key = 'deathmodereal',
   rarity = "fg_collective",
   cost = 6,
-  atlas = "deathmodereal",
-  pos = { x = 0 , y = 0},
+  atlas = "collective",
+  pos = { x = 3 , y = 0},
   config = {  extra = { Xmult = 20, blindchipmult = 2 } },
   loc_txt = {
   name = 'deathmodereal',
@@ -1283,8 +1290,8 @@ SMODS.Joker {
 		return { vars = { card.ability.extra.Xmult } }
 	end,
 	rarity = "fg_collective",
-	atlas = 'deathmoderealalt',
-	pos = { x = 0, y = 0 },
+	atlas = 'collective',
+	pos = { x = 4, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play then
@@ -1529,3 +1536,42 @@ SMODS.Joker {
   	end
 }
 ]]
+
+SMODS.Joker {
+    key = 'jogla',
+    loc_txt = {
+        name = 'Jogla',
+        text = {
+			"{C:dark_edition}+#1#{} consumeables slots.",
+			"Increases by #2# after {C:attention}#3# blind{} defeated",
+			"{C:inactive,s:0.7}\"I am NOT a wizard\""
+        }
+    },
+    config = { extra = { initial_slots = 3, slots_increase = 1, secret = "Boss" } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = {
+			card.ability.extra.initial_slots,
+			card.ability.extra.slots_increase,
+			card.ability.extra.secret
+		 } }
+    end,
+    rarity = "fg_collective",
+    atlas = 'collective',
+    pos = { x = 2, y = 0 },
+	soul_pos = { x = 2, y = 1},
+    cost = 5,
+	add_to_deck = function(self,card,from_debuff)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.initial_slots
+	end,
+	calculate = function (self,card,context)
+		if context.setting_blind then
+			local use_secret = pseudorandom("Charla", 1,1000)
+			if use_secret == 1 then card.ability.extra.secret = "Boos" else card.ability.extra.secret = "Boss" end
+		end
+		if context.end_of_round and G.GAME.blind.boss and not context.repetition and not context.individual then
+			G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.slots_increase
+			card.ability.extra.initial_slots = card.ability.extra.initial_slots + card.ability.extra.slots_increase
+			card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!"})
+		end
+	end
+}
