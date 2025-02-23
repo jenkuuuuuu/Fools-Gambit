@@ -7,7 +7,7 @@ collective = SMODS.Rarity {
   default_weight = 0,
 }
 
-commonalt = SMODS.Rarity {
+common_alt = SMODS.Rarity {
   key = "common",
   loc_txt = {
     name = "Common?"
@@ -16,7 +16,7 @@ commonalt = SMODS.Rarity {
   default_weight = 0,
 }
 
-uncommonalt = SMODS.Rarity {
+uncommon_alt = SMODS.Rarity {
   key = "uncommon",
   loc_txt = {
     name = "Uncommon?"
@@ -25,7 +25,7 @@ uncommonalt = SMODS.Rarity {
   default_weight = 0,
 }
 
-rarealt= SMODS.Rarity {
+rare_alt= SMODS.Rarity {
   key = "rare",
   loc_txt = {
     name = "Rare?"
@@ -34,7 +34,7 @@ rarealt= SMODS.Rarity {
   default_weight = 0,
 }
 
-legendaryalt= SMODS.Rarity {
+legendary_alt= SMODS.Rarity {
   key = "legendary",
   loc_txt = {
     name = "Legendary?"
