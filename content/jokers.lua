@@ -13,20 +13,6 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
-    key = 'deathmodereal',
-	path = 'deathmodereal2.png',
-	px = 71,
-	py = 95
-}
-
-SMODS.Atlas {
-    key = 'deathmoderealalt',
-	path = 'deathmodereal2a.png',
-	px = 71,
-	py = 95
-}
-
-SMODS.Atlas {
 	key = 'collective',
 	path = 'collective.png',
 	px = 71,
@@ -1240,13 +1226,6 @@ SMODS.Joker {
   atlas = "collective",
   pos = { x = 3 , y = 0},
   config = {  extra = { Xmult = 20, blindchipmult = 2 } },
-  loc_txt = {
-  name = 'deathmodereal',
-  text = {
-  "He's {X:black,C:white}cool(ish){}",
-  '{X:mult,C:white}X#1#{} mult.'
-  },
-  },
   loc_vars = function(self, info_queue, card)
     return { vars = {
         card.ability.extra.Xmult
@@ -1277,14 +1256,6 @@ SMODS.Joker {
 
 SMODS.Joker {
 	key = 'deathmoderealalt',
-	loc_txt = {
-		 name = 'deathmodereal',
-         text = {
-     "He's {X:white,C:black}cool{}",
-     'each scored card gives',
-	 '{X:mult,C:white}X#1#{} mult.'
-		}
-	},
 	config = { extra = {Xmult = 1.25} },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.Xmult } }
@@ -1539,14 +1510,6 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = 'jogla',
-    loc_txt = {
-        name = 'Jogla',
-        text = {
-			"{C:dark_edition}+#1#{} consumeables slots.",
-			"Increases by #2# after {C:attention}#3# blind{} defeated",
-			"{C:inactive,s:0.7}\"I am NOT a wizard\""
-        }
-    },
     config = { extra = { initial_slots = 3, slots_increase = 1, secret = "Boss" } },
     loc_vars = function(self, info_queue, card)
         return { vars = {
@@ -1565,12 +1528,13 @@ SMODS.Joker {
 	end,
 	calculate = function (self,card,context)
 		if context.setting_blind then
-			local use_secret = pseudorandom("Charla", 1,1000)
+			local use_secret = pseudorandom("wizard", 1,2)
 			if use_secret == 1 then card.ability.extra.secret = "Boos" else card.ability.extra.secret = "Boss" end
 		end
 		if context.end_of_round and G.GAME.blind.boss and not context.repetition and not context.individual then
 			G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.slots_increase
 			card.ability.extra.initial_slots = card.ability.extra.initial_slots + card.ability.extra.slots_increase
+			card.ability.extra.secret = "Boss"
 			card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!"})
 		end
 	end
