@@ -15,7 +15,7 @@ SMODS.Shader {
 }
 
 SMODS.Edition({
-    key = "Polished",
+    key = "polished",
     loc_txt = {
         name = "Polished",
         label = "Polished",
@@ -69,24 +69,24 @@ SMODS.Edition({
     shader = "negative",
     discovered = true,
     unlocked = true,
-    config = { chips = 200, mult = 10, x_mult = 2 },
+    config = { extra = { slots = 1 } },
     in_shop = true,
     weight = 8,
     extra_cost = 6,
     apply_to_float = true,
-    on_apply = function(card)
-        if G.jokers then
+	loc_vars = function(self)
+        return { vars = { self.config.extra.slots } }
+    end,
+    on_apply = function(self)
+        if self.added_to_deck then
         G.consumeables.config.card_limit = G.consumeables.config.card_limit+1
         G.hand.config.card_limit = G.hand.config.card_limit+1
         end
     end,
-    
-    on_load = function(card)
-        G.consumeables.config.card_limit = G.consumeables.config.card_limit+1
-        G.hand.config.card_limit = G.hand.config.card_limit+1
-    end,
-    on_remove = function(card)
-        G.consumeables.config.card_limit = G.consumeables.config.card_limit-1
-        G.hand.config.card_limit = G.hand.config.card_limit-1
-    end
+	on_load = function(self)
+	if self.remove_from_deck then
+	  G.consumeables.config.card_limit = G.consumeables.config.card_limit-1
+      G.hand.config.card_limit = G.hand.config.card_limit-1
+	  end
+	 end
 })
