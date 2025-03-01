@@ -9,51 +9,43 @@ edition_equivalents = {
 -- POLISHED
 --
 
-function polishChips()
-	if hand_chips then
-		hand_chips = hand_chips*1.5
-		return 
-	else
-		return 0
-	end
-end
-
 SMODS.Shader {
     key = 'polished',
     path = 'polished.fs'
 }
 
 SMODS.Edition({
-    key = "polished",
+    key = "Polished",
     loc_txt = {
         name = "Polished",
-        label = "polished",
+        label = "Polished",
         text = {
-            "{X:chips,C:white}x1.5{} Chips"
+            "{X:chips,C:white}x#1#{} Chips"
         }
     },
 
     shader = "polished",
     discovered = true,
     unlocked = true,
-    config = { chips = 200, mult = 10, x_mult = 2 },
+    config = { extra = { xchips = 1.5 } },
     in_shop = true,
     weight = 8,
     extra_cost = 6,
     apply_to_float = true,
 	calculate = function(self, card, context)
-		if context.joker_main or context.cardarea == G.play and context.individual then
-			update_hand_text({delay = 0}, {chips = hand_chips*1.5})
-			polishChips()
-            if context.joker_main then
-                card_eval_status_text(card, 'extra', nil, nil, nil, { message = 'Multiplied!' })
-            else
-                return{message = 'Multiplied!' }
+		if context.final_scoring_step then
+			update_hand_text({delay = 0}, {chips = hand_chips*self.config.extra.xchips})
+            card_eval_status_text(card, 'extra', nil, nil, nil, { message = 'Multiplied!' })
+			if hand_chips then
+			hand_chips = hand_chips*self.config.extra.xchips
+			return
+			else
+			return 0
+			end
             end
-		end
-	end,
+		end,
     loc_vars = function(self)
-        return { vars = { self.config.chips, self.config.mult, self.config.x_mult } }
+        return { vars = { self.config.extra.xchips } }
     end
 })
 
