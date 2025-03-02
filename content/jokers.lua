@@ -1125,7 +1125,7 @@ SMODS.Joker {
 	rarity = 2,
 	atlas = 'newjokers',
 	pos = { x = 0, y = 0 },
-	cost = 2,
+	cost = 6,
 	calculate = function(self, card, context)
         if context.buying_card then
          card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
@@ -1164,7 +1164,7 @@ SMODS.Joker {
 	rarity = "fg_uncommon",
 	atlas = 'newjokers',
 	pos = { x = 0, y = 0 },
-	cost = 2,
+	cost = 6,
 	calculate = function(self, card, context)
 	if G.jokers then
          if context.buying_card then
@@ -1194,7 +1194,7 @@ SMODS.Joker {
 	rarity = 2,
 	atlas = 'newjokers',
 	pos = { x = 1, y = 0 },
-	cost = 2,
+	cost = 7,
 	calculate = function(self, card, context)
 		if context.skip_blind then
 			for i = 1, #G.consumeables.cards do
@@ -1223,7 +1223,7 @@ SMODS.Joker {
 	atlas = 'newjokers',
 	yes_pool_flag = 'alternate',
 	pos = { x = 1, y = 0 },
-	cost = 2,
+	cost = 8,
 	calculate = function(self, card, context)
 		if context.end_of_round and context.individual then
 		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
