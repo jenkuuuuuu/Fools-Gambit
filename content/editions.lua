@@ -82,11 +82,17 @@ SMODS.Edition({
         G.consumeables.config.card_limit = G.consumeables.config.card_limit+1
         G.hand.config.card_limit = G.hand.config.card_limit+1
         end
-    end,
-	on_load = function(self)
-	if self.remove_from_deck then
+	end,
+	on_remove = function(self)
+	    if self.remove_from_deck then
 	  G.consumeables.config.card_limit = G.consumeables.config.card_limit-1
       G.hand.config.card_limit = G.hand.config.card_limit-1
 	  end
-	 end
+	 end,
+	 calculate = function(self, card, context)
+	 if context.selling_self then
+	 G.consumeables.config.card_limit = G.consumeables.config.card_limit-1
+      G.hand.config.card_limit = G.hand.config.card_limit-1
+	  end
+	  end
 })
