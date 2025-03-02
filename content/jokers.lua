@@ -19,6 +19,13 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Atlas {
+    key = 'concert',
+	path = 'hjky.png',
+	px = 71,
+	py = 95
+}
+
 -- All joker equivalents. Format is: original <> alternate
 joker_equivalents = {
 	-- Mod jokers
@@ -53,6 +60,7 @@ joker_equivalents = {
 	["j_family"] = "j_fg_family",
 	["j_order"] = "j_fg_order",
 	["j_egg"] = "j_fg_egg",
+	["j_fg_concert"] = "j_fg_concertalt",
 	-- COLLECTION
 	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
 
@@ -1075,6 +1083,79 @@ SMODS.Joker {
 	end
 	end
 }
+--Concert Ticket
+SMODS.Joker {
+	key = 'concert',
+	config = {  extra = {item_amount = 15, item_amount2 = 0} },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.item_amount, card.ability.extra.item_amount2}}
+    end,
+	rarity = 2,
+	atlas = 'concert',
+	pos = { x = 0, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+        if context.buying_card then
+         card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
+        end
+		if context.open_booster then
+         card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
+        end
+		if context.reroll_shop then
+		 card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + (G.GAME.current_round.reroll_cost-1))
+		end
+         if G.jokers then
+         if card.ability.extra.item_amount2 >= card.ability.extra.item_amount then
+		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+                    return true
+                end)}))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_abberation'), colour = G.C.PURPLE})
+        end
+		card.ability.extra.item_amount2 = card.ability.extra.item_amount2 - card.ability.extra.item_amount
+        end
+ end
+end
+}
+
+SMODS.Joker {
+	key = 'concertalt',
+	config = { },
+	rarity = "fg_uncommon",
+	atlas = 'concert',
+	pos = { x = 0, y = 0 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if G.jokers then
+         if context.buying_card then
+		 if context.card.ability.set == 'Voucher' then
+		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+                    return true
+                end)}))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_abberation'), colour = G.C.PURPLE})
+        end
+        end
+end
+end
+end
+}
 -- Bones
 --[[ 
 SMODS.Joker {
@@ -1161,7 +1242,7 @@ SMODS.Joker {
 }
 -- Deathmodereal alt
 SMODS.Joker {
-	key = 'deathmodereal_alt',
+	key = 'deathmoderealalt',
 	config = { extra = {Xmult = 1.25} },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.Xmult } }
