@@ -46,7 +46,7 @@ return {
                 name = 'Joker?',
                 text = {
                     "Every card scored",
-                    "gives {C:mult}+#1#{} Mult."
+                    "gives {C:mult}+#1#{} Mult"
                 }
             },
             j_fg_greedy = {
