@@ -212,6 +212,22 @@ return {
                      "{C:inactive}#2#",
                 }
             },
+			 j_fg_concert = {
+                name = 'Concert Ticket',
+                text = {
+                     "Every {C:money}$#1#{} spent {C:inactive}(#2#){} creates",
+                     "an {C:purple}Abberation{} card",
+					 "{C:inactive}(Must have room)",
+                }
+            },
+			 j_fg_concertalt = {
+                name = 'Concert Ticket?',
+                text = {
+                     "Creates an {C:purple}Abberation{} card",
+                     "when redeeming a {C:attention}Voucher{}",
+					 "{C:inactive}(Must have room)",
+                }
+            },
             j_fg_8ball = {
                 name = '8 Ball?',
                 text = {
@@ -303,14 +319,14 @@ return {
                }
             },
             -- Collectives
-            j_Fg_deathmodereal = {
+            j_fg_deathmodereal = {
                 name = 'deathmodereal',
                 text = {
                     "He's {X:black,C:white}cool(ish){}",
                     '{X:mult,C:white}X#1#{} mult.'
                 },
             },
-            j_Fg_deathmodereal_alt = {
+            j_fg_deathmoderealalt = {
                 name = 'deathmodereal',
                 text = {
                     "He's {X:white,C:black}cool{}",
@@ -342,7 +358,8 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
-            k_chipMult="Multiplied!"
+            k_chipMult="Multiplied!",
+			k_plus_abberation="+1 Abberation",
         },
         high_scores={},
         labels={},
