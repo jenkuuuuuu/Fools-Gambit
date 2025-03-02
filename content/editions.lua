@@ -9,6 +9,7 @@ edition_equivalents = {
 -- POLISHED
 --
 
+
 SMODS.Shader {
     key = 'polished',
     path = 'polished.fs'
@@ -34,10 +35,10 @@ SMODS.Edition({
     apply_to_float = true,
 	calculate = function(self, card, context)
 		if context.final_scoring_step then
-			update_hand_text({delay = 0}, {chips = hand_chips*self.config.extra.xchips})
+			update_hand_text({delay = 0}, {chips = hand_chips * self.config.extra.xchips})
             card_eval_status_text(card, 'extra', nil, nil, nil, { message = 'Multiplied!' })
 			if hand_chips then
-			hand_chips = hand_chips*self.config.extra.xchips
+			hand_chips = hand_chips * self.config.extra.xchips
 			return
 			else
 			return 0

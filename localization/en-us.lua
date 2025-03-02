@@ -318,6 +318,22 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
             },
+			j_fg_delinquent = {
+			    name = 'Delinquent',
+			    text = {
+                    "{C:attention}Replaces{} consumeable cards",
+                    "with {C:purple}Aberration{} cards",
+                    "when a blind is skipped",
+                },
+            },
+            j_fg_delinquentalt = {
+			    name = 'Delinquent?',
+			    text = {
+                    "{C:attention}Replenishes{} empty consumeable",
+                    "card slots with {C:purple}Aberration{} cards",
+                    "when a blind is beaten",
+                },
+            },							
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
@@ -360,6 +376,8 @@ return {
         dictionary={
             k_chipMult="Multiplied!",
 			k_plus_abberation="+1 Abberation",
+			k_replaced="Replaced!",
+			k_replenished="Replenished!",
         },
         high_scores={},
         labels={},
