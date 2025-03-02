@@ -45,7 +45,7 @@ return {
             j_fg_joker = {
                 name = 'Joker?',
                 text = {
-                    "Every card played",
+                    "Every card scored",
                     "gives {C:mult}+#1#{} Mult."
                 }
             },
