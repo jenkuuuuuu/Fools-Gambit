@@ -8,7 +8,8 @@ local mod_contents = {
 	"consumeables",
 	"booster_packs",
 	"rarities",
-	"vouchers"
+	"vouchers",
+	"enhancements"
 }
 
 for k, v in pairs(mod_contents) do -- Load this mod's files
