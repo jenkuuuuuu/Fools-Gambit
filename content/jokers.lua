@@ -184,6 +184,7 @@ SMODS.Joker {
 	key = 'joker',
 	config = { extra = {mult = 0.5} },
 	loc_vars = function(self, info_queue, card)
+		--info_queue[#info_queue+1] = G.P_CENTERS[tostring(get_equivalent(self.key,joker_equivalents,"v"))]
 		return { vars = { card.ability.extra.mult } }
 	end,
 	rarity = "fg_common",
@@ -783,37 +784,7 @@ SMODS.Joker {
 	end
 }
 -- Fist
-SMODS.Joker {
-    key = 'fist',
-    config = { extra = {mult = 0.5} },
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.mult } }
-    end,
-    rarity = "fg_common",
-    atlas = 'jokers_alt',
-    pos = { x = 8, y = 2 },
-    cost = 2,
-    calculate = function(self, card, context)
-        if context.cardarea == G.hand then
-            local temp_Mult = 1
-			local temp_ID = 1
-			local raised_card = nil
-			for i=1, #G.hand.cards do
-					if temp_ID <= G.hand.cards[i].base.id and G.hand.cards[i].ability.effect ~= 'Stone Card' then 
-					temp_Mult = G.hand.cards[i].base.nominal
-					temp_ID = G.hand.cards[i].base.id 
-					raised_card = G.hand.cards[i]
-				end
-			end
-			if raised_card and context.repetition and context.cardarea == G.play then
-				return {
-					h_mult = card.ability.extra.mult/2,
-					card = card,
-				}
-        	end
-    	end
-	end
-}
+-- YET TO BE ADDED.
 -- Fibonacci
 SMODS.Joker {
 	key = 'fibonacci',
