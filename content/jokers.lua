@@ -382,7 +382,7 @@ SMODS.Joker {
 	atlas = 'newjokers',
 	pos = { x = 4, y = 0 }, -- read above
 	cost = 5,
-	config = { extra = {amount = 2} },
+	config = { extra = {amount = 1} },
 	loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.amount}}
     end,
