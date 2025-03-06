@@ -1,4 +1,4 @@
-enhancement_equivalents = {
+FG.enhancement_equivalents = {
 ["m_glass"] = "m_fg_glass",
 }
 
