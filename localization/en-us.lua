@@ -92,7 +92,7 @@ return {
 			j_fg_conductor={
                 name="Conductor",
                 text={
-                    "Creates #1# {C:purple}Abberation{} cards if",
+                    "Creates #1# {C:purple}Abberation{} card if",
                     "played hand contains only",
                     "{C:attention}Face{} cards",
                     "{C:inactive}(Must have room)",
