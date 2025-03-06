@@ -29,6 +29,9 @@ SMODS.Atlas {
 joker_equivalents = {
 	-- Mod jokers
 	["j_fg_flipped_script"] = "j_fg_flipped_script_alt",
+	["j_fg_concert"] = "j_fg_concertalt",
+	["j_fg_delinquent"] = "j_fg_delinquentalt",
+	["j_fg_conductor"] = "j_fg_conductoralt",
 	-- Normal jokers
 	["j_joker"] = "j_fg_joker",
 	["j_greedy_joker"] = "j_fg_greedy",
@@ -59,8 +62,6 @@ joker_equivalents = {
 	["j_family"] = "j_fg_family",
 	["j_order"] = "j_fg_order",
 	["j_egg"] = "j_fg_egg",
-	["j_fg_concert"] = "j_fg_concertalt",
-	["j_fg_delinquent"] = "j_fg_delinquentalt",
 	-- COLLECTION
 	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
 
@@ -183,7 +184,269 @@ SMODS.Joker {
 		end
 	end
 }
+----------------
+---NEW JOKERS---
+----------------
+--Concert Ticket
+SMODS.Joker {
+	key = 'concert',
+	config = {  extra = {item_amount = 15, item_amount2 = 0} },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.item_amount, card.ability.extra.item_amount2}}
+    end,
+	rarity = 2,
+	atlas = 'newjokers',
+	pos = { x = 0, y = 0 },
+	cost = 6,
+	calculate = function(self, card, context)
+        if context.buying_card then
+         card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
+        end
+		if context.open_booster then
+         card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
+        end
+		if context.reroll_shop then
+		 card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + (G.GAME.current_round.reroll_cost-1))
+		end
+         if G.jokers then
+         if card.ability.extra.item_amount2 >= card.ability.extra.item_amount then
+		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+                    return true
+                end)}))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_abberation'), colour = G.C.PURPLE})
+        end
+		card.ability.extra.item_amount2 = card.ability.extra.item_amount2 - card.ability.extra.item_amount
+        end
+ end
+end
+}
 
+SMODS.Joker {
+	key = 'concertalt',
+	config = { },
+	rarity = "fg_uncommon",
+	atlas = 'newjokers',
+	pos = { x = 0, y = 0 },
+	cost = 6,
+	calculate = function(self, card, context)
+	if G.jokers then
+         if context.buying_card then
+		 if context.card.ability.set == 'Voucher' then
+		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+            G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+                    return true
+                end)}))
+            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_abberation'), colour = G.C.PURPLE})
+        end
+        end
+end
+end
+end
+}
+-- Delinquent
+SMODS.Joker {
+	key = 'delinquent',
+	rarity = 2,
+	atlas = 'newjokers',
+	pos = { x = 1, y = 0 },
+	cost = 7,
+	calculate = function(self, card, context)
+		if context.skip_blind then
+			for i = 1, #G.consumeables.cards do
+			G.consumeables.cards[i]:start_dissolve(nil,true,1,true)
+			G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+                    return true
+                end)}))
+		end
+		if #G.consumeables.cards > 0 then
+		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_replaced'), colour = G.C.PURPLE})
+	end
+	end
+end
+}
+
+SMODS.Joker {
+	key = 'delinquentalt',
+	rarity = "fg_uncommon",
+	atlas = 'newjokers',
+	yes_pool_flag = 'alternate',
+	pos = { x = 1, y = 0 },
+	cost = 8,
+	calculate = function(self, card, context)
+		if context.end_of_round and context.individual then
+		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+			for i = 1, G.consumeables.config.card_limit - #G.consumeables.cards + G.GAME.consumeable_buffer do
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+			G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+					    G.GAME.consumeable_buffer = 0
+                    return true
+                end)}))
+		end
+		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_replenished'), colour = G.C.PURPLE})
+		end
+	end
+end
+}
+--Disc Joker
+SMODS.Joker {
+	key = 'disc',
+	config = { extra = {chips = 25} },
+	rarity = 1,
+	atlas = 'newjokers',
+	pos = { x = 2, y = 0 }, -- read above
+	cost = 5,
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips}}
+    end,
+	calculate = function(self, card, context)
+		if context.other_joker then
+            if (context.other_joker.config.center.rarity == 1 or context.other_joker.config.center.rarity == 2 or context.other_joker.config.center.rarity == 3 or context.other_joker.config.center.rarity == 4 or context.other_joker.config.center.rarity == "fg_collective") then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        context.other_joker:juice_up(0.5, 0.5)
+                        return true
+                    end
+                })) 
+				return {
+				chip_mod = card.ability.extra.chips,
+				message = '+' .. card.ability.extra.chips,
+				colour = G.C.CHIPS
+				}
+				end
+            end
+	    end
+}
+--Orchestral Joker
+SMODS.Joker {
+	key = 'orchestral',
+	config = { extra = {mult = 10} },
+	rarity = 1,
+	atlas = 'newjokers',
+	pos = { x = 3, y = 0 }, -- read above
+	cost = 5,
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult}}
+    end,
+	calculate = function(self, card, context)
+		if context.other_joker then
+            if (context.other_joker.config.center.rarity == "fg_common" or context.other_joker.config.center.rarity == "fg_uncommon" or context.other_joker.config.center.rarity == "fg_rare" or context.other_joker.config.center.rarity == "fg_legendary") then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        context.other_joker:juice_up(0.5, 0.5)
+                        return true
+                    end
+                })) 
+				return {
+				mult_mod = card.ability.extra.mult,
+				message = '+' .. card.ability.extra.mult,
+				colour = G.C.MULT
+				}
+				end
+            end
+	    end
+}
+--Conductor
+SMODS.Joker {
+	key = 'conductor',
+	rarity = 2,
+	atlas = 'newjokers',
+	pos = { x = 4, y = 0 }, -- read above
+	cost = 5,
+	config = { extra = {amount = 2} },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.amount}}
+    end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+		local nofaces = false
+		for i = 1, #context.full_hand do
+        if not context.full_hand[i]:is_face() then
+		nofaces = true
+		end
+		end
+		if not nofaces then
+		if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+		for i = 1, card.ability.extra.amount do
+		G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+                        G.GAME.consumeable_buffer = 0
+                    return true
+                end)}))
+		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_abberation'), colour = G.C.PURPLE})
+end
+end
+end
+end
+end
+}
+
+SMODS.Joker {
+	key = 'conductoralt',
+	rarity = "fg_uncommon",
+	atlas = 'newjokers',
+	pos = { x = 4, y = 0 }, -- read above
+	cost = 5,
+	config = { extra = {amount = 2} },
+	loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.amount}}
+    end,
+	calculate = function(self, card, context)
+		if context.using_consumeable then
+		if context.consumeable.ability.set == 'abberation' then
+		G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.7,
+                func = function() 
+                    local cards = {}
+                    for i=1, card.ability.extra.amount do
+                        cards[i] = true
+                        local _suit, _rank = nil, nil
+						_rank = pseudorandom_element({'J', 'Q', 'K'}, pseudoseed('familiar_create'))
+                        _suit = pseudorandom_element({'S','H','D','C'}, pseudoseed('familiar_create'))
+						_suit = _suit or 'S'; _rank = _rank or 'A'
+						create_playing_card({front = G.P_CARDS[_suit..'_'.._rank], center = base}, G.deck, true, i ~= 1, {G.C.BLUE})
+						card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_card_added'), colour = G.C.BLUE})
+end
+return true end }))
+end
+end
+end
+}
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
@@ -1114,136 +1377,6 @@ SMODS.Joker {
 	end
 	end
 	end
-}
---Concert Ticket
-SMODS.Joker {
-	key = 'concert',
-	config = {  extra = {item_amount = 15, item_amount2 = 0} },
-	loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.item_amount, card.ability.extra.item_amount2}}
-    end,
-	rarity = 2,
-	atlas = 'newjokers',
-	pos = { x = 0, y = 0 },
-	cost = 6,
-	calculate = function(self, card, context)
-        if context.buying_card then
-         card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
-        end
-		if context.open_booster then
-         card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
-        end
-		if context.reroll_shop then
-		 card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + (G.GAME.current_round.reroll_cost-1))
-		end
-         if G.jokers then
-         if card.ability.extra.item_amount2 >= card.ability.extra.item_amount then
-		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-            G.E_MANAGER:add_event(Event({
-                trigger = 'before',
-                delay = 0.0,
-                func = (function()
-                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
-                        card:add_to_deck()
-                        G.consumeables:emplace(card)
-                        G.GAME.consumeable_buffer = 0
-                    return true
-                end)}))
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_abberation'), colour = G.C.PURPLE})
-        end
-		card.ability.extra.item_amount2 = card.ability.extra.item_amount2 - card.ability.extra.item_amount
-        end
- end
-end
-}
-
-SMODS.Joker {
-	key = 'concertalt',
-	config = { },
-	rarity = "fg_uncommon",
-	atlas = 'newjokers',
-	pos = { x = 0, y = 0 },
-	cost = 6,
-	calculate = function(self, card, context)
-	if G.jokers then
-         if context.buying_card then
-		 if context.card.ability.set == 'Voucher' then
-		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-            G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-            G.E_MANAGER:add_event(Event({
-                trigger = 'before',
-                delay = 0.0,
-                func = (function()
-                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
-                        card:add_to_deck()
-                        G.consumeables:emplace(card)
-                        G.GAME.consumeable_buffer = 0
-                    return true
-                end)}))
-            card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_abberation'), colour = G.C.PURPLE})
-        end
-        end
-end
-end
-end
-}
--- Delinquent
-SMODS.Joker {
-	key = 'delinquent',
-	rarity = 2,
-	atlas = 'newjokers',
-	pos = { x = 1, y = 0 },
-	cost = 7,
-	calculate = function(self, card, context)
-		if context.skip_blind then
-			for i = 1, #G.consumeables.cards do
-			G.consumeables.cards[i]:start_dissolve(nil,true,1,true)
-			G.E_MANAGER:add_event(Event({
-                trigger = 'before',
-                delay = 0.0,
-                func = (function()
-                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
-                        card:add_to_deck()
-                        G.consumeables:emplace(card)
-                        G.GAME.consumeable_buffer = 0
-                    return true
-                end)}))
-		end
-		if #G.consumeables.cards > 0 then
-		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_replaced'), colour = G.C.PURPLE})
-	end
-	end
-end
-}
-
-SMODS.Joker {
-	key = 'delinquentalt',
-	rarity = "fg_uncommon",
-	atlas = 'newjokers',
-	yes_pool_flag = 'alternate',
-	pos = { x = 1, y = 0 },
-	cost = 8,
-	calculate = function(self, card, context)
-		if context.end_of_round and context.individual then
-		 if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
-			for i = 1, G.consumeables.config.card_limit - #G.consumeables.cards + G.GAME.consumeable_buffer do
-			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-			G.E_MANAGER:add_event(Event({
-                trigger = 'before',
-                delay = 0.0,
-                func = (function()
-                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
-                        card:add_to_deck()
-                        G.consumeables:emplace(card)
-					    G.GAME.consumeable_buffer = 0
-                    return true
-                end)}))
-		end
-		card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_replenished'), colour = G.C.PURPLE})
-		end
-	end
-end
 }
 -- Bones
 --[[ 

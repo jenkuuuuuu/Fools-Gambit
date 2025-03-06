@@ -41,6 +41,70 @@ return {
                     "all other jokers to the opposite edition."
                 }
             },
+			j_fg_delinquent = {
+			    name = 'Delinquent',
+			    text = {
+                    "{C:attention}Replaces{} consumeable cards",
+                    "with {C:purple}Aberration{} cards",
+                    "when a blind is skipped",
+                },
+            },
+            j_fg_delinquentalt = {
+			    name = 'Delinquent?',
+			    text = {
+                    "{C:attention}Replenishes{} empty consumeable",
+                    "card slots with {C:purple}Aberration{} cards",
+                    "when a blind is beaten",
+                },
+            },						
+            j_fg_concert = {
+                name = 'Concert Ticket',
+                text = {
+                     "Every {C:money}$#1#{} spent {C:inactive}(#2#){} creates",
+                     "an {C:purple}Abberation{} card",
+					 "{C:inactive}(Must have room)",
+                }
+            },
+			 j_fg_concertalt = {
+                name = 'Concert Ticket?',
+                text = {
+                     "Creates an {C:purple}Abberation{} card",
+                     "when redeeming a {C:attention}Voucher{}",
+					 "{C:inactive}(Must have room)",
+                }
+            },
+			j_fg_disc={
+                name="Disc Joker",
+                text={
+                    "{C:blue}Original{C:attention} Jokers",
+                    "each give {C:chips}+#1#{} Chips",
+					 "{s:0.8}Disc Joker included",
+                },
+            },
+			j_fg_orchestral={
+                name="Orchestral Joker",
+                text={
+                    "{C:purple}Alternate{C:attention} Jokers",
+                    "each give {C:mult}+#1#{} Mult",
+					 "{s:0.8}Orchestral Joker included",
+                },
+            },
+			j_fg_conductor={
+                name="Conductor",
+                text={
+                    "Creates #1# {C:purple}Abberation{} cards if",
+                    "played hand contains only",
+                    "{C:attention}Face{} cards",
+                    "{C:inactive}(Must have room)",
+                },
+            },
+			j_fg_conductoralt={
+                name="Conductor?",
+                text={
+                    "Creates #1# {C:attention}Face{} cards",
+                    "every {C:purple}Abberation{} card used",
+                },
+            },
             -- Normal jokers
             j_fg_joker = {
                 name = 'Joker?',
@@ -52,7 +116,7 @@ return {
             j_fg_greedy = {
                 name = 'Greedy Joker?',
                 text = {
-                    "Each played card with {C:diamonds}Diamond{} suit",
+                    "Each scored card with {C:diamonds}Diamond{} suit",
                     "temporarily gains {C:mult}+#1#{} mult, resets",
                     "when {C:attention}Boss Blind{} is defeated",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
@@ -61,7 +125,7 @@ return {
             j_fg_lusty = {
                 name = 'Lusty Joker?',
                 text = {
-                    "Each played card with {C:hearts}Heart{} suit",
+                    "Each scored card with {C:hearts}Heart{} suit",
                     "temporarily gains {C:mult}+#1#{} mult, resets",
                     "when {C:attention}Boss Blind{} is defeated",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
@@ -70,7 +134,7 @@ return {
             j_fg_wrathful = {
                 name = 'Wrathful Joker?',
                 text = {
-                    "Each played card with {C:spades}Spade{} suit",
+                    "Each scored card with {C:spades}Spade{} suit",
                     "temporarily gains {C:mult}+#1#{} mult, resets",
                     "when {C:attention}Boss Blind{} is defeated",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
@@ -79,7 +143,7 @@ return {
             j_fg_gluttenous = {
                 name = "Gluttonous Joker?",
                 text = {
-                    "Each played card with {C:clubs}Club{} suit",
+                    "Each scored card with {C:clubs}Club{} suit",
                     "temporarily gains {C:mult}+#1#{} mult, resets",
                     "when {C:attention}Boss Blind{} is defeated",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
@@ -212,26 +276,10 @@ return {
                      "{C:inactive}#2#",
                 }
             },
-			 j_fg_concert = {
-                name = 'Concert Ticket',
-                text = {
-                     "Every {C:money}$#1#{} spent {C:inactive}(#2#){} creates",
-                     "an {C:purple}Abberation{} card",
-					 "{C:inactive}(Must have room)",
-                }
-            },
-			 j_fg_concertalt = {
-                name = 'Concert Ticket?',
-                text = {
-                     "Creates an {C:purple}Abberation{} card",
-                     "when redeeming a {C:attention}Voucher{}",
-					 "{C:inactive}(Must have room)",
-                }
-            },
             j_fg_8ball = {
                 name = '8 Ball?',
                 text = {
-                        "Each played {C:attention}8{} creates a",
+                        "Each scored {C:attention}8{} creates a",
                         "{C:tarot}Tarot{} card when scored",
                         "{C:inactive}(Must have room)",
                 },
@@ -318,22 +366,6 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
             },
-			j_fg_delinquent = {
-			    name = 'Delinquent',
-			    text = {
-                    "{C:attention}Replaces{} consumeable cards",
-                    "with {C:purple}Aberration{} cards",
-                    "when a blind is skipped",
-                },
-            },
-            j_fg_delinquentalt = {
-			    name = 'Delinquent?',
-			    text = {
-                    "{C:attention}Replenishes{} empty consumeable",
-                    "card slots with {C:purple}Aberration{} cards",
-                    "when a blind is beaten",
-                },
-            },							
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
@@ -378,6 +410,7 @@ return {
 			k_plus_abberation="+1 Abberation",
 			k_replaced="Replaced!",
 			k_replenished="Replenished!",
+			k_card_added="+1 Card",
         },
         high_scores={},
         labels={},
