@@ -69,7 +69,7 @@ SMODS.current_mod.extra_tabs = function()
 							}},
 						}},
 						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "SPRITES", colour = G.C.BLUE, scale = .5}}}},
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "ART", colour = G.C.BLUE, scale = .5}}}},
 							{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Gappie", colour = G.C.WHITE, scale = .3}}}},
