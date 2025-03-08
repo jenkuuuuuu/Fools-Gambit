@@ -1,3 +1,5 @@
+FG = {}
+FG.config = SMODS.current_mod.config
 
 -- This is in preparation for file splitting. I'll do that later. - Jogla
 -- im splitting jokers and stuff into sections to make this easier later - jenku
