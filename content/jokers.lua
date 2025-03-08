@@ -64,7 +64,6 @@ FG.joker_equivalents = {
 	["j_egg"] = "j_fg_egg",
 	-- COLLECTION
 	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
-
 }
 --------------------
 ---SPECIAL JOKERS---
@@ -452,7 +451,9 @@ end
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
-
+for k,v in ipairs(G.P_CENTERS) do
+	
+end
 
 -- Joker
 SMODS.Joker {

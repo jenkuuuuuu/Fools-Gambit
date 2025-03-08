@@ -9,6 +9,7 @@ px = 71,
 py = 95
 }
 
+if FG.config.debug_mode then
 SMODS.Enhancement{
 	key = "glass",
 	loc_txt = {
@@ -57,4 +58,5 @@ SMODS.Enhancement{
 		end
 	end
 }
+end
 --display is broken please fix
