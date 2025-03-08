@@ -1,4 +1,4 @@
-function is_alternate(card,table)
+function FG.is_alternate(card,table)
     for k, v in pairs(table) do
         if card == v then
             return "v"
@@ -33,20 +33,21 @@ end
 -- card is the card instance you are dealing with. 99% of the time it will be just card (the one provided you by the function)
 -- table is the reference table to look up and compare.
 function FG.alternate_card(key,card,table)
-	local convert = FG.get_equivalent(key,table,FG.is_alternate(key,table))
-	local new_card = create_card('Joker', G.jokers, false, nil, true, false, convert, nil)
-	new_card:add_to_deck()
-	G.jokers:emplace(new_card)
+	local convert_to = FG.get_equivalent(key,table,FG.is_alternate(key,table))
+	local new_card = SMODS.add_card({
+		set = 'Joker',
+		skip_materialize = true,
+		key = tostring(convert_to),
+	})
 	if card.edition then
 		new_card:set_edition(tostring(card.edition.key),true,true)
 	else
 		new_card:set_edition(nil,true,true)
 	end
-
 	card:start_dissolve(nil,false,0,true)
 end
 
-function flip_editions(card)
+function FG.flip_editions(card)
 	if card.edition then
 		if card.edition.negative then
 			card:set_edition(nil, true)
@@ -65,7 +66,7 @@ function flip_editions(card)
 end
 
 -- UNFINISHED !!!
-function change_pace()
+function FG.change_pace()
 	if common_alt.default_weight > 0 then
 		sendInfoMessage("Regular", "MyInfoLogger")
 	common_alt.default_weight = 0

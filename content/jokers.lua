@@ -19,7 +19,7 @@ SMODS.Atlas {
 	py = 95
 }
 -- All joker equivalents. Format is: original <> alternate
-joker_equivalents = {
+FG.joker_equivalents = {
 	-- Mod jokers
 	["j_fg_flipped_script"] = "j_fg_flipped_script_alt",
 	["j_fg_concert"] = "j_fg_concertalt",
@@ -76,7 +76,7 @@ SMODS.Joker {
 	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self then
-			for k, v in pairs(joker_equivalents) do
+			for k, v in pairs(FG.joker_equivalents) do
 				if not string.find(k, '_fg_') then
 				
 					sendInfoMessage(k, "MyInfoLogger")
@@ -119,8 +119,8 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "v" then
-                            alternate_card(currentCard.config.center_key, card, joker_equivalents)
+                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "v" then
+                            FG.alternate_card(currentCard.config.center_key, card, FG.joker_equivalents)
                             currentCard:start_dissolve(nil,false,0,true)
                         end
 					end
@@ -145,8 +145,8 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "k" then
-                            alternate_card(currentCard.config.center_key, card, joker_equivalents)
+                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" then
+                            FG.alternate_card(currentCard.config.center_key, card, FG.joker_equivalents)
                             currentCard:start_dissolve(nil,false,0,true)		
                         end
 					end
@@ -172,7 +172,7 @@ SMODS.Joker {
 					sendInfoMessage("Should be changing if i did it right", "MyInfoLogger")
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-						flip_editions(currentCard)
+						FG.flip_editions(currentCard)
 						-- if wanting to add an edition to cards without one just add it as an else to the g.joker.cards[i].edition
 					end
 					return true

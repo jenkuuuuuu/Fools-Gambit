@@ -49,7 +49,6 @@ SMODS.current_mod.extra_tabs = function()
 				return {n = G.UIT.ROOT, config = {
 					-- config values here, see 'Building a UI' page
 					r = 0.1, minw = 10, minh = 6, align = "tm", padding = 0.2, colour = G.C.BLACK
-
 				}, nodes = {
 					-- work your UI wizardry here, see 'Building a UI' page
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Fool's Gambit", colour = G.C.PURPLE, scale = .7}}}},
