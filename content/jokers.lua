@@ -61,7 +61,6 @@ joker_equivalents = {
 	["j_onyx_agate"] = "j_fg_agate",
 	-- COLLECTION
 	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
-
 }
 --------------------
 ---SPECIAL JOKERS---
@@ -447,11 +446,16 @@ end
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
+for k,v in ipairs(G.P_CENTERS) do
+	
+end
+
 -- Joker
 SMODS.Joker {
 	key = 'joker',
 	config = { extra = {mult = 0.5} },
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_CENTERS['j_joker']
 		return { vars = { card.ability.extra.mult } }
 	end,
 	rarity = "fg_common",

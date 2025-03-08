@@ -14,7 +14,7 @@ SMODS.Shader {
     key = 'polished',
     path = 'polished.fs'
 }
-
+if FG.config.debug_mode then
 SMODS.Edition({
     key = "polished",
     loc_txt = {
@@ -97,3 +97,4 @@ SMODS.Edition({
 	  end
 	  end
 })
+end
