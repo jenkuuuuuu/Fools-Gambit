@@ -65,6 +65,7 @@ joker_equivalents = {
 --------------------
 ---SPECIAL JOKERS---
 --------------------
+if FG.config.debug_mode then
 -- Change of pace
 SMODS.Joker {
 	key = 'change_of_pace',
@@ -443,6 +444,7 @@ end
 end
 end
 }
+end
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
