@@ -1,7 +1,6 @@
-FG = {
-} -- Every global variable/function this mods uses should go under FG.<whatever_the_heck>
-FG.config = SMODS.current_mod.config
 
+-- This is in preparation for file splitting. I'll do that later. - Jogla
+-- im splitting jokers and stuff into sections to make this easier later - jenku
 local mod_contents = {
 	"aux_functions",
 	"jokers",

@@ -1,11 +1,4 @@
 SMODS.Atlas {
-	key = "jokers",
-	path = "jokers.png",
-	px = 71,
-	py = 95
-}
-
-SMODS.Atlas {
 	key = "jokers_alt",
 	path = "jokers_alt.png",
 	px = 71,
@@ -26,7 +19,7 @@ SMODS.Atlas {
 	py = 95
 }
 -- All joker equivalents. Format is: original <> alternate
-FG.joker_equivalents = {
+joker_equivalents = {
 	-- Mod jokers
 	["j_fg_flipped_script"] = "j_fg_flipped_script_alt",
 	["j_fg_concert"] = "j_fg_concertalt",
@@ -62,6 +55,10 @@ FG.joker_equivalents = {
 	["j_family"] = "j_fg_family",
 	["j_order"] = "j_fg_order",
 	["j_egg"] = "j_fg_egg",
+	["j_rough_gem"] = "j_fg_gem",
+	["j_bloodstone"] = "j_fg_bloodstone",
+	["j_arrowhead"] = "j_fg_arrowhead",
+	["j_onyx_agate"] = "j_fg_agate",
 	-- COLLECTION
 	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
 
@@ -69,18 +66,17 @@ FG.joker_equivalents = {
 --------------------
 ---SPECIAL JOKERS---
 --------------------
-if FG.config.debug_mode then
 -- Change of pace
 SMODS.Joker {
 	key = 'change_of_pace',
 	config = { extra = {} },
-	rarity = "fg_rare",
-	atlas = 'jokers',
-	pos = { x = 0, y = 0 }, -- havent added the sprite to the sheet yet 
+	rarity = 3,
+	atlas = 'newjokers',
+	pos = { x = 5, y = 0 }, -- havent added the sprite to the sheet yet 
 	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self then
-			for k, v in pairs(FG.joker_equivalents) do
+			for k, v in pairs(joker_equivalents) do
 				if not string.find(k, '_fg_') then
 				
 					sendInfoMessage(k, "MyInfoLogger")
@@ -94,13 +90,13 @@ SMODS.Joker {
 		end
 	end
 }
--- Change of pace alt
+
 SMODS.Joker {
 	key = 'change_of_pace_alt',
 	config = { extra = {} },
 	rarity = "fg_uncommon",
-	atlas = 'jokers',
-	pos = { x = 0, y = 0 }, -- read above
+	atlas = 'newjokers',
+	pos = { x = 5, y = 0 }, -- read above
 	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self then
@@ -113,9 +109,9 @@ SMODS.Joker {
 	key = 'flipped_script',
 	config = { extra = {} },
 	rarity = "fg_rare",
-	atlas = 'jokers',
+	atlas = 'newjokers',
 	yes_pool_flag = 'alternate',
-	pos = { x = 0, y = 0 },
+	pos = { x = 6, y = 0 },
 	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self then
@@ -123,8 +119,8 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-                        if FG.FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "v" then
-                            FG.FG.alternate_card(currentCard.config.center_key, card, FG.joker_equivalents)
+                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "v" then
+                            alternate_card(currentCard.config.center_key, card, joker_equivalents)
                             currentCard:start_dissolve(nil,false,0,true)
                         end
 					end
@@ -134,14 +130,14 @@ SMODS.Joker {
 		end
 	end
 }
--- Flipped script alt
+
 SMODS.Joker {
 	key = 'flipped_script_alt',
 	config = { extra = {} },
 	rarity = 2,
-	atlas = 'jokers',
+	atlas = 'newjokers',
 	yes_pool_flag = 'alternate',
-	pos = { x = 0, y = 0 },
+	pos = { x = 6, y = 0 },
 	cost = 4,
 	calculate = function(self, card, context)
 		if context.selling_self then
@@ -149,8 +145,8 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" then
-                            FG.alternate_card(currentCard.config.center_key, card, FG.joker_equivalents)
+                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "k" then
+                            alternate_card(currentCard.config.center_key, card, joker_equivalents)
                             currentCard:start_dissolve(nil,false,0,true)		
                         end
 					end
@@ -164,9 +160,9 @@ SMODS.Joker {
 SMODS.Joker {
 	key = 'NOTflipped_script',
 	config = { extra = {} },
-	rarity = "fg_rare",
-	atlas = 'jokers',
-	pos = { x = 1, y = 0 },
+	rarity = 3,
+	atlas = 'newjokers',
+	pos = { x = 7, y = 0 },
 	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self then
@@ -390,8 +386,8 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.joker_main then
 		local nofaces = false
-		for i = 1, #context.full_hand do
-        if not context.full_hand[i]:is_face() then
+		for i = 1, #context.scoring_hand do
+        if not context.scoring_hand[i]:is_face() then
 		nofaces = true
 		end
 		end
@@ -448,7 +444,6 @@ end
 end
 end
 }
-end
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
@@ -1379,6 +1374,134 @@ SMODS.Joker {
 	end
 	end
 	end
+}
+-- Rough Gem
+SMODS.Joker {
+	key = 'gem',
+	config = {type = 'Flush', extra = { dollars = 10 }},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {localize(card.ability.type, 'poker_hands'), card.ability.extra.dollars}}
+	end,
+	rarity = "fg_common",
+	atlas = 'jokers_alt',
+	yes_pool_flag = 'alternate',
+	pos = { x = 9, y = 7 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.joker_main then
+    if (next(context.poker_hands[card.ability.type])) then
+	for i = 1, #context.scoring_hand do
+	if context.scoring_hand[i]:is_suit("Diamonds") then
+	G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollars
+                    G.E_MANAGER:add_event(Event({func = (function() G.GAME.dollar_buffer = 0; return true end)}))
+                    return {
+                        dollars = card.ability.extra.dollars,
+                        card = card
+                    }
+	end
+	end
+end
+end
+end
+}
+-- Bloodstone
+SMODS.Joker {
+	key = 'bloodstone',
+	config = {type = 'Flush', extra = { Xmult_gain = 0.5, Xmult = 1 }},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult_gain, card.ability.extra.Xmult}}
+	end,
+	rarity = "fg_common",
+	atlas = 'jokers_alt',
+	yes_pool_flag = 'alternate',
+	pos = { x = 0, y = 8 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.before then
+    if (next(context.poker_hands[card.ability.type])) then
+	for i = 1, #context.scoring_hand do
+	if not context.scoring_hand[i]:is_suit("Hearts") then
+	local extrasuit = true
+	end
+	end
+	if not extrasuit then
+	card.ability.extra.Xmult = card.ability.extra.Xmult_gain + card.ability.extra.Xmult
+	end
+	end
+	end
+	if context.joker_main then
+                    return {
+                        Xmult_mod = card.ability.extra.Xmult,
+						message = 'X' .. card.ability.extra.Xmult
+                    }
+end
+end
+}
+-- Arrowhead
+SMODS.Joker {
+	key = 'arrowhead',
+	config = {type = 'Flush', extra = { chip_gain = 25, chips = 0 }},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {localize(card.ability.type, 'poker_hands'), card.ability.extra.chip_gain, card.ability.extra.chips}}
+	end,
+	rarity = "fg_common",
+	atlas = 'jokers_alt',
+	yes_pool_flag = 'alternate',
+	pos = { x = 1, y = 8 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.before then
+    if (next(context.poker_hands[card.ability.type])) then
+	for i = 1, #context.scoring_hand do
+	if not context.scoring_hand[i]:is_suit("Spades") then
+	local extrasuit = true
+	end
+	end
+	if not extrasuit then
+	card.ability.extra.chips = card.ability.extra.chip_gain + card.ability.extra.chips
+	end
+	end
+	end
+	if context.joker_main then
+                    return {
+                        chip_mod = card.ability.extra.chips,
+						message = '+' .. card.ability.extra.chips
+                    }
+end
+end
+}
+-- Onyx Agate
+SMODS.Joker {
+	key = 'agate',
+	config = {type = 'Flush', extra = { mult_gain = 20, mult = 0 }},
+	  loc_vars = function(self, info_queue, card)
+	return { vars = {localize(card.ability.type, 'poker_hands'), card.ability.extra.mult_gain, card.ability.extra.mult}}
+	end,
+	rarity = "fg_common",
+	atlas = 'jokers_alt',
+	yes_pool_flag = 'alternate',
+	pos = { x = 2, y = 8 },
+	cost = 2,
+	calculate = function(self, card, context)
+	if context.before then
+    if (next(context.poker_hands[card.ability.type])) then
+	for i = 1, #context.scoring_hand do
+	if not context.scoring_hand[i]:is_suit("Clubs") then
+	local extrasuit = true
+	end
+	end
+	if not extrasuit then
+	card.ability.extra.mult = card.ability.extra.mult_gain + card.ability.extra.mult
+	end
+	end
+	end
+	if context.joker_main then
+                    return {
+                        mult_mod = card.ability.extra.mult,
+						message = '+' .. card.ability.extra.mult
+                    }
+end
+end
 }
 -- Bones
 --[[ 

@@ -1,4 +1,4 @@
-function FG.is_alternate(card,table)
+function is_alternate(card,table)
     for k, v in pairs(table) do
         if card == v then
             return "v"
@@ -15,7 +15,7 @@ key is the provided card key.
 table is the reference table to look up.
 passing key or value, and returns the other.
 ]] 
-function FG.get_equivalent(key,table,passing)
+function get_equivalent(key,table,passing)
 	if passing == ("k" or "K" or "Key" or "key") then -- passing key, returning value
 		for k,v in pairs(table) do
 			if k == key then return v end
@@ -31,8 +31,8 @@ end
 -- key is the provided card key.
 -- card is the card instance you are dealing with. 99% of the time it will be just card (the one provided you by the function)
 -- table is the reference table to look up and compare.
-function FG.alternate_card(key,card,table) 
-	local convert = FG.get_equivalent(key,table,FG.is_alternate(key,table))
+function alternate_card(key,card,table) 
+	local convert = get_equivalent(key,table,is_alternate(key,table))
 	local new_card = create_card('Joker', G.jokers, false, nil, true, false, convert, nil)
 	new_card:add_to_deck()
 	G.jokers:emplace(new_card)
@@ -46,7 +46,7 @@ function FG.alternate_card(key,card,table)
 	card:start_dissolve(nil,false,0,true)
 end
 
-function FG.flip_editions(card)
+function flip_editions(card)
 	if card.edition then
 		if card.edition.negative then
 			card:set_edition(nil, true)
@@ -65,7 +65,7 @@ function FG.flip_editions(card)
 end
 
 -- UNFINISHED !!!
-function FG.change_pace()
+function change_pace()
 	if common_alt.default_weight > 0 then
 		sendInfoMessage("Regular", "MyInfoLogger")
 	common_alt.default_weight = 0
