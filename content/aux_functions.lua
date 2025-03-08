@@ -1,4 +1,4 @@
-function FG.is_alternate(card,table)
+function is_alternate(card,table)
     for k, v in pairs(table) do
         if card == v then
             return "v"
@@ -21,7 +21,7 @@ function FG.get_equivalent(key,table,passing)
 		for k,v in pairs(table) do
 			if k == key then return v end
 		end
-	elseif _passing == v then -- passing value, returning key
+	elseif _passing == "v" then -- passing value, returning key
 		for k,v in pairs(table) do
 			if v == key then return k end
 		end
@@ -46,7 +46,7 @@ function FG.alternate_card(key,card,table)
 	card:start_dissolve(nil,false,0,true)
 end
 
-function FG.flip_editions(card)
+function flip_editions(card)
 	if card.edition then
 		if card.edition.negative then
 			card:set_edition(nil, true)
@@ -65,7 +65,7 @@ function FG.flip_editions(card)
 end
 
 -- UNFINISHED !!!
-function FG.change_pace()
+function change_pace()
 	if common_alt.default_weight > 0 then
 		sendInfoMessage("Regular", "MyInfoLogger")
 	common_alt.default_weight = 0

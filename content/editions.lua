@@ -1,4 +1,4 @@
-FG.edition_equivalents = {
+edition_equivalents = {
 	["e_polychrome"] = "e_fg_polychrome",
 	["e_negative"] = "e_fg_negative",
 	["e_holographic"] = "e_fg_holographic",

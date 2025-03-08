@@ -41,7 +41,7 @@ SMODS.Consumable{
     can_use = function(self, card)
         if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
             any_state then
-            if #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" then
+            if #G.jokers.highlighted == 1 and is_alternate(G.jokers.highlighted[1].config.center_key,joker_equivalents) == "v" then
                 return true
             end
         end
@@ -52,7 +52,7 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                    FG.alternate_card(G.jokers.highlighted[1].config.center_key, G.jokers.highlighted[1], FG.joker_equivalents)
+                    alternate_card(G.jokers.highlighted[1].config.center_key, G.jokers.highlighted[1], joker_equivalents)
                 return true
             end
         }))
@@ -76,7 +76,7 @@ SMODS.Consumable{
     can_use = function(self, card)
         if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
             any_state then
-            if #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" then
+            if #G.jokers.highlighted == 1 and is_alternate(G.jokers.highlighted[1].config.center_key,joker_equivalents) == "k" then
                 return true
             end
         end
@@ -87,7 +87,7 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                    FG.alternate_card(G.jokers.highlighted[1].config.center_key, G.jokers.highlighted[1], FG.joker_equivalents)
+                    alternate_card(G.jokers.highlighted[1].config.center_key, G.jokers.highlighted[1], joker_equivalents)
                 return true
             end
         }))
@@ -150,7 +150,7 @@ SMODS.Consumable{
         for i in ipairs(G.jokers.cards) do
             currentJoker = G.jokers.cards[i]
             if currentJoker.rarity == 1 then
-                FG.alternate_card(currentJoker)
+                alternate_card(currentJoker)
             end
         end
     return true
@@ -160,8 +160,8 @@ SMODS.Consumable{
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
-                            FG.alternate_card(currentCard.config.center_key, currentCard, FG.joker_equivalents)
+                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
+                            alternate_card(currentCard.config.center_key, currentCard, joker_equivalents)
                         end
 					end
                     return true
@@ -187,7 +187,7 @@ SMODS.Consumable{
         for i in ipairs(G.jokers.cards) do
             currentJoker = G.jokers.cards[i]
             if currentJoker.rarity == 1 then
-                FG.alternate_card(currentJoker)
+                alternate_card(currentJoker)
             end
         end
     return true
@@ -197,8 +197,8 @@ SMODS.Consumable{
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 2 then
-                            FG.alternate_card(currentCard.config.center_key, currentCard, FG.joker_equivalents)
+                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "k" and currentCard.config.center.rarity == 2 then
+                            alternate_card(currentCard.config.center_key, currentCard, joker_equivalents)
                         end
 					end
                     return true
@@ -224,7 +224,7 @@ SMODS.Consumable{
         for i in ipairs(G.jokers.cards) do
             currentJoker = G.jokers.cards[i]
             if currentJoker.rarity == 1 then
-                FG.alternate_card(currentJoker)
+                alternate_card(currentJoker)
             end
         end
     return true
@@ -234,8 +234,8 @@ SMODS.Consumable{
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 3 then
-                            FG.alternate_card(currentCard.config.center_key, currentCard, FG.joker_equivalents)
+                        if is_alternate(currentCard.config.center_key, joker_equivalents) == "k" and currentCard.config.center.rarity == 3 then
+                            alternate_card(currentCard.config.center_key, currentCard, joker_equivalents)
                         end
 					end
                     return true

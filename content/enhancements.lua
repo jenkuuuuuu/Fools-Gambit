@@ -1,6 +1,5 @@
 FG.enhancement_equivalents = {
 	["m_glass"] = "m_fg_glass",
-}
 
 SMODS.Atlas {
 key = 'enhanced',

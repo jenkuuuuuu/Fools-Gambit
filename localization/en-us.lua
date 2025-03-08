@@ -9,15 +9,15 @@ return {
             j_fg_change_of_pace = {
                 name = 'Change of Pace',
                 text = {
-                    "After being sold, change {C:red}everything{}",
-                    "to it's {C:purple}Alternate{} form."
+                    "After being sold, changes spawned {C:red}jokers{}",
+                    "to their {C:purple}Alternate{} forms."
                 }
             },
             j_fg_change_of_pace_alt = {
                 name = 'Change of Pace?',
                 text = {
-                    "After being sold, change {C:purple}everything{}",
-                    "back to it's {C:red}Original{} form."
+                     "After being sold, changes spawned {C:purple}jokers{}",
+                    "to their {C:red}Original{} forms."
                 }
             },
             j_fg_flipped_script = {
@@ -76,7 +76,7 @@ return {
 			j_fg_disc={
                 name="Disc Joker",
                 text={
-                    "{C:blue}Original{C:attention} Jokers",
+                    "{C:red}Original{C:attention} Jokers",
                     "each give {C:chips}+#1#{} Chips",
 					 "{s:0.8}Disc Joker included",
                 },
@@ -93,7 +93,7 @@ return {
                 name="Conductor",
                 text={
                     "Creates #1# {C:purple}Abberation{} card if",
-                    "played hand contains only",
+                    "played poker hand contains only",
                     "{C:attention}Face{} cards",
                     "{C:inactive}(Must have room)",
                 },
@@ -366,6 +366,41 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
             },
+			 j_fg_gem={
+                name="Rough Gem?",
+                text={
+                    "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:diamonds}Diamond{} suit, earn",
+                    "{C:money}$#2#{} when scored",
+                },
+			},
+			j_fg_bloodstone={
+                name="Bloodstone?",
+                text={
+                   "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:hearts}Heart{} suit, gain",
+                    "{X:mult,C:white}X#2#{} Mult when scored",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+                },
+			},
+			j_fg_arrowhead={
+                name="Arrowhead?",
+                text={
+                   "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:spades}Spade{} suit, gain",
+                    "{C:chips}+#2#{} Chips when scored",
+					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips)",
+                },
+			},
+			j_fg_agate={
+                name="Onyx Agate?",
+                text={
+                   "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:clubs}Club{} suit, gain",
+                    "{C:mult}+#2#{} Mult when scored",
+					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
+                },
+			},
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
