@@ -452,11 +452,14 @@ end
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
+
+
 -- Joker
 SMODS.Joker {
 	key = 'joker',
 	config = { extra = {mult = 0.5} },
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_CENTERS['j_joker']
 		return { vars = { card.ability.extra.mult } }
 	end,
 	rarity = "fg_common",
