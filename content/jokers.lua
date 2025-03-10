@@ -459,7 +459,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = G.P_CENTERS['j_joker']
 		return { vars = { card.ability.extra.mult } }
-	end,
+		end,
 	rarity = "fg_common",
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
