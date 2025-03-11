@@ -244,3 +244,86 @@ SMODS.Consumable{
         return true
     end
 }
+
+SMODS.Consumable{
+    key = "stake",
+    set = "abberation",
+    atlas = "abberations",
+	pos = { x = 4, y = 0 },
+    loc_txt ={
+        name = "Stake",
+        text = {
+            "Creates up to {C:attention}#1#",
+            "random {C:purple}Aberration{} cards",
+            "{C:inactive}(Must have room)",
+        }
+    },
+	 config = {
+        extra = {
+            cards = 2
+			
+        }
+    },
+    can_use = function(self, card)
+    return true
+    end,
+	loc_vars = function(self,info_queue, card)
+         return {vars = {card.ability.extra.cards}}
+	end,
+    use = function(card, area, copier)
+			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+			for i = 1, math.min(card.config.extra.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
+			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+			G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = (function()
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        card:add_to_deck()
+                        G.consumeables:emplace(card)
+					    G.GAME.consumeable_buffer = 0
+						card:juice_up(0.3, 0.5)
+                    return true
+                end)}))
+		end
+	end
+end
+}
+
+SMODS.Consumable{
+    key = "fildivoce",
+    set = "abberation",
+    atlas = "abberations",
+	pos = { x = 3, y = 0 },
+    loc_txt ={
+        name = "Fil Di Voce",
+        text = {
+             "Gives {C:money}$#1#{} for every",
+             "owned {C:purple}Alternate{} Joker",
+        }
+    },
+	 config = {
+        extra = {
+            dollars = 5
+			
+        }
+    },
+    can_use = function(self, card)
+    return true
+    end,
+	loc_vars = function(self,info_queue, card)
+         return {vars = {card.ability.extra.dollars}}
+	end,
+    use = function(card, area, copier)
+			for i = 1, #G.jokers.cards do
+			if (G.jokers.cards[i].config.center.rarity == "fg_common" or G.jokers.cards[i].config.center.rarity == "fg_uncommon" or G.jokers.cards[i].config.center.rarity == "fg_rare" or G.jokers.cards[i].config.center.rarity == "fg_legendary") then
+                     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                     play_sound('timpani')
+                     G.jokers.cards[i]:juice_up(0.3, 0.5)
+                     ease_dollars(card.config.extra.dollars, true)
+                     return true end }))
+                     delay(0.2)
+                end
+            end
+end
+}
