@@ -8,7 +8,7 @@ SMODS.Atlas {
 }
 
 
-
+if FG.config.debug_mode then
 SMODS.Voucher{
 	key = 'violin',
 	loc_txt = {
@@ -41,3 +41,4 @@ SMODS.Voucher{
         end
     end
 }
+end

@@ -1558,6 +1558,7 @@ SMODS.Joker {
 -----------------
 ---Collectives---
 -----------------
+if FG.config.debug_mode then
 -- Deathmodereal
 SMODS.Joker {
   key = 'deathmodereal',
@@ -1644,3 +1645,4 @@ SMODS.Joker {
 		end
 	end
 }
+end

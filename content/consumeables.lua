@@ -93,7 +93,7 @@ SMODS.Consumable{
         }))
     end
 }
-
+if FG.config.debug_mode then
 SMODS.Consumable{
     key = "accelerando",
     set = "abberation",
@@ -131,7 +131,7 @@ SMODS.Consumable{
         }))
     end
 }
-
+end
 
 
 SMODS.Consumable{
