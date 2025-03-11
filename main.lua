@@ -60,11 +60,10 @@ SMODS.current_mod.extra_tabs = function()
 							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "CODE", colour = G.C.GREEN, scale = .5}}}},
 							{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Jogla", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Jenku", colour = G.C.WHITE, scale = .3}}}},
+								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "jenku", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Pablo", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "deathmodereal", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Aikoyori", colour = G.C.WHITE, scale = .3}}}},
-
+								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Gappie", colour = G.C.WHITE, scale = .3}}}},
 							}},
 						}},
 						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
@@ -74,7 +73,6 @@ SMODS.current_mod.extra_tabs = function()
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Gappie", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Samuran", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Hyperx", colour = G.C.WHITE, scale = .3}}}},
-
 							}},
 						}},
 						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {

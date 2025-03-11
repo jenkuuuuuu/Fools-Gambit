@@ -56,7 +56,7 @@ abberation2 = SMODS.Booster {
         return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
     end
 }
-
+if FG.config.debug_mode then
 jumbo_abberation = SMODS.Booster {
     key = "abberation3",
     kind = "abberation",
@@ -106,3 +106,4 @@ mega_abberation = SMODS.Booster {
         return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
     end
 }
+end
