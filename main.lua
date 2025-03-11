@@ -62,7 +62,7 @@ SMODS.current_mod.extra_tabs = function()
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Jogla", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Jenku", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Pablo", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Deathmodereal", colour = G.C.WHITE, scale = .3}}}},
+								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "deathmodereal", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Aikoyori", colour = G.C.WHITE, scale = .3}}}},
 
 							}},
