@@ -33,35 +33,47 @@ end
 -- card is the card instance you are dealing with. 99% of the time it will be just card (the one provided you by the function)
 -- table is the reference table to look up and compare.
 function FG.alternate_card(key,card,table)
-	local convert_to = FG.get_equivalent(key,table,FG.is_alternate(key,table))
+	local _table = table or FG.joker_equivalents
+	local convert_to = FG.get_equivalent(key,_table,FG.is_alternate(key,_table))
 	local new_card = SMODS.add_card({
 		set = 'Joker',
 		skip_materialize = true,
 		key = tostring(convert_to),
 	})
 	if card.edition then
-		new_card:set_edition(tostring(card.edition.key),true,true)
-	else
-		new_card:set_edition(nil,true,true)
+		FG.update_edition(new_card)
 	end
 	card:start_dissolve(nil,false,0,true)
 end
 
-function FG.flip_editions(card)
+-- Allows to integrate original<>alternate entries to the mod's tables.
+-- Target table: The table you are adding entries to.
+-- Source table: The table you are taking entries from.
+function FG.register_alternate(target_table, source_table)
+	if not target_table or not source_table then
+		sendWarnMessage("Missing or incorrect arguments: target_table [table], source_table [table]","Fool's Gambit/register_cards")
+		return
+    end
+    for k,v in pairs(source_table) do
+        target_table[k] = v
+    end
+end
+
+-- card is the old card, that is being deleted
+-- new_card is the new card created for alternating.
+function FG.update_alternate_values(old_card,new_card)
+		for k,v in ipairs(old_card.config.extra.alternating_values) do
+	  	new_card.config.extra.alternating_values.k = v
+  	end
+end
+
+-- Transfers the edition from the old card to the new card.
+-- card is the card object of which the edition has to be updated.
+function FG.update_edition(card)
 	if card.edition then
-		if card.edition.negative then
-			card:set_edition(nil, true)
-		elseif card.edition.polychrome then
-			card:set_edition("e_fg_polished", true)
-		elseif card.edition.fg_polished then
-			card:set_edition("e_polychrome", true)
-		elseif card.edition.holo then
-			card:set_edition("e_foil", true)
-		elseif card.edition.foil then
-			card:set_edition("e_holo", true)
-		end							
+		card:set_edition(tostring(card.edition.key),true,true)
 	else
-		card:set_edition("e_negative", true)
+		card:set_edition(nil,true,true)
 	end
 end
 
@@ -69,9 +81,9 @@ end
 function FG.change_pace()
 	if common_alt.default_weight > 0 then
 		sendInfoMessage("Regular", "MyInfoLogger")
-	common_alt.default_weight = 0
-	uncommon_alt.default_weight = 0
-	rare_alt.default_weight= 0
+		common_alt.default_weight = 0
+		uncommon_alt.default_weight = 0
+		rare_alt.default_weight= 0
 	else
 		sendInfoMessage("Alternate", "MyInfoLogger")
 		common_alt.default_weight = .70
