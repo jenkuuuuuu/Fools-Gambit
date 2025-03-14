@@ -1,5 +1,6 @@
 FG = {}
 FG.config = SMODS.current_mod.config
+FG.config.version = SMODS.current_mod.version
 
 -- This is in preparation for file splitting. I'll do that later. - Jogla
 -- im splitting jokers and stuff into sections to make this easier later - jenku
@@ -11,7 +12,8 @@ local mod_contents = {
 	"booster_packs",
 	"rarities",
 	"vouchers",
-	"enhancements"
+	"enhancements",
+	"test"
 }
 
 for k, v in pairs(mod_contents) do -- Load this mod's files
@@ -52,6 +54,7 @@ SMODS.current_mod.extra_tabs = function()
 				}, nodes = {
 					-- work your UI wizardry here, see 'Building a UI' page
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Fool's Gambit", colour = G.C.PURPLE, scale = .7}}}},
+					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = tostring("Version: "..FG.config.version), colour = G.C.GREY, scale = .3}}}},
 					{n = G.UIT.R, config = {align = "tm", minh = .2}},
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Lead developer", colour = G.C.GOLD, scale = .5}}}},
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
