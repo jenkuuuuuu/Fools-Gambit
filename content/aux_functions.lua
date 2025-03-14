@@ -41,7 +41,7 @@ function FG.alternate_card(key,card,table)
 		key = tostring(convert_to),
 	})
 	if card.edition then
-		FG.update_edition(new_card)
+		FG.update_edition(card,new_card)
 	end
 	card:start_dissolve(nil,false,0,true)
 end
@@ -69,11 +69,11 @@ end
 
 -- Transfers the edition from the old card to the new card.
 -- card is the card object of which the edition has to be updated.
-function FG.update_edition(card)
-	if card.edition then
-		card:set_edition(tostring(card.edition.key),true,true)
+function FG.update_edition(old_card,new_card)
+	if old_card.edition then
+		new_card:set_edition(tostring(old_card.edition.key),true,true)
 	else
-		card:set_edition(nil,true,true)
+		new_card:set_edition(nil,true,true)
 	end
 end
 
