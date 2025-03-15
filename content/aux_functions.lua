@@ -77,17 +77,3 @@ function FG.update_edition(old_card,new_card)
 	end
 end
 
--- UNFINISHED !!!
-function FG.change_pace()
-	if common_alt.default_weight > 0 then
-		sendInfoMessage("Regular", "MyInfoLogger")
-		common_alt.default_weight = 0
-		uncommon_alt.default_weight = 0
-		rare_alt.default_weight= 0
-	else
-		sendInfoMessage("Alternate", "MyInfoLogger")
-		common_alt.default_weight = .70
-		uncommon_alt.default_weight = .25
-		rare_alt.default_weight= .05
-	end
-end
