@@ -76,16 +76,12 @@ if FG.config.debug_mode then
 		cost = 8,
 		calculate = function(self, card, context)
 			if context.selling_self then
-				for k, v in pairs(FG.joker_equivalents) do
-					if not string.find(k, '_fg_') then
-						sendInfoMessage(k, "MyInfoLogger")
-						SMODS.Joker:take_ownership(k,
-							{
-								no_pool_flag = 'alternate'
-							})
+				G.GAME.pool_flags.alternate = true
+				for k, v in pairs(G.P_CENTERS) do
+					if string.find(k, '^j_') and not string.find(k, "_fg_") then
+						G.P_CENTERS[k]['no_pool_flag'] = 'alternate'
 					end
 				end
-				G.GAME.pool_flags.alternate = true
 			end
 		end
 	}
@@ -93,7 +89,7 @@ if FG.config.debug_mode then
 	SMODS.Joker {
 		key = 'change_of_pace_alt',
 		config = { extra = {} },
-		rarity = "fg_uncommon",
+		rarity = 2,
 		atlas = 'newjokers',
 		pos = { x = 5, y = 0 }, -- read above
 		cost = 8,
@@ -107,7 +103,7 @@ if FG.config.debug_mode then
 	SMODS.Joker {
 		key = 'flipped_script',
 		config = { extra = {} },
-		rarity = "fg_rare",
+		rarity = 3,
 		atlas = 'newjokers',
 		yes_pool_flag = 'alternate',
 		pos = { x = 6, y = 0 },
@@ -193,6 +189,7 @@ if FG.config.debug_mode then
 		atlas = 'newjokers',
 		pos = { x = 0, y = 0 },
 		cost = 6,
+		no_pool_flag = 'alternate',
 		calculate = function(self, card, context)
 			if context.buying_card then
 				card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
@@ -230,10 +227,11 @@ if FG.config.debug_mode then
 	SMODS.Joker {
 		key = 'concertalt',
 		config = {},
-		rarity = "fg_uncommon",
+		rarity = 2,
 		atlas = 'newjokers',
 		pos = { x = 0, y = 0 },
 		cost = 6,
+		yes_pool_flag = 'alternate',
 		calculate = function(self, card, context)
 			if G.jokers then
 				if context.buying_card then
@@ -266,6 +264,7 @@ if FG.config.debug_mode then
 		atlas = 'newjokers',
 		pos = { x = 1, y = 0 },
 		cost = 7,
+		no_pool_flag = 'alternate',
 		calculate = function(self, card, context)
 			if context.skip_blind then
 				for i = 1, #G.consumeables.cards do
@@ -292,7 +291,7 @@ if FG.config.debug_mode then
 
 	SMODS.Joker {
 		key = 'delinquentalt',
-		rarity = "fg_uncommon",
+		rarity = 2,
 		atlas = 'newjokers',
 		yes_pool_flag = 'alternate',
 		pos = { x = 1, y = 0 },
@@ -422,10 +421,11 @@ if FG.config.debug_mode then
 
 	SMODS.Joker {
 		key = 'conductoralt',
-		rarity = "fg_uncommon",
+		rarity = 2,
 		atlas = 'newjokers',
 		pos = { x = 4, y = 0 }, -- read above
 		cost = 5,
+		yes_pool_flag = 'alternate',
 		config = { extra = { amount = 2 } },
 		loc_vars = function(self, info_queue, card)
 			return { vars = { card.ability.extra.amount } }
@@ -472,7 +472,7 @@ SMODS.Joker {
 		--info_queue[#info_queue + 1] = G.P_CENTERS['j_joker']
 		return { vars = { card.ability.extra.mult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 0, y = 0 },
@@ -491,7 +491,7 @@ SMODS.Joker {
 SMODS.Joker {
 	key = 'greedy',
 	config = { extra = { mult_gain = 1, currentMult = 0 } },
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
@@ -524,7 +524,7 @@ SMODS.Joker {
 SMODS.Joker {
 	key = 'lusty',
 	config = { extra = { mult_gain = 1, currentMult = 0 } },
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
@@ -557,7 +557,7 @@ SMODS.Joker {
 SMODS.Joker {
 	key = 'wrathful',
 	config = { extra = { mult_gain = 1, currentMult = 0 } },
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
@@ -590,7 +590,7 @@ SMODS.Joker {
 SMODS.Joker {
 	key = 'gluttenous',
 	config = { extra = { mult_gain = 1, currentMult = 0 } },
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
@@ -626,7 +626,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 2, y = 0 },
@@ -650,7 +650,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 3, y = 0 },
@@ -674,7 +674,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 4, y = 0 },
@@ -698,7 +698,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 5, y = 0 },
@@ -722,7 +722,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_mult, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 6, y = 0 },
@@ -746,7 +746,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 0, y = 14 },
@@ -770,7 +770,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 1, y = 14 },
@@ -794,7 +794,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 2, y = 14 },
@@ -818,7 +818,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 3, y = 14 },
@@ -842,7 +842,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.t_chips, localize(card.ability.type, 'poker_hands'), card.ability.extra.repetitions } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 4, y = 14 },
@@ -866,7 +866,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.chips, card.ability.extra.mult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 5, y = 5 },
@@ -915,7 +915,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.chips, card.ability.extra.discards } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 1, y = 2 },
@@ -944,7 +944,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult, card.ability.extra.discards, card.ability.extra.discards2 } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 2, y = 2 },
@@ -974,7 +974,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.item_amount, localize { type = 'variable', key = (card.ability.loyalty_remaining == 0 and 'loyalty_active' or 'loyalty_inactive'), vars = { card.ability.loyalty_remaining } } } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	pos = { x = 4, y = 2 },
 	cost = 2,
@@ -1028,7 +1028,7 @@ SMODS.Joker {
 -- 8 Ball
 SMODS.Joker {
 	key = '8ball',
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
 	pos = { x = 0, y = 5 },
@@ -1063,7 +1063,7 @@ SMODS.Joker {
 -- Missprint
 SMODS.Joker {
 	key = 'misprint',
-	rarity = "fg_uncommon",
+	rarity = 2,
 	cost = 6,
 	atlas = "jokers_alt",
 	pos = { x = 6, y = 2 },
@@ -1102,7 +1102,7 @@ SMODS.Joker {
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
     end,
-    rarity = "fg_common",
+    rarity = 1,
     atlas = 'jokers_alt',
     pos = { x = 8, y = 2 },
     cost = 2,
@@ -1131,7 +1131,7 @@ SMODS.Joker {
 -- Fibonacci
 SMODS.Joker {
 	key = 'fibonacci',
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
@@ -1237,7 +1237,7 @@ SMODS.Joker {
 -- Face
 SMODS.Joker {
 	key = 'face',
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
 	pos = { x = 2, y = 3 },
@@ -1265,7 +1265,7 @@ SMODS.Joker {
 -- Abstract
 SMODS.Joker {
 	key = 'abstract',
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
 	pos = { x = 3, y = 3 },
@@ -1293,7 +1293,7 @@ SMODS.Joker {
 -- Egg
 SMODS.Joker {
 	key = 'egg',
-	rarity = "fg_common",
+	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
@@ -1325,7 +1325,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 5, y = 4 },
@@ -1352,7 +1352,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 6, y = 4 },
@@ -1379,7 +1379,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 7, y = 4 },
@@ -1406,7 +1406,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.Xmult_mod, localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 8, y = 4 },
@@ -1433,7 +1433,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.dollars } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 9, y = 7 },
@@ -1464,7 +1464,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult_gain, card.ability.extra.Xmult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 0, y = 8 },
@@ -1497,7 +1497,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.chip_gain, card.ability.extra.chips } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 1, y = 8 },
@@ -1530,7 +1530,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.mult_gain, card.ability.extra.mult } }
 	end,
-	rarity = "fg_common",
+	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 2, y = 8 },
@@ -1560,7 +1560,7 @@ SMODS.Joker {
 --[[
 SMODS.Joker {
 	key = 'mr_bones',
-	rarity = "fg_rare",
+	rarity = 3,
 	cost = 2,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
