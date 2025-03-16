@@ -20,47 +20,50 @@ SMODS.Atlas {
 }
 -- All joker equivalents. Format is: original <> alternate
 FG.joker_equivalents = {
+	meta = {
+		set = "jokers"
+	},
 	-- Mod jokers
-	["j_fg_flipped_script"] = "j_fg_flipped_script_alt",
-	["j_fg_concert"] = "j_fg_concertalt",
-	["j_fg_delinquent"] = "j_fg_delinquentalt",
-	["j_fg_conductor"] = "j_fg_conductoralt",
+	j_fg_flipped_script = "j_fg_flipped_script_alt",
+	j_fg_concert = "j_fg_concertalt",
+	j_fg_delinquent = "j_fg_delinquentalt",
+	j_fg_conductor = "j_fg_conductoralt",
 	-- Normal jokers
-	["j_joker"] = "j_fg_joker",
-	["j_greedy_joker"] = "j_fg_greedy",
-	["j_lusty_joker"] = "j_fg_lusty",
-	["j_wrathful_joker"] = "j_fg_wrathful",
-	["j_gluttenous_joker"] = "j_fg_gluttenous",
-	["j_jolly"] = "j_fg_jolly",
-	["j_zany"] = "j_fg_zany",
-	["j_mad"] = "j_fg_mad",
-	["j_crazy"] = "j_fg_crazy",
-	["j_droll"] = "j_fg_droll",
-	["j_sly"] = "j_fg_sly",
-	["j_wily"] = "j_fg_wily",
-	["j_clever"] = "j_fg_clever",
-	["j_devious"] = "j_fg_devious",
-	["j_ceremonial"] = "j_fg_dagger",
-	["j_banner"] = "j_fg_banner",
-	["j_mystic_summit"] = "j_fg_summit",
-	["j_loyalty_card"] = "j_fg_loyalty",
-	["j_8_ball"] = "j_fg_8ball",
-	["j_misprint"] = "j_fg_misprint",
-	["j_fibonacci"] = "j_fg_fibonacci",
-	["j_scary_face"] = "j_fg_face",
-	["j_abstract"] = "j_fg_abstract",
-	["j_crafty"] = "j_fg_crafty",
-	["j_duo"] = "j_fg_duo",
-	["j_trio"] = "j_fg_trio",
-	["j_family"] = "j_fg_family",
-	["j_order"] = "j_fg_order",
-	["j_egg"] = "j_fg_egg",
-	["j_rough_gem"] = "j_fg_gem",
-	["j_bloodstone"] = "j_fg_bloodstone",
-	["j_arrowhead"] = "j_fg_arrowhead",
-	["j_onyx_agate"] = "j_fg_agate",
+	j_joker = "j_fg_joker",
+	j_greedy_joker = "j_fg_greedy",
+	j_lusty_joker = "j_fg_lusty",
+	j_wrathful_joker = "j_fg_wrathful",
+	j_gluttenous_joker = "j_fg_gluttenous",
+	j_jolly = "j_fg_jolly",
+	j_zany = "j_fg_zany",
+	j_mad = "j_fg_mad",
+	j_crazy = "j_fg_crazy",
+	j_droll = "j_fg_droll",
+	j_sly = "j_fg_sly",
+	j_wily = "j_fg_wily",
+	j_clever = "j_fg_clever",
+	j_devious = "j_fg_devious",
+	j_ceremonial = "j_fg_dagger",
+	j_banner = "j_fg_banner",
+	j_mystic_summit = "j_fg_summit",
+	j_loyalty_card = "j_fg_loyalty",
+	j_8_ball = "j_fg_8ball",
+	j_misprint = "j_fg_misprint",
+	j_fibonacci = "j_fg_fibonacci",
+	j_scary_face = "j_fg_face",
+	j_abstract = "j_fg_abstract",
+	j_crafty = "j_fg_crafty",
+	j_duo = "j_fg_duo",
+	j_trio = "j_fg_trio",
+	j_family = "j_fg_family",
+	j_order = "j_fg_order",
+	j_egg = "j_fg_egg",
+	j_rough_gem = "j_fg_gem",
+	j_bloodstone = "j_fg_bloodstone",
+	j_arrowhead = "j_fg_arrowhead",
+	j_onyx_agate = "j_fg_agate",
 	-- COLLECTION
-	["j_fg_deathmodereal"] = "j_fg_deathmoderealalt",
+	j_fg_deathmodereal = "j_fg_deathmoderealalt",
 }
 --------------------
 ---SPECIAL JOKERS---
@@ -115,7 +118,9 @@ if FG.config.debug_mode then
 						for i in ipairs(G.jokers.cards) do
 							local currentCard = G.jokers.cards[i]
 							if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "v" then
-								FG.alternate_card(currentCard.config.center_key, card, FG.joker_equivalents)
+								FG.alternate_card({
+									card = currentCard
+								})
 								currentCard:start_dissolve(nil, false, 0, true)
 							end
 						end
@@ -141,7 +146,9 @@ if FG.config.debug_mode then
 						for i in ipairs(G.jokers.cards) do
 							local currentCard = G.jokers.cards[i]
 							if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" then
-								FG.alternate_card(currentCard.config.center_key, card, FG.joker_equivalents)
+								FG.alternate_card({
+									card = currentCard
+								})
 								currentCard:start_dissolve(nil, false, 0, true)
 							end
 						end

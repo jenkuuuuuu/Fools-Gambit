@@ -32,15 +32,27 @@ end
 -- key is the provided card key.
 -- card is the card instance you are dealing with. 99% of the time it will be just card (the one provided you by the function)
 -- table is the reference table to look up and compare.
-function FG.alternate_card(key,card,table)
-	local _table = table or FG.joker_equivalents
-	local convert_to = FG.get_equivalent(key,_table,FG.is_alternate(key,_table))
+function FG.alternate_card(args)
+	-- Definitions (Sets all the default values)
+	local args = args or {}
+	if not args.key or args.card then sendWarnMessage("Missing card key and/or card instance!","Fool's Gambit/alternate_card") end
+	local card = args.card -- can't provide default value
+	local table = args.set or FG.joker_equivalents
+	local edition = args.skip_edition or false -- Keep editions
+	local enhancement = args.skip_enhancement or false -- Keep enhancements
+	local seal = args.skip_seal or false -- Keep seals
+	local sticker = args.skip_stickers or false -- Keep stickers
+	-- Extra definitions (Other definitions that are not set by args)
+	local key = card.config.center_key
+	local set = table.meta.setor "jokers"
+	-- Function
+	local convert_to = FG.get_equivalent(key,table,FG.is_alternate(key,table))
 	local new_card = SMODS.add_card({
-		set = 'Joker',
+		set = set,
 		skip_materialize = true,
 		key = tostring(convert_to),
 	})
-	if card.edition then
+	if card.edition and not edition then
 		FG.update_edition(card,new_card)
 	end
 	card:start_dissolve(nil,false,0,true)

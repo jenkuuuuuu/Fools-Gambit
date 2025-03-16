@@ -1,8 +1,10 @@
 FG.edition_equivalents = {
-	["e_polychrome"] = "e_fg_polychrome",
-	["e_negative"] = "e_fg_negative",
-	["e_holographic"] = "e_fg_holographic",
-	["e_foil"] = "e_fg_foil"
+    meta = {
+    },
+	e_polychrome = "e_fg_polychrome",
+	e_negative = "e_fg_negative",
+	e_holographic = "e_fg_holographic",
+	e_foil = "e_fg_foil"
 } -- use for alternating later
 
 --
