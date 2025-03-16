@@ -44,7 +44,7 @@ function FG.alternate_card(args)
 	local sticker = args.skip_stickers or false -- Keep stickers
 	-- Extra definitions (Other definitions that are not set by args)
 	local key = card.config.center_key
-	local set = table.meta.setor "jokers"
+	local set = table.meta.set "jokers"
 	-- Function
 	local convert_to = FG.get_equivalent(key,table,FG.is_alternate(key,table))
 	local new_card = SMODS.add_card({
