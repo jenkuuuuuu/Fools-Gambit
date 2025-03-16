@@ -2,14 +2,14 @@
 	"id": "foolsGambit",
 	"name": "Fool's Gambit",
 	"display_name": "FG",
-	"author": ["GoldenLeaf", "jenku", "Jogla", "deathmodereal"],
+	"author": ["GoldenLeaf (See Credits page)"],
 	"description": "A mod that adds alternative version of a lot of cards.",
 	"prefix": "fg",
 	"main_file": "main.lua",
 	"priority": 0,
 	"badge_colour": "6fa0e8",
 	"badge_text_colour": "e6eaf0",
-	"version": "0.1.0",
+	"version": "0.1.0-pre5",
 	"dependencies": [
         "Steamodded (>=1.*)",
 		"Lovely (>=0.6)"
