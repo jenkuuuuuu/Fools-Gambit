@@ -894,7 +894,7 @@ SMODS.Joker {
 					func = function()
 						G.GAME.joker_buffer = 0
 						card.ability.extra.chips = card.ability.extra.chips +
-						sliced_card.sell_cost * card.ability.extra.mult
+							sliced_card.sell_cost * card.ability.extra.mult
 						card:juice_up(0.8, 0.8)
 						sliced_card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
 						play_sound('slice1', 0.96 + math.random() * 0.08)
@@ -902,8 +902,12 @@ SMODS.Joker {
 					end
 				}))
 				card_eval_status_text(card, 'extra', nil, nil, nil,
-					{ message = localize { type = 'variable', key = 'a_chips', vars = { card.ability.extra.chips + card.ability.extra.mult * sliced_card.sell_cost } }, colour =
-					G.C.CHIPS, no_juice = true })
+					{
+						message = localize { type = 'variable', key = 'a_chips', vars = { card.ability.extra.chips + card.ability.extra.mult * sliced_card.sell_cost } },
+						colour =
+							G.C.CHIPS,
+						no_juice = true
+					})
 			end
 		end
 		if context.joker_main and card.ability.extra.chips > 0 then
@@ -1440,7 +1444,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.dollars } }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 9, y = 7 },
@@ -1451,9 +1455,11 @@ SMODS.Joker {
 				for i = 1, #context.scoring_hand do
 					if context.scoring_hand[i]:is_suit("Diamonds") then
 						G.GAME.dollar_buffer = (G.GAME.dollar_buffer or 0) + card.ability.extra.dollars
-						G.E_MANAGER:add_event(Event({ func = (function()
-							G.GAME.dollar_buffer = 0; return true
-						end) }))
+						G.E_MANAGER:add_event(Event({
+							func = (function()
+								G.GAME.dollar_buffer = 0; return true
+							end)
+						}))
 						return {
 							dollars = card.ability.extra.dollars,
 							card = card
@@ -1471,7 +1477,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult_gain, card.ability.extra.Xmult } }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 0, y = 8 },
@@ -1504,7 +1510,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.chip_gain, card.ability.extra.chips } }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 1, y = 8 },
@@ -1537,7 +1543,7 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.mult_gain, card.ability.extra.mult } }
 	end,
-	rarity = 1,
+	rarity = 3,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
 	pos = { x = 2, y = 8 },

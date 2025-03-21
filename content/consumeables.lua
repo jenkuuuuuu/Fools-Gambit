@@ -54,7 +54,6 @@ SMODS.Consumable{
             func = function()
                     FG.alternate_card({
                         card = G.jokers.highlighted[1],
-                        edition = false
                     })
                 return true
             end
@@ -169,7 +168,7 @@ SMODS.Consumable{
 						local currentCard = G.jokers.cards[i]
                         if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
                             FG.alternate_card({
-                                card = currentCard
+                                card = currentCard,
                             })
                         end
 					end

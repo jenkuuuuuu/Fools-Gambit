@@ -37,25 +37,60 @@ function FG.alternate_card(args)
 	local args = args or {}
 	if not args.key or args.card then sendWarnMessage("Missing card key and/or card instance!","Fool's Gambit/alternate_card") end
 	local card = args.card -- can't provide default value
-	local table = args.set or FG.joker_equivalents
-	local edition = args.skip_edition or false -- Keep editions
-	local enhancement = args.skip_enhancement or false -- Keep enhancements
-	local seal = args.skip_seal or false -- Keep seals
-	local sticker = args.skip_stickers or false -- Keep stickers
+	local ref = args.ref or FG.joker_equivalents
+	local edition = args.edition or 'keep' -- keep | alternate | ignore
+	local edition_ref = args.edition_ref or FG.edition_equivalents
+
 	-- Extra definitions (Other definitions that are not set by args)
+
 	local key = card.config.center_key
-	local set = table.meta.set "jokers"
+	local set = ref.meta.set or "jokers"
+
 	-- Function
-	local convert_to = FG.get_equivalent(key,table,FG.is_alternate(key,table))
+
+	local convert_to = FG.get_equivalent(key,ref,FG.is_alternate(key,ref))
 	local new_card = SMODS.add_card({
 		set = set,
 		skip_materialize = true,
 		key = tostring(convert_to),
 	})
-	if card.edition and not edition then
-		FG.update_edition(card,new_card)
+	if edition == 'keep' then FG.update_edition(card,new_card) 
+	elseif edition == 'alternate' then FG.alternate_edition(card,new_card,edition_ref)
 	end
 	card:start_dissolve(nil,false,0,true)
+end
+
+-- Transfers the edition from the old card to the new card.
+function FG.update_edition(source,target)
+	if source.edition then
+		target:set_edition(source.edition.key,true,true)
+	else
+		target:set_edition(nil,true,true)
+	end
+end
+
+function FG.alternate_edition(source,target,ref)
+	if source.edition then
+		target:set_edition(FG.get_equivalent(source.edition.key,ref),true,true)
+	else
+		target:set_edition(nil,true,true)
+	end
+end
+
+-- WIP functions. Do nothing at the moment
+
+function FG.update_enhancement(source,target) end
+function FG.alternate_enhancement(source,target) end
+function FG.update_seal(source,target) end
+function FG.alternate_seal(source,target) end
+
+
+-- card is the old card, that is being deleted
+-- new_card is the new card created for alternating.
+function FG.update_alternate_values(source,target,mode)
+	for k,v in ipairs(source.config.extra.alternating_values) do
+		target.config.extra.alternating_values[k] = v
+	end
 end
 
 -- Allows to integrate original<>alternate entries to the mod's tables.
@@ -70,22 +105,3 @@ function FG.register_alternate(target_table, source_table)
         target_table[k] = v
     end
 end
-
--- card is the old card, that is being deleted
--- new_card is the new card created for alternating.
-function FG.update_alternate_values(old_card,new_card)
-		for k,v in ipairs(old_card.config.extra.alternating_values) do
-	  	new_card.config.extra.alternating_values.k = v
-  	end
-end
-
--- Transfers the edition from the old card to the new card.
--- card is the card object of which the edition has to be updated.
-function FG.update_edition(old_card,new_card)
-	if old_card.edition then
-		new_card:set_edition(tostring(old_card.edition.key),true,true)
-	else
-		new_card:set_edition(nil,true,true)
-	end
-end
-
