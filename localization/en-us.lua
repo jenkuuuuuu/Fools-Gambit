@@ -34,8 +34,8 @@ return {
                     "{C:attention}Jokers{} to their {C:purple}Alternate{}"
                 }
             },
-            j_fg_NOTflipped_script = {
-                name = 'NOTFlipped Script',
+            j_fg_script_flipped = {
+                name = 'Script Flipped',
                 text = {
                     "When sold, changes the edition of",
                     "all other jokers to the opposite edition."
@@ -423,6 +423,15 @@ return {
                     "{C:dark_edition}+#1#{} consumeables slots.",
                     "Increases by #2# after {C:attention}#3# blind{} defeated",
                     "{C:inactive,s:0.7}\"I am NOT a wizard\""
+                }
+            },
+            j_fg_jenker = {
+                name = 'Jenku',
+                text = {
+                    "Retriggers every {C:attention}Joker{}",
+                    "for each {C:attention}Boss Blind{} defeated.",
+					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
+                    "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
                 }
             },
         },

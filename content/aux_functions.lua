@@ -105,3 +105,57 @@ function FG.register_alternate(target_table, source_table)
         target_table[k] = v
     end
 end
+function FG.flip_editions(card)
+	if card.edition then
+		if card.edition.negative then
+			card:set_edition(nil, true)
+		elseif card.edition.polychrome then
+			card:set_edition("e_fg_polished", true)
+		elseif card.edition.fg_polished then
+			card:set_edition("e_polychrome", true)
+		elseif card.edition.holo then
+			card:set_edition("e_foil", true)
+		elseif card.edition.foil then
+			card:set_edition("e_holo", true)
+		end							
+		if card.edition.negative then card:set_edition(nil, true)
+		elseif card.edition.polychrome then card:set_edition("e_fg_polished", true)
+		elseif card.edition.fg_polished then card:set_edition("e_polychrome", true)
+		elseif card.edition.holo then card:set_edition("e_foil", true)
+		elseif card.edition.foil then card:set_edition("e_holo", true)
+		end
+	else
+		card:set_edition("e_negative", true)
+	end
+end
+
+if FG.config.debug_mode then -- scary !!! broken!!!! (eats tags and is forced after reroll)
+	function FG.replace_shop_joker(key, index)
+		if G.shop_jokers then
+			if G.shop_jokers.cards then
+				local replacee = G.shop_jokers.cards[index]
+				if replacee then
+				G.shop_jokers:remove_card(replacee)
+				replacee:remove()
+				
+	
+				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
+				create_shop_card_ui(replacement, joker, G.shop_jokers)
+				replacement:start_materialize()
+				end
+			end
+		end
+	end
+
+	local shopref = create_card_for_shop
+
+	function create_card_for_shop(area)
+		local card = shopref(area)
+
+		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips then
+			FG.replace_shop_joker("j_fg_change_of_pace", 1)
+		end
+
+		return card
+	end
+end

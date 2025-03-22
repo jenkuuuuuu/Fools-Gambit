@@ -2,6 +2,8 @@ FG = {}
 FG.config = SMODS.current_mod.config
 FG.config.version = SMODS.current_mod.version
 
+SMODS.current_mod.optional_features = { retrigger_joker = true }
+
 -- This is in preparation for file splitting. I'll do that later. - Jogla
 -- im splitting jokers and stuff into sections to make this easier later - jenku
 local mod_contents = {

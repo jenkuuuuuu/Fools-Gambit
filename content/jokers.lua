@@ -75,6 +75,8 @@ if FG.config.debug_mode then
 		config = { extra = {} },
 		rarity = 3,
 		atlas = 'newjokers',
+		eternal_compat = false,
+		perishable_compat = false,
 		pos = { x = 5, y = 0 }, -- havent added the sprite to the sheet yet
 		cost = 8,
 		calculate = function(self, card, context)
@@ -94,6 +96,8 @@ if FG.config.debug_mode then
 		config = { extra = {} },
 		rarity = 2,
 		atlas = 'newjokers',
+		eternal_compat = false,
+		perishable_compat = false,
 		pos = { x = 5, y = 0 }, -- read above
 		cost = 8,
 		calculate = function(self, card, context)
@@ -111,6 +115,8 @@ if FG.config.debug_mode then
 		yes_pool_flag = 'alternate',
 		pos = { x = 6, y = 0 },
 		cost = 8,
+		eternal_compat = false,
+		perishable_compat = false,
 		calculate = function(self, card, context)
 			if context.selling_self then
 				G.E_MANAGER:add_event(Event({
@@ -139,6 +145,8 @@ if FG.config.debug_mode then
 		yes_pool_flag = 'alternate',
 		pos = { x = 6, y = 0 },
 		cost = 4,
+		eternal_compat = false,
+		perishable_compat = false,
 		calculate = function(self, card, context)
 			if context.selling_self then
 				G.E_MANAGER:add_event(Event({
@@ -160,12 +168,14 @@ if FG.config.debug_mode then
 	}
 	-- Script Flipped
 	SMODS.Joker {
-		key = 'NOTflipped_script',
+		key = 'script_flipped',
 		config = { extra = {} },
 		rarity = 3,
 		atlas = 'newjokers',
 		pos = { x = 7, y = 0 },
 		cost = 8,
+		eternal_compat = false,
+		perishable_compat = false,
 		calculate = function(self, card, context)
 			if context.selling_self then
 				G.E_MANAGER:add_event(Event({
@@ -368,7 +378,7 @@ if FG.config.debug_mode then
 		end,
 		calculate = function(self, card, context)
 			if context.other_joker then
-				if (context.other_joker.config.center.rarity == "fg_common" or context.other_joker.config.center.rarity == "fg_uncommon" or context.other_joker.config.center.rarity == "fg_rare" or context.other_joker.config.center.rarity == "fg_legendary") then
+				if (context.other_joker.config.center.yes_pool_flag == "alternate") then
 					G.E_MANAGER:add_event(Event({
 						func = function()
 							context.other_joker:juice_up(0.5, 0.5)
@@ -1710,6 +1720,37 @@ if FG.config.debug_mode then
 				card.ability.extra.secret = "Boss"
 				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!" })
 			end
+		end
+	}
+	-- Jenku
+	-- shes fucking op i will probably nerf her but its 4am
+	SMODS.Joker {
+		key = 'jenker',
+		config = { extra = { repetitions = 0 } },
+		loc_vars = function(self, info_queue, card)
+			return {
+				vars = {
+					card.ability.extra.repetitions
+				}
+			}
+		end,
+		rarity = "fg_collective",
+		atlas = 'collective',
+		pos = { x = 1, y = 0 },
+		soul_pos = { x = 1, y = 1 },
+		cost = 5,
+		calculate = function(self, card, context)
+			if card.ability.extra.repetitions == 0 then
+				card.ability.extra.repetitions = 1
+			end
+			if context.end_of_round and not context.repetition and not context.individual and G.GAME.blind.boss then
+				card.ability.extra.repetitions = card.ability.extra.repetitions + 1
+			end
+			if context.retrigger_joker_check and not context.retrigger_joker and card ~= self then
+				return { 
+					repetitions = card.ability.extra.repetitions
+				 } 
+			   end
 		end
 	}
 end

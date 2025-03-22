@@ -332,7 +332,7 @@ SMODS.Consumable{
 	end,
     use = function(card, area, copier)
 			for i = 1, #G.jokers.cards do
-			if (G.jokers.cards[i].config.center.rarity == "fg_common" or G.jokers.cards[i].config.center.rarity == "fg_uncommon" or G.jokers.cards[i].config.center.rarity == "fg_rare" or G.jokers.cards[i].config.center.rarity == "fg_legendary") then
+                if (G.jokers.cards[i].config.center.yes_pool_flag == "alternate") then
                      G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                      play_sound('timpani')
                      G.jokers.cards[i]:juice_up(0.3, 0.5)
