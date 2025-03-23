@@ -429,9 +429,16 @@ return {
                 name = 'Jenku',
                 text = {
                     "Retriggers every {C:attention}Joker{}",
-                    "for each {C:attention}Boss Blind{} defeated.",
+                    "for every second {C:attention}Boss Blind{} defeated.",
+                    "starting at {C:mult}1{}",
 					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
                     "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
+                }
+            },
+            j_fg_jenkeralt = {
+                name = 'Jenku',
+                text = {
+                    "",
                 }
             },
         },

@@ -1726,7 +1726,7 @@ if FG.config.debug_mode then
 	-- shes fucking op i will probably nerf her but its 4am
 	SMODS.Joker {
 		key = 'jenker',
-		config = { extra = { repetitions = 0 } },
+		config = { extra = { repetitions = 1, increase = false } },
 		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
@@ -1744,13 +1744,126 @@ if FG.config.debug_mode then
 				card.ability.extra.repetitions = 1
 			end
 			if context.end_of_round and not context.repetition and not context.individual and G.GAME.blind.boss then
-				card.ability.extra.repetitions = card.ability.extra.repetitions + 1
+				if increase == true then
+					card.ability.extra.repetitions = card.ability.extra.repetitions + 1
+					increase = false
+				else
+					increase = true
+				end
 			end
 			if context.retrigger_joker_check and not context.retrigger_joker and card ~= self then
 				return { 
 					repetitions = card.ability.extra.repetitions
 				 } 
 			   end
+		end
+	}
+	-- Jenku alt
+	SMODS.Joker {
+		key = 'jenkeralt',
+		config = { extra = { repetitions = 0, repetitionsmax = 5, repetitionsmin=1 } },
+		rarity = "fg_collective",
+		atlas = 'collective',
+		pos = { x = 1, y = 0 },
+		soul_pos = { x = 1, y = 1 },
+		cost = 5,
+		loc_vars = function(self, info_queue, card)
+			return {
+				main_end = {
+					{n=G.UIT.R, config= {align="bm", padding = 0.02}, nodes={
+						{n=G.UIT.C, config={align = "m", colour=colour, r=0.05, padding=0.05}, nodes={
+							{n=G.UIT.T, config={text = "Retriggers every", colour = G.C.UI.TEXT_DARK, scale=0.3}},
+							{
+								n = G.UIT.O,
+								config = {
+									object = DynaText({
+										string = { "scORed Card", "scp]o}{d }ca", "Cscored ()'", "560$30 6470", "sd[]{;l''l;} a;'", "834934-230", "s{;} @:[ored]"},
+										colours = { G.C.RED },
+										pop_in_rate = 9999999,
+										silent = true,
+										random_element = true,
+										pop_delay = 0.30,
+										scale = 0.32,
+										min_cycle_time = 0,
+									}),
+								},
+							},
+						}}
+					}},
+					{n=G.UIT.R, config= {align="bm", padding = 0.02}, nodes={
+						{n=G.UIT.C, config={align = "m", colour=colour, r=0.05, padding=0.05}, nodes={
+							{
+								n = G.UIT.O,
+								config = {
+									object = DynaText({
+										string = { "-1", "0", "1", "2", "3", "4", "5"},
+										colours = { G.C.IMPORTANT },
+										pop_in_rate = 9999999,
+										silent = true,
+										random_element = true,
+										pop_delay = 0.30,
+										scale = 0.32,
+										min_cycle_time = 0,
+									}),
+								},
+							},
+							{n=G.UIT.T, config={text = "times.", colour = G.C.UI.TEXT_DARK, scale=0.3}},
+							{n=G.UIT.T, config={text = "1/4", colour = G.C.IMPORTANT, scale=0.3}},
+							{n=G.UIT.T, config={text = "chance to", colour = G.C.UI.TEXT_DARK, scale=0.3}},
+							{n=G.UIT.T, config={text = "debuff", colour = G.C.UI.TEXT_DARK, scale=0.3}},
+						}}
+					}},
+					{n=G.UIT.R, config= {align="bm", padding = 0.02}, nodes={
+						{n=G.UIT.C, config={align = "m", colour=colour, r=0.05, padding=0.05}, nodes={
+							{n=G.UIT.T, config={text = "every card in", colour = G.C.UI.TEXT_DARK, scale=0.3}},
+							{
+								n = G.UIT.O,
+								config = {
+									object = DynaText({
+										string = { "scoring hand", "scp]as}ga }ha", "8Coirgng ad()'", "56$30 6470", "s[]{;l''l;} a;'", "834934-230", "s{;} @:[ored]"},
+										colours = { G.C.RED },
+										pop_in_rate = 9999999,
+										silent = true,
+										random_element = true,
+										pop_delay = 0.30,
+										scale = 0.32,
+										min_cycle_time = 0,
+									}),
+								},
+							},
+						}}
+					}},
+					{n=G.UIT.R, config= {align="bm", padding = 0.02}, nodes={
+						{n=G.UIT.C, config={align = "m", colour=colour, r=0.05, padding=0.05}, nodes={
+							{n=G.UIT.T, config={text = "Uh, this one's kinda.. broken. You sure?", colour = G.C.UI.TEXT_INACTIVE, scale=0.25}},
+						}}
+					}},
+				}
+				}			
+		end,
+		calculate = function(self, card, context)
+			if context.before then
+				card.ability.extra.repetitions = (pseudorandom('jenker', card.ability.extra.repetitionsmin, card.ability.extra.repetitionsmax))
+			end
+			if context.scoring_hand then
+				if card.ability.extra.repetitions == 5 then
+					for i in ipairs(context.scoring_hand) do
+						SMODS.debuff_card(context.scoring_hand[i], true, "jenkerdebuff")
+					end
+				end
+			end
+			if context.cardarea == G.play and context.repetition and not context.repetition_only then
+				return{
+					message = "And again!",
+					repetitions = card.ability.extra.repetitions,
+					card = context.other_card
+				}
+			end
+			if context.end_of_round then
+				for i in ipairs(G.playing_cards) do
+				SMODS.debuff_card(G.playing_cards[i], false, "jenkerdebuff")
+				end
+			end
 		end
 	}
 end
