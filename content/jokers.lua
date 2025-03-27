@@ -1082,6 +1082,15 @@ SMODS.Joker {
 	end
 }
 -- Missprint
+
+function generateArrayMisprint(min, max) 
+	local mults = {}
+	for i = 1, 10 do
+		local num = (pseudorandom('misprint', min, max) / 100)
+		table.insert(mults, "x"..tostring(num))
+	end
+	return mults
+end
 SMODS.Joker {
 	key = 'misprint',
 	rarity = 2,
@@ -1099,7 +1108,29 @@ SMODS.Joker {
 				card.ability.extra.Xmult,
 				card.ability.extra.Xmult_min,
 				card.ability.extra.Xmult_max
-			}
+				},
+				main_end = {
+					{n=G.UIT.R, config= {align="bm", padding = 0.02}, nodes={
+						{n=G.UIT.C, config={align = "m", colour=colour, r=0.05, padding=0.05}, nodes={
+							{
+								n = G.UIT.O,
+								config = {
+									object = DynaText({
+										string = generateArrayMisprint(card.ability.extra.Xmult_min,card.ability.extra.Xmult_max),
+										colours = { G.C.RED },
+										pop_in_rate = 9999999,
+										silent = true,
+										random_element = true,
+										pop_delay = 0.30,
+										scale = 0.32,
+										min_cycle_time = 0,
+									}),
+								},
+							},
+							{n=G.UIT.T, config={text = "mult", colour = G.C.UI.TEXT_DARK, scale=0.3}}
+						}}
+					}},
+				}
 		}
 	end,
 	calculate = function(self, card, context)
@@ -1761,9 +1792,13 @@ if FG.config.debug_mode then
 	-- Jenku alt
 	SMODS.Joker {
 		key = 'jenkeralt',
-		config = { extra = { repetitions = 0, repetitionsmax = 5, repetitionsmin=1 } },
+		config = { extra = { retriggers = "jenku", repetitionsmax = 5, repetitionsmin=1 } },
 		rarity = "fg_collective",
 		atlas = 'collective',
+		loc_txt = {
+			name = "#1#",
+			text = {""}
+		},
 		pos = { x = 1, y = 0 },
 		soul_pos = { x = 1, y = 1 },
 		cost = 5,
@@ -1838,25 +1873,34 @@ if FG.config.debug_mode then
 							{n=G.UIT.T, config={text = "Uh, this one's kinda.. broken. You sure?", colour = G.C.UI.TEXT_INACTIVE, scale=0.25}},
 						}}
 					}},
-				}
-				}			
+				},
+				vars = {card.ability.extra.name,card.ability.extra.repetitionsmin,card.ability.extra.repetitionsmax}
+			}
 		end,
 		calculate = function(self, card, context)
 			if context.before then
-				card.ability.extra.repetitions = (pseudorandom('jenker', card.ability.extra.repetitionsmin, card.ability.extra.repetitionsmax))
+				retriggers = (pseudorandom('jenker', card.ability.extra.repetitionsmin, card.ability.extra.repetitionsmax))
+				if retriggers == 5 then
+						card.ability.extra.name = "janku"
+						card.children.center:set_sprite_pos({x = 5, y = 0})
+						card.children.floating_sprite:set_sprite_pos({x = 5, y = 1})
+						card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Nope!" })
+				end
 			end
 			if context.scoring_hand then
-				if card.ability.extra.repetitions == 5 then
+				if retriggers == 5 then
 					for i in ipairs(context.scoring_hand) do
 						SMODS.debuff_card(context.scoring_hand[i], true, "jenkerdebuff")
 					end
 				end
 			end
 			if context.cardarea == G.play and context.repetition and not context.repetition_only then
+				card.ability.extra.name = "jenku"
+				card.children.center:set_sprite_pos({x = 1, y = 0})
+				card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
 				return{
 					message = "And again!",
-					repetitions = card.ability.extra.repetitions,
-					card = context.other_card
+					repetitions = retriggers
 				}
 			end
 			if context.end_of_round then
