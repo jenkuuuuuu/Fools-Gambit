@@ -1,20 +1,20 @@
 SMODS.Atlas {
 	key = "jokers_alt",
-	path = "jokers_alt.png",
+	path = "mila.jpg",
 	px = 71,
 	py = 95
 }
 
 SMODS.Atlas {
 	key = 'collective',
-	path = 'collective.png',
+	path = 'mila.jpg',
 	px = 71,
 	py = 95
 }
 
 SMODS.Atlas {
 	key = 'newjokers',
-	path = 'newjokers.png',
+	path = 'mila.jpg',
 	px = 71,
 	py = 95
 }
@@ -65,14 +65,14 @@ FG.joker_equivalents = {
 --------------------
 ---SPECIAL JOKERS---
 --------------------
-if FG.config.debug_mode then
+
 	-- Change of pace
 	SMODS.Joker {
 		key = 'change_of_pace',
 		config = { extra = {} },
 		rarity = 3,
 		atlas = 'newjokers',
-		pos = { x = 5, y = 0 }, -- havent added the sprite to the sheet yet
+		pos = { x = 0, y = 0 }, -- havent added the sprite to the sheet yet
 		cost = 8,
 		calculate = function(self, card, context)
 			if context.selling_self then
@@ -91,7 +91,7 @@ if FG.config.debug_mode then
 		config = { extra = {} },
 		rarity = 2,
 		atlas = 'newjokers',
-		pos = { x = 5, y = 0 }, -- read above
+		pos = { x = 0, y = 0 }, -- read above
 		cost = 8,
 		calculate = function(self, card, context)
 			if context.selling_self then
@@ -106,7 +106,7 @@ if FG.config.debug_mode then
 		rarity = 3,
 		atlas = 'newjokers',
 		yes_pool_flag = 'alternate',
-		pos = { x = 6, y = 0 },
+		pos = { x = 0, y = 0 },
 		cost = 8,
 		calculate = function(self, card, context)
 			if context.selling_self then
@@ -132,7 +132,7 @@ if FG.config.debug_mode then
 		rarity = 2,
 		atlas = 'newjokers',
 		yes_pool_flag = 'alternate',
-		pos = { x = 6, y = 0 },
+		pos = { x = 0, y = 0 },
 		cost = 4,
 		calculate = function(self, card, context)
 			if context.selling_self then
@@ -157,7 +157,7 @@ if FG.config.debug_mode then
 		config = { extra = {} },
 		rarity = 3,
 		atlas = 'newjokers',
-		pos = { x = 7, y = 0 },
+		pos = { x = 0, y = 0 },
 		cost = 8,
 		calculate = function(self, card, context)
 			if context.selling_self then
@@ -262,7 +262,7 @@ if FG.config.debug_mode then
 		key = 'delinquent',
 		rarity = 2,
 		atlas = 'newjokers',
-		pos = { x = 1, y = 0 },
+		pos = { x = 0, y = 0 },
 		cost = 7,
 		no_pool_flag = 'alternate',
 		calculate = function(self, card, context)
@@ -294,7 +294,7 @@ if FG.config.debug_mode then
 		rarity = 2,
 		atlas = 'newjokers',
 		yes_pool_flag = 'alternate',
-		pos = { x = 1, y = 0 },
+		pos = { x = 0, y = 0 },
 		cost = 8,
 		calculate = function(self, card, context)
 			if context.end_of_round and context.individual then
@@ -325,7 +325,7 @@ if FG.config.debug_mode then
 		config = { extra = { chips = 25 } },
 		rarity = 1,
 		atlas = 'newjokers',
-		pos = { x = 2, y = 0 }, -- read above
+		pos = { x = 0, y = 0 }, -- read above
 		cost = 5,
 		loc_vars = function(self, info_queue, card)
 			return { vars = { card.ability.extra.chips } }
@@ -354,7 +354,7 @@ if FG.config.debug_mode then
 		config = { extra = { mult = 10 } },
 		rarity = 1,
 		atlas = 'newjokers',
-		pos = { x = 3, y = 0 }, -- read above
+		pos = { x = 0, y = 0 }, -- read above
 		cost = 5,
 		loc_vars = function(self, info_queue, card)
 			return { vars = { card.ability.extra.mult } }
@@ -382,7 +382,7 @@ if FG.config.debug_mode then
 		key = 'conductor',
 		rarity = 2,
 		atlas = 'newjokers',
-		pos = { x = 4, y = 0 }, -- read above
+		pos = { x = 0, y = 0 }, -- read above
 		cost = 5,
 		config = { extra = { amount = 1 } },
 		loc_vars = function(self, info_queue, card)
@@ -423,7 +423,7 @@ if FG.config.debug_mode then
 		key = 'conductoralt',
 		rarity = 2,
 		atlas = 'newjokers',
-		pos = { x = 4, y = 0 }, -- read above
+		pos = { x = 0, y = 0 }, -- read above
 		cost = 5,
 		yes_pool_flag = 'alternate',
 		config = { extra = { amount = 2 } },
@@ -456,7 +456,6 @@ if FG.config.debug_mode then
 			end
 		end
 	}
-end
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
@@ -495,7 +494,7 @@ SMODS.Joker {
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 6, y = 1 },
+	pos = { x = 0, y = 0 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
 	end,
@@ -528,7 +527,7 @@ SMODS.Joker {
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 7, y = 1 },
+	pos = { x = 0, y = 0 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
 	end,
@@ -561,7 +560,7 @@ SMODS.Joker {
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 8, y = 1 },
+	pos = { x = 0, y = 0 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
 	end,
@@ -594,7 +593,7 @@ SMODS.Joker {
 	cost = 0,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 9, y = 1 },
+	pos = { x = 0, y = 0 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
 	end,
@@ -629,7 +628,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 2, y = 0 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -653,7 +652,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 3, y = 0 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -677,7 +676,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 4, y = 0 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -701,7 +700,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 5, y = 0 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -725,7 +724,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 6, y = 0 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -749,7 +748,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 0, y = 14 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -773,7 +772,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 1, y = 14 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -797,7 +796,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 2, y = 14 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -821,7 +820,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 3, y = 14 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -845,7 +844,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 4, y = 14 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
@@ -869,7 +868,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 5, y = 5 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.setting_blind and not self.getting_sliced then
@@ -918,7 +917,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 1, y = 2 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.setting_blind then
@@ -947,7 +946,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 2, y = 2 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.setting_blind then
@@ -976,7 +975,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	pos = { x = 4, y = 2 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.buying_card then
@@ -1031,7 +1030,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
-	pos = { x = 0, y = 5 },
+	pos = { x = 0, y = 0 },
 	config = { extra = { chips = 0, chip_gain = 15 } },
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual and (context.other_card:get_id() == 8) then
@@ -1066,7 +1065,7 @@ SMODS.Joker {
 	rarity = 2,
 	cost = 6,
 	atlas = "jokers_alt",
-	pos = { x = 6, y = 2 },
+	pos = { x = 0, y = 0 },
 	config = { extra = {
 		Xmult = 1,
 		Xmult_min = 75,
@@ -1135,7 +1134,7 @@ SMODS.Joker {
 	cost = 2,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 1, y = 5 },
+	pos = { x = 0, y = 0 },
 	config = { extra = { retriggers = 1 } },
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1240,7 +1239,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
-	pos = { x = 2, y = 3 },
+	pos = { x =0, y = 0 },
 	config = { extra = { chips = 0, chip_gain = 15 } },
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1268,7 +1267,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
-	pos = { x = 3, y = 3 },
+	pos = { x = 0, y = 0 },
 	config = { extra = { mult_gain = 10, mult = 0, sold = 0 } },
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1297,7 +1296,7 @@ SMODS.Joker {
 	cost = 2,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 0, y = 10 },
+	pos = { x = 0, y = 0 },
 	config = { extra = { sell_value = 50, hands = -1, discards = -1 } },
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1328,7 +1327,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 5, y = 4 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.before and context.cardarea == G.jokers and not context.repetition then
@@ -1355,7 +1354,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 6, y = 4 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.before and context.cardarea == G.jokers and not context.repetition then
@@ -1382,7 +1381,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 7, y = 4 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.before and context.cardarea == G.jokers and not context.repetition then
@@ -1409,7 +1408,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 8, y = 4 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.before and context.cardarea == G.jokers and not context.repetition then
@@ -1436,7 +1435,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 9, y = 7 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.joker_main then
@@ -1467,7 +1466,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 0, y = 8 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.before then
@@ -1500,7 +1499,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 1, y = 8 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.before then
@@ -1533,7 +1532,7 @@ SMODS.Joker {
 	rarity = 1,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 2, y = 8 },
+	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
 		if context.before then
@@ -1557,26 +1556,21 @@ SMODS.Joker {
 	end
 }
 -- Bones
---[[
 SMODS.Joker {
 	key = 'mr_bones',
 	rarity = 3,
 	cost = 2,
 	atlas = 'jokers_alt',
 	yes_pool_flag = 'alternate',
-	pos = { x = 3 , y = 4 },
+	pos = { x = 0 , y = 0 },
 	config = {  extra = {
 		destroy_chance = 1,
 		total_chance = 2,
 	} },
 	loc_txt = {
-	name = 'Mr. Bones?',
+	name = "mila",
 	text = {
-		"Gives {C:chips}+1{} hand and {C:mult}+1{} discard",
-		"if chips scored are at least {C:attention}25%{} of",
-		"required chips when playing final hand.",
-		"{C:green}1 in 2{} chance this card ",
-		"gets destroyed when triggered."
+"mila"
 	},
 	},
 	calculate = function (self, card, context)
@@ -1601,18 +1595,17 @@ SMODS.Joker {
 		end
   	end
 }
-]]
 -----------------
 ---Collectives---
 -----------------
-if FG.config.debug_mode then
+
 	-- Deathmodereal
 	SMODS.Joker {
 		key = 'deathmodereal',
 		rarity = "fg_collective",
 		cost = 6,
 		atlas = "collective",
-		pos = { x = 3, y = 0 },
+		pos = { x = 0, y = 0 },
 		config = { extra = { Xmult = 20, blindchipmult = 2 } },
 		loc_vars = function(self, info_queue, card)
 			return {
@@ -1655,7 +1648,7 @@ if FG.config.debug_mode then
 		end,
 		rarity = "fg_collective",
 		atlas = 'collective',
-		pos = { x = 4, y = 0 },
+		pos = { x = 0, y = 0 },
 		cost = 2,
 		calculate = function(self, card, context)
 			if context.individual and context.cardarea == G.play then
@@ -1680,8 +1673,8 @@ if FG.config.debug_mode then
 		end,
 		rarity = "fg_collective",
 		atlas = 'collective',
-		pos = { x = 2, y = 0 },
-		soul_pos = { x = 2, y = 1 },
+		pos = { x = 0, y = 0 },
+		soul_pos = { x = 0, y = 0 },
 		cost = 5,
 		add_to_deck = function(self, card, from_debuff)
 			G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.initial_slots
@@ -1699,4 +1692,3 @@ if FG.config.debug_mode then
 			end
 		end
 	}
-end

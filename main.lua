@@ -13,7 +13,8 @@ local mod_contents = {
 	"rarities",
 	"vouchers",
 	"enhancements",
-	"test"
+	"test",
+	"languages"
 }
 
 for k, v in pairs(mod_contents) do -- Load this mod's files
