@@ -15,7 +15,7 @@ abberation1 = SMODS.Booster {
         group_name = 'abberation',
         text = { "Choose {C:attention}#1#{} of up to ",
         " {C:attention}#2#{} {C:purple}Abberation{} cards to",
-        "be used instantly." }
+        "be used instantly" }
         },
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
@@ -41,7 +41,7 @@ abberation2 = SMODS.Booster {
             group_name = 'abberation',
             text = { "Choose {C:attention}#1#{} of up to ",
             " {C:attention}#2#{} {C:purple}Abberation{} cards to",
-            "be used instantly." }
+            "be used instantly" }
             },
     pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1 },
@@ -66,7 +66,7 @@ jumbo_abberation = SMODS.Booster {
             group_name = 'abberation',
             text = { "Choose {C:attention}#1#{} of up to ",
             " {C:attention}#2#{} {C:purple}Abberation{} cards to",
-            "be used instantly." }
+            "be used instantly" }
             },
     pos = { x = 2, y = 0 },
     config = { extra = 5, choose = 1 },
@@ -91,7 +91,7 @@ mega_abberation = SMODS.Booster {
             group_name = 'abberation',
             text = { "Choose {C:attention}#1#{} of up to ",
             " {C:attention}#2#{} {C:purple}Abberation{} cards to",
-            "be used instantly." }
+            "be used instantly" }
             },
     pos = { x = 3, y = 0 },
     config = { extra = 5, choose = 2 },
