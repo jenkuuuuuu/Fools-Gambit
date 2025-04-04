@@ -15,7 +15,7 @@ SMODS.Voucher{
 		name = 'Violin',
 		text = {
 			"{C:attention}+1{} option and {C:attention}+1{} select in every",
-			"{C:purple}Abberation{} pack."
+			"{C:purple}Abberation{} pack"
 		}
 	},
     atlas = "vouchers",
