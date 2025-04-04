@@ -10,14 +10,14 @@ return {
                 name = 'Change of Pace',
                 text = {
                     "After being sold, changes spawned {C:red}jokers{}",
-                    "to their {C:purple}Alternate{} forms."
+                    "to their {C:purple}Alternate{} forms"
                 }
             },
             j_fg_change_of_pace_alt = {
                 name = 'Change of Pace?',
                 text = {
                      "After being sold, changes spawned {C:purple}jokers{}",
-                    "to their {C:red}Original{} forms."
+                    "to their {C:red}Original{} forms"
                 }
             },
             j_fg_flipped_script = {
@@ -38,7 +38,7 @@ return {
                 name = 'Script Flipped',
                 text = {
                     "When sold, changes the edition of",
-                    "all other jokers to the opposite edition."
+                    "all other jokers to the opposite edition"
                 }
             },
 			j_fg_delinquent = {
@@ -85,8 +85,7 @@ return {
                 name="Orchestral Joker",
                 text={
                     "{C:purple}Alternate{C:attention} Jokers",
-                    "each give {C:mult}+#1#{} Mult",
-					 "{s:0.8}Orchestral Joker included",
+                    "each give {C:mult}+#1#{} Mult"
                 },
             },
 			j_fg_conductor={
@@ -311,7 +310,7 @@ return {
                 name = 'Scary face?',
                 text = {
                     'Gains {C:chips}+#2#{} chips per scored {C:attention}face{} card',
-                    'Currently {C:chips}+#1#{} chips.'
+                    'Currently {C:chips}+#1#{} chips'
                 },
             },
             j_fg_abstract = {
@@ -432,7 +431,7 @@ return {
                     "for every second {C:attention}Boss Blind{} defeated.",
                     "starting at {C:mult}1{}",
 					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
-                    "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
+                    "{C:inactive,s:0.7}\"Probably caused the most crashes\""
                 }
             }
         },
