@@ -11,7 +11,7 @@ abberation1 = SMODS.Booster {
     kind = "abberation",
     atlas = "pack",
     loc_txt = { 
-        name = 'Abberation Pack',
+        name = 'Melody Pack',
         group_name = 'abberation',
         text = { "Choose {C:attention}#1#{} of up to ",
         " {C:attention}#2#{} {C:purple}Abberation{} cards to",

@@ -9,7 +9,6 @@ function FG.is_alternate(card,table)
     return "no"
 end
 
-
 --[[
 key is the provided card key.
 table is the reference table to look up.
@@ -71,7 +70,7 @@ end
 
 function FG.alternate_edition(source,target,ref)
 	if source.edition then
-		target:set_edition(FG.get_equivalent(source.edition.key,ref),true,true)
+		target:set_edition('e_holo',true,true)
 	else
 		target:set_edition(nil,true,true)
 	end
@@ -79,8 +78,26 @@ end
 
 -- WIP functions. Do nothing at the moment
 
-function FG.update_enhancement(source,target) end
-function FG.alternate_enhancement(source,target) end
+function FG.update_enhancement(source,target) 
+	local enhancement = SMODS.poll_enhancement{
+		key = "mila",
+		guaranteed = true,
+		options = {SMODS.get_enhancements(source)}
+	}
+	target:set_ability(G.P_CENTERS[enhancement])
+end
+
+
+function FG.alternate_enhancement(source,target)
+	
+	local enhancement = SMODS.poll_enhancement{
+		key = "mila",
+		guaranteed = true,
+		options = {SMODS.get_enhancements(source)[1]}
+	}
+	target:set_ability(G.P_CENTERS[enhancement])
+
+end
 function FG.update_seal(source,target) end
 function FG.alternate_seal(source,target) end
 
@@ -117,12 +134,6 @@ function FG.flip_editions(card)
 			card:set_edition("e_foil", true)
 		elseif card.edition.foil then
 			card:set_edition("e_holo", true)
-		end							
-		if card.edition.negative then card:set_edition(nil, true)
-		elseif card.edition.polychrome then card:set_edition("e_fg_polished", true)
-		elseif card.edition.fg_polished then card:set_edition("e_polychrome", true)
-		elseif card.edition.holo then card:set_edition("e_foil", true)
-		elseif card.edition.foil then card:set_edition("e_holo", true)
 		end
 	else
 		card:set_edition("e_negative", true)
@@ -137,8 +148,6 @@ if FG.config.debug_mode then -- scary !!! broken!!!! (eats tags and is forced af
 				if replacee then
 				G.shop_jokers:remove_card(replacee)
 				replacee:remove()
-				
-	
 				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
 				create_shop_card_ui(replacement, joker, G.shop_jokers)
 				replacement:start_materialize()
@@ -154,8 +163,18 @@ if FG.config.debug_mode then -- scary !!! broken!!!! (eats tags and is forced af
 
 		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips then
 			FG.replace_shop_joker("j_fg_change_of_pace", 1)
-		end
+		end 
 
 		return card
 	end
+end
+
+
+
+-- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
+
+G.FUNCS.FG_s_version = function (args)
+	FG.test.s_version = args
+	FG.config.s_version.selected = args.cycle_config.current_option
+	FG.config.s_version.active = args.to_val
 end

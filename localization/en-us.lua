@@ -302,9 +302,9 @@ return {
                 name = 'Fibonacci?',
                 text = {
                     "Retrigger each scored {C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{},",
-                    "{C:attention}8{} and {C:attention}King{}{C:attention}1{} time and permanently",
+                    "{C:attention}8{} and {C:attention}King{} {C:attention}1{} time and permanently",
                     "upgrades it to next rank when scored",
-                    "{C:inactive}(ex: 2 to 3, 5 to 8, King to Ace){}",
+                    "{C:inactive}(ex: Ace to 2, 8 to King, King to Ace){}",
                 },
             },
             j_fg_face = {
