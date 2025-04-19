@@ -287,7 +287,7 @@ return {
             j_fg_misprint = {
                 name = 'Misprint?',
                 text = {
-                    "{X:mult,C:white}X#1#{} Mult"
+                    ""
                 }
             },
             j_fg_fist = {
@@ -434,13 +434,7 @@ return {
 					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
                     "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
                 }
-            },
-            j_fg_jenkeralt = {
-                name = 'Jenku',
-                text = {
-                    "",
-                }
-            },
+            }
         },
         Other={},
         Planet={},
