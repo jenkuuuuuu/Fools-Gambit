@@ -27,9 +27,6 @@ SMODS.current_mod.config_tab = function()
 						ref_value = "extra_jokers"
 					},
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {
-						{n = G.UIT.T, config = {text = "(Requires restart)", align = "tm", colour = G.C.GREY, scale = .3, minw = 2, minh = 6, padding = 0.4}},
-					}},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {
 						{n = G.UIT.T, config = {text = "Hover to vew more info", align = "tm", colour = G.C.GREY, scale = .2, minw = 2, minh = 6, padding = 0.4, tooltip = {text = {
 							"Fool's Gambit adds several new jokers without vanilla counterparts",
 							"Toggle this option to allow/disallow them to appear in your run",
@@ -79,7 +76,6 @@ SMODS.current_mod.extra_tabs = function()
 							{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Jogla", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "jenku", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Pablo", colour = G.C.WHITE, scale = .3}}}},
 								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "deathmodereal", colour = G.C.WHITE, scale = .3}}}},
 							}},
 						}},

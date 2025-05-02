@@ -1,15 +1,5 @@
 return {
     descriptions = {
-        fg_abberation={
-            fg_tonal = {
-                name = "Tonal",
-                text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
-                    "to their {C:red}Original{} form",
-                    "{C:inactive}Placeholder Sprite{}"
-                }
-            }
-        },
         Back={},
         Blind={},
         Edition={},
@@ -27,46 +17,10 @@ return {
                 name = "Steel? Card",
                 text = {
                     "Gains {C:white,X:red}X#1#{} mult for every",
-                    "steel card {C:attention}in deck{}",
-                    "Triggers while this card is",
+                    "steel card played.",
+                    "Triggers when this card is",
                     "held in hand.",
                     "{C:inactive}(Currently {C:white,X:red}X#2#{C:inactive} mult)"
-                }
-            },
-            m_fg_lucky = {
-                name = "Lucky? card",
-                text = {
-                    "{C:green}#1# in #2#{} chance",
-                    "for {C:chips}+#3#{} Chips",
-                    "{C:green}#4# in #5#{} chance",
-                    "to win {C:gold}$#6#"
-                }
-            },
-            m_fg_gold = {
-                name = "Gold? card",
-                text = {
-                    "Add {C:attention}half{} the money equivalent",
-                    "to the cards {C:attention}held in hand{}",
-                    "at the {C:attention}end of round{C:inactive} (Rounded up){}",
-                    "{C:inactive}(Currently {C:gold}+$#1#{C:inactive})"
-                },
-            },
-            m_fg_bonus = {
-                name = "Bonus? card",
-                text = {
-                    "{C:green}#1# in #2#{} chance",
-                    "for {C:chips}+#3#{} Chips",
-                    "{C:green}#4# in #5#{} chance",
-                    "for {C:chips}#6#{} Chips",
-                }
-            },
-            m_fg_mult = {
-                name = "Mult? card",
-                text = {
-                    "{C:green}#1# in #2#{} chance",
-                    "for {C:mult}+#3#{} mult",
-                    "{C:green}#4# in #5#{} chance",
-                    "for {C:mult}-#6#{} mult",
                 }
             }
         },
@@ -486,11 +440,11 @@ return {
             j_fg_jogla = {
                 name = 'Jogla',
                 text = {
-                    "Create {C:attention}#1# {C:dark_edition}Negative{} copies of",
-                    "the {C:attention}leftmost{} consumeable in posession",
-                    "at the end of the{C:attention} shop{}.",
-                    "{C:inactive}(Currently copying {C:attention}#2#{C:inactive})",
-                    "{C:inactive,s:0.7}\"I am NOT a wizard\""
+                    "Crea {C:attention}#1#{} copias {C:dark_edition}Negativa{} del consumible",
+                    "que poseas de más a la {C:attention}izquierda{} al salir",
+                    "de la{C:attention} tienda{}",
+                    "{C:inactive}(Actualmente copiando {C:attention}#2#{C:inactive})",
+                    "{C:inactive,s:0.7}\"NO soy un mago\""
                 },
             },
             j_fg_jogla_alt = {
