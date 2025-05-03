@@ -1,6 +1,11 @@
 FG.enhancement_equivalents = {
+	c_base = "c_base",
+	m_bonus = "m_fg_bonus",
+	m_mult = "m_fg_mult",
 	m_glass = "m_fg_glass",
-	m_steel = "m_fg_steel"
+	m_steel = "m_fg_steel",
+	m_lucky = "m_fg_lucky",
+	m_gold = "m_fg_gold"
 }
 FG.cards = {
 	steel_mult = 1
@@ -11,6 +16,82 @@ path = 'Enhancers.png',
 px = 71,
 py = 95
 }
+
+SMODS.Enhancement{
+	key = "bonus",
+	atlas = "enhanced",
+	pos = { x = 1, y = 1 },
+	config = {
+		extra = {
+			grant_min = 1,
+			grant_max = 2,
+			grant_amount = 60,
+			remove_min = 1,
+			remove_max = 4,
+			remove_amount = -15
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		card.ability.bonus = 0
+		return {
+			vars = {
+				card.ability.extra.grant_min,
+				card.ability.extra.grant_max,
+				card.ability.extra.grant_amount,
+				card.ability.extra.remove_min,
+				card.ability.extra.remove_max,
+				card.ability.extra.remove_amount
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		card.ability.bonus = 0
+		if pseudorandom("mila",card.ability.extra.grant_min,card.ability.extra.grant_max) <= card.ability.extra.grant_min then
+			card.ability.bonus = card.ability.mult + card.ability.extra.grant_amount
+		end
+		if pseudorandom("mila",card.ability.extra.remove_min,card.ability.extra.remove_max) <= card.ability.extra.remove_min then
+			card.ability.bonus = card.ability.mult + card.ability.extra.remove_amount
+		end
+	end
+}
+
+SMODS.Enhancement{
+	key = "mult",
+	atlas = "enhanced",
+	pos = { x = 2, y = 1 },
+	config = {
+		extra = {
+			grant_min = 1,
+			grant_max = 2,
+			grant_amount = 8,
+			remove_min = 1,
+			remove_max = 4,
+			remove_amount = -2
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.grant_min,
+				card.ability.extra.grant_max,
+				card.ability.extra.grant_amount,
+				card.ability.extra.remove_min,
+				card.ability.extra.remove_max,
+				card.ability.extra.remove_amount
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		card.ability.mult = 0
+		if pseudorandom("mila",card.ability.extra.grant_min,card.ability.extra.grant_max) <= card.ability.extra.grant_min then
+			card.ability.mult = card.ability.mult + card.ability.extra.grant_amount
+		end
+		if pseudorandom("mila",card.ability.extra.remove_min,card.ability.extra.remove_max) <= card.ability.extra.remove_min then
+			card.ability.mult = card.ability.mult - card.ability.extra.remove_amount
+		end
+	end
+}
+
 SMODS.Enhancement{
 	key = "glass",
 	atlas = "enhanced",
@@ -153,6 +234,30 @@ SMODS.Enhancement{
 }
 
 SMODS.Enhancement{
+	key = "gold",
+	atlas = "enhanced",
+	pos = { x = 6, y = 0},
+	config = {
+		extra = {
+			dollars = 0
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		if G.hand then
+			card.ability.extra.dollars = math.ceil(#G.hand.cards/2)
+		end
+		return {
+			vars = {
+				card.ability.extra.dollars
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		card.ability.h_dollars = card.ability.extra.dollars
+	end
+}
+
+SMODS.Enhancement{
 	key = "lucky",
 	atlas = "enhanced",
 	pos = {x = 4, y = 1},
@@ -187,105 +292,6 @@ SMODS.Enhancement{
 			card.ability.p_dollars = card.ability.extra.money
 		else
 			card.ability.p_dollars = 0
-		end
-	end
-}
-
-SMODS.Enhancement{
-	key = "gold",
-	atlas = "enhanced",
-	pos = { x = 6, y = 0},
-	config = {
-		extra = {
-			dollars = 0
-		}
-	},
-	loc_vars = function (self, info_queue, card)
-		if G.hand then
-			card.ability.extra.dollars = math.ceil(#G.hand.cards/2)
-		end
-		return {
-			vars = {
-				card.ability.extra.dollars
-			}
-		}
-	end,
-	calculate = function (self, card, context)
-		card.ability.h_dollars = card.ability.extra.dollars
-	end
-}
-
-SMODS.Enhancement{
-	key = "mult",
-	atlas = "enhanced",
-	pos = { x = 2, y = 1 },
-	config = {
-		extra = {
-			grant_min = 1,
-			grant_max = 2,
-			grant_amount = 8,
-			remove_min = 1,
-			remove_max = 4,
-			remove_amount = -2
-		}
-	},
-	loc_vars = function (self, info_queue, card)
-		return {
-			vars = {
-				card.ability.extra.grant_min,
-				card.ability.extra.grant_max,
-				card.ability.extra.grant_amount,
-				card.ability.extra.remove_min,
-				card.ability.extra.remove_max,
-				card.ability.extra.remove_amount
-			}
-		}
-	end,
-	calculate = function (self, card, context)
-		card.ability.mult = 0
-		if pseudorandom("mila",card.ability.extra.grant_min,card.ability.extra.grant_max) <= card.ability.extra.grant_min then
-			card.ability.mult = card.ability.mult + card.ability.extra.grant_amount
-		end
-		if pseudorandom("mila",card.ability.extra.remove_min,card.ability.extra.remove_max) <= card.ability.extra.remove_min then
-			card.ability.mult = card.ability.mult - card.ability.extra.remove_amount
-		end
-	end
-}
-
-SMODS.Enhancement{
-	key = "bonus",
-	atlas = "enhanced",
-	pos = { x = 1, y = 1 },
-	config = {
-		extra = {
-			grant_min = 1,
-			grant_max = 2,
-			grant_amount = 60,
-			remove_min = 1,
-			remove_max = 4,
-			remove_amount = -15
-		}
-	},
-	loc_vars = function (self, info_queue, card)
-		card.ability.bonus = 0
-		return {
-			vars = {
-				card.ability.extra.grant_min,
-				card.ability.extra.grant_max,
-				card.ability.extra.grant_amount,
-				card.ability.extra.remove_min,
-				card.ability.extra.remove_max,
-				card.ability.extra.remove_amount
-			}
-		}
-	end,
-	calculate = function (self, card, context)
-		card.ability.bonus = 0
-		if pseudorandom("mila",card.ability.extra.grant_min,card.ability.extra.grant_max) <= card.ability.extra.grant_min then
-			card.ability.bonus = card.ability.mult + card.ability.extra.grant_amount
-		end
-		if pseudorandom("mila",card.ability.extra.remove_min,card.ability.extra.remove_max) <= card.ability.extra.remove_min then
-			card.ability.bonus = card.ability.mult + card.ability.extra.remove_amount
 		end
 	end
 }

@@ -6,6 +6,22 @@ SMODS.Atlas {
     py = 95
 }
 
+SMODS.Seal{
+    key = "red",
+    atlas = "enhanced",
+    pos = {x = 5, y = 4},
+    loc_vars = {
+        label = "Red?",
+        name = "Red?",
+        text = {
+            "Retrigger this card {C:attention}1{} additional times",
+            "Decreases by {C:attention}1{} when scored",
+            "{C:inactive}(Removes seal when reaches zero)"
+        }
+    }
+}
+
+--[[
 SMODS.Seal {
     name = "Tune",
     key = "Tune",
@@ -29,3 +45,4 @@ SMODS.Seal {
         -- does not work, i cant get it to calculate without being scored
     end
 }
+]]

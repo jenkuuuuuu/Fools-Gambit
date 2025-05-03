@@ -1304,6 +1304,8 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play and context.other_card:is_face() then
 			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chip_gain
+			card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!" })
+
 		end
 		if context.joker_main and card.ability.extra.chips > 0 then
 			return {
@@ -1723,12 +1725,12 @@ if FG.config.debug_mode then
 		key = 'jogla',
 		config = { extra = { duplicate = 3, name = "None"} },
 		loc_vars = function(self, info_queue, card)
-			info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+			info_queue[#info_queue+1] = {key = 'e_negative_consumable', set = 'Edition', config = {extra = 1}}
 			if G.consumeables then
 				if G.consumeables.cards[1] then
 					card.ability.extra.name = G.consumeables.cards[1].config.center.name
 					info_queue[#info_queue+1] = G.consumeables.cards[1].config.center
-					--card.ability.extra.name = localize(G.consumeables.cards[1].config.center.key)
+					card.ability.extra.name = localize{type = "name_text", set = G.consumeables.cards[1].ability.set, key = G.consumeables.cards[1].config.center.key}
 				else
 					card.ability.extra.name = "None"
 				end
@@ -1765,6 +1767,40 @@ if FG.config.debug_mode then
 					end
 				end
 				--card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!" })
+			end
+		end
+	}
+	SMODS.Joker {
+		key = 'jogla_alt',
+		config = { extra = { increase = 1, extra_size = 1} },
+		loc_vars = function(self, info_queue, card)
+			return {
+				vars = {
+					card.ability.extra.increase,
+					card.ability.extra.extra_size
+				}
+			}
+		end,
+		rarity = "fg_collective",
+		atlas = 'collective',
+		pos = { x = 2, y = 0 },
+		soul_pos = { x = 2, y = 1 },
+		cost = 5,
+		blueprint_compat = false,
+		add_to_deck = function (self, card, from_debuff)
+			G.hand:change_size(card.ability.extra.extra_size)
+		end,
+		remove_from_deck = function (self, card, from_debuff)
+			G.hand:change_size(-card.ability.extra.extra_size)
+		end,
+		calculate = function(self, card, context)
+			if context.setting_blind and not context.blueprint then
+				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..card.ability.extra.extra_size.." hand size!" })
+			end
+			if context.end_of_round and not context.blueprint and G.GAME.blind.boss and not context.repetition and not context.individual then
+				card.ability.extra.extra_size = card.ability.extra.extra_size + card.ability.extra.increase
+				G.hand:change_size(card.ability.extra.increase)
+				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!" })
 			end
 		end
 	}

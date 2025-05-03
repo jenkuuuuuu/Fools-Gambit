@@ -116,23 +116,45 @@ SMODS.Consumable{
     can_use = function(self, card)
         if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
             any_state then
-            if #G.hand.highlighted <= 3 then
-                return true
-            end
+            if #G.hand.highlighted > 0 and #G.hand.highlighted <= 3 then return true else return false end
         end
     end,
     use = function(card, area, copier)
-        local used_tarot = (copier or card)
+        local pitch = 0.9
+        play_sound("tarot1")
+        for k,v in pairs(G.hand.highlighted) do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.2,
+                func = function()
+                            v:flip()
+                    return true
+                end
+            }))
+        end
         G.E_MANAGER:add_event(Event({
-            trigger = 'after',
-            delay = 0.4,
+            trigger = 'immediate',
             func = function()
-                    for i in ipairs(G.hand.highlighted) do
-                        FG.flip_editions(G.hand.highlighted[i]) -- change to alternate editions when theyre implemented
+                    for k,v in pairs(G.hand.highlighted) do
+                        -- FG.flip_editions(G.hand.highlighted[i]) -- change to alternate editions when theyre implemented
+                        FG.alternate_enhancement(v)
+                        FG.alternate_edition(v)
                     end
                 return true
             end
         }))
+        for k,v in pairs(G.hand.highlighted) do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.2,
+                func = function()
+                            v:flip()
+                            play_sound("tarot2",pitch)
+                            pitch = pitch + 0.2
+                    return true
+                end
+            }))
+        end
     end
 }
 end

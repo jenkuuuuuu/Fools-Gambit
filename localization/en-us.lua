@@ -1,12 +1,13 @@
 return {
     descriptions = {
-        fg_abberation={
+        fg_Abberation={
             fg_tonal = {
                 name = "Tonal",
                 text = {
                     "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
                     "to their {C:red}Original{} form",
-                    "{C:inactive}Placeholder Sprite{}"
+                    "{C:inactive}Placeholder Sprite{}",
+                    "TEST!!!!!"
                 }
             }
         },
@@ -34,7 +35,7 @@ return {
                 }
             },
             m_fg_lucky = {
-                name = "Lucky? card",
+                name = "Lucky? Card",
                 text = {
                     "{C:green}#1# in #2#{} chance",
                     "for {C:chips}+#3#{} Chips",
@@ -43,7 +44,7 @@ return {
                 }
             },
             m_fg_gold = {
-                name = "Gold? card",
+                name = "Gold? Card",
                 text = {
                     "Add {C:attention}half{} the money equivalent",
                     "to the cards {C:attention}held in hand{}",
@@ -52,7 +53,7 @@ return {
                 },
             },
             m_fg_bonus = {
-                name = "Bonus? card",
+                name = "Bonus? Card",
                 text = {
                     "{C:green}#1# in #2#{} chance",
                     "for {C:chips}+#3#{} Chips",
@@ -61,12 +62,12 @@ return {
                 }
             },
             m_fg_mult = {
-                name = "Mult? card",
+                name = "Mult? Card",
                 text = {
                     "{C:green}#1# in #2#{} chance",
                     "for {C:mult}+#3#{} mult",
                     "{C:green}#4# in #5#{} chance",
-                    "for {C:mult}-#6#{} mult",
+                    "for {C:mult}#6#{} mult",
                 }
             }
         },
@@ -377,7 +378,7 @@ return {
                 name = 'Scary face?',
                 text = {
                     'Gains {C:chips}+#2#{} chips per scored {C:attention}face{} card',
-                    'Currently {C:chips}+#1#{} chips.'
+                    '{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}'
                 },
             },
             j_fg_abstract = {
@@ -494,11 +495,11 @@ return {
                 },
             },
             j_fg_jogla_alt = {
-                name = 'Jogla',
+                name = "Jogla",
                 text = {
-                    "{C:green}1 in 3 {}chance to apply{C:dark_edition}Negative{} to",
-                    "a {C:attention}random{} joker after {C:attention}Boss blind{} defeated",
-                    "{C:inactive,s:0.7}\"I am STILL NOT a wizard\""
+                    "Increases hand size by {C:attention}#1#{} when",
+                    "{C:attention}Boos blind{} defeated",
+                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
                 }
             },
             j_fg_jenker = {
@@ -517,7 +518,159 @@ return {
         Spectral={},
         Stake={},
         Tag={},
-        Tarot={},
+        Tarot={
+            c_fg_chariot = {
+                name = "The Chariot?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Steel? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_death = {
+                name = "Death?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards",
+                    "Convert all cards into the {C:attention}rightmost card",
+                    "{C:inactive}(Only copies {C:attention}suit{C:inactive} and {C:attention}rank{C:inactive}){}",
+                    "{C:inactive}(Drag to rearrange){}"
+                }
+            },
+            c_fg_devil = {
+                name = "The Devil?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Gold? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_empress = {
+                name = "The Empress?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Mult? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_fool = {
+                name = "The Fool?",
+                text = {
+                    "Creates {C:attention}#1#{} random",
+                    "{C:tarot}Tarot{} or {C:planet}Planet{} card",
+                    "{C:inactive}({C:tarot}The Fool?{} excluded)"
+                }
+            },
+            c_fg_hermit = {
+                name = "The Hermit?",
+                text = {
+                    "Enhance {C:attention}#1#{} selected cards",
+                    "with a {C:attention}random{} enhancement",
+                    "{C:attention}Halves{} money",
+                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})"
+                }
+            },
+            c_fg_hierophant = {
+                name = "The Hierophant?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Bonus? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_justice = {
+                name = "Justice?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Glass? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_magician = {
+                name = "The Magician?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Lucky? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_moon = {
+                name = "The Moon?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:clubs}Clubs",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:diamonds}Diamonds{}"
+                }
+            },
+            c_fg_star = {
+                name = "The Star?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:diamonds}Diamonds",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:clubs}Clubs{}"
+                }
+            },
+            c_fg_sun = {
+                name = "The Sun?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:hearts}Hearts",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:spades}Spades{}"
+                }
+            },
+            c_fg_temperance = {
+                name = "Temperance?",
+                text = {
+                    "Gives {C:attention}double{} the total sell value",
+                    "of {C:attention}all{} consumeables in posession",
+                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
+                    "{C:inactive}(Will give {C:gold}$#1#{C:inactive})"
+                }
+            },
+            c_fg_wheel_of_fortune = {
+                name = "The Wheel of Fortune?",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "add {C:dark_edition}Negative{} to",
+                    "a random {C:attention}Joker{}"
+                }
+            },
+            c_fg_world = {
+                name = "The World?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:spades}Spades",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:hearts}Hearts{}"
+                }
+            },
+        },
         Voucher={},
     },
     misc = {
