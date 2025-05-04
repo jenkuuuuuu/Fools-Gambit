@@ -221,7 +221,7 @@ SMODS.Joker {
 						trigger = 'before',
 						delay = 0.0,
 						func = (function()
-							local card = create_card('abberation', G.consumeables, nil, nil, nil, nil, nil, '8ba')
+							local card = create_card('aberration', G.consumeables, nil, nil, nil, nil, nil, '8ba')
 							card:add_to_deck()
 							G.consumeables:emplace(card)
 							G.GAME.consumeable_buffer = 0
@@ -229,7 +229,7 @@ SMODS.Joker {
 						end)
 					}))
 					card_eval_status_text(card, 'extra', nil, nil, nil,
-						{ message = localize('k_plus_abberation'), colour = G.C.PURPLE })
+						{ message = localize('k_plus_aberration'), colour = G.C.PURPLE })
 				end
 				card.ability.extra.item_amount2 = card.ability.extra.item_amount2 - card.ability.extra.item_amount
 			end
@@ -255,7 +255,7 @@ SMODS.Joker {
 							trigger = 'before',
 							delay = 0.0,
 							func = (function()
-								local card = create_card('abberation', G.consumeables, nil, nil, nil, nil, nil, '8ba')
+								local card = create_card('aberration', G.consumeables, nil, nil, nil, nil, nil, '8ba')
 								card:add_to_deck()
 								G.consumeables:emplace(card)
 								G.GAME.consumeable_buffer = 0
@@ -263,7 +263,7 @@ SMODS.Joker {
 							end)
 						}))
 						card_eval_status_text(card, 'extra', nil, nil, nil,
-							{ message = localize('k_plus_abberation'), colour = G.C.PURPLE })
+							{ message = localize('k_plus_aberration'), colour = G.C.PURPLE })
 					end
 				end
 			end
@@ -286,7 +286,7 @@ SMODS.Joker {
 					trigger = 'before',
 					delay = 0.0,
 					func = (function()
-						local card = create_card('abberation', G.consumeables, nil, nil, nil, nil, nil, '8ba')
+						local card = create_card('aberration', G.consumeables, nil, nil, nil, nil, nil, '8ba')
 						card:add_to_deck()
 						G.consumeables:emplace(card)
 						G.GAME.consumeable_buffer = 0
@@ -318,7 +318,7 @@ SMODS.Joker {
 						trigger = 'before',
 						delay = 0.0,
 						func = (function()
-							local card = create_card('abberation', G.consumeables, nil, nil, nil, nil, nil, '8ba')
+							local card = create_card('aberration', G.consumeables, nil, nil, nil, nil, nil, '8ba')
 							card:add_to_deck()
 							G.consumeables:emplace(card)
 							G.GAME.consumeable_buffer = 0
@@ -416,7 +416,7 @@ SMODS.Joker {
 							trigger = 'before',
 							delay = 0.0,
 							func = (function()
-								local card = create_card('abberation', G.consumeables, nil, nil, nil, nil, nil, '8ba')
+								local card = create_card('aberration', G.consumeables, nil, nil, nil, nil, nil, '8ba')
 								card:add_to_deck()
 								G.consumeables:emplace(card)
 								G.GAME.consumeable_buffer = 0
@@ -424,7 +424,7 @@ SMODS.Joker {
 							end)
 						}))
 						card_eval_status_text(card, 'extra', nil, nil, nil,
-							{ message = localize('k_plus_abberation'), colour = G.C.PURPLE })
+							{ message = localize('k_plus_aberration'), colour = G.C.PURPLE })
 					end
 				end
 			end
@@ -445,7 +445,7 @@ SMODS.Joker {
 	end,
 	calculate = function(self, card, context)
 		if context.using_consumeable then
-			if context.consumeable.ability.set == 'abberation' then
+			if context.consumeable.ability.set == 'aberration' then
 				G.E_MANAGER:add_event(Event({
 					trigger = 'after',
 					delay = 0.7,
@@ -1613,52 +1613,7 @@ SMODS.Joker {
 		end
 	end
 }
--- Bones
---[[
-SMODS.Joker {
-	key = 'mr_bones',
-	rarity = 3,
-	cost = 2,
-	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
-	pos = { x = 3 , y = 4 },
-	config = {  extra = {
-		destroy_chance = 1,
-		total_chance = 2,
-	} },
-	loc_txt = {
-	name = 'Mr. Bones?',
-	text = {
-		"Gives {C:chips}+1{} hand and {C:mult}+1{} discard",
-		"if chips scored are at least {C:attention}25%{} of",
-		"required chips when playing final hand.",
-		"{C:green}1 in 2{} chance this card ",
-		"gets destroyed when triggered."
-	},
-	},
-	calculate = function (self, card, context)
-		if context.joker_main and G.GAME.current_round.hands_left == 0 then
-			print("TEST!")
-			G.GAME.current_round.discards_left = G.GAME.current_round.discards_left + 1
-			G.GAME.current_round.hands_left = G.GAME.current_round.hands_left + 1
-			return {
-				message = localize('k_saved_ex'),
-				colour = G.C.RED
-			}
-		end
-		if context.after and context.cardarea == G.jokers and G.GAME.chips < G.GAME.blind.chips then
-			print(G.GAME.chips)
-			print(G.GAME.blind.chips)
-			local dissolve = 2
-			dissolve = pseudorandom('sans', 1, 2)
-			print (dissolve)
-			if dissolve == 1 then card:start_dissolve() end
-		end
-		if context.end_of_round and G.GAME.chips < G.GAME.blind.chips then
-		end
-  	end
-}
-]]
+
 -----------------
 ---Collectives---
 -----------------
@@ -1758,6 +1713,7 @@ if FG.config.debug_mode then
 						card = card,
 						message = "k_duplicated_ex",
 						mode = "localize",
+						cathegory = "dictionary"
 					}
 					for i=1, card.ability.extra.duplicate do
 						local new_card = SMODS.add_card{

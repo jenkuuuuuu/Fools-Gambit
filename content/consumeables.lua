@@ -12,15 +12,13 @@ SMODS.Atlas {
 	py = 95
 } -- added placeholder sprites before the actual ones are finished just so they can be differentiated in packs
 
-
-
 SMODS.ConsumableType{
     key = "abberation",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
     loc_txt ={
-        name = "Abberation Cards",
-        collection = "Abberation Cards",
+        name = "Aberration Cards",
+        collection = "Aberration Cards",
         }
 }
 
@@ -38,7 +36,7 @@ SMODS.Consumable{
         }
     },
     loc_vars = function (self, info_queue, card)
-        if not card.fake_card and #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" then
+        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" then
             info_queue[#info_queue+1] = G.P_CENTERS[FG.get_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents)]
         end
     end,
@@ -75,7 +73,7 @@ SMODS.Consumable{
         }
     },
     loc_vars = function (self, info_queue, card)
-        if not card.fake_card and #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" then
+        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" then
             info_queue[#info_queue+1] = G.P_CENTERS[FG.get_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents)]
         end
     end,

@@ -1,7 +1,7 @@
 return {
     descriptions = {
-        fg_Abberation={
-            fg_tonal = {
+        fg_abberation={
+            c_fg_tonal = {
                 name = "Tonal",
                 text = {
                     "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
@@ -691,7 +691,7 @@ return {
         collabs={},
         dictionary={
             k_chipMult="Multiplied!",
-			k_plus_abberation="+1 Abberation",
+			k_plus_abberation="+1 Aberration",
 			k_replaced="Replaced!",
 			k_replenished="Replenished!",
 			k_card_added="+1 Card",

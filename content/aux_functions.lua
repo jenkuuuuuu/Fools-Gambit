@@ -199,9 +199,9 @@ function FG.card_eval_status_text (args)
 	local args = args or {}
 	local card = args.card -- Target card
 	local eval_type = args.type or "extra"
-	local misc_cat = args.cat or 'FG'
+	local misc_cat = args.cathegory or 'FG'
 	local message = args.message or "ERROR"
-	local mode = args.mode or "literal"
+	local mode = args.mode or "localize"
 	local colour = args.colour or args.color or string.upper("orange") -- The color of the square background.
 
 	if mode == "literal" then
@@ -212,6 +212,35 @@ function FG.card_eval_status_text (args)
 		{ message = localize(message,misc_cat), colour = G.C[colour] })
 	end
 end
+--- Retrieves useful data for the specified card
+---@param card table|card The target card to evaluete
+---@return table ret 
+--- Returns the card's `rank`, `suit`, `key` (or enhancement), `edition`, `seal` 
+--- and if it's `eternal`, `perishable` and how many rounds it has left, `rental` and
+--- the `raw` data of the card.
+function FG.get_card_status(card)
+	local ret = {
+		rank = card.config.card.value or false,
+		suit = card.config.card.suit or false,
+		key = card.config.center.key or false,
+		edition = false,
+		seal = card.seal or false,
+		eternal = false,
+		perishable = false,
+		perish_tally = 0,
+		rental = false,
+		raw = card
+	}
+	if card.edition then ret.edition = card.edition.key end
+	if card.ability.eternal then ret.eternal = true end
+	if card.ability.perishable then
+		ret.perishable = true
+		ret.perish_tally = card.ability.perish_tally
+	end
+	if card.ability.rental then ret.rental = true end
+	return ret
+end
+
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
 

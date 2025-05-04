@@ -31,7 +31,7 @@ SMODS.Seal {
         label = 'Tune',
         name = 'Tune',
         text = {
-            'Creates an {C:purple}Abberation{} Card',
+            'Creates an {C:purple}aberration{} Card',
             'when played but {C:attention}not{} scored'
         }
     },
@@ -40,7 +40,7 @@ SMODS.Seal {
 
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
-            return create_card("abberation", G.consumeables, nil, nil, false, true, nil)
+            return create_card("aberration", G.consumeables, nil, nil, false, true, nil)
         end
         -- does not work, i cant get it to calculate without being scored
     end

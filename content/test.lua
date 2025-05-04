@@ -5,7 +5,6 @@ local function generate_alternate_label(key,before)
     else return key end
 end
 
-
 if FG.config.debug_mode then
     SMODS.Joker {
         key = "test",
@@ -18,14 +17,6 @@ if FG.config.debug_mode then
         cost = 1,
         rarity = 1,
         loc_vars = function (self, info_queue, card)
-            local contains
-            for _, q in ipairs(info_queue) do
-              if q == G.P_CENTERS.j_key then
-                contains = true
-                break
-              end
-            end
-            return {}
         end,
         calculate = function (self, card, context)
         end
