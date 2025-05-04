@@ -63,6 +63,7 @@ FG.joker_equivalents = {
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
 	-- COLLECTION
+	j_fg_jogla = "j_fg_jogla_alt",
 	j_fg_deathmodereal = "j_fg_deathmoderealalt",
 }
 --------------------
@@ -123,9 +124,7 @@ SMODS.Joker {
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
 						if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "v" then
-							FG.alternate_card({
-								card = currentCard
-							})
+							FG.alternate_card(currentCard,FG.joker_equivalents)
 							currentCard:start_dissolve(nil, false, 0, true)
 						end
 					end
@@ -153,9 +152,7 @@ SMODS.Joker {
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
 						if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" then
-							FG.alternate_card({
-								card = currentCard
-							})
+							FG.alternate_card(currentCard,FG.joker_equivalents)
 							currentCard:start_dissolve(nil, false, 0, true)
 						end
 					end
@@ -1752,18 +1749,16 @@ if FG.config.debug_mode then
 			if context.ending_shop and G.consumeables.cards[1] then
 				local target_card_key = G.consumeables.cards[1].config.center.key
 				if target_card_key ~= nil then
+					FG.card_eval_status_text{
+						card = card,
+						message = "k_duplicated_ex",
+						mode = "localize",
+					}
 					for i=1, card.ability.extra.duplicate do
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 0.2,
-							func = function()
-								SMODS.add_card{
-									key = target_card_key,
-									edition = "e_negative"
-								}
-								return true
-							end
-						}))
+						local new_card = SMODS.add_card{
+							key = target_card_key,
+							edition = "e_negative"
+						}
 					end
 				end
 				--card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!" })

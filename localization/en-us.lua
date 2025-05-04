@@ -674,6 +674,15 @@ return {
         Voucher={},
     },
     misc = {
+        -- This one is very important. I have moved every localization key we might need for FG here. See aux_functions > FG.card_eval_status_text for more info
+        FG = {
+            chipMult="Multiplied!",
+			plus_abberation="+1 Abberation",
+			replaced="Replaced!",
+			replenished="Replenished!",
+			card_added="+1 Card",
+        },
+
         achievement_descriptions={},
         achievement_names={},
         blind_states={},

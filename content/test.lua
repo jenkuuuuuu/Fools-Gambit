@@ -1,5 +1,10 @@
 FG.test = {}
 
+local function generate_alternate_label(key,before)
+    if before then return
+    else return key end
+end
+
 
 if FG.config.debug_mode then
     SMODS.Joker {
@@ -12,19 +17,17 @@ if FG.config.debug_mode then
         },
         cost = 1,
         rarity = 1,
-        calculate = function (self, card, context)
-            if context.repetition and context.cardarea == G.play then
-                ----[[
-                FG.test.enhancements = SMODS.get_enhancements(context.other_card)
-                FG.test.enhancement_chosen = SMODS.poll_enhancement{
-                    key = "mila",
-                    guaranteed = true,
-                    options = {"m_lucky"}
-                }
-                context.other_card:set_ability(G.P_CENTERS[FG.test.enhancement_chosen])
-                --]]--
-                --FG.alternate_enhancement(context.other_card,context.other_card)
+        loc_vars = function (self, info_queue, card)
+            local contains
+            for _, q in ipairs(info_queue) do
+              if q == G.P_CENTERS.j_key then
+                contains = true
+                break
+              end
             end
+            return {}
+        end,
+        calculate = function (self, card, context)
         end
     }
 end
