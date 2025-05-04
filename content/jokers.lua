@@ -1079,11 +1079,11 @@ SMODS.Joker {
 }
 -- Missprint
 
-function generateArrayMisprint(min, max) 
+local function generateArrayMisprint(min, max) 
 	local mults = {}
 	for i = 1, 10 do
 		local num = (pseudorandom('misprint', min, max) / 100)
-		table.insert(mults, "x"..tostring(num))
+		table.insert(mults, "X"..tostring(num))
 	end
 	return mults
 end
@@ -1104,16 +1104,17 @@ SMODS.Joker {
 				card.ability.extra.Xmult,
 				card.ability.extra.Xmult_min,
 				card.ability.extra.Xmult_max
-				},
-				main_end = {
-					{n=G.UIT.R, config= {align="bm", padding = 0.02}, nodes={
-						{n=G.UIT.C, config={align = "m", colour=colour, r=0.05, padding=0.05}, nodes={
+			},
+			main_end = {
+				{n=G.UIT.R, nodes = {
+					{n=G.UIT.C, config= {align="bm", padding = 0.02}, nodes={
+						{n=G.UIT.C, config={align = "m", colour=G.C.RED, r=0.7, padding=0.05}, nodes={
 							{
 								n = G.UIT.O,
 								config = {
 									object = DynaText({
 										string = generateArrayMisprint(card.ability.extra.Xmult_min,card.ability.extra.Xmult_max),
-										colours = { G.C.RED },
+										colours = { G.C.WHITE },
 										pop_in_rate = 9999999,
 										silent = true,
 										random_element = true,
@@ -1123,10 +1124,14 @@ SMODS.Joker {
 									}),
 								},
 							},
-							{n=G.UIT.T, config={text = "mult", colour = G.C.UI.TEXT_DARK, scale=0.3}}
 						}}
 					}},
-				}
+					{n=G.UIT.C, config={align = "m", colour=G.C.WHITE, r=0.05, padding=0.05}, nodes={
+						{n=G.UIT.T, config={text = "Mult", colour = G.C.UI.TEXT_DARK, scale=0.3}}
+					}}
+				}},
+				
+			}
 		}
 	end,
 	calculate = function(self, card, context)

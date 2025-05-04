@@ -30,7 +30,7 @@ end
 -- Alternates between this card and the associated alternative card.
 ---@param card table|card The card instance itself.
 ---@param ref table The table to compare the card when alternating it.
----@return table|card new_card The newly generated card
+---@return table|card table A table containing the old card and the new card.
 function FG.alternate_card(card,ref)
 	local ref = ref or FG.joker_equivalents
 	local key = card.config.center_key
@@ -41,7 +41,11 @@ function FG.alternate_card(card,ref)
 		key = tostring(convert_to),
 	})
 	card:start_dissolve(nil,false,0,true)
-	return new_card
+
+	return {
+		original = card,
+		alternate = new_card
+	}
 end
 
 --- Transfers the edition from the old card to the new card.
@@ -189,7 +193,7 @@ end
 --- @param args.message string The message. Can be literal or a key for translation.
 --- @param args.cat? string Defaults to `FG`.
 --- @param args.mode string `literal` Display the raw text in `args.message`. `localize` Use `args.message` as a localization entry
---- @param colour string Refer to `G.C` for all available colours.
+--- @param colour string Refer to `G.C.<colours>` for all available colours.
 function FG.card_eval_status_text (args)
 	if not type(args) == "table" then return end
 	local args = args or {}
