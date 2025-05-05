@@ -17,6 +17,7 @@ if FG.config.debug_mode then
         cost = 1,
         rarity = 1,
         loc_vars = function (self, info_queue, card)
+            print(FG.get_card_info(card))
         end,
         calculate = function (self, card, context)
         end

@@ -218,10 +218,10 @@ end
 --- Returns the card's `rank`, `suit`, `key` (or enhancement), `edition`, `seal` 
 --- and if it's `eternal`, `perishable` and how many rounds it has left, `rental` and
 --- the `raw` data of the card.
-function FG.get_card_status(card)
+function FG.get_card_info(card)
 	local ret = {
-		rank = card.config.card.value or false,
-		suit = card.config.card.suit or false,
+		rank = false,
+		suit = false,
 		key = card.config.center.key or false,
 		edition = false,
 		seal = card.seal or false,
@@ -231,6 +231,8 @@ function FG.get_card_status(card)
 		rental = false,
 		raw = card
 	}
+	if card.config.card then ret.rank = card.config.card.value end
+	if card.config.card then ret.suit = card.config.card.suit end
 	if card.edition then ret.edition = card.edition.key end
 	if card.ability.eternal then ret.eternal = true end
 	if card.ability.perishable then
