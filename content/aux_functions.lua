@@ -143,7 +143,7 @@ function FG.flip_editions(card)
 	end
 end
 
-if FG.config.debug_mode then -- scary !!! broken!!!! (eats tags and is forced after reroll)
+if FG.config.debug_mode then -- slightly less scary !!! still broken!!!! (eats tags)
 	function FG.replace_shop_joker(key, index)
 		if G.shop_jokers then
 			if G.shop_jokers.cards then
@@ -160,13 +160,15 @@ if FG.config.debug_mode then -- scary !!! broken!!!! (eats tags and is forced af
 	end
 
 	local shopref = create_card_for_shop
+	cop_reroll = false
 
 	function create_card_for_shop(area)
 		local card = shopref(area)
 
-		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips then
+		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips and cop_reroll == false then
 			FG.replace_shop_joker("j_fg_change_of_pace", 1)
-		end
+			cop_reroll = true
+			end
 
 		return card
 	end
