@@ -33,7 +33,7 @@ end
 ---@return table|card table A table containing the old card and the new card.
 function FG.alternate_card(card,ref)
 	local ref = ref or FG.joker_equivalents
-	local key = card.config.center_key
+	local key = FG.get_card_info(card).key
 	local convert_to = FG.get_alternate(key,ref,FG.is_alternate(key,ref))
 	local new_card = SMODS.add_card({
 		set = 'Joker',
@@ -54,7 +54,7 @@ end
 function FG.update_edition(source,target)
 	target = target or source
 	if source.edition then
-		target:set_edition(source.edition.key,true,true)
+		target:set_edition(FG.get_card_info(source).edition,true,true)
 	else
 		target:set_edition(nil,true,true)
 	end
@@ -68,7 +68,7 @@ function FG.alternate_edition(source,target,ref)
 	ref = ref or FG.edition_equivalents
 	target = target or source
 	if source.edition then
-		target:set_edition(FG.get_alternate(source.edition.key,FG.edition_equivalents),true,true)
+		target:set_edition(FG.get_alternate(FG.get_card_info(source).edition,FG.edition_equivalents),true,true)
 	else
 		target:set_edition(nil,true,true)
 	end
@@ -80,8 +80,8 @@ end
 function FG.update_enhancement(source,target)
 	target = target or source
 	local enhancement = nil
-	if source.config.center.key then 
-		enhancement = source.config.center.key 
+	if FG.get_card_info(source).key then 
+		enhancement = FG.get_card_info(source).key
 	end
 	target:set_ability(G.P_CENTERS[enhancement])
 end
@@ -93,7 +93,7 @@ end
 function FG.alternate_enhancement(source,target,ref)
 	ref = ref or FG.enhancement_equivalents
 	target = target or source
-	local enhancement = FG.get_alternate(source.config.center.key,ref)
+	local enhancement = FG.get_alternate(FG.get_card_info(source).key,ref)
 	target:set_ability(G.P_CENTERS[enhancement])
 end
 
@@ -222,15 +222,17 @@ function FG.get_card_info(card)
 	local ret = {
 		rank = false,
 		suit = false,
-		key = card.config.center.key or false,
+		key = card.config.center.key,
 		edition = false,
 		seal = card.seal or false,
 		eternal = false,
 		perishable = false,
 		perish_tally = 0,
 		rental = false,
+		unchangeable = false,
 		raw = card
 	}
+	
 	if card.config.card then ret.rank = card.config.card.value end
 	if card.config.card then ret.suit = card.config.card.suit end
 	if card.edition then ret.edition = card.edition.key end
@@ -240,8 +242,21 @@ function FG.get_card_info(card)
 		ret.perish_tally = card.ability.perish_tally
 	end
 	if card.ability.rental then ret.rental = true end
+	if card.ability.fg_unchangeable then ret.unchangeable = true end
 	return ret
 end
+
+
+function FG.modify_card(args)
+	if not args or not type(args) == "table" then return {false} end
+	local rank = args.rank or false
+	local suit = args.suit or false
+	local key = args.key or "keep"
+	local edition = args.edition or "keep"
+	local seal = args.seal or "keep"
+	local stickers = args.stickers or "keep"
+end
+
 
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT

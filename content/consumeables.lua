@@ -36,12 +36,16 @@ SMODS.Consumable{
         }
     },
     loc_vars = function (self, info_queue, card)
-        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" then
-            info_queue[#info_queue+1] = G.P_CENTERS[FG.get_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents)]
+        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
+        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v"
+        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.get_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents)]
         end
     end,
     can_use = function(self, card)
-        if #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" then
+        if #G.jokers.highlighted == 1
+        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" 
+        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable then
             print(FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents))
             return true
         end
@@ -73,12 +77,17 @@ SMODS.Consumable{
         }
     },
     loc_vars = function (self, info_queue, card)
-        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" then
+        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
+        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" 
+        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable
+        then
             info_queue[#info_queue+1] = G.P_CENTERS[FG.get_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents)]
         end
     end,
     can_use = function(self, card)
-        if #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" then
+        if #G.jokers.highlighted == 1
+        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" 
+        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable then
             print(FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents))
             return true
         end
@@ -175,7 +184,6 @@ SMODS.Consumable{
             local currentJoker = G.jokers.cards[i]
             if currentJoker.rarity == 1 then
                 FG.alternate_card(currentJoker,FG.joker_equivalents)
-
             end
         end
     return true

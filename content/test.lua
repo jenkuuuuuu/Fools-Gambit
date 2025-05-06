@@ -5,6 +5,26 @@ local function generate_alternate_label(key,before)
     else return key end
 end
 
+function FG.test.toggle_unchangeable()
+    if not G.jokers then
+        sendWarnMessage("Please, execute this function while in a run.","FG/toggle_unchangeable")
+        return "not_in_game"
+    end
+    if not G.jokers.highlighted[1] then
+        sendWarnMessage("Please, select one Joker before executing this funciton","FG.toggle_unchangeable")
+        return "no_card_selected"
+    end
+    local target = G.jokers.highlighted[1]
+    if not FG.get_card_info(target).unchangeable then
+        target.ability.fg_unchangeable = true
+        return "enabled"
+    elseif FG.get_card_info(target).unchangeable then
+        target.ability.fg_unchangeable = false
+        return "disabled"
+    end
+end
+
+
 if FG.config.debug_mode then
     SMODS.Joker {
         key = "test",
@@ -17,7 +37,6 @@ if FG.config.debug_mode then
         cost = 1,
         rarity = 1,
         loc_vars = function (self, info_queue, card)
-            print(FG.get_card_info(card))
         end,
         calculate = function (self, card, context)
         end

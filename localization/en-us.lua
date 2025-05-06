@@ -513,7 +513,15 @@ return {
                 }
             }
         },
-        Other={},
+        Other={
+            fg_unchangeable = {
+                name = "Unchangeable",
+                label = "Unchangeable",
+                text = {
+                    "Can't be alternated"
+                }
+            }
+        },
         Planet={},
         Spectral={},
         Stake={},
@@ -695,6 +703,7 @@ return {
 			k_replaced="Replaced!",
 			k_replenished="Replenished!",
 			k_card_added="+1 Card",
+            k_unchangeable_warning = "This card can't be alternated"
         },
         high_scores={},
         labels={},

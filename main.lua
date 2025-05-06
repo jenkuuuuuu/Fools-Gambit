@@ -29,6 +29,7 @@ local mod_contents = {
 	"test",
 	"special_editions/mila",
 	"tarots",
+	"misc"
 }
 
 for k, v in pairs(mod_contents) do -- Load this mod's files
