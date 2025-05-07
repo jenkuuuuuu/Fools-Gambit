@@ -543,7 +543,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "star",
     atlas = "Consumeables",
-    pos = {x = 6, y = 1},
+    pos = {x = 7, y = 1},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}
@@ -577,7 +577,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "moon",
     atlas = "Consumeables",
-    pos = {x = 7, y = 1},
+    pos = {x = 8, y = 1},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}
@@ -594,7 +594,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "sun",
     atlas = "Consumeables",
-    pos = {x = 6, y = 1},
+    pos = {x = 9, y = 1},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}
@@ -611,7 +611,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "world",
     atlas = "Consumeables",
-    pos = {x = 7, y = 1},
+    pos = {x = 1, y = 2},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}

@@ -1,4 +1,4 @@
-
+FG.vouchers = {}
 
 SMODS.Atlas {
 	key = "vouchers",
@@ -21,13 +21,10 @@ SMODS.Voucher{
     atlas = "vouchers",
     pos = { x = 2, y = 0 },
     redeem = function(self,card)
-        aberration1.config.choose = aberration1.config.choose + 1
-        aberration2.config.extra = aberration2.config.extra + 1
-        aberration2.config.choose = aberration2.config.choose + 1
-        jumbo_aberration.config.extra = jumbo_aberration.config.extra + 1
-        jumbo_aberration.config.choose = jumbo_aberration.config.choose + 1
-        mega_aberration.config.extra = mega_aberration.config.extra + 1
-        mega_aberration.config.choose = mega_aberration.config.choose + 1
+        for _,v in pairs(FG.boosters) do
+            v.config.choice = v.config.choice + 1
+            v.config.extra = v.config.extra + 1
+        end
 
         local card_open_ref = Card.open
         function Card:open()

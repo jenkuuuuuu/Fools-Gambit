@@ -5,8 +5,9 @@ SMODS.Atlas {
 	py = 95
 }
 
+FG.boosters = {}
 
-abberation1 = SMODS.Booster {
+FG.boosters.abberation1 = SMODS.Booster {
     key = "abberation1",
     kind = "abberation",
     atlas = "pack",
@@ -32,7 +33,7 @@ abberation1 = SMODS.Booster {
 }
 
 
-abberation2 = SMODS.Booster {
+FG.boosters.abberation2 = SMODS.Booster {
     key = "abberation2",
     kind = "abberation",
     atlas = "pack",
@@ -57,7 +58,7 @@ abberation2 = SMODS.Booster {
     end
 }
 if FG.config.debug_mode then
-jumbo_abberation = SMODS.Booster {
+FG.boosters.jumbo_abberation = SMODS.Booster {
     key = "abberation3",
     kind = "abberation",
     atlas = "pack",
@@ -82,7 +83,7 @@ jumbo_abberation = SMODS.Booster {
     end
 }
 
-mega_abberation = SMODS.Booster {
+FG.boosters.mega_abberation = SMODS.Booster {
     key = "abberation4",
     kind = "abberation",
     atlas = "pack",
