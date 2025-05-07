@@ -658,7 +658,7 @@ return {
                     "Gives {C:attention}double{} the total sell value",
                     "of {C:attention}all{} consumeables in posession",
                     "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
-                    "{C:inactive}(Will give {C:gold}$#1#{C:inactive})"
+                    "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
                 }
             },
             c_fg_wheel_of_fortune = {

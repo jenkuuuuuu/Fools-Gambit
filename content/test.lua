@@ -1,10 +1,5 @@
 FG.test = {}
 
-local function generate_alternate_label(key,before)
-    if before then return
-    else return key end
-end
-
 function FG.test.toggle_unchangeable()
     if not G.jokers then
         sendWarnMessage("Please, execute this function while in a run.","FG/toggle_unchangeable")

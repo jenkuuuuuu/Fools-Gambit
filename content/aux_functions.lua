@@ -215,12 +215,13 @@ function FG.card_eval_status_text (args)
 	end
 end
 --- Retrieves useful data for the specified card
----@param card table|card The target card to evaluete
----@return table ret 
+---@param card table|card  The target card to evaluete
+---@return table ret
 --- Returns the card's `rank`, `suit`, `key` (or enhancement), `edition`, `seal` 
 --- and if it's `eternal`, `perishable` and how many rounds it has left, `rental` and
 --- the `raw` data of the card.
 function FG.get_card_info(card)
+	if not card then sendWarnMessage("No card was passed.","FG.get_card_info") return 1 end
 	local ret = {
 		rank = false,
 		suit = false,
@@ -247,18 +248,6 @@ function FG.get_card_info(card)
 	if card.ability.fg_unchangeable then ret.unchangeable = true end
 	return ret
 end
-
-
-function FG.modify_card(args)
-	if not args or not type(args) == "table" then return {false} end
-	local rank = args.rank or false
-	local suit = args.suit or false
-	local key = args.key or "keep"
-	local edition = args.edition or "keep"
-	local seal = args.seal or "keep"
-	local stickers = args.stickers or "keep"
-end
-
 
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT

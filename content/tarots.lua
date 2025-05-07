@@ -477,12 +477,14 @@ SMODS.Consumable{
     pos = {x = 4, y = 1},
     config = {extra = {value = 0, max = 50}},
     loc_vars = function (self, info_queue, card)
-        card.ability.extra.value = 0
-        for _,v in pairs(G.consumeables.cards) do
-            card.ability.extra.value = card.ability.extra.value + v.config.center.cost
-        end
-        if card.ability.extra.value > card.ability.extra.max then
-            card.ability.extra.value = card.ability.extra.max
+        if G.consumeables then
+            card.ability.extra.value = 0
+            for _,v in pairs(G.consumeables.cards) do
+                card.ability.extra.value = card.ability.extra.value + v.config.center.cost
+            end
+            if card.ability.extra.value > card.ability.extra.max then
+                card.ability.extra.value = card.ability.extra.max
+            end
         end
         return {vars = {
             card.ability.extra.value,
