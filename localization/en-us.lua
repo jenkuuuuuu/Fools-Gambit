@@ -18,10 +18,10 @@ return {
             m_fg_glass = {
                 name = "Glass? Card",
                 text = {
-                    "Gives {C:attention}x#2#{} blind's chip requirements.",
+                    "Gains {C:white,X:red}X1{} Mult for each scoring card",
+                    "with this enhancement in playing hand",
                     "destroys after use",
                     "no rank or suit",
-                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}"
                 }
             },
             m_fg_steel = {
@@ -68,6 +68,15 @@ return {
                     "for {C:mult}+#3#{} mult",
                     "{C:green}#4# in #5#{} chance",
                     "for {C:mult}#6#{} mult",
+                }
+            },
+            m_Fg_stone = {
+                name = "Stone? Card",
+                text = {
+                    "When held in hand, self destruct and ",
+                    "enhance adjacent non-enhanced cards to",
+                    "{C:attention}Stone? Cards{} with {C:chips}15 more chips.",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} extra chips)"
                 }
             }
         },

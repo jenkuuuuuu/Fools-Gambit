@@ -215,7 +215,7 @@ function FG.card_eval_status_text (args)
 	end
 end
 --- Retrieves useful data for the specified card
----@param card table|card  The target card to evaluete
+---@param card table|card  The target card to evaluate
 ---@return table ret
 --- Returns the card's `rank`, `suit`, `key` (or enhancement), `edition`, `seal` 
 --- and if it's `eternal`, `perishable` and how many rounds it has left, `rental` and

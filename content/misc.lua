@@ -1,9 +1,8 @@
 SMODS.Stake{
     key = "pink",
     applied_stakes = {
-        "stake_black"
+        "black"
     },
-    above_stake = "stake_blue",
     loc_txt = {
         name = "Pink stake",
         text = {
@@ -28,6 +27,7 @@ SMODS.Sticker{
     atlas = "stickers",
     pos = { x = 0, y = 0},
     badge_colour = HEX("e083b0"),
-    sets = {Joker = true},
-    rate = 10000
+    default_compat = true,
+    rate = 1,
+    needs_enabled_flag = false
 }
