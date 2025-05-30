@@ -186,6 +186,47 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     set = "Tarot",
+    key = "high_priestess",
+    atlas = "Consumeables",
+    pos = {x = 2, y = 0},
+    config = {
+        extra = {
+            min = 1,
+            max = 8
+        }
+    },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.c_black_hole
+        card.ability.extra.min = G.GAME.probabilities.normal or 1
+        return {
+            vars = {
+                card.ability.extra.min,
+                card.ability.extra.max
+            }
+        }
+    end,
+    can_use = function (self, card)
+        if not G.consumeables then return false end
+        if G.consumeables.config.card_count <= G.consumeables.config.card_limit then return true end
+    end,
+    use = function (self, card, area, copier)
+        if pseudorandom("mila",card.ability.extra.min,card.ability.extra.max) <= card.ability.extra.min then
+            SMODS.add_card{
+                key = "c_black_hole"
+            }
+        else
+            FG.card_eval_status_text{
+                card = card,
+                message = "Nope!",
+                mode = "literal"
+            }
+        end
+    end
+}
+
+
+SMODS.Consumable{
+    set = "Tarot",
     key = "empress",
     atlas = "Consumeables",
     pos = {x = 3 , y = 0},
@@ -214,6 +255,46 @@ SMODS.Consumable{
     end,
     use = function (self, card, area, copier)
         tarot_convert("m_fg_mult")
+    end
+}
+
+SMODS.Consumable{
+    set = "Tarot",
+    key = "emperor",
+    atlas = "Consumeables",
+    pos = {x = 4, y = 0},
+    config = {
+        extra = {
+            min = 1,
+            max = 16
+        }
+    },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.c_soul
+        card.ability.extra.min = G.GAME.probabilities.normal or 1
+        return {
+            vars = {
+                card.ability.extra.min,
+                card.ability.extra.max
+            }
+        }
+    end,
+    can_use = function (self, card)
+        if not G.consumeables then return false end
+        if G.consumeables.config.card_count <= G.consumeables.config.card_limit then return true end
+    end,
+    use = function (self, card, area, copier)
+        if pseudorandom("mila",card.ability.extra.min,card.ability.extra.max) <= card.ability.extra.min then
+            SMODS.add_card{
+                key = "c_soul"
+            }
+        else
+            FG.card_eval_status_text{
+                card = card,
+                message = "Nope!",
+                mode = "literal"
+            }
+        end
     end
 }
 
@@ -385,6 +466,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        card.ability.extra.min_chance = G.GAME.probabilities.normal or 1
         return {
             vars = {
                 card.ability.extra.min_chance,

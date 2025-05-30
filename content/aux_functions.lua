@@ -190,7 +190,7 @@ FG.duplicate_playing_card = function (card)
 	return _card
 end
 
---- Wrapper function to not use card_eval_status_text
+--- Wrapper function to not use card_eval_status_text (scroll down  [vvv])
 --- @param args.card table|card The card instance.
 --- @param args.message string The message. Can be literal or a key for translation.
 --- @param args.cat? string Defaults to `FG`.
@@ -205,7 +205,8 @@ function FG.card_eval_status_text (args)
 	local message = args.message or "ERROR"
 	local mode = args.mode or "localize"
 	local colour = args.colour or args.color or string.upper("orange") -- The color of the square background.
-
+	colour = string.upper(colour)
+	
 	if mode == "literal" then
 		card_eval_status_text(card, eval_type, nil, nil, nil,
 		{ message = message, colour = G.C[colour] })
@@ -216,12 +217,12 @@ function FG.card_eval_status_text (args)
 end
 --- Retrieves useful data for the specified card
 ---@param card table|card  The target card to evaluate
----@return table ret
+---@return table|nil ret
 --- Returns the card's `rank`, `suit`, `key` (or enhancement), `edition`, `seal` 
 --- and if it's `eternal`, `perishable` and how many rounds it has left, `rental` and
---- the `raw` data of the card.
+--- the `raw` data of the card, or `nil` if no card is passed.
 function FG.get_card_info(card)
-	if not card then sendWarnMessage("No card was passed.","FG.get_card_info") return 1 end
+	if not card then sendWarnMessage("No card was passed.","FG.get_card_info") return nil end
 	local ret = {
 		rank = false,
 		suit = false,
@@ -254,7 +255,6 @@ end
 
 -- Settings, special edition
 G.FUNCS.FG_s_version = function (args)
-	FG.test.s_version = args
 	FG.config.s_version.selected = args.cycle_config.current_option
 	FG.config.s_version.active = args.to_val
 end

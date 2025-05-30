@@ -14,7 +14,7 @@ function FG.test.toggle_unchangeable()
         target.ability.fg_unchangeable = true
         return "enabled"
     elseif FG.get_card_info(target).unchangeable then
-        target.ability.fg_unchangeable = false
+        target.ability.fg_unchangeable = nil
         return "disabled"
     end
 end

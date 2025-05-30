@@ -1517,7 +1517,7 @@ SMODS.Joker {
 -- Bloodstone
 SMODS.Joker {
 	key = 'bloodstone',
-	config = { type = 'Flush', extra = { Xmult_gain = 0.5, Xmult = 1 } },
+	config = { type = 'Flush', extra = { Xmult_gain = 0.25, Xmult = 1 } },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult_gain, card.ability.extra.Xmult } }
 	end,
@@ -1529,21 +1529,29 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.before then
 			if (next(context.poker_hands[card.ability.type])) then
+				local extrasuit = false
 				for i = 1, #context.scoring_hand do
 					if not context.scoring_hand[i]:is_suit("Hearts") then
-						local extrasuit = true
+						extrasuit = true
 					end
 				end
 				if not extrasuit then
 					card.ability.extra.Xmult = card.ability.extra.Xmult_gain + card.ability.extra.Xmult
+					FG.card_eval_status_text{
+						card = card,
+						message = "Upgrade!",
+						mode = "literal"
+					}
 				end
 			end
 		end
 		if context.joker_main then
-			return {
-				Xmult_mod = card.ability.extra.Xmult,
-				message = 'X' .. card.ability.extra.Xmult
-			}
+			if card.ability.extra.Xmult ~= 1 then
+				return {
+					Xmult_mod = card.ability.extra.Xmult,
+					message = 'X' .. card.ability.extra.Xmult
+				}
+			end
 		end
 	end
 }
@@ -1680,7 +1688,7 @@ if FG.config.debug_mode then
 	-- Jogla (I was told he was op, but I decided to not change it lol)
 	SMODS.Joker {
 		key = 'jogla',
-		config = { extra = { duplicate = 3, name = "None"} },
+		config = { extra = { duplicate = 2, name = "None"} },
 		loc_vars = function(self, info_queue, card)
 			info_queue[#info_queue+1] = {key = 'e_negative_consumable', set = 'Edition', config = {extra = 1}}
 			if G.consumeables then
@@ -1728,7 +1736,7 @@ if FG.config.debug_mode then
 	}
 	SMODS.Joker {
 		key = 'jogla_alt',
-		config = { extra = { increase = 1, extra_size = 1} },
+		config = { extra = { increase = 1, extra_size = 2} },
 		loc_vars = function(self, info_queue, card)
 			return {
 				vars = {
@@ -1737,7 +1745,7 @@ if FG.config.debug_mode then
 				}
 			}
 		end,
-		rarity = "fg_collective",
+		rarity = "fg_collective", 
 		atlas = 'collective',
 		pos = { x = 2, y = 0 },
 		soul_pos = { x = 2, y = 1 },

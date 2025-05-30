@@ -70,7 +70,7 @@ return {
                     "for {C:mult}#6#{} mult",
                 }
             },
-            m_Fg_stone = {
+            m_fg_stone = {
                 name = "Stone? Card",
                 text = {
                     "When held in hand, self destruct and ",
@@ -569,6 +569,13 @@ return {
                     "{C:inactive}an enhancement){}"
                 }
             },
+            c_fg_emperor = {
+                name = "The Emperor",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "create a {C:legendary}Soul{}"
+                }
+            },
             c_fg_empress = {
                 name = "The Empress?",
                 text = {
@@ -608,6 +615,13 @@ return {
                     "{C:attention}without{} any enhancement",
                     "{C:inactive}(Copied cards must have{}",
                     "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_high_priestess = {
+                name = "highest Priestess",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "create a {C:legendary}Black Hole{}"
                 }
             },
             c_fg_justice = {

@@ -86,10 +86,10 @@ SMODS.Edition({
         end
 	end,
 	on_remove = function(self)
-	    if self.remove_from_deck then
-	  G.consumeables.config.card_limit = G.consumeables.config.card_limit-1
-      G.hand.config.card_limit = G.hand.config.card_limit-1
-	  end
+	    if self.remove_from_deck and G.consumeables and G.hand then
+            G.consumeables.config.card_limit = G.consumeables.config.card_limit-1
+            G.hand.config.card_limit = G.hand.config.card_limit-1
+	    end
 	 end,
 	 calculate = function(self, card, context)
 	 if context.selling_self then
