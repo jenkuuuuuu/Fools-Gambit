@@ -1721,7 +1721,7 @@ if FG.config.debug_mode then
 						card = card,
 						message = "k_duplicated_ex",
 						mode = "localize",
-						cathegory = "dictionary"
+						category = "dictionary"
 					}
 					for i=1, card.ability.extra.duplicate do
 						local new_card = SMODS.add_card{

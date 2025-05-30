@@ -201,7 +201,7 @@ function FG.card_eval_status_text (args)
 	local args = args or {}
 	local card = args.card -- Target card
 	local eval_type = args.type or "extra"
-	local misc_cat = args.cathegory or 'FG'
+	local misc_cat = args.category or 'FG'
 	local message = args.message or "ERROR"
 	local mode = args.mode or "localize"
 	local colour = args.colour or args.color or string.upper("orange") -- The color of the square background.
