@@ -137,26 +137,26 @@ SMODS.Enhancement{
 
 
 local stone = {
-	triggered = false,
-	trigger = function (triggered)
+	triggered = false, -- True if the function has been trigger already.
+	trigger = function (triggered) -- Very scuffed function to make stone card work. Only argument checks if the function has been triggered already.
 		if not triggered then
 			local c = 0
 			for k,v in pairs(G.hand.cards) do
 				local card = v
 				local lock = false
-				if FG.get_card_info(card).key == "m_fg_stone" then lock = card.ability.extra.lock end
+				if FG.get_card_info(card).key == "m_fg_stone" then lock = card.ability.extra.lock end -- Find stone card in hand, check if it is locked.
 				c = c + 1
 				--print("c="..c)
-				if FG.get_card_info(v).key == "m_fg_stone" and not lock then
+				if FG.get_card_info(v).key == "m_fg_stone" and not lock then -- If not locked, convert left and right card. Otherwise do nothing.
 					--print("Valid card found")
-					if c > 1 then
+					if c > 1 then -- If not leftmost card
 						--print("stone left")
 						local target = G.hand.cards[c-1]
 						target:set_ability("m_fg_stone")
 						target.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
 						target.ability.extra.lock = true
 					end
-					if c < #G.hand.cards then
+					if c < #G.hand.cards then -- If not rightmost card
 						--print("stone right")
 						local target = G.hand.cards[c+1]
 						target:set_ability("m_fg_stone")
@@ -225,22 +225,22 @@ SMODS.Enhancement{
 			FG.cards.steel.mult = 1
 			card.ability.extra.card_mult = FG.cards.steel.mult
 			for _,v in pairs(G.deck.cards) do
-				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end
 			for _,v in pairs(G.hand.cards) do
-				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end
 			for _,v in pairs(G.discard.cards) do
-				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end
 			for _,v in pairs(G.play.cards) do
-				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end
