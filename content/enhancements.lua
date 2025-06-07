@@ -8,8 +8,11 @@ FG.enhancement_equivalents = {
 	m_gold = "m_fg_gold"
 }
 FG.cards = {
-	steel_mult = 1 -- Stores the value of Xmult of every Steel Card?
+	steel = {
+		mult = 1
+	},
 }
+
 SMODS.Atlas {
 	key = 'enhanced',
 	path = 'Enhancers.png',
@@ -219,22 +222,30 @@ SMODS.Enhancement{
 	},
 	loc_vars = function (self, info_queue, card)
 		if G.jokers then
-			FG.cards.steel_mult = 1
-			card.ability.extra.card_mult = FG.cards.steel_mult
-			--local i = 1
-			for _,v in ipairs(G.deck.cards) do
-				local enhancements = SMODS.get_enhancements(v)
-				if enhancements and enhancements.m_fg_steel then 
-					FG.cards.steel_mult = FG.cards.steel_mult + card.ability.extra.card_gain
-					--print("Fuck yeah!")
+			FG.cards.steel.mult = 1
+			card.ability.extra.card_mult = FG.cards.steel.mult
+			for _,v in pairs(G.deck.cards) do
+				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
-				--print(SMODS.get_enhancements(v))
-				--print(i)
-				--i = i + 1
-				--print(FG.cards.steel_mult)
+			end
+			for _,v in pairs(G.hand.cards) do
+				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
+				end
+			end
+			for _,v in pairs(G.discard.cards) do
+				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
+				end
+			end
+			for _,v in pairs(G.play.cards) do
+				if tostring(FG.get_card_info(card).key) == "m_fg_steel" then
+					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
+				end
 			end
 		end
-		card.ability.extra.card_mult = FG.cards.steel_mult
+		card.ability.extra.card_mult = FG.cards.steel.mult
 		return {
 			vars = {
 				card.ability.extra.card_gain,
@@ -243,7 +254,7 @@ SMODS.Enhancement{
 		}
 	end,
 	calculate = function (self, card, context)
-		card.ability.h_x_mult = FG.cards.steel_mult
+		card.ability.h_x_mult = FG.cards.steel.mult
 	end
 }
 

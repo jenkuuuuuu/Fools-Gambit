@@ -28,7 +28,7 @@ return {
                 name = "Steel? Card",
                 text = {
                     "Gains {C:white,X:red}X#1#{} mult for every",
-                    "steel card {C:attention}in deck{}",
+                    "steel card in {C:attention}full deck{}",
                     "Triggers while this card is",
                     "held in hand.",
                     "{C:inactive}(Currently {C:white,X:red}X#2#{C:inactive} mult)"
