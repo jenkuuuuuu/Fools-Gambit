@@ -1,4 +1,4 @@
-FG.enhancement_equivalents = {
+FG.ALTS.enhancement_equivalents = {
 	c_base = "c_base",
 	m_bonus = "m_fg_bonus",
 	m_mult = "m_fg_mult",
@@ -7,7 +7,7 @@ FG.enhancement_equivalents = {
 	m_lucky = "m_fg_lucky",
 	m_gold = "m_fg_gold"
 }
-FG.cards = {
+FG.cards = { -- Stores global card info.
 	steel = {
 		mult = 1
 	},
@@ -114,7 +114,7 @@ SMODS.Enhancement{
 		if context.before and not context.repetition and not context.individual then
 			card.ability.bonus = 0
 			for _,v in pairs(G.play.cards) do
-				if FG.get_card_info(v).key == "m_fg_glass" then
+				if FG.FUNCS.get_card_info(v).key == "m_fg_glass" then
 					card.ability.x_mult = card.ability.x_mult + 1
 				end
 			end
@@ -144,10 +144,10 @@ local stone = {
 			for k,v in pairs(G.hand.cards) do
 				local card = v
 				local lock = false
-				if FG.get_card_info(card).key == "m_fg_stone" then lock = card.ability.extra.lock end -- Find stone card in hand, check if it is locked.
+				if FG.FUNCS.get_card_info(card).key == "m_fg_stone" then lock = card.ability.extra.lock end -- Find stone card in hand, check if it is locked.
 				c = c + 1
 				--print("c="..c)
-				if FG.get_card_info(v).key == "m_fg_stone" and not lock then -- If not locked, convert left and right card. Otherwise do nothing.
+				if FG.FUNCS.get_card_info(v).key == "m_fg_stone" and not lock then -- If not locked, convert left and right card. Otherwise do nothing.
 					--print("Valid card found")
 					if c > 1 then -- If not leftmost card
 						--print("stone left")
@@ -225,22 +225,22 @@ SMODS.Enhancement{
 			FG.cards.steel.mult = 1
 			card.ability.extra.card_mult = FG.cards.steel.mult
 			for _,v in pairs(G.deck.cards) do
-				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
+				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end
 			for _,v in pairs(G.hand.cards) do
-				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
+				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end
 			for _,v in pairs(G.discard.cards) do
-				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
+				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end
 			for _,v in pairs(G.play.cards) do
-				if tostring(FG.get_card_info(v).key) == "m_fg_steel" then
+				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
 					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
 				end
 			end

@@ -1,4 +1,4 @@
-FG.edition_equivalents = {
+FG.ALTS.edition_equivalents = {
     meta = {},
 	e_polychrome = "e_fg_polished",
 	e_negative = "e_negative",

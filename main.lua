@@ -1,4 +1,7 @@
-FG = {}
+FG = {
+	ALTS = {},		-- Stores all alternating tables.
+	FUNCS = {} 		-- Stores all funtions used in the mod, be it the API or not.
+}
 FG.config = SMODS.current_mod.config
 
 FG.config.version = SMODS.current_mod.version
@@ -37,7 +40,7 @@ for k, v in pairs(mod_contents) do -- Load this mod's files
 end
 
 -- Pool flags
---G.GAME.pool_flags.FG_alternate_spawn = false
+--G.GAME.pool_flags.FG.ALTSernate_spawn = false
 
 
 

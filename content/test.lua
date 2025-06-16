@@ -10,10 +10,10 @@ function FG.test.toggle_unchangeable()
         return "no_card_selected"
     end
     local target = G.jokers.highlighted[1]
-    if not FG.get_card_info(target).unchangeable then
+    if not FG.FUNCS.get_card_info(target).unchangeable then
         target.ability.fg_unchangeable = true
         return "enabled"
-    elseif FG.get_card_info(target).unchangeable then
+    elseif FG.FUNCS.get_card_info(target).unchangeable then
         target.ability.fg_unchangeable = nil
         return "disabled"
     end

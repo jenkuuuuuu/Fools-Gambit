@@ -19,7 +19,7 @@ SMODS.Atlas {
 	py = 95
 }
 -- All joker equivalents. Format is: original <> alternate
-FG.joker_equivalents = {
+FG.ALTS.joker_equivalents = {
 	meta = {
 		set = "jokers"
 	},
@@ -81,10 +81,10 @@ SMODS.Joker {
 	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self and FG.config.extra_jokers then
-			G.GAME.pool_flags.FG_alternate_spawn = true
+			G.GAME.pool_flags.FG.ALTSernate_spawn = true
 			for k, v in pairs(G.P_CENTERS) do
 				if string.find(k, '^j_') and not string.find(k, "_fg_") then
-					G.P_CENTERS[k]['no_pool_flag'] = 'FG_alternate_spawn'
+					G.P_CENTERS[k]['no_pool_flag'] = 'FG.ALTSernate_spawn'
 				end
 			end
 		end
@@ -102,7 +102,7 @@ SMODS.Joker {
 	cost = 8,
 	calculate = function(self, card, context)
 		if context.selling_self and FG.config.extra_jokers then
-			G.GAME.pool_flags.FG_alternate_spawn = false
+			G.GAME.pool_flags.FG.ALTSernate_spawn = false
 		end
 	end
 }
@@ -112,7 +112,7 @@ SMODS.Joker {
 	config = { extra = {} },
 	rarity = 3,
 	atlas = 'newjokers',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 6, y = 0 },
 	cost = 8,
 	eternal_compat = false,
@@ -123,8 +123,8 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-						if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "v" then
-							FG.alternate_card(currentCard,FG.joker_equivalents)
+						if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "v" then
+							FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
 							currentCard:start_dissolve(nil, false, 0, true)
 						end
 					end
@@ -140,7 +140,7 @@ SMODS.Joker {
 	config = { extra = {} },
 	rarity = 2,
 	atlas = 'newjokers',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 6, y = 0 },
 	cost = 4,
 	eternal_compat = false,
@@ -151,8 +151,8 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-						if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" then
-							FG.alternate_card(currentCard,FG.joker_equivalents)
+						if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" then
+							FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
 							currentCard:start_dissolve(nil, false, 0, true)
 						end
 					end
@@ -179,7 +179,7 @@ SMODS.Joker {
 					sendInfoMessage("Should be changing if i did it right", "MyInfoLogger")
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-						FG.flip_editions(currentCard)
+						FG.FUNCS.flip_editions(currentCard)
 						-- if wanting to add an edition to cards without one just add it as an else to the g.joker.cards[i].edition
 					end
 					return true
@@ -202,7 +202,7 @@ SMODS.Joker {
 	atlas = 'newjokers',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-	no_pool_flag = 'FG_alternate_spawn',
+	no_pool_flag = 'FG.ALTSernate_spawn',
 	calculate = function(self, card, context)
 		if context.buying_card then
 			card.ability.extra.item_amount2 = (card.ability.extra.item_amount2 + context.card.cost)
@@ -244,7 +244,7 @@ SMODS.Joker {
 	atlas = 'newjokers',
 	pos = { x = 0, y = 0 },
 	cost = 6,
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	calculate = function(self, card, context)
 		if G.jokers then
 			if context.buying_card then
@@ -277,7 +277,7 @@ SMODS.Joker {
 	atlas = 'newjokers',
 	pos = { x = 1, y = 0 },
 	cost = 7,
-	no_pool_flag = 'FG_alternate_spawn',
+	no_pool_flag = 'FG.ALTSernate_spawn',
 	calculate = function(self, card, context)
 		if context.skip_blind then
 			for i = 1, #G.consumeables.cards do
@@ -306,7 +306,7 @@ SMODS.Joker {
 	key = 'delinquentalt',
 	rarity = 2,
 	atlas = 'newjokers',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 1, y = 0 },
 	cost = 8,
 	calculate = function(self, card, context)
@@ -438,7 +438,7 @@ SMODS.Joker {
 	atlas = 'newjokers',
 	pos = { x = 4, y = 0 }, -- read above
 	cost = 5,
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	config = { extra = { amount = 2 } },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.amount } }
@@ -487,7 +487,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 0, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -507,7 +507,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 6, y = 1 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
@@ -540,7 +540,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 7, y = 1 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
@@ -573,7 +573,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 8, y = 1 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
@@ -606,7 +606,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 0,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 9, y = 1 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
@@ -641,7 +641,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 2, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -665,7 +665,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 3, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -689,7 +689,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 4, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -713,7 +713,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 5, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -737,7 +737,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 6, y = 0 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -761,7 +761,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 0, y = 14 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -785,7 +785,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 1, y = 14 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -809,7 +809,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 2, y = 14 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -833,7 +833,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 3, y = 14 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -857,7 +857,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 4, y = 14 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -881,7 +881,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 5, y = 5 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -934,7 +934,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 1, y = 2 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -963,7 +963,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 2, y = 2 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1187,7 +1187,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 1, y = 5 },
 	config = { extra = { retriggers = 1 } },
 	loc_vars = function(self, info_queue, card)
@@ -1351,7 +1351,7 @@ SMODS.Joker {
 	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 0, y = 10 },
 	config = { extra = { sell_value = 50, hands = -1, discards = -1 } },
 	loc_vars = function(self, info_queue, card)
@@ -1382,7 +1382,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 5, y = 4 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1409,7 +1409,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 6, y = 4 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1436,7 +1436,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 7, y = 4 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1463,7 +1463,7 @@ SMODS.Joker {
 	end,
 	rarity = 1,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 8, y = 4 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1490,7 +1490,7 @@ SMODS.Joker {
 	end,
 	rarity = 3,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 9, y = 7 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1523,7 +1523,7 @@ SMODS.Joker {
 	end,
 	rarity = 3,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 0, y = 8 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1537,7 +1537,7 @@ SMODS.Joker {
 				end
 				if not extrasuit then
 					card.ability.extra.Xmult = card.ability.extra.Xmult_gain + card.ability.extra.Xmult
-					FG.card_eval_status_text{
+					FG.FUNCS.card_eval_status_text{
 						card = card,
 						message = "Upgrade!",
 						mode = "literal"
@@ -1564,7 +1564,7 @@ SMODS.Joker {
 	end,
 	rarity = 3,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 1, y = 8 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1597,7 +1597,7 @@ SMODS.Joker {
 	end,
 	rarity = 3,
 	atlas = 'jokers_alt',
-	yes_pool_flag = 'FG_alternate_spawn',
+	yes_pool_flag = 'FG.ALTSernate_spawn',
 	pos = { x = 2, y = 8 },
 	cost = 2,
 	calculate = function(self, card, context)
@@ -1717,7 +1717,7 @@ if FG.config.debug_mode then
 			if context.ending_shop and G.consumeables.cards[1] then
 				local target_card_key = G.consumeables.cards[1].config.center.key
 				if target_card_key ~= nil then
-					FG.card_eval_status_text{
+					FG.FUNCS.card_eval_status_text{
 						card = card,
 						message = "k_duplicated_ex",
 						mode = "localize",

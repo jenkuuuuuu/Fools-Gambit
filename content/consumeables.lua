@@ -30,16 +30,16 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card)
         if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
-        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v"
-        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable then
-                info_queue[#info_queue+1] = G.P_CENTERS[FG.get_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents)]
+        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "v"
+        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents)]
         end
     end,
     can_use = function(self, card)
         if #G.jokers.highlighted == 1
-        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" 
-        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable then
-            print(FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents))
+        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "v" 
+        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable then
+            --print(FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents))
             return true
         end
     end,
@@ -49,7 +49,7 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                    FG.alternate_card(G.jokers.highlighted[1],FG.joker_equivalents)
+                    FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
                 return true
             end
         }))
@@ -71,17 +71,17 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card)
         if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
-        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" 
-        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable
+        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "k" 
+        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable
         then
-            info_queue[#info_queue+1] = G.P_CENTERS[FG.get_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents)]
+            info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents)]
         end
     end,
     can_use = function(self, card)
         if #G.jokers.highlighted == 1
-        and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" 
-        and not FG.get_card_info(G.jokers.highlighted[1]).unchangeable then
-            print(FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents))
+        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "k" 
+        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable then
+            --print(FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents))
             return true
         end
     end,
@@ -91,7 +91,7 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                FG.alternate_card(G.jokers.highlighted[1],FG.joker_equivalents)
+                FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
                 return true
             end
         }))
@@ -136,9 +136,9 @@ SMODS.Consumable{
             trigger = 'immediate',
             func = function()
                     for k,v in pairs(G.hand.highlighted) do
-                        -- FG.flip_editions(G.hand.highlighted[i]) -- change to alternate editions when theyre implemented
-                        FG.alternate_enhancement(v)
-                        FG.alternate_edition(v)
+                        -- FG.FUNCS.flip_editions(G.hand.highlighted[i]) -- change to alternate editions when theyre implemented
+                        FG.FUNCS.alternate_enhancement(v)
+                        FG.FUNCS.alternate_edition(v)
                     end
                 return true
             end
@@ -182,8 +182,8 @@ SMODS.Consumable{
             func = function()
                 for i in ipairs(G.jokers.cards) do
                     local currentCard = G.jokers.cards[i]
-                    if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
-                        FG.alternate_card(currentCard,FG.joker_equivalents)
+                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
+                        FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
 
                     end
                 end
@@ -215,8 +215,8 @@ SMODS.Consumable{
             func = function()
                 for i in ipairs(G.jokers.cards) do
                     local currentCard = G.jokers.cards[i]
-                    if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 2 then
-                        FG.alternate_card(currentCard,FG.joker_equivalents)
+                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 2 then
+                        FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
                     end
                 end
                 return true
@@ -247,8 +247,8 @@ SMODS.Consumable{
             func = function()
                 for i in ipairs(G.jokers.cards) do
                     local currentCard = G.jokers.cards[i]
-                    if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 3 then
-                        FG.alternate_card(currentCard,FG.joker_equivalents)
+                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 3 then
+                        FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
                     end
                 end
                 return true

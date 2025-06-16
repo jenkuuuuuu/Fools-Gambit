@@ -1,4 +1,4 @@
-FG.tarot_equivalents = {
+FG.ALTS.tarot_equivalents = {
     c_chariot = "c_fg_chariot",
     c_death = "c_fg_death",
     c_devil = "c_fg_devil",
@@ -51,7 +51,7 @@ local function tarot_convert (target_enhancement)
             trigger = "after",
             delay = 0.2,
             func = function()
-                local new_card = FG.duplicate_playing_card(v)
+                local new_card = FG.FUNCS.duplicate_playing_card(v)
                 cards[#cards+1] = new_card
                 new_card:set_ability(G.P_CENTERS.c_base)
                 v:set_ability(target_enhancement)
@@ -215,7 +215,7 @@ SMODS.Consumable{
                 key = "c_black_hole"
             }
         else
-            FG.card_eval_status_text{
+            FG.FUNCS.card_eval_status_text{
                 card = card,
                 message = "Nope!",
                 mode = "literal"
@@ -289,7 +289,7 @@ SMODS.Consumable{
                 key = "c_soul"
             }
         else
-            FG.card_eval_status_text{
+            FG.FUNCS.card_eval_status_text{
                 card = card,
                 message = "Nope!",
                 mode = "literal"
