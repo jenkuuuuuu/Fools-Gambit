@@ -32,6 +32,8 @@ local mod_contents = {
 	"test",
 	"special_editions/mila",
 	"tarots",
+	"spectral",
+	--"seals", -- WIP, SMODS is acting rather silly now
 	"misc"
 }
 

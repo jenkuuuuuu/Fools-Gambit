@@ -9,11 +9,11 @@ function FG.FUNCS.is_alternate(card,table)
     return "no"
 end
 
---- Gets the key/value pair associated with the passing data.
+--- Gets the key/value pair associated with the passing data. Returns `nil` if there is no alternate
 ---@param key string The provided card key.
 ---@param table table The reference table to look up.
 ---@param passing? string Key or value, and returns the other.
----@return string 
+---@return string|boolean
 function FG.FUNCS.get_alternate(key,table,passing)
 	local _passing = passing or FG.FUNCS.is_alternate(key,table)
 	if _passing == "k" then -- passing key, returning value
@@ -24,7 +24,7 @@ function FG.FUNCS.get_alternate(key,table,passing)
 		for k,v in pairs(table) do
 			if v == key then return k end
 		end
-	end
+	else return false end
 end
 
 -- Alternates between this card and the associated alternative card.
@@ -36,7 +36,7 @@ function FG.FUNCS.alternate_card(card,ref)
 	local key = FG.FUNCS.get_card_info(card).key
 	local convert_to = FG.FUNCS.get_alternate(key,ref,FG.FUNCS.is_alternate(key,ref))
 	local new_card = SMODS.add_card({
-		set = 'Joker',
+		--set = 'Joker',
 		skip_materialize = true,
 		key = tostring(convert_to),
 	})

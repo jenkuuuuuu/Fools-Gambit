@@ -1789,14 +1789,8 @@ if FG.config.debug_mode then
 			if card.ability.extra.repetitions == 0 then
 				card.ability.extra.repetitions = 1
 			end
-			local increase
 			if context.end_of_round and not context.repetition and not context.individual and G.GAME.blind.boss then
-				if increase == true then
-					card.ability.extra.repetitions = card.ability.extra.repetitions + 1
-					increase = false
-				else
-					increase = true
-				end
+				card.ability.extra.repetitions = card.ability.extra.repetitions + 1
 			end
 			if context.retrigger_joker_check and not context.retrigger_joker and card ~= self then
 				return { 

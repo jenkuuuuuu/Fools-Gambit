@@ -205,7 +205,7 @@ SMODS.Enhancement{
 			stone.triggered = false 
 			card.ability.extra.lock = false
 		end
-		print(stone.triggered)
+		--print(stone.triggered)
 	end
 }
 

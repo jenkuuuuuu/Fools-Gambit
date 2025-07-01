@@ -1,12 +1,12 @@
 SMODS.Atlas {
-	key = "abberations",
-	path = "abberationcards.png",
+	key = "aberrations",
+	path = "aberrationcards.png",
 	px = 71,
 	py = 95
 }
 
 SMODS.ConsumableType{
-    key = "abberation",
+    key = "aberration",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
     loc_txt ={
@@ -17,8 +17,8 @@ SMODS.ConsumableType{
 
 SMODS.Consumable{
     key = "tonal",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 7, y = 0 },
     loc_txt ={
         name = "Tonal",
@@ -58,8 +58,8 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "atonal",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 5, y = 0 },
     loc_txt ={
         name = "Atonal",
@@ -100,8 +100,8 @@ SMODS.Consumable{
 if FG.config.debug_mode then
 SMODS.Consumable{
     key = "accelerando",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 6, y = 0 },
     loc_txt ={
         name = "Accelerando",
@@ -114,10 +114,7 @@ SMODS.Consumable{
     },
 
     can_use = function(self, card)
-        if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
-            any_state then
-            if #G.hand.highlighted > 0 and #G.hand.highlighted <= 3 then return true else return false end
-        end
+        if #G.hand.highlighted > 0 and #G.hand.highlighted <= 3 then return true else return false end
     end,
     use = function(card, area, copier)
         local pitch = 0.9
@@ -162,8 +159,8 @@ end
 
 SMODS.Consumable{
     key = "treble",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 2, y = 0 },
     loc_txt ={
         name = "Treble",
@@ -195,8 +192,8 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "bass",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 0, y = 0 },
     loc_txt ={
         name = "Bass",
@@ -227,8 +224,8 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "alto",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 1, y = 0 },
     loc_txt ={
         name = "Alto",
@@ -259,8 +256,8 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "stake",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 4, y = 0 },
     loc_txt ={
         name = "Stake",
@@ -277,7 +274,7 @@ SMODS.Consumable{
         }
     },
     can_use = function(self, card)
-        if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+        if #G.consumeables.cards < G.consumeables.config.card_limit then
             return true
         end
     end,
@@ -285,14 +282,14 @@ SMODS.Consumable{
          return {vars = {card.ability.extra.cards}}
 	end,
     use = function(card, area, copier)
-			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+			if #G.consumeables.cards < G.consumeables.config.card_limit then
 			for i = 1, math.min(card.config.extra.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
 			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 			G.E_MANAGER:add_event(Event({
                 trigger = 'before',
                 delay = 0.0,
                 func = (function()
-                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        local card = create_card('aberration',G.consumeables, nil, nil, nil, nil, nil, '8ba')
                         card:add_to_deck()
                         G.consumeables:emplace(card)
 					    G.GAME.consumeable_buffer = 0
@@ -306,8 +303,8 @@ end
 
 SMODS.Consumable{
     key = "fildivoce",
-    set = "abberation",
-    atlas = "abberations",
+    set = "aberration",
+    atlas = "aberrations",
 	pos = { x = 3, y = 0 },
     loc_txt ={
         name = "Fil Di Voce",

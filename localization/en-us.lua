@@ -1,6 +1,6 @@
 return {
     descriptions = {
-        fg_abberation={
+        fg_aberration={
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
@@ -73,7 +73,7 @@ return {
             m_fg_stone = {
                 name = "Stone? Card",
                 text = {
-                    "When held in hand, self destruct and ",
+                    "When held in hand, destroy this card and ",
                     "enhance adjacent non-enhanced cards to",
                     "{C:attention}Stone? Cards{} with {C:chips}15 more chips.",
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} extra chips)"
@@ -137,14 +137,14 @@ return {
                 name = 'Concert Ticket',
                 text = {
                      "Every {C:money}$#1#{} spent {C:inactive}(#2#){} creates",
-                     "an {C:purple}Abberation{} card",
+                     "an {C:purple}aberration{} card",
 					 "{C:inactive}(Must have room)",
                 }
             },
 			 j_fg_concertalt = {
                 name = 'Concert Ticket?',
                 text = {
-                     "Creates an {C:purple}Abberation{} card",
+                     "Creates an {C:purple}aberration{} card",
                      "when redeeming a {C:attention}Voucher{}",
 					 "{C:inactive}(Must have room)",
                 }
@@ -168,7 +168,7 @@ return {
 			j_fg_conductor={
                 name="Conductor",
                 text={
-                    "Creates #1# {C:purple}Abberation{} card if",
+                    "Creates #1# {C:purple}aberration{} card if",
                     "played poker hand contains only",
                     "{C:attention}Face{} cards",
                     "{C:inactive}(Must have room)",
@@ -178,7 +178,7 @@ return {
                 name="Conductor?",
                 text={
                     "Creates #1# {C:attention}Face{} cards",
-                    "every {C:purple}Abberation{} card used",
+                    "every {C:purple}aberration{} card used",
                 },
             },
             -- Normal jokers
@@ -504,7 +504,7 @@ return {
                 },
             },
             j_fg_jogla_alt = {
-                name = "Jogla",
+                name = "Joglalt",
                 text = {
                     "Increases hand size by {C:attention}#1#{} when",
                     "{C:attention}Boos blind{} defeated",
@@ -709,7 +709,7 @@ return {
         -- See aux_functions > FG.FUNCS.card_eval_status_text for more info
         FG = {
             chipMult="Multiplied!",
-			plus_abberation="+1 Abberation",
+			plus_aberration="+1 aberration",
 			replaced="Replaced!",
 			replenished="Replenished!",
 			card_added="+1 Card",
@@ -722,7 +722,7 @@ return {
         collabs={},
         dictionary={
             k_chipMult="Multiplied!",
-			k_plus_abberation="+1 Aberration",
+			k_plus_aberration="+1 Aberration",
 			k_replaced="Replaced!",
 			k_replenished="Replenished!",
 			k_card_added="+1 Card",
