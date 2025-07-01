@@ -42,7 +42,7 @@ for k, v in pairs(mod_contents) do -- Load this mod's files
 end
 
 -- Pool flags
---G.GAME.pool_flags.FG.ALTSernate_spawn = false
+--G.GAME.pool_flags.alternate_spawn = false
 
 
 
