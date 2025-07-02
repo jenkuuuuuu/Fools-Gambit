@@ -268,7 +268,7 @@ SMODS.Consumable{
     },
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
-            if (v.config.center.yes_pool_flag == "alternate") then 
+            if (v.config.center.yes_pool_flag == "alternate_spawn") then 
                 return true
             end
         end
@@ -278,7 +278,7 @@ SMODS.Consumable{
 	end,
     use = function(card, area, copier)
         for i = 1, #G.jokers.cards do
-            if (G.jokers.cards[i].config.center.yes_pool_flag == "alternate") then
+            if (G.jokers.cards[i].config.center.yes_pool_flag == "alternate_spawn") then
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 play_sound('timpani')
                 G.jokers.cards[i]:juice_up(0.3, 0.5)
