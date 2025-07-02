@@ -33,8 +33,8 @@ local function tarot_convert (target_enhancement)
     local cards = {}
     play_sound("tarot1",1)
     local pitch = 0.9
-    if next(SMODS.get_enhancements(v)) then
-        for _,v in ipairs(G.hand.highlighted) do -- Flip cards
+    for _,v in ipairs(G.hand.highlighted) do -- Flip cards
+        if next(SMODS.get_enhancements(v)) then
             cards[#cards+1] = v
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
@@ -47,7 +47,9 @@ local function tarot_convert (target_enhancement)
                 end
             }))
         end
-        for _,v in ipairs(G.hand.highlighted) do -- Duplicate and add enhancement
+    end
+    for _,v in ipairs(G.hand.highlighted) do -- Duplicate and add enhancement
+        if next(SMODS.get_enhancements(v)) then
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.2,
@@ -60,7 +62,9 @@ local function tarot_convert (target_enhancement)
                 end
             }))
         end
-        for _,v in ipairs(cards) do -- Flip cards
+    end
+    for _,v in ipairs(cards) do -- Flip cards
+        if next(SMODS.get_enhancements(v)) then
             G.E_MANAGER:add_event(Event({
                 trigger = "after",
                 delay = 0.2,
@@ -321,11 +325,10 @@ SMODS.Consumable{
     can_use = function (self, card)
         if #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.convert then
             for _,v in ipairs(G.hand.highlighted) do
-                if not next(SMODS.get_enhancements(v)) then
-                    return false
+                if next(SMODS.get_enhancements(v)) then
+                    return true
                 end
             end
-            return true
         else return false end
     end,
     use = function (self, card, area, copier)
@@ -354,11 +357,10 @@ SMODS.Consumable{
     can_use = function (self, card)
         if #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.convert then
             for _,v in ipairs(G.hand.highlighted) do
-                if not next(SMODS.get_enhancements(v)) then
-                    return false
+                if next(SMODS.get_enhancements(v)) then
+                    return true
                 end
             end
-            return true
         else return false end
     end,
     use = function (self, card, area, copier)
@@ -387,11 +389,10 @@ SMODS.Consumable{
     can_use = function (self, card)
         if #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.convert then
             for _,v in ipairs(G.hand.highlighted) do
-                if not next(SMODS.get_enhancements(v)) then
-                    return false
+                if next(SMODS.get_enhancements(v)) then
+                    return true
                 end
             end
-            return true
         else return false end
     end,
     use = function (self, card, area, copier)
