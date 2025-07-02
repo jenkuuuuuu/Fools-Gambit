@@ -12,7 +12,7 @@ SMODS.Consumable{
     key = "soul",
     atlas = "Consumeables",
     pos = {x = 2, y = 2},
-    soul_pos = {x = 2, y = 2},
+    soul_pos = {x = 6, y = 5},
     loc_txt = {
         name = "The Soul?",
         text = {

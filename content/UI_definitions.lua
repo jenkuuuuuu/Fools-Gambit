@@ -28,11 +28,9 @@ SMODS.current_mod.config_tab = function()
 					},
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {
 						{n = G.UIT.T, config = {text = "Hover to vew more info", align = "tm", colour = G.C.GREY, scale = .2, minw = 2, minh = 6, padding = 0.4, tooltip = {text = {
-							"Fool's Gambit adds several new jokers without vanilla counterparts",
-							"Toggle this option to allow/disallow them to appear in your run",
-							"Collective jokers are not affected by this setting",
-							"",
-							"WARNING: Toggling this setting and continuing a run can crash your game"}
+							"Prevents jokers added by Fool's Gambit ",
+							"that don't have a vanilla counterpart",
+							"from spawning"}
 						}}},
 					}},
 				}}

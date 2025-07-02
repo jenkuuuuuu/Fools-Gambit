@@ -9,10 +9,17 @@ SMODS.ConsumableType{
     key = "aberration",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
-    loc_txt ={
+    loc_txt = {
         name = "Aberration Cards",
         collection = "Aberration Cards",
+        undiscovered = {
+            name = "???",
+            text = {
+                "Use this card once to find out",
+                "what it does"
+            }
         }
+    }
 }
 
 SMODS.Consumable{
@@ -20,14 +27,6 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 7, y = 0 },
-    loc_txt ={
-        name = "Tonal",
-        text = {
-            "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
-            "to their {C:red}Original{} form",
-            "{C:inactive}Placeholder Sprite{}"
-        }
-    },
     loc_vars = function (self, info_queue, card)
         if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
         and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "v"
@@ -61,14 +60,6 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 5, y = 0 },
-    loc_txt ={
-        name = "Atonal",
-        text = {
-            "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
-            "to their {C:purple}Alternate{} form",
-            "{C:inactive}Placeholder Sprite{}"
-        }
-    },
     loc_vars = function (self, info_queue, card)
         if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
         and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "k" 
@@ -103,16 +94,6 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 6, y = 0 },
-    loc_txt ={
-        name = "Accelerando",
-        text = {
-            "Changes {C:attention}3{} selected cards",
-            "and turns their editions, seals and,",
-            "enhancements to their {C:purple}Alternate{} form",
-            "{C:inactive}Placeholder Sprite{}"
-        }
-    },
-
     can_use = function(self, card)
         if #G.hand.highlighted > 0 and #G.hand.highlighted <= 3 then return true else return false end
     end,
@@ -162,13 +143,6 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 2, y = 0 },
-    loc_txt ={
-        name = "Treble",
-        text = {
-            "Turns all Common Jokers in hand",
-            "into their {C:purple}Alternate{} form"
-        }
-    },
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
             if v.config.center.rarity == 1 then return true end
@@ -195,13 +169,6 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 0, y = 0 },
-    loc_txt ={
-        name = "Bass",
-        text = {
-            "Turns all Uncommon Jokers in hand",
-            "into their {C:purple}Alternate{} form"
-        }
-    },
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
             if v.config.center.rarity == 2 then return true end
@@ -227,13 +194,6 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 1, y = 0 },
-    loc_txt ={
-        name = "Alto",
-        text = {
-            "Turns all Rare Jokers in hand",
-            "into their {C:purple}Alternate{} form"
-        }
-    },
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
             if v.config.center.rarity == 3 then return true end
@@ -259,14 +219,6 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 4, y = 0 },
-    loc_txt ={
-        name = "Stake",
-        text = {
-            "Creates up to {C:attention}#1#",
-            "random {C:purple}Aberration{} cards",
-            "{C:inactive}(Must have room)",
-        }
-    },
 	 config = {
         extra = {
             cards = 2
@@ -302,17 +254,10 @@ end
 }
 
 SMODS.Consumable{
-    key = "fildivoce",
+    key = "fil_di_voce",
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 3, y = 0 },
-    loc_txt ={
-        name = "Fil Di Voce",
-        text = {
-             "Gives {C:money}$#1#{} for every",
-             "owned {C:purple}Alternate{} Joker",
-        }
-    },
 	 config = {
         extra = {
             dollars = 5
@@ -332,13 +277,13 @@ SMODS.Consumable{
     use = function(card, area, copier)
         for i = 1, #G.jokers.cards do
             if (G.jokers.cards[i].config.center.yes_pool_flag == "alternate") then
-                    G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-                    play_sound('timpani')
-                    G.jokers.cards[i]:juice_up(0.3, 0.5)
-                    ease_dollars(card.config.extra.dollars, true)
-                    return true end }))
-                    delay(0.2)
+                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                play_sound('timpani')
+                G.jokers.cards[i]:juice_up(0.3, 0.5)
+                ease_dollars(card.config.extra.dollars, true)
+                return true end }))
+                delay(0.2)
             end
         end
-end
+    end
 }

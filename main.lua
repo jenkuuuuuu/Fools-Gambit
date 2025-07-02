@@ -9,6 +9,14 @@ FG.config.version = SMODS.current_mod.version
 SMODS.current_mod.optional_features = { retrigger_joker = true }
 
 SMODS.Atlas{
+	key = "mod_icon",
+	path = "modicon.png",
+	px = 34,
+	py = 34
+}
+
+
+SMODS.Atlas{
 	key = 'Consumeables',
 	path = 'Tarots.png',
 	px = 71,

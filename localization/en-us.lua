@@ -1,13 +1,65 @@
 return {
     descriptions = {
-        fg_aberration={
+        aberration={
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
                     "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
                     "to their {C:red}Original{} form",
                     "{C:inactive}Placeholder Sprite{}",
-                    "TEST!!!!!"
+                }
+            },
+            c_fg_atonal = {
+                name = "Atonal",
+                text = {
+                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+                    "to their {C:purple}Alternate{} form",
+                    "{C:inactive}Placeholder Sprite{}"
+                }
+            },
+            c_fg_accelerando = {
+                name = "Accelerando",
+                text = {
+                    "Changes {C:attention}3{} selected cards",
+                    "and turns their editions, seals and,",
+                    "enhancements to their {C:purple}Alternate{} form",
+                    "{C:inactive}Placeholder Sprite{}"
+                }
+            },
+            c_fg_treble = {
+                name = "Treble",
+                text = {
+                    "Turns all Common Jokers in hand",
+                    "into their {C:purple}Alternate{} form"
+                }
+            },
+            c_fg_bass = {
+                name = "Bass",
+                text = {
+                    "Turns all Uncommon Jokers in hand",
+                    "into their {C:purple}Alternate{} form"
+                }
+            },
+            c_fg_alto = {
+                name = "Alto",
+                text = {
+                    "Turns all Rare Jokers in hand",
+                    "into their {C:purple}Alternate{} form"
+                }
+            },
+            c_fg_stake = {
+                name = "Stake",
+                text = {
+                    "Creates up to {C:attention}#1#",
+                    "random {C:purple}Aberration{} cards",
+                    "{C:inactive}(Must have room)",
+                }
+            },
+            c_fg_fil_di_voce = {
+                name = "Fil Di Voce",
+                text = {
+                    "Gives {C:money}$#1#{} for every",
+                    "owned {C:purple}Alternate{} Joker",
                 }
             }
         },
