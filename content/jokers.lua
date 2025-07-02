@@ -1577,7 +1577,7 @@ SMODS.Joker {
 			if card.ability.extra.Xmult ~= 1 then
 				return {
 					Xmult_mod = card.ability.extra.Xmult,
-					message = 'X' .. card.ability.extra.Xmult
+					message = 'X' .. card.ability.extra.Xmult .. ' Mult'
 				}
 			end
 		end
@@ -1611,7 +1611,7 @@ SMODS.Joker {
 		if context.joker_main then
 			return {
 				chip_mod = card.ability.extra.chips,
-				message = '+' .. card.ability.extra.chips
+				message = '+' .. card.ability.extra.chips .. ' Chips'
 			}
 		end
 	end

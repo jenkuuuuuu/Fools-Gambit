@@ -33,43 +33,45 @@ local function tarot_convert (target_enhancement)
     local cards = {}
     play_sound("tarot1",1)
     local pitch = 0.9
-    for _,v in ipairs(G.hand.highlighted) do -- Flip cards
-        cards[#cards+1] = v
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.2,
-            func = function()
-                v:flip()
-                play_sound("tarot2",pitch)
-                pitch = pitch + 0.2
-                return true
-            end
-        }))
-    end
-    for _,v in ipairs(G.hand.highlighted) do -- Duplicate and add enhancement
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.2,
-            func = function()
-                local new_card = FG.FUNCS.duplicate_playing_card(v)
-                cards[#cards+1] = new_card
-                new_card:set_ability(G.P_CENTERS.c_base)
-                v:set_ability(target_enhancement)
-                return true
-            end
-        }))
-    end
-    for _,v in ipairs(cards) do -- Flip cards
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.2,
-            func = function()
-                v:flip()
-                play_sound("tarot2",pitch)
-                pitch = pitch + 0.2
-                return true
-            end
-        }))
+    if next(SMODS.get_enhancements(v)) then
+        for _,v in ipairs(G.hand.highlighted) do -- Flip cards
+            cards[#cards+1] = v
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.2,
+                func = function()
+                    v:flip()
+                    play_sound("tarot2",pitch)
+                    pitch = pitch + 0.2
+                    return true
+                end
+            }))
+        end
+        for _,v in ipairs(G.hand.highlighted) do -- Duplicate and add enhancement
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.2,
+                func = function()
+                    local new_card = FG.FUNCS.duplicate_playing_card(v)
+                    cards[#cards+1] = new_card
+                    new_card:set_ability(G.P_CENTERS.c_base)
+                    v:set_ability(target_enhancement)
+                    return true
+                end
+            }))
+        end
+        for _,v in ipairs(cards) do -- Flip cards
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.2,
+                func = function()
+                    v:flip()
+                    play_sound("tarot2",pitch)
+                    pitch = pitch + 0.2
+                    return true
+                end
+            }))
+        end
     end
 end
 
