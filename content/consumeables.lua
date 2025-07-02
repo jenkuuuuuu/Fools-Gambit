@@ -48,7 +48,8 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                    FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
+                    local c = FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
+                    FG.FUNCS.update_edition(c.original,c.alternate)
                 return true
             end
         }))
@@ -82,7 +83,8 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
+                local c = FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
+                FG.FUNCS.update_edition(c.original,c.alternate)
                 return true
             end
         }))

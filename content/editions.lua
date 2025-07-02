@@ -113,7 +113,7 @@ SMODS.Edition({
         label = "Holographic",
         text = {
             "{C:mult}+#1#{} Mult",
-            "{C:attention}#2#/#3#{} chance to retrigger"
+            "{C:green}#2# in #3#{} chance to retrigger"
         }
     },
     shader = "holo",
@@ -150,7 +150,7 @@ SMODS.Edition({
         label = "Foil",
         text = {
             "{C:mult}+#1#{} Chips",
-            "{C:attention}#2#/#3#{} chance to retrigger"
+            "{C:green}#2# in #3#{} chance to retrigger"
         }
     },
     shader = "foil",
