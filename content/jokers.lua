@@ -1481,6 +1481,34 @@ SMODS.Joker {
 		end
 	end
 }
+-- Hanging chad
+--[[
+SMODS.Joker{
+	key = "hanging_chad",
+	atlas = "jokers_alt",
+	pos = { x = 9, y = 6},
+	rarity = 3,
+	calculate = function (self, card, context)
+		if context.main_scoring and context.cardarea == G.play then
+			for i,v in ipairs(G.play.cards) do
+				print("E")
+				--if v.ability.played_this_ante then
+					print("TEST!")
+					--if not FG.FUNCS.get_card_info(v).key == "c_base" then
+						v:set_ability("m_fg_steel")
+					if not FG.FUNCS.get_card_info(v).seal then
+						v.seal = SMODS.poll_seal{
+							guaranteed = true
+						}
+					elseif not FG.FUNCS.get_card_info(v).edition then
+						v:set_edition(poll_edition("mila",1,true,true),true,false)
+					end
+				--end
+			end
+		end
+	end
+}
+]]
 -- Rough Gem
 SMODS.Joker {
 	key = 'gem',

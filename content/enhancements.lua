@@ -95,6 +95,45 @@ SMODS.Enhancement{
 	end
 }
 
+
+SMODS.Enhancement{
+	key = "wild",
+	atlas = "enhanced",
+	pos = { x = 3, y = 1},
+	config = {
+		extra = {
+			chips = 30,
+			mult = 10,
+			xmult = 1.5,
+			dollars = 4
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.chips,
+				card.ability.extra.mult,
+				card.ability.extra.xmult,
+				card.ability.extra.dollars
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		if context.main_scoring and context.cardarea == G.play then
+			local choice = pseudorandom("mila",1,4)
+			if choice == 1 then
+				return {chips = card.ability.extra.chips }
+			elseif choice == 2 then
+				return {mult = card.ability.extra.mult}
+			elseif choice == 3 then
+				return {xmult = card.ability.extra.xmult}
+			elseif choice == 4 then
+				return {dollars = card.ability.extra.dollars}
+			end
+		end
+	end
+}
+
 SMODS.Enhancement{
 	key = "glass",
 	atlas = "enhanced",

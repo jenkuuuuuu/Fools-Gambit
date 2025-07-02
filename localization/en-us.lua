@@ -27,8 +27,8 @@ return {
             m_fg_steel = {
                 name = "Steel? Card",
                 text = {
-                    "Gains {C:white,X:red}X#1#{} mult for every",
-                    "steel card in {C:attention}full deck{}",
+                    "Gains {C:white,X:red}X#1#{} Mult for every",
+                    "{C:attention}steel? card{} in {C:attention}full deck{}",
                     "Triggers while this card is",
                     "held in hand.",
                     "{C:inactive}(Currently {C:white,X:red}X#2#{C:inactive} mult)"
@@ -40,13 +40,13 @@ return {
                     "{C:green}#1# in #2#{} chance",
                     "for {C:chips}+#3#{} Chips",
                     "{C:green}#4# in #5#{} chance",
-                    "to win {C:gold}$#6#"
+                    "for {C:gold}$#6#"
                 }
             },
             m_fg_gold = {
                 name = "Gold? Card",
                 text = {
-                    "Add {C:attention}half{} the money equivalent",
+                    "Adds {C:attention}half{} the money equivalent",
                     "to the cards {C:attention}held in hand{}",
                     "at the {C:attention}end of round{C:inactive} (Rounded up){}",
                     "{C:inactive}(Currently {C:gold}+$#1#{C:inactive})"
@@ -65,9 +65,9 @@ return {
                 name = "Mult? Card",
                 text = {
                     "{C:green}#1# in #2#{} chance",
-                    "for {C:mult}+#3#{} mult",
+                    "for {C:mult}+#3#{} Mult",
                     "{C:green}#4# in #5#{} chance",
-                    "for {C:mult}#6#{} mult",
+                    "for {C:mult}#6#{} Mult",
                 }
             },
             m_fg_stone = {
@@ -75,8 +75,16 @@ return {
                 text = {
                     "When held in hand, destroy this card and ",
                     "enhance adjacent non-enhanced cards to",
-                    "{C:attention}Stone? Cards{} with {C:chips}15 more chips.",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} extra chips)"
+                    "{C:attention}Stone? Cards{} with {C:chips}15 more Chips.",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} extra Chips)"
+                }
+            },
+            m_fg_wild = {
+                name = "Wild? Card",
+                text = {
+                    "When played randomly gives",
+                    "{C:chips}+#1#{} Chips, {C:mult}+#2#{} Mult,",
+                    "{C:white,X:mult}X#3#{} Mult or {C:gold}$#4#{}"
                 }
             }
         },
@@ -442,7 +450,16 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
             },
-			 j_fg_gem={
+            j_fg_hanging_chad={
+                name="Hanging Chad?",
+                text={
+                    "If {C:attention}played cards{} have been already",
+                    "played this {C:attention}ante{}, add random {C:attention}enhancement{}.",
+                    "If already enhanced, add a random {C:attention}seal{.",
+                    "If already have a seal, add a random {C:attention}edition{}"
+                },
+			},
+			j_fg_gem={
                 name="Rough Gem?",
                 text={
                     "If poker hand contains a {C:attention}#1#{}",
