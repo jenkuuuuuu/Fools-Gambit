@@ -1808,7 +1808,6 @@ SMODS.Joker{
 		if not card.ability then card.ability = {} end
 		card.ability.saved_ability = FG.cards.invisible.selected.ability
 		card.ability.saved_key = FG.cards.invisible.selected.config.center.key
-		card.ability.eternal = true
 		--FG.cards.invisible.elegible_jokers = {}
 		--FG.cards.invisible.selected = {}
 	end,
