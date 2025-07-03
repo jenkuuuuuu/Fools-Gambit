@@ -475,6 +475,12 @@ return {
                     "{C:mult}#2#{} hand and {C:mult}#3#{} discard"
                 },
             },
+            j_fg_splash = {
+                name = "Splash?",
+                text = {
+                    "undebuffs {C:attention}scored cards{}",
+                }
+            },
             j_fg_cavendish = {
                 name = "Cavendish?",
                 text = {

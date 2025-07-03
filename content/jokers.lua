@@ -59,6 +59,7 @@ FG.ALTS.joker_equivalents = {
 	j_family = "j_fg_family",
 	j_order = "j_fg_order",
 	j_egg = "j_fg_egg",
+	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
@@ -522,8 +523,10 @@ SMODS.Joker {
 			playingCard = context.other_card
 			if playingCard:is_suit('Diamonds') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
-				return {
-					message = "Increased!"
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
 				}
 			end
 		end
@@ -550,13 +553,16 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
 	end,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
 			playingCard = context.other_card
 			if playingCard:is_suit('Hearts') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
-				return {
-					message = "Increased!"
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
 				}
 			end
 		end
@@ -583,13 +589,16 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
 	end,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
 			playingCard = context.other_card
 			if playingCard:is_suit('Spades') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
-				return {
-					message = "Increased!"
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
 				}
 			end
 		end
@@ -616,13 +625,16 @@ SMODS.Joker {
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.extra.mult_gain, card.ability.extra.currentMult } }
 	end,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
 			playingCard = context.other_card
 			if playingCard:is_suit('Clubs') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
-				return {
-					message = "Increased!"
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
 				}
 			end
 		end
@@ -649,6 +661,7 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 2, y = 0 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
 			if (next(context.poker_hands[card.ability.type])) then
@@ -1222,23 +1235,23 @@ SMODS.Joker {
 		if context.after and not has_fired then
 			local sound_pitch = 0.8
 			for k, v in ipairs(context.scoring_hand) do
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					delay = 0,
-					func = function()
-						if v.base.value == "Ace" or
-							v.base.value == "2" or
-							v.base.value == "3" or
-							v.base.value == "5" or
-							v.base.value == "8" or
-							v.base.value == "King" then
+				if v.base.value == "Ace" or
+				v.base.value == "2" or
+				v.base.value == "3" or
+				v.base.value == "5" or
+				v.base.value == "8" or
+				v.base.value == "King" then
+					G.E_MANAGER:add_event(Event({
+							trigger = 'after',
+						delay = 0,
+						func = function()	
 							v:flip()
 							play_sound("tarot2", sound_pitch)
 							sound_pitch = sound_pitch + 0.1
+							return true
 						end
-						return true
-					end
-				}))
+					}))
+				end
 				G.E_MANAGER:add_event(Event({
 					trigger = 'after',
 					delay = .25,
@@ -1266,23 +1279,23 @@ SMODS.Joker {
 				func = function() return true end
 			}))
 			for _, v in ipairs(context.scoring_hand) do
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					delay = 0.25,
-					func = function()
-						if v.base.value == "Ace" or
-							v.base.value == "2" or
-							v.base.value == "3" or
-							v.base.value == "5" or
-							v.base.value == "8" or
-							v.base.value == "King" then
+				if v.base.value == "Ace" or
+				v.base.value == "2" or
+				v.base.value == "3" or
+				v.base.value == "5" or
+				v.base.value == "8" or
+				v.base.value == "King" then
+					G.E_MANAGER:add_event(Event({
+						trigger = 'after',
+						delay = 0.25,
+						func = function()
 							v:flip()
 							play_sound("tarot2", sound_pitch)
 							sound_pitch = sound_pitch + 0.1
+							return true
 						end
-						return true
-					end
-				}))
+					}))
+				end
 			end
 			G.E_MANAGER:add_event(Event({
 				trigger = 'after',
@@ -1384,6 +1397,9 @@ SMODS.Joker {
 		if context.selling_card and not context.repetition then
 			card.ability.extra.sold = card.ability.extra.sold + 1
 			card.ability.extra.mult = card.ability.extra.mult_gain * card.ability.extra.sold
+			return {
+				message = "+"..card.ability.extra.mult_gain.." Mult"
+			}
 		end
 		if context.joker_main then
 			return {
@@ -1420,6 +1436,21 @@ SMODS.Joker {
 		end
 	end
 }
+--[[-- Splash | does not work help
+SMODS.Joker{
+	key = "splash",
+	atlas = "jokers_alt",
+	pos = { x = 6, y = 10},
+	rarity = 1,
+	calculate = function (self, card, context)
+		if context.before and context.cardarea == G.play then
+			for i,v in ipairs(G.play.hand) do
+				SMODS.debuff_card(v,false)
+			end
+		end
+	end
+}
+]]
 -- Cavendish
 SMODS.Joker{
 	key = "cavendish",
@@ -1745,8 +1776,9 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 0, y = 8 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.before then
+		if context.before and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				local extra_suit = false
 				for i = 1, #context.scoring_hand do
@@ -1797,10 +1829,13 @@ SMODS.Joker {
 				end
 				if not extra_suit then
 					card.ability.extra.chips = card.ability.extra.chip_gain + card.ability.extra.chips
+					return {
+						message = "Upgrade!"
+					}
 				end
 			end
 		end
-		if context.joker_main then
+		if context.joker_main and card.ability.extra.chips ~= 0 then
 			return {
 				chip_mod = card.ability.extra.chips,
 				message = '+' .. card.ability.extra.chips .. ' Chips'
