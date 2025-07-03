@@ -102,10 +102,10 @@ SMODS.Enhancement{
 	pos = { x = 3, y = 1},
 	config = {
 		extra = {
-			chips = 30,
-			mult = 10,
-			xmult = 1.5,
-			dollars = 4
+			chips = 20,
+			mult = 6,
+			xmult = 1.25,
+			dollars = 3
 		}
 	},
 	loc_vars = function (self, info_queue, card)
@@ -174,81 +174,6 @@ SMODS.Enhancement{
 
 --display is broken please fix
 
-
-local stone = {
-	triggered = false, -- True if the function has been trigger already.
-	trigger = function (triggered) -- Very scuffed function to make stone card work. Only argument checks if the function has been triggered already.
-		if not triggered then
-			local c = 0
-			for k,v in pairs(G.hand.cards) do
-				local card = v
-				local lock = false
-				if FG.FUNCS.get_card_info(card).key == "m_fg_stone" then lock = card.ability.extra.lock end -- Find stone card in hand, check if it is locked.
-				c = c + 1
-				--print("c="..c)
-				if FG.FUNCS.get_card_info(v).key == "m_fg_stone" and not lock then -- If not locked, convert left and right card. Otherwise do nothing.
-					--print("Valid card found")
-					if c > 1 then -- If not leftmost card
-						--print("stone left")
-						local target = G.hand.cards[c-1]
-						target:set_ability("m_fg_stone")
-						target.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
-						target.ability.extra.lock = true
-					end
-					if c < #G.hand.cards then -- If not rightmost card
-						--print("stone right")
-						local target = G.hand.cards[c+1]
-						target:set_ability("m_fg_stone")
-						target.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
-						target.ability.extra.lock = true
-					end
-					card:start_dissolve()
-				end
-			end
-		end
-		return true
-	end
-}
-
-
-SMODS.Enhancement{
-	key = "stone",
-	atlas = "enhanced",
-	pos = { x = 5, y = 0 },
-	config = {
-		h_chips = 30,
-		extra = {
-			chips = 30,
-			gain = 15,
-			lock = false,
-			selected = false
-		}
-		},
-	loc_vars = function(self,info_queue, card)
-		return {vars = {
-			card.ability.h_chips,
-			card.ability.extra.chips,
-			card.ability.extra.gain,
-			card.ability.extra.lock,
-			card.ability.extra.selected
-		}}
-	end,
-	replace_base_card = false,
-	calculate = function (self, card, context)
-		if context.before and context.cardarea == G.hand then
-			stone.triggered = stone.trigger(stone.triggered)
-			card.ability.h_chips = card.ability.extra.chips
-			if not card.ability.extra.lock then card.ability.h_chips = 0 end
-		end
-		if context.after then
-			stone.triggered = false 
-			card.ability.extra.lock = false
-		end
-		--print(stone.triggered)
-	end
-}
-
-
 SMODS.Enhancement{
 	key = "steel",
 	atlas = "enhanced",
@@ -294,6 +219,78 @@ SMODS.Enhancement{
 	end,
 	calculate = function (self, card, context)
 		card.ability.h_x_mult = FG.cards.steel.mult
+	end
+}
+
+local stone = {
+	triggered = false, -- True if the function has been trigger already.
+	trigger = function (triggered) -- Very scuffed function to make stone card work. Only argument checks if the function has been triggered already.
+		if not triggered then
+			local c = 0
+			for k,v in pairs(G.hand.cards) do
+				local card = v
+				local lock = false
+				if FG.FUNCS.get_card_info(card).key == "m_fg_stone" then lock = card.ability.extra.lock end -- Find stone card in hand, check if it is locked.
+				c = c + 1
+				--print("c="..c)
+				if FG.FUNCS.get_card_info(v).key == "m_fg_stone" and not lock then -- If not locked, convert left and right card. Otherwise do nothing.
+					--print("Valid card found")
+					if c > 1 then -- If not leftmost card
+						--print("stone left")
+						local target = G.hand.cards[c-1]
+						target:set_ability("m_fg_stone")
+						target.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
+						target.ability.extra.lock = true
+					end
+					if c < #G.hand.cards then -- If not rightmost card
+						--print("stone right")
+						local target = G.hand.cards[c+1]
+						target:set_ability("m_fg_stone")
+						target.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
+						target.ability.extra.lock = true
+					end
+					card:start_dissolve()
+				end
+			end
+		end
+		return true
+	end
+}
+
+SMODS.Enhancement{
+	key = "stone",
+	atlas = "enhanced",
+	pos = { x = 5, y = 0 },
+	config = {
+		h_chips = 30,
+		extra = {
+			chips = 30,
+			gain = 15,
+			lock = false,
+			selected = false
+		}
+		},
+	loc_vars = function(self,info_queue, card)
+		return {vars = {
+			card.ability.h_chips,
+			card.ability.extra.chips,
+			card.ability.extra.gain,
+			card.ability.extra.lock,
+			card.ability.extra.selected
+		}}
+	end,
+	replace_base_card = false,
+	calculate = function (self, card, context)
+		if context.before and context.cardarea == G.hand then
+			stone.triggered = stone.trigger(stone.triggered)
+			card.ability.h_chips = card.ability.extra.chips
+			if not card.ability.extra.lock then card.ability.h_chips = 0 end
+		end
+		if context.after then
+			stone.triggered = false 
+			card.ability.extra.lock = false
+		end
+		--print(stone.triggered)
 	end
 }
 

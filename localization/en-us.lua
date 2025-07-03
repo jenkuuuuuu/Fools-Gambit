@@ -505,10 +505,14 @@ return {
             j_fg_hanging_chad={
                 name="Hanging Chad?",
                 text={
-                    "If {C:attention}played cards{} have been already",
-                    "played this {C:attention}ante{}, add random {C:attention}enhancement{}.",
-                    "If already enhanced, add a random {C:attention}seal{.",
-                    "If already have a seal, add a random {C:attention}edition{}"
+
+                    "{C:green}#1# in #2#{} chance to add",
+                    "a random {C:attention}enhancement{}.",
+                    "If already enhanced, {C:green}#3# in #4#{}",
+                    "chance to add a random {C:attention}seal{.",
+                    "If already have a seal, {C:green}#5# in #6#{}",
+                    "chance add a random {C:attention}edition{}",
+                    "{C:inactive,s:0.8}(Effect applies after scoring){}"
                 },
 			},
 			j_fg_gem={

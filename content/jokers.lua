@@ -1482,33 +1482,83 @@ SMODS.Joker {
 	end
 }
 -- Hanging chad
---[[
+
 SMODS.Joker{
 	key = "hanging_chad",
 	atlas = "jokers_alt",
 	pos = { x = 9, y = 6},
 	rarity = 3,
+	config = {
+		extra = {
+			enhancement_max = 2,
+			seal_max = 6,
+			edition_max = 16,
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.enhancement_max,
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.seal_max,
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.edition_max
+			}
+		}
+	end,
 	calculate = function (self, card, context)
-		if context.main_scoring and context.cardarea == G.play then
-			for i,v in ipairs(G.play.cards) do
-				print("E")
-				--if v.ability.played_this_ante then
-					print("TEST!")
-					--if not FG.FUNCS.get_card_info(v).key == "c_base" then
-						v:set_ability("m_fg_steel")
-					if not FG.FUNCS.get_card_info(v).seal then
-						v.seal = SMODS.poll_seal{
-							guaranteed = true
-						}
-					elseif not FG.FUNCS.get_card_info(v).edition then
-						v:set_edition(poll_edition("mila",1,true,true),true,false)
+		if context.after then
+			for i,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).key == "c_base" then
+					if FG.FUNCS.random_chance(card.ability.extra.enhancement_max) then
+						G.E_MANAGER:add_event(Event({
+							trigger = "after",
+							delay = 0.2,
+							func = function ()
+								v:set_ability(SMODS.poll_enhancement{guaranteed = true})
+								v:juice_up()
+								card:juice_up()
+								return true
+								
+							end
+						}))
+						FG.FUNCS.card_eval_status_text{card = card, message = "Enhanced!", mode = "literal"}	
 					end
-				--end
+				elseif not FG.FUNCS.get_card_info(v).seal then	
+					if FG.FUNCS.random_chance(card.ability.extra.seal_max) then	
+						G.E_MANAGER:add_event(Event({
+							trigger = "after",
+							delay = 0.2,
+							func = function ()
+								v.seal = SMODS.poll_seal{guaranteed = true}
+								v:juice_up()
+								card:juice_up()
+								return true
+							end
+						}))
+						FG.FUNCS.card_eval_status_text{card = card, message = "Seal!", mode = "literal"}
+					end
+				elseif not FG.FUNCS.get_card_info(v).edition then
+					if FG.FUNCS.random_chance(card.ability.extra.edition_max) then
+						G.E_MANAGER:add_event(Event({
+							trigger = "after",
+							delay = 0,2,
+							func = function ()
+								v:set_edition(poll_edition("mila",1,true,true),true,false)
+								v:juice_up()
+								card:juice_up()
+								return true
+							end
+						}))
+						FG.FUNCS.card_eval_status_text{card = card, message = "Edition!", mode = "literal"}
+					end
+				end
 			end
 		end
 	end
 }
-]]
+
 -- Rough Gem
 SMODS.Joker {
 	key = 'gem',
@@ -1545,7 +1595,7 @@ SMODS.Joker {
 -- Bloodstone
 SMODS.Joker {
 	key = 'bloodstone',
-	config = { type = 'Flush', extra = { Xmult_gain = 0.25, Xmult = 1 } },
+	config = { type = 'Flush', extra = { Xmult_gain = 0.4, Xmult = 1 } },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.Xmult_gain, card.ability.extra.Xmult } }
 	end,
@@ -1557,13 +1607,13 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.before then
 			if (next(context.poker_hands[card.ability.type])) then
-				local extrasuit = false
+				local extra_suit = false
 				for i = 1, #context.scoring_hand do
 					if not context.scoring_hand[i]:is_suit("Hearts") then
-						extrasuit = true
+						extra_suit = true
 					end
 				end
-				if not extrasuit then
+				if not extra_suit then
 					card.ability.extra.Xmult = card.ability.extra.Xmult_gain + card.ability.extra.Xmult
 					FG.FUNCS.card_eval_status_text{
 						card = card,
@@ -1598,12 +1648,13 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.before then
 			if (next(context.poker_hands[card.ability.type])) then
+				local extra_suit = false
 				for i = 1, #context.scoring_hand do
 					if not context.scoring_hand[i]:is_suit("Spades") then
-						local extrasuit = true
+						extra_suit = true
 					end
 				end
-				if not extrasuit then
+				if not extra_suit then
 					card.ability.extra.chips = card.ability.extra.chip_gain + card.ability.extra.chips
 				end
 			end
@@ -1631,12 +1682,13 @@ SMODS.Joker {
 	calculate = function(self, card, context)
 		if context.before then
 			if (next(context.poker_hands[card.ability.type])) then
+				local extra_suit = false
 				for i = 1, #context.scoring_hand do
 					if not context.scoring_hand[i]:is_suit("Clubs") then
-						local extrasuit = true
+						extra_suit = true
 					end
 				end
-				if not extrasuit then
+				if not extra_suit then
 					card.ability.extra.mult = card.ability.extra.mult_gain + card.ability.extra.mult
 				end
 			end
@@ -1644,7 +1696,7 @@ SMODS.Joker {
 		if context.joker_main then
 			return {
 				mult_mod = card.ability.extra.mult,
-				message = '+' .. card.ability.extra.mult
+				message = '+' .. card.ability.extra.mult .. ' Mult'
 			}
 		end
 	end

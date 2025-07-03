@@ -250,6 +250,17 @@ function FG.FUNCS.get_card_info(card)
 	return ret
 end
 
+---Simple function to check for any given chance.
+---@param max number 1 in N chance, where N is `max`
+---@return boolean success If the random chance succeeds
+function FG.FUNCS.random_chance(max)
+	if pseudorandom('mila', G.GAME.probabilities.normal, max) <= G.GAME.probabilities.normal then
+		return true
+	else
+		return false
+	end
+end
+
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
 
