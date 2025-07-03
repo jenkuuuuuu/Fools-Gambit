@@ -1481,8 +1481,50 @@ SMODS.Joker {
 		end
 	end
 }
--- Hanging chad
 
+-- Throwback
+SMODS.Joker{
+	key = "throwback",
+	atlas = "jokers_alt",
+	pos = { x = 5 , y = 7},
+	rarity = 2,
+	config = {
+		extra = {
+			xmult = 1,
+			xmult_i = 0.35,
+			u_shop = false,
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i
+			}
+		}
+	end,
+	blueprint_compat = true,
+	calculate = function (self, card, context)
+		if context.end_of_round then card.ability.extra.u_shop = false end
+		if context.buying_card or context.open_booster then
+			card.ability.extra.u_shop = true
+		end
+		if context.ending_shop and not card.ability.extra.u_shop then
+			card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+			return {
+				message = "X"..card.ability.extra.xmult.."!"
+			}
+		end
+		if context.joker_main and card.ability.extra.xmult ~= 1 then
+			return {
+				xmult = card.ability.extra.xmult
+			}
+		end
+
+	end
+}
+
+-- Hanging chad
 SMODS.Joker{
 	key = "hanging_chad",
 	atlas = "jokers_alt",
@@ -1495,6 +1537,7 @@ SMODS.Joker{
 			edition_max = 16,
 		}
 	},
+	blueprint_compat = false,
 	loc_vars = function (self, info_queue, card)
 		return {
 			vars = {
@@ -1508,7 +1551,7 @@ SMODS.Joker{
 		}
 	end,
 	calculate = function (self, card, context)
-		if context.after then
+		if context.after and not context.blueprint then
 			for i,v in ipairs(context.scoring_hand) do
 				if FG.FUNCS.get_card_info(v).key == "c_base" then
 					if FG.FUNCS.random_chance(card.ability.extra.enhancement_max) then

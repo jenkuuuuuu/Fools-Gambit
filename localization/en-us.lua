@@ -502,10 +502,17 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
             },
-            j_fg_hanging_chad={
-                name="Hanging Chad?",
-                text={
-
+            j_fg_throwback = {
+                name = "Throwback?",
+                text = {
+                    "{C:white,X:mult}X#2#{} Mult for each {C:attention}shop{} skipped",
+                    "this run",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult){}"
+                }
+            },
+            j_fg_hanging_chad = {
+                name = "Hanging Chad?",
+                text = {
                     "{C:green}#1# in #2#{} chance to add",
                     "a random {C:attention}enhancement{}.",
                     "If already enhanced, {C:green}#3# in #4#{}",
