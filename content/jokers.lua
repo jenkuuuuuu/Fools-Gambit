@@ -1772,7 +1772,7 @@ SMODS.Joker{
 			FG.cards.invisible.selected = selected
 			SMODS.add_card{
 				key = "j_fg_invisible_memory",
-				edition = "e_negative"
+				edition = false
 			}
 			selected:start_dissolve()
 		end
@@ -1805,11 +1805,12 @@ SMODS.Joker{
 		}
 	end,
 	add_to_deck = function (self, card, from_debuff)
+		if not card.ability then card.ability = {} end
 		card.ability.saved_ability = FG.cards.invisible.selected.ability
 		card.ability.saved_key = FG.cards.invisible.selected.config.center.key
 		card.ability.eternal = true
-		FG.cards.invisible.elegible_jokers = {}
-		FG.cards.invisible.selected = {}
+		--FG.cards.invisible.elegible_jokers = {}
+		--FG.cards.invisible.selected = {}
 	end,
 	calculate = function (self, card, context)
 		if context.end_of_round and context.cardarea == G.jokers then
