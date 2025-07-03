@@ -7,10 +7,8 @@ FG.ALTS.enhancement_equivalents = {
 	m_lucky = "m_fg_lucky",
 	m_gold = "m_fg_gold"
 }
-FG.cards = { -- Stores global card info.
-	steel = {
-		mult = 1
-	},
+FG.cards.steel = {-- Stores global card info.
+	mult = 1
 }
 
 SMODS.Atlas {

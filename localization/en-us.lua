@@ -505,8 +505,8 @@ return {
             j_fg_throwback = {
                 name = "Throwback?",
                 text = {
-                    "{C:white,X:mult}X#2#{} Mult for each {C:attention}shop{} skipped",
-                    "this run",
+                    "{C:white,X:mult}X#2#{} Mult for each",
+                    "{C:attention}shop{} skipped this run",
                     "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult){}"
                 }
             },
@@ -557,6 +557,24 @@ return {
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
+            j_fg_invisible = {
+                name = "Invisible Joker?",
+                text = {
+                    "When sold, remove a random {C:attention}Joker",
+                    "After {C:attention}6{} rounds, create {C:attention}2{} {C:dark_edition}negative{} copies",
+                    "of the removed Joker",
+                    "{C:inactive}(Cannot copy eternal jokers){}"
+                }
+            },
+            j_fg_invisible_memory = {
+                name = "{C:dark_edition,E:1}Invisible memory?{}",
+                text = {
+                    "The memory of an {C:attention}Invisible Joker?{}",
+                    "After {C:attention}#1#{} round(s), {C:red,E:2}self-destruct{} and",
+                    "give {C:attention}#2#{} copies of {C:attention}#3#{}",
+                    "Can't be sold or destroyed.",
+                }
+            },
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',

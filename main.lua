@@ -1,6 +1,7 @@
 FG = {
 	ALTS = {},		-- Stores all alternating tables.
-	FUNCS = {} 		-- Stores all funtions used in the mod, be it the API or not.
+	FUNCS = {}, 	-- Stores all funtions used in the mod, be it the API or not.
+	cards = {}
 }
 FG.config = SMODS.current_mod.config
 

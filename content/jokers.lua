@@ -1294,6 +1294,7 @@ SMODS.Joker {
 	cost = 2,
 	atlas = 'jokers_alt',
 	pos = { x = 2, y = 3 },
+	blueprint_compat = true,
 	config = { extra = { chips = 0, chip_gain = 15 } },
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1740,6 +1741,91 @@ SMODS.Joker {
 			return {
 				mult_mod = card.ability.extra.mult,
 				message = '+' .. card.ability.extra.mult .. ' Mult'
+			}
+		end
+	end
+}
+
+-- Invisible
+
+FG.cards.invisible = {
+	elegible_jokers = {},
+	selected = {}
+}
+
+SMODS.Joker{
+	key = "invisible",
+	atlas = "jokers_alt",
+	pos = { x = 1, y = 7},
+	rarity = 3,
+	eternal_compat = false,
+	calculate = function (self, card, context)
+		if context.selling_self then
+			FG.cards.invisible.elegible_jokers = {}
+			for i,joker in ipairs(G.jokers.cards) do
+				if not (joker.config.center.key == "j_fg_invisible_memory" or joker.config.center.key == "j_fg_invisible" or joker.ability.eternal) then
+					table.insert(FG.cards.invisible.elegible_jokers,joker)
+				end
+			end
+			if not FG.cards.invisible.elegible_jokers[1] then return {message = "Nope!"} end
+			local selected = FG.cards.invisible.elegible_jokers[pseudorandom('mila',1,#FG.cards.invisible.elegible_jokers)]
+			FG.cards.invisible.selected = selected
+			SMODS.add_card{
+				key = "j_fg_invisible_memory",
+				edition = "e_negative"
+			}
+			selected:start_dissolve()
+		end
+	end
+}
+
+SMODS.Joker{
+	key = "invisible_memory",
+	atlas = "jokers_alt",
+	rarity = 3,
+	no_collection = true,
+	yes_pool_flag = "mila",
+	pos = { x = 1, y = 7},
+	config = {
+		extra = {
+			rounds = 6,
+			copies = 2,
+			name = "nil"
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		card.ability.extra.name = "None"
+		if card.ability.saved_ability then card.ability.extra.name = localize{type = "name_text",set = card.ability.saved_ability.set, key = card.ability.saved_key} end
+		return {
+			vars = {
+				card.ability.extra.rounds,
+				card.ability.extra.copies,
+				card.ability.extra.name
+			}
+		}
+	end,
+	add_to_deck = function (self, card, from_debuff)
+		card.ability.saved_ability = FG.cards.invisible.selected.ability
+		card.ability.saved_key = FG.cards.invisible.selected.config.center.key
+		card.ability.eternal = true
+		FG.cards.invisible.elegible_jokers = {}
+		FG.cards.invisible.selected = {}
+	end,
+	calculate = function (self, card, context)
+		if context.end_of_round and context.cardarea == G.jokers then
+			if card.ability.extra.rounds == 1 then
+				for i=1, card.ability.extra.copies do
+					local c = SMODS.add_card { key = card.ability.saved_key, edition = "e_negative" }
+					c.ability = card.ability.saved_ability
+				end
+				card:start_dissolve()
+				return {
+					message = "Active!"
+				}
+			end
+			card.ability.extra.rounds = card.ability.extra.rounds - 1
+			return {
+				message = card.ability.extra.rounds .. " left!"
 			}
 		end
 	end
