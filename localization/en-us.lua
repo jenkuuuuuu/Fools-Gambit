@@ -450,6 +450,15 @@ return {
                     '{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}'
                 },
             },
+            j_fg_gros_michel = {
+                name = "Gros Michel?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance this",
+                    "card gets destroyed",
+                    "at end of round"
+                }
+            },
             j_fg_abstract = {
                 name = 'Abstract Joker?',
                 text = {
@@ -465,6 +474,15 @@ return {
                     "when sold lose",
                     "{C:mult}#2#{} hand and {C:mult}#3#{} discard"
                 },
+            },
+            j_fg_cavendish = {
+                name = "Cavendish?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult",
+                    "{C:green}#3# in #4#{} chance of losing",
+                    "{C:white,X:mult}X#2#{} Mult at end of round.",
+                    "Self-destruct on {C:white,X:mult}X1{} Mult"
+                }
             },
             j_fg_duo = {
                 name = 'The Duo?',
@@ -561,8 +579,8 @@ return {
                 name = "Invisible Joker?",
                 text = {
                     "When sold, remove a random {C:attention}Joker",
-                    "After {C:attention}6{} rounds, create {C:attention}2{} {C:dark_edition}negative{} copies",
-                    "of the removed Joker",
+                    "Create an {C:attention}Invisible memory?{}",
+                    "with the removed Joker",
                     "{C:inactive}(Cannot copy eternal jokers){}"
                 }
             },

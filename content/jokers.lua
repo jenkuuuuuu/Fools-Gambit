@@ -51,6 +51,7 @@ FG.ALTS.joker_equivalents = {
 	j_misprint = "j_fg_misprint",
 	j_fibonacci = "j_fg_fibonacci",
 	j_scary_face = "j_fg_face",
+	j_gros_michel = "j_fg_gros_michel",
 	j_abstract = "j_fg_abstract",
 	j_crafty = "j_fg_crafty",
 	j_duo = "j_fg_duo",
@@ -58,10 +59,14 @@ FG.ALTS.joker_equivalents = {
 	j_family = "j_fg_family",
 	j_order = "j_fg_order",
 	j_egg = "j_fg_egg",
+	j_cavendish = "j_fg_cavendish",
+	j_throwback = "j_fg_throwback",
+	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
+	j_invisible = "j_fg_invisible",
 	-- COLLECTION
 	j_fg_jogla = "j_fg_jogla_alt",
 	j_fg_deathmodereal = "j_fg_deathmoderealalt",
@@ -1318,6 +1323,47 @@ SMODS.Joker {
 		end
 	end
 }
+-- Gros Michael
+SMODS.Joker{
+	key = "gros_michel",
+	rarity = 1,
+	atlas = "jokers_alt",
+	pos = { x = 7, y = 6},
+	config = {
+		extra = {
+			xmult = 1.5,
+			max_chance = 6
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.xmult,
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.max_chance
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+		if context.end_of_round and context.cardarea == G.jokers then
+			if FG.FUNCS.random_chance(card.ability.extra.max_chance) then
+			play_sound("tarot2",1.5,1)
+			card:start_dissolve()
+			G.GAME.pool_flags.fg_gros_michel_extinct = true
+			return {
+				message = "Extint?!"
+			}
+			end
+			return {
+				message = "Safe!?"
+			}
+		end
+	end
+}
+
+
+
 -- Abstract
 SMODS.Joker {
 	key = 'abstract',
@@ -1374,6 +1420,57 @@ SMODS.Joker {
 		end
 	end
 }
+-- Cavendish
+SMODS.Joker{
+	key = "cavendish",
+	atlas = "jokers_alt",
+	pos = { x = 5, y = 11},
+	yes_pool_flag = "fg_gros_michel_extinct",
+	rarity = 2,
+	config = {
+		extra = {
+			xmult = 10,
+			xmult_r = 1,
+			xmult_c = 10
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_r,
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.xmult_c
+			}
+		}		
+	end,
+	calculate = function (self, card, context)
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+		if context.end_of_round and context.cardarea == G.jokers then
+			if FG.FUNCS.random_chance(card.ability.extra.xmult_c) then
+				card.ability.extra.xmult = card.ability.extra.xmult - card.ability.extra.xmult_r
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "-X1",
+					mode = "literal",
+					colour = "red"
+				}
+			else
+				return {
+					message = "Safe!?"
+				}
+			end
+			if card.ability.extra.xmult <= 1 then
+				card:start_dissolve()
+				play_sound("tarot2",1.5,1)
+				return {
+					message = "Extint?!"
+				}
+			end	
+		end
+	end
+}
+
 -- Duo
 SMODS.Joker {
 	key = 'duo',
@@ -1759,6 +1856,9 @@ SMODS.Joker{
 	pos = { x = 1, y = 7},
 	rarity = 3,
 	eternal_compat = false,
+	loc_vars = function (self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_CENTERS.j_fg_invisible_memory
+	end,
 	calculate = function (self, card, context)
 		if context.selling_self then
 			FG.cards.invisible.elegible_jokers = {}
