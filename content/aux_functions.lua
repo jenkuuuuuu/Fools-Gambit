@@ -226,8 +226,10 @@ end
 function FG.FUNCS.get_card_info(card)
 	if not card then sendWarnMessage("No card was passed.","FG.FUNCS.get_card_info") return nil end
 	local ret = {
+		id = card.base.id,
 		rank = false,
 		suit = false,
+		is_face = false,
 		key = card.config.center.key,
 		edition = false,
 		seal = card.seal or false,
@@ -241,6 +243,7 @@ function FG.FUNCS.get_card_info(card)
 	
 	if card.config.card then ret.rank = card.config.card.value end
 	if card.config.card then ret.suit = card.config.card.suit end
+	if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
 	if card.edition then ret.edition = card.edition.key end
 	if card.ability.eternal then ret.eternal = true end
 	if card.ability.perishable then

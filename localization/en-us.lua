@@ -477,6 +477,50 @@ return {
                     "at end of round"
                 }
             },
+            j_fg_even_steven = {
+                name = "Even Steven?",
+                text = {
+                    "Gain {C:mult}+#1#{} Mult for each",
+                    "{C:attention}even triggered{} card",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                    "{C:inactive}(10, 8, 6, 4, 2){}"
+                }
+            },
+            j_fg_odd_todd = {
+                name = "Odd Todd?",
+                text = {
+                    "Gain {C:chips}+#1#{} Chips for each",
+                    "{C:attention}odd triggered{} card",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "{C:inactive}(A, 9, 7, 5, 3)"
+                }
+            },
+            j_fg_scholar = {
+                name = "Scholar?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if scoring hand",
+                    "contains at least {C:attention}#2#{} #3#s"
+                }
+            },
+            j_fg_business = {
+                name = "Business card?",
+                text = {
+                    "{C:green}#1# in #2#{} chance to enhance",
+                    "scored {C:attention}face{} cards",
+                    "{C:inactive}(Applies effect after scoring){}"
+                }
+            },
+            j_fg_supernova = {
+
+            },
+            j_fg_ride_the_bus = {
+                name = "Ride the Bus",
+                text = {
+                    "{C:mult}+#2#{} Mult",
+                    "{C:mult}-#1#{} Mult for every",
+                    "played {C:attention}face{} card"
+                }
+            },
             j_fg_abstract = {
                 name = 'Abstract Joker?',
                 text = {

@@ -60,6 +60,11 @@ FG.ALTS.joker_equivalents = {
 	j_fibonacci = "j_fg_fibonacci",
 	j_scary_face = "j_fg_face",
 	j_gros_michel = "j_fg_gros_michel",
+	j_even_steven = "j_fg_even_steven",
+	j_odd_todd = "j_fg_odd_todd",
+	j_business = "j_fg_business",
+	--j_supernova = "j_fg_supernova",
+	j_ride_the_bus = "j_fg_ride_the_bus",
 	j_abstract = "j_fg_abstract",
 	j_crafty = "j_fg_crafty",
 	j_duo = "j_fg_duo",
@@ -1519,9 +1524,210 @@ SMODS.Joker{
 		end
 	end
 }
+-- Even Steven
+SMODS.Joker{
+	key = "even_steven",
+	atlas = "jokers_alt",
+	pos = { x = 8, y = 3},
+	rarity = 1,
+	config = {
+		extra = {
+			mult_i = 2, -- Mult increase
+			mult_t = 0  -- Mult total
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.mult_i,
+				card.ability.extra.mult_t
+			}
+		}
+	end,
+	blueprint_compat = true,
+	calculate = function (self, card, context)
+		if context.individual and context.cardarea == G.play then
+			local id = FG.FUNCS.get_card_info(context.other_card).id
+			if id % 2 == 0 and not ( value == "King" or value == "Queen" or value == "Jack") then
+				card.ability.extra.mult_t = card.ability.extra.mult_t + card.ability.extra.mult_i
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
+				}
+			end
+		end
+		if context.joker_main then return {mult = card.ability.extra.mult_t} end
+	end
+}
+-- Odd Todd
+SMODS.Joker{
+	key = "odd_todd",
+	atlas = "jokers_alt",
+	pos = { x = 9, y = 3},
+	rarity = 1,
+	config = {
+		extra = {
+			chips_i = 13, -- Chips increase
+			chips_t = 0  -- Chips total
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.chips_i,
+				card.ability.extra.chips_t
+			}
+		}
+	end,
+	blueprint_compat = true,
+	calculate = function (self, card, context)
+		if context.individual and context.cardarea == G.play then
+			local id = FG.FUNCS.get_card_info(context.other_card).id
+			local value = FG.FUNCS.get_card_info(context.other_card).rank
+			if id % 2 ~= 0 and not ( value == "King" or value == "Queen" or value == "Jack") then
+				card.ability.extra.chips_t = card.ability.extra.chips_t + card.ability.extra.chips_i
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
+				}
+			end
+		end
+		if context.joker_main then return {chips = card.ability.extra.chips_t} end
+	end
+}
+-- Scholar
+SMODS.Joker{
+	key = "scholar",
+	atlas = "jokers_alt",
+	pos = { x = 3, y = 6},
+	rarity = 2,
+	cost = 4,
+	config = {
+		extra = {
+			xmult = 3,
+			amount = 4,
+			card = "Ace"
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.amount,
+				card.ability.extra.card
+			}
+		}
+	end,
+	blueprint_compat = true,
+	calculate = function (self, card, context)
+		if context.joker_main then
+			local count = 0
+			for _,v in ipairs(G.play.cards) do
+				if FG.FUNCS.get_card_info(v).rank == card.ability.extra.card then
+					count = count + 1
+				end
+			end
+			if count >= card.ability.extra.amount then return {xmult = card.ability.extra.xmult} end
+		end
+	end
+}
+-- Business Card
+SMODS.Joker {
+	key = "business",
+	atlas = "jokers_alt",
+	pos = { x = 1, y = 4},
+	rarity = 2,
+	cost = 4,
+	config = {
+		extra = {
+			max_chance = 4
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.max_chance
+			}
+		}
+	end,
+	blueprint_compat = true,
+	calculate = function (self, card, context)
+		if context.after then
+			for _,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).is_face and FG.FUNCS.random_chance(card.ability.extra.max_chance) and FG.FUNCS.get_card_info(v).key == "c_base" then
+					G.E_MANAGER:add_event(Event({
+						trigger = "after",
+						delay = 0.2,
+						func = function()
+							v:set_ability(SMODS.poll_enhancement{guaranteed = true})
+							v:juice_up()
+							return true
+						end
+					}))
+					FG.FUNCS.card_eval_status_text{
+						card = card,
+						message = "Enhanced!",
+						mode = "literal"
+					}
+				end
+			end
+		end
+	end
+}
+-- Supernova TBA
 
-
-
+-- Ride the buss
+SMODS.Joker{
+	key = "ride_the_bus",
+	atlas = "jokers_alt",
+	pos = { x = 1, y = 6},
+	rarity = 1,
+	cost = 3,
+	config = {
+		extra = {
+			mult = 25,
+			mult_d = 1,
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.mult_d,
+				card.ability.extra.mult
+			}
+		}
+	end,
+	blueprint_compat = true,
+	calculate = function (self, card, context)
+		if context.before and not context.blueprint then
+			
+			local face = 0
+			for _,v in ipairs(G.play.cards) do
+				if FG.FUNCS.get_card_info(v).is_face then
+					card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_d
+					face = face + 1
+				end
+			end
+			if face > 0 then FG.FUNCS.card_eval_status_text{card = card, message = "-"..face.." Mult!", mode = "literal", colour = "mult"} end
+			if card.ability.extra.mult <= 0 then
+				FG.FUNCS.card_eval_status_text{card = card, message = "Last stop!", mode = "literal", colour = "red"} 
+				G.E_MANAGER:add_event(Event({
+					func = function ()
+						card:start_dissolve()
+						return true
+					end
+				}))
+				return {}
+			end
+		end
+		if context.joker_main and card.ability.extra.mult > 0 then
+			return {mult = card.ability.extra.mult}
+		end
+	end
+}
 -- Abstract
 SMODS.Joker {
 	key = 'abstract',
