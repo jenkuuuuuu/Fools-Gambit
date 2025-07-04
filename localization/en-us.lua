@@ -480,7 +480,7 @@ return {
             j_fg_even_steven = {
                 name = "Even Steven?",
                 text = {
-                    "Gain {C:mult}+#1#{} Mult for each",
+                    "Gains {C:mult}+#1#{} Mult for each",
                     "{C:attention}even triggered{} card",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
                     "{C:inactive}(10, 8, 6, 4, 2){}"
@@ -489,7 +489,7 @@ return {
             j_fg_odd_todd = {
                 name = "Odd Todd?",
                 text = {
-                    "Gain {C:chips}+#1#{} Chips for each",
+                    "Gains {C:chips}+#1#{} Chips for each",
                     "{C:attention}odd triggered{} card",
                     "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
                     "{C:inactive}(A, 9, 7, 5, 3)"

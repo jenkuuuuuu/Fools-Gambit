@@ -494,6 +494,8 @@ SMODS.Joker{
 	atlas = "oscillator_atlas",
 	pos = { x = 0, y = 1},
 	rarity = 1,
+	cost = 3,
+	yes_pool_flag = 'alternate_spawn',
 	config = {
 		fg_alternate = {
 			chips = 50
@@ -563,6 +565,8 @@ SMODS.Joker{
 	atlas = "oscillator_atlas",
 	pos = { x = 0, y = 1},
 	rarity = 1,
+	cost = 3,
+	yes_pool_flag = 'alternate_spawn',
 	config = {
 		fg_alternate = {
 			chips = 50
@@ -1462,6 +1466,7 @@ SMODS.Joker {
 	cost = 2,
 	atlas = 'jokers_alt',
 	pos = { x = 2, y = 3 },
+	yes_pool_flag = 'alternate_spawn',
 	blueprint_compat = true,
 	config = { extra = { chips = 0, chip_gain = 15 } },
 	loc_vars = function(self, info_queue, card)
@@ -1490,8 +1495,10 @@ SMODS.Joker {
 SMODS.Joker{
 	key = "gros_michel",
 	rarity = 1,
+	cost = 4,
 	atlas = "jokers_alt",
 	pos = { x = 7, y = 6},
+	yes_pool_flag = 'alternate_spawn',
 	config = {
 		extra = {
 			xmult = 1.5,
@@ -1507,6 +1514,7 @@ SMODS.Joker{
 			}
 		}
 	end,
+	blueprint_compat = true,
 	calculate = function (self, card, context)
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
 		if context.end_of_round and context.cardarea == G.jokers then
@@ -1530,6 +1538,8 @@ SMODS.Joker{
 	atlas = "jokers_alt",
 	pos = { x = 8, y = 3},
 	rarity = 1,
+	cost = 2,
+	yes_pool_flag = 'alternate_spawn',
 	config = {
 		extra = {
 			mult_i = 2, -- Mult increase
@@ -1548,6 +1558,7 @@ SMODS.Joker{
 	calculate = function (self, card, context)
 		if context.individual and context.cardarea == G.play then
 			local id = FG.FUNCS.get_card_info(context.other_card).id
+			local value = FG.FUNCS.get_card_info(context.other_card).rank
 			if id % 2 == 0 and not ( value == "King" or value == "Queen" or value == "Jack") then
 				card.ability.extra.mult_t = card.ability.extra.mult_t + card.ability.extra.mult_i
 				FG.FUNCS.card_eval_status_text{
@@ -1566,6 +1577,7 @@ SMODS.Joker{
 	atlas = "jokers_alt",
 	pos = { x = 9, y = 3},
 	rarity = 1,
+	yes_pool_flag = 'alternate_spawn',
 	config = {
 		extra = {
 			chips_i = 13, -- Chips increase
@@ -1604,6 +1616,7 @@ SMODS.Joker{
 	pos = { x = 3, y = 6},
 	rarity = 2,
 	cost = 4,
+	yes_pool_flag = 'alternate_spawn',
 	config = {
 		extra = {
 			xmult = 3,
@@ -1637,6 +1650,7 @@ SMODS.Joker{
 SMODS.Joker {
 	key = "business",
 	atlas = "jokers_alt",
+	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 1, y = 4},
 	rarity = 2,
 	cost = 4,
@@ -1686,6 +1700,7 @@ SMODS.Joker{
 	pos = { x = 1, y = 6},
 	rarity = 1,
 	cost = 3,
+	yes_pool_flag = 'alternate_spawn',
 	config = {
 		extra = {
 			mult = 25,
@@ -1735,6 +1750,7 @@ SMODS.Joker {
 	cost = 2,
 	atlas = 'jokers_alt',
 	pos = { x = 3, y = 3 },
+	yes_pool_flag = 'alternate_spawn',
 	config = { extra = { mult_gain = 10, mult = 0, sold = 0 } },
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1744,8 +1760,9 @@ SMODS.Joker {
 			}
 		}
 	end,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.selling_card and not context.repetition then
+		if context.selling_card and not context.repetition and not context.blueprint then
 			card.ability.extra.sold = card.ability.extra.sold + 1
 			card.ability.extra.mult = card.ability.extra.mult_gain * card.ability.extra.sold
 			return {
@@ -1826,6 +1843,7 @@ SMODS.Joker{
 			}
 		}		
 	end,
+	blueprint_compat = true,
 	calculate = function (self, card, context)
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
 		if context.end_of_round and context.cardarea == G.jokers then
@@ -1865,8 +1883,9 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 5, y = 4 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.before and context.cardarea == G.jokers and not context.repetition then
+		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
 			end
@@ -1892,8 +1911,9 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 6, y = 4 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.before and context.cardarea == G.jokers and not context.repetition then
+		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
 			end
@@ -1919,8 +1939,9 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 7, y = 4 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.before and context.cardarea == G.jokers and not context.repetition then
+		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
 			end
@@ -1946,8 +1967,9 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 8, y = 4 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.before and context.cardarea == G.jokers and not context.repetition then
+		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
 			end
@@ -1965,6 +1987,7 @@ SMODS.Joker {
 -- Throwback
 SMODS.Joker{
 	key = "throwback",
+	yes_pool_flag = 'alternate_spawn',
 	atlas = "jokers_alt",
 	pos = { x = 5 , y = 7},
 	rarity = 2,
@@ -1985,7 +2008,7 @@ SMODS.Joker{
 	end,
 	blueprint_compat = true,
 	calculate = function (self, card, context)
-		if context.end_of_round then card.ability.extra.u_shop = false end
+		if context.end_of_round then card.ability.extra.u_shop = false and not context.blueprint end
 		if context.buying_card or context.open_booster then
 			card.ability.extra.u_shop = true
 		end
@@ -2007,6 +2030,7 @@ SMODS.Joker{
 -- Hanging chad
 SMODS.Joker{
 	key = "hanging_chad",
+	yes_pool_flag = 'alternate_spawn',
 	atlas = "jokers_alt",
 	pos = { x = 9, y = 6},
 	rarity = 3,
@@ -2094,6 +2118,7 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 9, y = 7 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.joker_main then
 			if (next(context.poker_hands[card.ability.type])) then
@@ -2169,8 +2194,9 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 1, y = 8 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.before then
+		if context.before and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				local extra_suit = false
 				for i = 1, #context.scoring_hand do
@@ -2206,8 +2232,9 @@ SMODS.Joker {
 	yes_pool_flag = 'alternate_spawn',
 	pos = { x = 2, y = 8 },
 	cost = 2,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
-		if context.before then
+		if context.before and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				local extra_suit = false
 				for i = 1, #context.scoring_hand do
@@ -2238,6 +2265,7 @@ FG.cards.invisible = {
 
 SMODS.Joker{
 	key = "invisible",
+	yes_pool_flag = 'alternate_spawn',
 	atlas = "jokers_alt",
 	pos = { x = 1, y = 7},
 	rarity = 3,
@@ -2297,7 +2325,7 @@ SMODS.Joker{
 		--FG.cards.invisible.selected = {}
 	end,
 	calculate = function (self, card, context)
-		if context.end_of_round and context.cardarea == G.jokers then
+		if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
 			if card.ability.extra.rounds == 1 then
 				for i=1, card.ability.extra.copies do
 					local c = SMODS.add_card { key = card.ability.saved_key, edition = "e_negative" }
