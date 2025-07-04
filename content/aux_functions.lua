@@ -105,9 +105,9 @@ function FG.FUNCS.alternate_seal(source,target) end
 ---@param source table|card is the old card, that is being deleted
 ---@param target table|card is the new card created for alternating.
 function FG.FUNCS.update_alternate_values(source,target,mode)
-	for k,v in ipairs(source.config.extra.alternating_values) do
-		target.config.extra.alternating_values[k] = v
-	end
+	if not source.ability.fg_alternate then sendWarnMessage("This card lacks fg_alternate table inside it's ability table!","FG.FUNCS.update_alternate_values") return end
+	if not target.ability.fg_alternate then sendWarnMessage("The target card lacks fg_alternate table") return end
+	target.ability.fg_alternate = source.ability.fg_alternate
 end
 
 --- Allows to integrate original<>alternate entries to the mod's tables.
@@ -143,36 +143,36 @@ function FG.FUNCS.flip_editions(card)
 	end
 end
 
-if FG.config.debug_mode then -- slightly less scary !!! still broken!!!! (eats tags)
-	function FG.replace_shop_joker(key, index)
+--if FG.config.debug_mode then -- slightly less scary !!! still broken!!!! (eats tags) || buggy af, fix the UI please
+	function FG.FUNCS.replace_shop_joker(key, index)
 		if G.shop_jokers then
 			if G.shop_jokers.cards then
 				local replacee = G.shop_jokers.cards[index]
 				if replacee then
-				G.shop_jokers:remove_card(replacee)
-				replacee:remove()
-				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
-				create_shop_card_ui(replacement, joker, G.shop_jokers)
-				replacement:start_materialize()
+					G.shop_jokers:remove_card(replacee)
+					replacee:remove()
 				end
+				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
+				create_shop_card_ui(replacement, 'joker', G.shop_jokers)
+				replacement:start_materialize()
 			end
 		end
 	end
 
 	local shopref = create_card_for_shop
-	cop_reroll = false
+	local cop_reroll = false
 
 	function create_card_for_shop(area)
 		local card = shopref(area)
 
 		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips and cop_reroll == false then
-			FG.replace_shop_joker("j_fg_change_of_pace", 1)
+			FG.FUNCS.replace_shop_joker("j_fg_change_of_pace", #G.shop_jokers.cards+1)
 			cop_reroll = true
 			end
 
 		return card
 	end
-end
+--end
 
 --- Allows to duplicate any given card and insert it into playing hand. Return value is the new card. Sourced from 'cryptid' (Spectral).
 ---@param card card The card that is being duplicated.
@@ -207,6 +207,8 @@ function FG.FUNCS.card_eval_status_text (args)
 	local colour = args.colour or args.color or string.upper("orange") -- The color of the square background.
 	colour = string.upper(colour)
 	
+	if not card then sendWarnMessage("No target card selected!\nMake sure you specify the target card in the function arguments","FG.FUNCS.card_eval_status_text") return end
+
 	if mode == "literal" then
 		card_eval_status_text(card, eval_type, nil, nil, nil,
 		{ message = message, colour = G.C[colour] })

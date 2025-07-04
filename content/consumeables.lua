@@ -50,6 +50,7 @@ SMODS.Consumable{
             func = function()
                     local c = FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
                     FG.FUNCS.update_edition(c.original,c.alternate)
+                    FG.FUNCS.update_alternate_values(c.original,c.alternate)
                 return true
             end
         }))
@@ -85,6 +86,7 @@ SMODS.Consumable{
             func = function()
                 local c = FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
                 FG.FUNCS.update_edition(c.original,c.alternate)
+                FG.FUNCS.update_alternate_values(c.original,c.alternate)
                 return true
             end
         }))
@@ -156,8 +158,9 @@ SMODS.Consumable{
                 for i in ipairs(G.jokers.cards) do
                     local currentCard = G.jokers.cards[i]
                     if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
-                        FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
-
+                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
                     end
                 end
                 return true
@@ -182,7 +185,9 @@ SMODS.Consumable{
                 for i in ipairs(G.jokers.cards) do
                     local currentCard = G.jokers.cards[i]
                     if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 2 then
-                        FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
                     end
                 end
                 return true
@@ -207,7 +212,9 @@ SMODS.Consumable{
                 for i in ipairs(G.jokers.cards) do
                     local currentCard = G.jokers.cards[i]
                     if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 3 then
-                        FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
                     end
                 end
                 return true

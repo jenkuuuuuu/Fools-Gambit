@@ -125,9 +125,27 @@ return {
                     "every {C:purple}aberration{} card used",
                 },
             },
+            j_fg_oscillator = {
+                name = "Oscilador",
+                text = {
+                    "Gama {C:chips}+#2#{} Fichas cuando se {C:attention}selecciona{} una ciega",
+                    "{C:chips}-#3#{} Fichas cuando se {C:attention}derrota{} una ciega",
+                    "{C:inactive}(Actualmente {C:chips}+#1#{C:inactive} Fichas, no puede ser negativo){}",
+                    "{C:inactive}(Se mantiene el valor al {C:purple}alternar{C:inactive} esta carta)"
+                }
+            },
+            j_fg_oscillator_alt = {
+                name = "¿Oscilador?",
+                text = {
+                    "Gama {C:chips}+#3#{} Fichas cuando se {C:attention}derrota{} una ciega",
+                    "{C:chips}-#2#{} Fichas cuando se {C:attention}selecciona{} una ciega",
+                    "{C:inactive}(Actualmente {C:chips}+#1#{C:inactive} Fichas, no puede ser negativo){}",
+                    "{C:inactive}(Se mantiene el valor al {C:red}alternar{C:inactive} esta carta)"
+                }
+            },
             -- Normal jokers
             j_fg_joker = {
-                name = 'Joker?',
+                name = '¿Comodín?',
                 text = {
                     "Every card scored",
                     "gives {C:mult}+#1#{} Mult"
@@ -421,6 +439,23 @@ return {
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
+            j_fg_invisible = {
+                name = "¿Comodín Invisible?",
+                text = {
+                    "Al ser vendido, elimina un {C:attention}Comodín{} aleatorio",
+                    "Crea una {C:attention}¿Memoria invisible?{}",
+                    "con el comodín eliminado",
+                    "{C:inactive}(No puede copiar comodines eternos){}",
+                }
+            },
+            j_fg_invisible_memory = {
+                name = "{C:dark_edition,E:1}¿Memoria invisible?{}",
+                text = {
+                    "La memoria de un {C:attention}Comodín Invisible{}",
+                    "Después de {C:attention}#1# ronda(s){}, se {C:red,E:2}autodestruye{} y",
+                    "crea {C:attention}#2#{} copias {C:dark_edition}negativas{} de {C:attention}#3#{}",
+                }
+            },
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
@@ -448,11 +483,11 @@ return {
                 },
             },
             j_fg_jogla_alt = {
-                name = 'Jogla',
+                name = 'Joglalt',
                 text = {
-                    "{C:green}1 in 3 {}chance to apply{C:dark_edition}Negative{} to",
-                    "a {C:attention}random{} joker after {C:attention}Boss blind{} defeated",
-                    "{C:inactive,s:0.7}\"I am STILL NOT a wizard\""
+                    "Aumenta el tamaño de la mano en {C:attention}#1#{}",
+                    "cuando se derrota a la {C:attention}ciega jefe{}",
+                    "{C:inactive}(Actualmente {C:attention}+#2#{C:inactive} tamaño de mano"
                 }
             },
             j_fg_jenker = {
@@ -481,11 +516,13 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
-            k_chipMult="Multiplied!",
-			k_plus_aberration="+1 aberration",
-			k_replaced="Replaced!",
+            k_chipMult="¡Multiplicado!",
+			k_plus_aberration="+1 aberración",
+			k_replaced="Reemplazado!",
 			k_replenished="Replenished!",
-			k_card_added="+1 Card",
+			k_card_added="+1 carta",
+            k_fg_active = "¡Activo!",
+            k_fg_none = "Ninguno"
         },
         high_scores={},
         labels={},

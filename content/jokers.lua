@@ -18,6 +18,13 @@ SMODS.Atlas {
 	px = 71,
 	py = 95
 }
+
+SMODS.Atlas {
+	key = 'oscillator_atlas',
+	path = 'oscillator_joker.png',
+	px = 71,
+	py = 95,
+}
 -- All joker equivalents. Format is: original <> alternate
 FG.ALTS.joker_equivalents = {
 	meta = {
@@ -28,6 +35,7 @@ FG.ALTS.joker_equivalents = {
 	j_fg_concert = "j_fg_concertalt",
 	j_fg_delinquent = "j_fg_delinquentalt",
 	j_fg_conductor = "j_fg_conductoralt",
+	j_fg_oscillator = "j_fg_oscillator_alt",
 	-- Normal jokers
 	j_joker = "j_fg_joker",
 	j_greedy_joker = "j_fg_greedy",
@@ -476,6 +484,143 @@ SMODS.Joker {
 	end
 }
 
+SMODS.Joker{
+	key = "oscillator",
+	atlas = "oscillator_atlas",
+	pos = { x = 0, y = 1},
+	rarity = 1,
+	config = {
+		fg_alternate = {
+			chips = 50
+		},
+		extra = {
+			increase = 25,
+			decrease = 25,
+			frame = 0,
+			y_frame = 1,
+			delay = .5,
+		}
+	},
+	add_to_deck = function (self, card, from_debuff)
+		local c = pseudorandom('mila',1,100)
+		if c >= 1 and c <= 33 then card.ability.extra.y_frame = 1
+		elseif c >= 34 and c <= 66 then card.ability.extra.y_frame = 2
+		elseif c >= 67 and c <= 99 then card.ability.extra.y_frame = 3
+		else card.ability.extra.y_frame = 0 end
+	end,
+	update = function (self, card, dt)
+		if not card.ability and not card.ability.extra then return end
+		card.ability.extra.delay = card.ability.extra.delay - dt
+		if card.ability.extra.delay <= 0 then -- Runs once the frame needs updating
+			if card.ability.extra.frame >= 3 then card.ability.extra.frame = 0 end
+			card.ability.extra.frame = card.ability.extra.frame + 1
+			card.children.center:set_sprite_pos({x = card.ability.extra.frame or 0, y = card.ability.extra.y_frame or 1})
+			card.ability.extra.delay = .5
+		end
+	end,
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.fg_alternate.chips,
+				card.ability.extra.increase,
+				card.ability.extra.decrease
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		if context.setting_blind then
+			card.ability.fg_alternate.chips = card.ability.fg_alternate.chips + card.ability.extra.increase
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.increase,
+				mode = "literal",
+				colour = "chips"
+			}
+		end
+		if context.end_of_round and context.cardarea == G.jokers then
+			if card.ability.fg_alternate.chips > 0 then
+					FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "-"..card.ability.extra.decrease,
+					mode = "literal",
+					colour = "chips"
+				}
+			end
+			card.ability.fg_alternate.chips = card.ability.fg_alternate.chips - card.ability.extra.decrease
+			if card.ability.fg_alternate.chips <= 0 then card.ability.fg_alternate.chips = 0 end
+		end
+		if context.joker_main and card.ability.fg_alternate.chips > 0 then return {chips = card.ability.fg_alternate.chips} end
+	end
+}
+
+SMODS.Joker{
+	key = "oscillator_alt",
+	atlas = "oscillator_atlas",
+	pos = { x = 0, y = 1},
+	rarity = 1,
+	config = {
+		fg_alternate = {
+			chips = 50
+		},
+		extra = {
+			increase = 25,
+			decrease = 25,
+			frame = 0,
+			y_frame = 1,
+			delay = .5,
+		}
+	},
+	add_to_deck = function (self, card, from_debuff)
+		local c = pseudorandom('mila',1,100)
+		if c >= 1 and c <= 33 then card.ability.extra.y_frame = 1
+		elseif c >= 34 and c <= 66 then card.ability.extra.y_frame = 2
+		elseif c >= 67 and c <= 99 then card.ability.extra.y_frame = 3
+		else card.ability.extra.y_frame = 0 end
+	end,
+	update = function (self, card, dt)
+		if not card.ability and not card.ability.extra then return end
+		card.ability.extra.delay = card.ability.extra.delay - dt
+		if card.ability.extra.delay <= 0 then -- Runs once the frame needs updating
+			if card.ability.extra.frame >= 3 then card.ability.extra.frame = 0 end
+			card.ability.extra.frame = card.ability.extra.frame + 1
+			card.children.center:set_sprite_pos({x = card.ability.extra.frame or 0, y = card.ability.extra.y_frame or 1})
+			card.ability.extra.delay = .5
+		end
+	end,
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.fg_alternate.chips,
+				card.ability.extra.increase,
+				card.ability.extra.decrease
+			}
+		}
+	end,
+	calculate = function (self, card, context)
+		if context.setting_blind then
+			if card.ability.fg_alternate.chips > 0 then
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "-"..card.ability.extra.decrease,
+					mode = "literal",
+					colour = "chips"
+				}				
+			end
+			card.ability.fg_alternate.chips = card.ability.fg_alternate.chips - card.ability.extra.decrease
+			if card.ability.fg_alternate.chips <= 0 then card.ability.fg_alternate.chips = 0 end
+		end
+		if context.end_of_round and context.cardarea == G.jokers then
+			card.ability.fg_alternate.chips = card.ability.fg_alternate.chips + card.ability.extra.increase
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.increase,
+				mode = "literal",
+				colour = "chips"
+			}
+		end
+		if context.joker_main and card.ability.fg_alternate.chips > 0 then return {chips = card.ability.fg_alternate.chips} end
+	end
+}
 ---------------------
 ---STANDARD JOKERS---
 ---------------------
@@ -500,7 +645,7 @@ SMODS.Joker {
 		if context.individual and context.cardarea == G.play then
 			return {
 				mult_mod = card.ability.extra.mult,
-				message = "+" .. card.ability.extra.mult,
+				message = "+" .. card.ability.extra.mult .. " Mult",
 				colour = G.C.MULT
 			}
 		end
@@ -1907,7 +2052,6 @@ SMODS.Joker{
 			FG.cards.invisible.selected = selected
 			SMODS.add_card{
 				key = "j_fg_invisible_memory",
-				edition = false
 			}
 			selected:start_dissolve()
 		end
@@ -1929,7 +2073,7 @@ SMODS.Joker{
 		}
 	},
 	loc_vars = function (self, info_queue, card)
-		card.ability.extra.name = "None"
+		card.ability.extra.name = localize("k_fg_none")
 		if card.ability.saved_ability then card.ability.extra.name = localize{type = "name_text",set = card.ability.saved_ability.set, key = card.ability.saved_key} end
 		return {
 			vars = {
@@ -1955,7 +2099,7 @@ SMODS.Joker{
 				end
 				card:start_dissolve()
 				return {
-					message = "Active!"
+					message = localize("k_fg_active")
 				}
 			end
 			card.ability.extra.rounds = card.ability.extra.rounds - 1
@@ -2233,7 +2377,7 @@ SMODS.Joker{
 		end,
 		calculate = function(self, card, context)
 			if context.before then
-				retriggers = (pseudorandom('jenker', card.ability.extra.repetitionsmin, card.ability.extra.repetitionsmax))
+				local retriggers = (pseudorandom('jenker', card.ability.extra.repetitionsmin, card.ability.extra.repetitionsmax))
 				if retriggers == 5 then
 						card.ability.extra.name = "janku"
 						card.children.center:set_sprite_pos({x = 5, y = 0})

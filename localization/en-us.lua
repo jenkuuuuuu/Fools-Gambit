@@ -241,6 +241,24 @@ return {
                     "every {C:purple}aberration{} card used",
                 },
             },
+            j_fg_oscillator = {
+                name = "Oscillator",
+                text = {
+                    "Gains {C:chips}+#2#{} Chips when blind {C:attention}selected{}",
+                    "{C:chips}-#3#{} Chips when blind {C:attention}defeated{}",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, can't be negative)",
+                    "{C:inactive}(Value is kept when {C:purple}alternating{C:inactive} this card)"
+                }
+            },
+            j_fg_oscillator_alt = {
+                name = "Oscillator?",
+                text = {
+                    "Gains {C:chips}+#3#{} Chips when blind {C:attention}defeated{}",
+                    "{C:chips}-#2#{} Chips when blind {C:attention}selected{}",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, can't be negative)",
+                    "{C:inactive}(Value is kept when {C:red}alternating{C:inactive} this card)"
+                }
+            },
             -- Normal jokers
             j_fg_joker = {
                 name = 'Joker?',
@@ -587,7 +605,7 @@ return {
                     "When sold, remove a random {C:attention}Joker",
                     "Create an {C:attention}Invisible memory?{}",
                     "with the removed Joker",
-                    "{C:inactive}(Cannot copy eternal jokers){}"
+                    "{C:inactive}(Cannot copy eternal jokers{}",
                 }
             },
             j_fg_invisible_memory = {
@@ -595,8 +613,7 @@ return {
                 text = {
                     "The memory of an {C:attention}Invisible Joker?{}",
                     "After {C:attention}#1#{} round(s), {C:red,E:2}self-destruct{} and",
-                    "give {C:attention}#2#{} copies of {C:attention}#3#{}",
-                    "Can't be sold or destroyed.",
+                    "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
                 }
             },
             -- Collectives
@@ -848,7 +865,9 @@ return {
 			k_replaced="Replaced!",
 			k_replenished="Replenished!",
 			k_card_added="+1 Card",
-            k_unchangeable_warning = "This card can't be alternated"
+            k_unchangeable_warning = "This card can't be alternated",
+            k_fg_active = "Active!",
+            k_fg_none = "None",
         },
         high_scores={},
         labels={},
