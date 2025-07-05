@@ -76,10 +76,11 @@ FG.ALTS.joker_equivalents = {
 	j_faceless = "j_fg_faceless",
 	j_baron = "j_fg_baron",
 	j_cloud_9 = "j_fg_cloud_9",
+	j_rocket = "j_fg_rocket",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_red_card = "j_fg_red_card",
-	j_baron = "j_fg_baron",
+	j_popcorn = "j_fg_popcorn",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
@@ -2073,6 +2074,45 @@ SMODS.Joker{
 		return card.ability.extra.dollars
 	end
 }
+-- Joker
+SMODS.Joker{
+    key = "rocket",
+    atlas = "jokers_alt",
+    pos = { x = 8, y = 12},
+    rarity = 1,
+    cost = 2,
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			payout = 10,
+			payout_d = 2
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.payout,
+				card.ability.extra.payout_d
+			}
+        }
+    end,
+    blueprint_compat = false,
+    calculate = function (self, card, context)
+		if context.skip_blind and not context.blueprint then
+			card.ability.extra.payout = card.ability.extra.payout - card.ability.extra.payout_d
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "-$2",
+				mode = "literal",
+				colour = "gold"
+			}
+		end
+    end,
+	calc_dollar_bonus = function (self, card)
+		return card.ability.extra.payout
+	end
+}
 --[[-- Splash | does not work help
 SMODS.Joker{
 	key = "splash",
@@ -2301,7 +2341,55 @@ SMODS.Joker{
 
 	end
 }
-
+-- Joker
+SMODS.Joker{
+    key = "popcorn",
+    atlas = "jokers_alt",
+    pos = { x = 1, y = 15},
+    rarity = 1,
+    cost = 2,
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			mult = 25,
+			mult_d = 1
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.mult,
+				card.ability.extra.mult_d
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.before and not context.blueprint then
+			card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.mult_d
+			if card.ability.extra.mult <= 0 then
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Eaten!",
+					mode = "literal",
+					colour = "red"
+				}
+				card:start_dissolve()
+				return
+			end
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "-"..card.ability.extra.mult_d,
+				mode = "literal",
+				colour = "red"
+			}
+		end
+		if context.joker_main then
+			return {mult = card.ability.extra.mult}
+		end
+    end
+}
 -- Hanging chad
 SMODS.Joker{
 	key = "hanging_chad",

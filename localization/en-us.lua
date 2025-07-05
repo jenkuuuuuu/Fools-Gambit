@@ -597,6 +597,14 @@ return {
                     "scored {C:attention}9{}"
                 }
             },
+            j_fg_rocket = {
+                name = "Rocket?",
+                text = {
+                    "Earn {C:gold}$#1#{} at {C:attention}end of round{}",
+                    "Decrease payout by {C:gold}$#2#{}",
+                    "when {C:attention}skipping blind{}"
+                }
+            },
             j_fg_duo = {
                 name = 'The Duo?',
                 text = {
@@ -632,6 +640,14 @@ return {
                     "a {C:attention}#2#",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
+            },
+            j_fg_popcorn = {
+                name = "Popcorn",
+                text = {
+                    "{C:mult}+#1#{} Mult",
+                    "{C:mult}-#2#{} per",
+                    "hand played"
+                }
             },
             j_fg_throwback = {
                 name = "Throwback?",
