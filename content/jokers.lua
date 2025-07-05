@@ -74,6 +74,8 @@ FG.ALTS.joker_equivalents = {
 	j_egg = "j_fg_egg",
 	j_ice_cream = "j_fg_ice_cream",
 	j_faceless = "j_fg_faceless",
+	j_baron = "j_fg_baron",
+	j_cloud_9 = "j_fg_cloud_9",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_red_card = "j_fg_red_card",
@@ -2042,6 +2044,34 @@ SMODS.Joker{
 		end
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end
+}
+-- Joker
+SMODS.Joker{
+    key = "cloud_9",
+    atlas = "jokers_alt",
+    pos = { x = 7, y = 12},
+    rarity = 1,
+    cost = 2,
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			dollars = 4
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.dollars
+			}
+        }
+    end,
+    blueprint_compat = false,
+    calculate = function (self, card, context)
+    end,
+	calc_dollar_bonus = function (self, card)
+		return card.ability.extra.dollars
+	end
 }
 --[[-- Splash | does not work help
 SMODS.Joker{

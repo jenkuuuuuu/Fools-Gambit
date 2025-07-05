@@ -590,6 +590,13 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{}{C:inactive} Mult)"
                 }
             },
+            j_fg_cloud_9 = {
+                name = "Cloud 9?",
+                text = {
+                    "Earn {C:gold}$#1#{} for each",
+                    "scored {C:attention}9{}"
+                }
+            },
             j_fg_duo = {
                 name = 'The Duo?',
                 text = {
