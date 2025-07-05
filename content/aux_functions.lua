@@ -13,7 +13,7 @@ end
 ---@param key string The provided card key.
 ---@param table table The reference table to look up.
 ---@param passing? string Key or value, and returns the other.
----@return string|boolean
+---@return string|boolean key The key of the alternate card, or `false` (boolean) if not found
 function FG.FUNCS.get_alternate(key,table,passing)
 	local _passing = passing or FG.FUNCS.is_alternate(key,table)
 	if _passing == "k" then -- passing key, returning value
@@ -266,6 +266,16 @@ function FG.FUNCS.random_chance(max)
 	end
 end
 
+function FG.FUNCS.allow_duplicate (card)
+	if not G.jokers then sendWarnMessage("G.jokers doesn't exist!","FG.FUNCS.allow_duplicate") return end
+	local found_showman = false
+	local found_alternate = false
+	for _,v in ipairs(G.jokers) do
+		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true break end -- Find showman
+		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
+	end
+	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
+end
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
 

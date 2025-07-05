@@ -8,32 +8,52 @@ SMODS.current_mod.config_tab = function()
 		{n = G.UIT.R, config = {minw = 4, minh = 6, align = "tm", padding = 0.1}, nodes = {
 			{n = G.UIT.R, nodes = {
 				{n = G.UIT.C, nodes = {
-					create_toggle{
-						label = "Debug mode",
-						ref_table = FG.config,
-						ref_value = "debug_mode"
-					},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {
-						{n = G.UIT.T, config = {text = "(Requires restart)", align = "tm", colour = G.C.GREY, scale = .3, minw = 2, minh = 6, padding = 0.4}},
-					}},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {
-						{n = G.UIT.T, config = {text = "\"It is called debug for a reason, you hear me?\"", align = "tm", colour = G.C.GREY, scale = .2, minw = 2, minh = 6, padding = 0.4}},
+					{n = G.UIT.R, nodes = {
+						{n = G.UIT.C, nodes = {
+							create_toggle{
+								label = "Additional jokers",
+								ref_table = FG.config,
+								ref_value = "extra_jokers"
+							},
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {
+								{n = G.UIT.T, config = {text = "Hover to vew more info", align = "tm", colour = G.C.GREY, scale = .4, minw = 2, minh = 6, padding = 0.4, tooltip = {text = {
+									"Prevents jokers added by Fool's Gambit ",
+									"that don't have a vanilla counterpart",
+									"from spawning",
+									" ",
+									"It is not recommended to toggle",
+									"this option during a run",
+									"{C:dark_edition}This option is experimental{}"
+									}
+								}}},
+							}},
+						}},
+					}}
+				}},
+				
+			}},
+			{n = G.UIT.R, nodes = {
+				{n = G.UIT.C, nodes = {
+					{n = G.UIT.R, nodes = {
+						{n = G.UIT.C, nodes = {
+							create_toggle{
+								label = "Disable duplicated Jokers",
+								ref_table = FG.config,
+								ref_value = "duplicated_jokers"
+							},
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {
+								{n = G.UIT.T, config = {text = "Hover to vew more info", align = "tm", colour = G.C.GREY, scale = .4, minw = 2, minh = 6, padding = 0.4, tooltip = {text = {
+									"Prevents original and alternate jokers",
+									"from spawning when the counterpart is",
+									"in possesion.",
+									"{C:inactive}(Affected by Showman){}",
+									"{C:dark_edition}This option is experimental{}"
+									}
+								}}},
+							}},
+						}},
 					}},
 				}},
-				{n = G.UIT.C, nodes = {
-					create_toggle{
-						label = "Additional jokers",
-						ref_table = FG.config,
-						ref_value = "extra_jokers"
-					},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {
-						{n = G.UIT.T, config = {text = "Hover to vew more info", align = "tm", colour = G.C.GREY, scale = .2, minw = 2, minh = 6, padding = 0.4, tooltip = {text = {
-							"Prevents jokers added by Fool's Gambit ",
-							"that don't have a vanilla counterpart",
-							"from spawning"}
-						}}},
-					}},
-				}}
 			}},
 			{n = G.UIT.R, config = {minh = 0.3}},
 			{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Special edition", colour = G.C.WHITE, scale = .4}}}},
@@ -46,6 +66,21 @@ SMODS.current_mod.config_tab = function()
                 w = 4
 			},
 			{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "(Requires restart)", colour = G.C.GREY, scale = .3}}}},
+			{n = G.UIT.R, nodes = {
+				{n = G.UIT.C, nodes = {
+					create_toggle{
+						label = "Debug mode",
+						ref_table = FG.config,
+						ref_value = "debug_mode"
+					},
+					{n = G.UIT.R, config = {align = "tm"}, nodes = {
+						{n = G.UIT.T, config = {text = "(Requires restart)", align = "tm", colour = G.C.GREY, scale = .3, minw = 2, minh = 6, padding = 0.4}},
+					}},
+					{n = G.UIT.R, config = {align = "tm"}, nodes = {
+						{n = G.UIT.T, config = {text = "\"It is called debug for a reason, you hear me?\"", align = "tm", colour = G.C.GREY, scale = .2, minw = 2, minh = 6, padding = 0.4}},
+					}},
+				}},
+			}},
 		}}
 	}}
 end
