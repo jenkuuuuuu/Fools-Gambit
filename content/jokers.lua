@@ -77,6 +77,7 @@ FG.ALTS.joker_equivalents = {
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_red_card = "j_fg_red_card",
+	j_baron = "j_fg_baron",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
@@ -1993,6 +1994,53 @@ SMODS.Joker{
 			}
 		end
 		if context.joker_main then return {mult = card.ability.extra.mult} end
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "baron",
+    atlas = "jokers_alt",
+    pos = { x = 6, y = 12},
+    rarity = 2,
+    cost = 6,
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1,
+			xmult_i = 0.1
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+			for _,v in ipairs(G.hand.cards) do
+				if FG.FUNCS.get_card_info(v).rank == "King" then
+					card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+					G.E_MANAGER:add_event(Event({
+						func = function ()
+							v:juice_up()
+							return true
+						end
+					}))
+					FG.FUNCS.card_eval_status_text{
+						card = card,
+						message = "+X"..card.ability.extra.xmult_i.." Mult",
+						mode = "literal",
+						colour = "mult"
+					}
+				end
+			end
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end
 }
 --[[-- Splash | does not work help

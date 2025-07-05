@@ -581,6 +581,15 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 }
             },
+            j_fg_baron = {
+                name = "Baron",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult for",
+                    "each {C:attention}King{} held in hand",
+                    "at {C:attention}end of round",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{}{C:inactive} Mult)"
+                }
+            },
             j_fg_duo = {
                 name = 'The Duo?',
                 text = {
