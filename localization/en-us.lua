@@ -514,7 +514,7 @@ return {
 
             },
             j_fg_ride_the_bus = {
-                name = "Ride the Bus",
+                name = "Ride the Bus?",
                 text = {
                     "{C:mult}+#2#{} Mult",
                     "{C:mult}-#1#{} Mult for every",
@@ -536,6 +536,21 @@ return {
                     "when sold lose",
                     "{C:mult}#2#{} hand and {C:mult}#3#{} discard"
                 },
+            },
+            j_fg_ice_cream = {
+                name = "Ice cream?",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "{C:chips}-#2#{} Chips when",
+                    "blind {C:attention}selected{}"
+                }
+            },
+            j_fg_faceless = {
+                name = "Faceless Joker?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if played hand",
+                    "contains no {C:attention}face{} cards"
+                }
             },
             j_fg_splash = {
                 name = "Splash?",

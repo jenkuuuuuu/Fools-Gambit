@@ -72,6 +72,8 @@ FG.ALTS.joker_equivalents = {
 	j_family = "j_fg_family",
 	j_order = "j_fg_order",
 	j_egg = "j_fg_egg",
+	j_ice_cream = "j_fg_ice_cream",
+	j_faceless = "j_fg_faceless",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_throwback = "j_fg_throwback",
@@ -228,7 +230,7 @@ SMODS.Joker {
 	cost = 6,
 	no_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function(self, card, context)
 		if context.buying_card then
@@ -273,7 +275,7 @@ SMODS.Joker {
 	cost = 6,
 	yes_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function(self, card, context)
 		if G.jokers then
@@ -309,7 +311,7 @@ SMODS.Joker {
 	cost = 7,
 	no_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function(self, card, context)
 		if context.skip_blind then
@@ -343,7 +345,7 @@ SMODS.Joker {
 	pos = { x = 1, y = 0 },
 	cost = 8,
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function(self, card, context)
 		if context.end_of_round and context.individual then
@@ -380,7 +382,7 @@ SMODS.Joker {
 		return { vars = { card.ability.extra.chips } }
 	end,
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function(self, card, context)
 		if context.other_joker then
@@ -412,7 +414,7 @@ SMODS.Joker {
 		return { vars = { card.ability.extra.mult } }
 	end,
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function(self, card, context)
 		if context.other_joker then
@@ -444,7 +446,7 @@ SMODS.Joker {
 		return { vars = { card.ability.extra.amount } }
 	end,
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function(self, card, context)
 		if context.joker_main then
@@ -489,8 +491,9 @@ SMODS.Joker {
 		return { vars = { card.ability.extra.amount } }
 	end,
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
+	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.using_consumeable then
 			if context.consumeable.ability.set == 'aberration' then
@@ -564,8 +567,9 @@ SMODS.Joker{
 		}
 	end,
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
+	blueprint_compat = true,
 	calculate = function (self, card, context)
 		if context.setting_blind then
 			card.ability.fg_alternate.chips = card.ability.fg_alternate.chips + card.ability.extra.increase
@@ -638,7 +642,7 @@ SMODS.Joker{
 		}
 	end,
 	in_pool = function (self, args)
-		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) then return true else return false end
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
 	end,
 	calculate = function (self, card, context)
 		if context.setting_blind then
@@ -1868,6 +1872,89 @@ SMODS.Joker {
 			ease_discard(card.ability.extra.discards)
 		end
 	end
+}
+-- Ice cream
+SMODS.Joker{
+    key = "ice_cream",
+    atlas = "jokers_alt",
+    pos = { x = 4, y = 10},
+    rarity = 1,
+    cost = 2,
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			chips = 120,
+			chips_d = 15,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.chips,
+				card.ability.extra.chips_d
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.setting_blind and not context.blueprint then
+			card.ability.extra.chips = card.ability.extra.chips - card.ability.extra.chips_d
+			if card.ability.extra.chips <= 0 then
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Melted!",
+					mode = "literal",
+					colour = "blue"
+				}
+				card:start_dissolve()
+				return
+			end
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "-"..card.ability.extra.chips_d,
+				mode = "literal",
+				colour = "blue"
+			}
+		end
+		if context.joker_main then
+			return {chips = card.ability.extra.chips}
+		end
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "faceless",
+    atlas = "jokers_alt",
+    pos = { x = 1, y = 11 },
+    rarity = 1,
+    cost = 2,
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1.5
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.joker_main then
+			local face = false
+			for _,v in ipairs(G.play.cards) do
+				if FG.FUNCS.get_card_info(v).is_face then
+					face = true
+				end
+			end
+			if not face then return {xmult = card.ability.extra.xmult} end
+		end
+    end
 }
 --[[-- Splash | does not work help
 SMODS.Joker{
