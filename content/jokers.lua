@@ -76,6 +76,7 @@ FG.ALTS.joker_equivalents = {
 	j_faceless = "j_fg_faceless",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
+	j_red_card = "j_fg_red_card",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
@@ -1560,6 +1561,7 @@ SMODS.Joker{
 	atlas = "jokers_alt",
 	pos = { x = 7, y = 6},
 	yes_pool_flag = 'alternate_spawn',
+	no_pool_flag = "fg_gros_michel_extinct",
 	config = {
 		extra = {
 			xmult = 1.5,
@@ -1954,6 +1956,43 @@ SMODS.Joker{
 			end
 			if not face then return {xmult = card.ability.extra.xmult} end
 		end
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "red_card",
+    atlas = "jokers_alt",
+    pos = { x = 7, y = 11},
+    rarity = 1,
+    cost = 2,
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			mult = 0,
+			mult_i = 15
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.mult,
+				card.ability.extra.mult_i
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.skip_blind and not context.blueprint then
+			card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.mult.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+		end
+		if context.joker_main then return {mult = card.ability.extra.mult} end
     end
 }
 --[[-- Splash | does not work help

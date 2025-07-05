@@ -346,7 +346,6 @@ SMODS.Enhancement{
 			card.ability.bonus = card.ability.extra.chips
 		end
 		local test_var = pseudorandom("mila",card.ability.extra.money_min,card.ability.extra.money_max)
-		print(test_var)
 		if test_var <= card.ability.extra.chips_min then
 			card.ability.p_dollars = card.ability.extra.money
 		else

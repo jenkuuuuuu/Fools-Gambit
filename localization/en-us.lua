@@ -567,6 +567,20 @@ return {
                     "Self-destruct on {C:white,X:mult}X1{} Mult"
                 }
             },
+            j_fg_card_sharp = {
+                name = "Card Sharp",
+                text = {
+                    ""
+                }
+            },
+            j_fg_red_card = {
+                name = "Red Card?",
+                text = {
+                    "Gains {C:mult}+#2#{} Mult when",
+                    "skipping a blind is {C:attention}skipped{}",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+                }
+            },
             j_fg_duo = {
                 name = 'The Duo?',
                 text = {
