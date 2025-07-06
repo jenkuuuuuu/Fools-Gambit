@@ -720,7 +720,7 @@ SMODS.Joker {
 	end,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
-			playingCard = context.other_card
+			local playingCard = context.other_card
 			if playingCard:is_suit('Diamonds') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
 				FG.FUNCS.card_eval_status_text{
@@ -757,7 +757,7 @@ SMODS.Joker {
 	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
-			playingCard = context.other_card
+			local playingCard = context.other_card
 			if playingCard:is_suit('Hearts') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
 				FG.FUNCS.card_eval_status_text{
@@ -794,7 +794,7 @@ SMODS.Joker {
 	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
-			playingCard = context.other_card
+			local playingCard = context.other_card
 			if playingCard:is_suit('Spades') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
 				FG.FUNCS.card_eval_status_text{
@@ -831,7 +831,7 @@ SMODS.Joker {
 	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual then
-			playingCard = context.other_card
+			local playingCard = context.other_card
 			if playingCard:is_suit('Clubs') then
 				card.ability.extra.currentMult = card.ability.extra.currentMult + card.ability.extra.mult_gain
 				FG.FUNCS.card_eval_status_text{
@@ -1229,6 +1229,7 @@ SMODS.Joker {
 	atlas = 'jokers_alt',
 	pos = { x = 4, y = 2 },
 	cost = 2,
+	yes_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
 		if context.buying_card then
@@ -1285,6 +1286,7 @@ SMODS.Joker {
 	atlas = 'jokers_alt',
 	pos = { x = 0, y = 5 },
 	config = { extra = { chips = 0, chip_gain = 15 } },
+	yes_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual and (context.other_card:get_id() == 8) then
@@ -1370,6 +1372,7 @@ SMODS.Joker {
 			}
 		}
 	end,
+	yes_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
 		if G.jokers then
@@ -1396,6 +1399,7 @@ SMODS.Joker {
     atlas = 'jokers_alt',
     pos = { x = 8, y = 2 },
     cost = 2,
+	yes_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
     calculate = function(self, card, context)
         if context.cardarea == G.hand then
@@ -1886,6 +1890,7 @@ SMODS.Joker{
     pos = { x = 4, y = 10},
     rarity = 1,
     cost = 2,
+	yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -1935,6 +1940,7 @@ SMODS.Joker{
     pos = { x = 1, y = 11 },
     rarity = 1,
     cost = 2,
+	yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -1969,6 +1975,7 @@ SMODS.Joker{
     pos = { x = 7, y = 11},
     rarity = 1,
     cost = 2,
+	yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -2004,8 +2011,9 @@ SMODS.Joker{
     key = "baron",
     atlas = "jokers_alt",
     pos = { x = 6, y = 12},
-    rarity = 2,
+    rarity = 3,
     cost = 6,
+	yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -2053,6 +2061,7 @@ SMODS.Joker{
     pos = { x = 7, y = 12},
     rarity = 1,
     cost = 2,
+	yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -2081,6 +2090,7 @@ SMODS.Joker{
     pos = { x = 8, y = 12},
     rarity = 1,
     cost = 2,
+	yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -2297,7 +2307,90 @@ SMODS.Joker {
 		end
 	end
 }
-
+--[[ Joker
+SMODS.Joker{
+    key = "ancient",
+    atlas = "jokers_alt",
+    pos = { x = 7, y = 15},
+    rarity = 1,
+    cost = 2,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1,
+			xmult_i = 0.5,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+		local suit = pseudorandom_element(SMODS.Suits)
+		suit = suit.name or "Spades"
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i,
+				suit,
+				colours = {
+					G.C.SUITS.Spades
+				}
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}]]
+-- Joker
+SMODS.Joker{
+    key = "campfire",
+    atlas = "jokers_alt",
+    pos = { x = 5, y = 15},
+    rarity = 3,
+    cost = 6,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1,
+			xmult_i = 0.04,
+			xmult_d = 0.5
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i,
+				card.ability.extra.xmult_d
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.discard and not context.blueprint then
+			card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+X"..card.ability.extra.xmult_i.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+		end
+		if context.end_of_round and context.cardarea == G.jokers and G.GAME.blind.boss and not context.blueprint then
+			card.ability.extra.xmult = card.ability.extra.xmult - card.ability.extra.xmult_d
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "-X"..card.ability.extra.xmult_d.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+			if card.ability.extra.xmult < 0.75 then card.ability.extra.xmult = 0.75 end
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+    end
+}
 -- Throwback
 SMODS.Joker{
 	key = "throwback",
@@ -2348,6 +2441,7 @@ SMODS.Joker{
     pos = { x = 1, y = 15},
     rarity = 1,
     cost = 2,
+	yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -2589,7 +2683,7 @@ SMODS.Joker {
 -- Onyx Agate
 SMODS.Joker {
 	key = 'agate',
-	config = { type = 'Flush', extra = { mult_gain = 20, mult = 0 } },
+	config = { type = 'Flush', extra = { mult_gain = 12, mult = 0 } },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { localize(card.ability.type, 'poker_hands'), card.ability.extra.mult_gain, card.ability.extra.mult } }
 	end,

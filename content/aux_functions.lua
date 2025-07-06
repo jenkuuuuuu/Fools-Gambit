@@ -207,7 +207,7 @@ function FG.FUNCS.card_eval_status_text (args)
 	local colour = args.colour or args.color or string.upper("orange") -- The color of the square background.
 	colour = string.upper(colour)
 	
-	if not card then sendWarnMessage("No target card selected!\nMake sure you specify the target card in the function arguments","FG.FUNCS.card_eval_status_text") return end
+	if not card then error("No target card selected!\nMake sure you specify the target card in the function arguments") return end
 
 	if mode == "literal" then
 		card_eval_status_text(card, eval_type, nil, nil, nil,
@@ -275,6 +275,19 @@ function FG.FUNCS.allow_duplicate (card)
 		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
 	end
 	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
+end
+
+local start_run_ref = Game.start_run 
+
+function Game:start_run(args)
+	start_run_ref(self,args)
+	if G.GAME.pool_flags.alternate_spawn then
+		for k, v in pairs(G.P_CENTERS) do
+			if string.find(k, 'j_') and not string.find(k, "_fg_") then
+				G.P_CENTERS[k]['no_pool_flag'] = 'alternate_spawn'
+			end
+		end
+	end
 end
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT

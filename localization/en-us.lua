@@ -462,7 +462,7 @@ return {
                 },
             },
             j_fg_face = {
-                name = 'Scary face?',
+                name = 'Scary Face?',
                 text = {
                     'Gains {C:chips}+#2#{} chips per scored {C:attention}face{} card',
                     '{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}'
@@ -503,7 +503,7 @@ return {
                 }
             },
             j_fg_business = {
-                name = "Business card?",
+                name = "Business Card?",
                 text = {
                     "{C:green}#1# in #2#{} chance to enhance",
                     "scored {C:attention}face{} cards",
@@ -568,7 +568,7 @@ return {
                 }
             },
             j_fg_card_sharp = {
-                name = "Card Sharp",
+                name = "Card Sharp?",
                 text = {
                     ""
                 }
@@ -582,7 +582,7 @@ return {
                 }
             },
             j_fg_baron = {
-                name = "Baron",
+                name = "Baron?",
                 text = {
                     "Gains {C:white,X:mult}X#2#{} Mult for",
                     "each {C:attention}King{} held in hand",
@@ -642,11 +642,32 @@ return {
                }
             },
             j_fg_popcorn = {
-                name = "Popcorn",
+                name = "Popcorn?",
                 text = {
                     "{C:mult}+#1#{} Mult",
                     "{C:mult}-#2#{} per",
                     "hand played"
+                }
+            },
+            j_fg_trouses = {},
+            j_fg_ancient = {
+                name = "Ancient Joker",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult when",
+                    "all playing cards are {V:#1#}#3#{}",
+                    "Suit changes every round",
+                    "{C:inactive}(Currently{C:white,X:mult}#1#{C:inactive} Mult)",
+                    "{C:inactive}(Can't go below X0.75 Mult)"
+                }
+            },
+            j_fg_campfire = {
+                name = "Campfire",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult for",
+                    "each card {C:attention}discarded{}",
+                    "Losses {C:white,X:mult}X#3#{} Mult when",
+                    "{C:attention}boss blind{} defeated",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult)"
                 }
             },
             j_fg_throwback = {
