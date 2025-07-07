@@ -2355,7 +2355,8 @@ SMODS.Joker{
         extra = {
 			xmult = 1,
 			xmult_i = 0.04,
-			xmult_d = 0.5
+			xmult_d = 0.5,
+			xmult_m = 0.75
 		}
     },
     loc_vars = function (self, info_queue, card)
@@ -2363,7 +2364,8 @@ SMODS.Joker{
             vars = {
 				card.ability.extra.xmult,
 				card.ability.extra.xmult_i,
-				card.ability.extra.xmult_d
+				card.ability.extra.xmult_d,
+				card.ability.extra.xmult_m
 			}
         }
     end,
@@ -2386,7 +2388,7 @@ SMODS.Joker{
 				mode = "literal",
 				colour = "mult"
 			}
-			if card.ability.extra.xmult < 0.75 then card.ability.extra.xmult = 0.75 end
+			if card.ability.extra.xmult < card.ability.extra.xmult_m then card.ability.extra.xmult = card.ability.extra.xmult_m end
 		end
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end

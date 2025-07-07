@@ -661,13 +661,11 @@ return {
                 }
             },
             j_fg_campfire = {
-                name = "Campfire",
+                name = "Campfire?",
                 text = {
-                    "Gains {C:white,X:mult}X#2#{} Mult for",
-                    "each card {C:attention}discarded{}",
-                    "Losses {C:white,X:mult}X#3#{} Mult when",
-                    "{C:attention}boss blind{} defeated",
-                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult)"
+                    "Gains {C:white,X:mult}X#2#{} Mult for each card {C:attention}discarded{}",
+                    "Losses {C:white,X:mult}X#3#{} Mult when {C:attention}boss blind{} defeated",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult, can't go below {C:white,X:mult}X0.75{C:inactive} Mult)"
                 }
             },
             j_fg_throwback = {
