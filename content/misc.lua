@@ -31,18 +31,3 @@ SMODS.Sticker{
     rate = 1,
     needs_enabled_flag = false
 }
-
-SMODS.Language{
-    key = "sn_bos",
-    label = "Sendien",
-    font = {
-        file = "SendienConlang.ttf",
-        render_scale = G.TILESIZE*7.5,
-        TEXT_HEIGHT_SCALE = 1,
-        TEXT_OFFSET = {x=0,y=0},
-        FONTSCALE = 0.08,
-        squish = 1,
-        DESCSCALE = 1
-    },
-    loc_key = "en_us"
-}

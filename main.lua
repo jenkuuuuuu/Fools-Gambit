@@ -29,6 +29,7 @@ SMODS.Atlas{
 -- This is in preparation for file splitting. I'll do that later. - Jogla
 -- im splitting jokers and stuff into sections to make this easier later - jenku
 local mod_contents = {
+	"special_editions/sendien",
 	"aux_functions",
 	"jokers",
 	"editions",
