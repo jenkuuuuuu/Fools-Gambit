@@ -1,4 +1,3 @@
-if FG.config.s_version.active == "2025 April Fools" then
 init_loc_ref = init_localization
 
 function init_localization()
@@ -239,4 +238,3 @@ init_loc_ref(self)
 end
 
 
-end

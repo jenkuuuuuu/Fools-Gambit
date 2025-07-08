@@ -1,21 +1,21 @@
-FG.ALTS.enhancement_equivalents = {
+FG.enhancement_equivalents = {
 	c_base = "c_base",
 	m_bonus = "m_fg_bonus",
 	m_mult = "m_fg_mult",
 	m_glass = "m_fg_glass",
 	m_steel = "m_fg_steel",
 	m_lucky = "m_fg_lucky",
-	m_gold = "m_fg_gold"
+	m_gold = "m_fg_gold",
+	m_stone = "m_fg_stone"
 }
-FG.cards.steel = {-- Stores global card info.
-	mult = 1
+FG.cards = {
+	steel_mult = 1
 }
-
 SMODS.Atlas {
-	key = 'enhanced',
-	path = 'Enhancers.png',
-	px = 71,
-	py = 95
+key = 'enhanced',
+path = 'Enhancers.png',
+px = 71,
+py = 95
 }
 
 SMODS.Enhancement{
@@ -93,84 +93,104 @@ SMODS.Enhancement{
 	end
 }
 
-
-SMODS.Enhancement{
-	key = "wild",
-	atlas = "enhanced",
-	pos = { x = 3, y = 1},
-	config = {
-		extra = {
-			chips = 20,
-			mult = 6,
-			xmult = 1.25,
-			dollars = 3
-		}
-	},
-	loc_vars = function (self, info_queue, card)
-		return {
-			vars = {
-				card.ability.extra.chips,
-				card.ability.extra.mult,
-				card.ability.extra.xmult,
-				card.ability.extra.dollars
-			}
-		}
-	end,
-	calculate = function (self, card, context)
-		if context.main_scoring and context.cardarea == G.play then
-			local choice = pseudorandom("mila",1,4)
-			if choice == 1 then
-				return {chips = card.ability.extra.chips }
-			elseif choice == 2 then
-				return {mult = card.ability.extra.mult}
-			elseif choice == 3 then
-				return {xmult = card.ability.extra.xmult}
-			elseif choice == 4 then
-				return {dollars = card.ability.extra.dollars}
-			end
-		end
-	end
-}
-
 SMODS.Enhancement{
 	key = "glass",
 	atlas = "enhanced",
 	pos = { x = 5, y = 1 },
 	config = {
-		bonus = 0,
-		x_mult = 0,
-	},
+		extra = {
+			bonus = 0,
+			divide = .4
+			},
+		},
 	loc_vars = function(self,info_queue, card)
-		return {vars = {card.ability.x_mult}}
+		if G.jokers then
+			card.ability.extra.bonus = G.GAME.blind.chips * card.ability.extra.divide
+		else
+			card.ability.extra.bonus = 0
+		end
+		return {vars = {
+			card.ability.extra.bonus,
+			card.ability.extra.divide
+	}}
 	end,
 	replace_base_card = true,
 	no_rank = true,
 	no_suit = true,
 	always_scores = true,
 	calculate = function(self,card,context)
-		if context.before and not context.repetition and not context.individual then
-			card.ability.bonus = 0
-			for _,v in pairs(G.play.cards) do
-				if FG.FUNCS.get_card_info(v).key == "m_fg_glass" then
-					card.ability.x_mult = card.ability.x_mult + 1
-				end
-			end
-			if card.ability.x_mult <= 0 then card.ability.x_mult = 1 end
+		if G.jokers then
+			card.ability.bonus = card.ability.extra.bonus
 		end
 		if context.after and context.cardarea == G.play then
 			G.E_MANAGER:add_event(Event({
-				trigger = "after",
-				delay = 0.5,
-				func = function ()
-					card:shatter()
-					return true
-				end
-			}))
-		 end
+			trigger = 'after',
+			delay = 0.1,
+			func = function() 
+				card:shatter()
+				return true 
+			end }))
+		end
 	end
 }
 
 --display is broken please fix
+
+SMODS.Enhancement{
+	key = "stone",
+	loc_txt = {
+		name = "Stone Card?",
+		text = {
+			"Copies the {C:attention}rank{} and {C:attention}suit{}",
+			"of a {C:attention}random card held in hand{}",
+			"{C:green}#1# in #2#{} chance to give said card an {C:attention}enhancement{}",
+			"{C:green}#3# in #4#{} chance to give said card an {C:attention}edition{}"
+		}
+	},
+	atlas = "enhanced",
+	pos = { x = 5, y = 0 },
+	config = {
+		extra = {
+			enhancement_chance = 1,
+			enhancement_max = 4,
+			edition_chance = 1,
+			edition_max = 6
+			},
+		},
+	loc_vars = function(self,info_queue, card)
+		return {vars = {
+			card.ability.extra.enhancement_chance,
+			card.ability.extra.enhancement_max,
+			card.ability.extra.edition_chance,
+			card.ability.extra.edition_max
+	}}
+	end,
+	replace_base_card = false,
+	calculate = function (self, card, context)
+		if context.before and context.cardarea == G.play then
+			FG.test.hand = G.hand.cards
+			FG.test.card_pre = card
+			-- select random card
+			local n_cards = #G.hand.cards
+			local choosen_card = pseudorandom("mila",1,n_cards)
+			-- Change card's rank and suit
+			local rank = G.hand.cards[choosen_card].config.card.value
+			local suit = G.hand.cards[choosen_card].config.card.suit
+			SMODS.change_base(card,suit,rank,"For some fucking reason the card didn't fully convert.")
+			FG.test.card_post = card
+			-- set target card's edition and enhancements
+			local enhance_max = card.ability.extra.enhancement_max
+			local edition_max = card.ability.extra.edition_max
+			local enhance_chance = card.ability.extra.enhancement_chance
+			local edition_chance = card.ability.extra.edition_chance
+			local enhance_give = pseudorandom("mila",1,enhance_max)
+			local edition_give = pseudorandom("mila",1,edition_max)
+			--if enhance_give >= enhance_chance then SMODS.poll_enhancement{guaranteed = true} end
+			--if edition_give >= edition_chance then choosen_card:poll_edition(nil,nil,true,true) end
+		end
+	end
+}
+
 
 SMODS.Enhancement{
 	key = "steel",
@@ -184,30 +204,22 @@ SMODS.Enhancement{
 	},
 	loc_vars = function (self, info_queue, card)
 		if G.jokers then
-			FG.cards.steel.mult = 1
-			card.ability.extra.card_mult = FG.cards.steel.mult
-			for _,v in pairs(G.deck.cards) do
-				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
-					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
+			FG.cards.steel_mult = 1
+			card.ability.extra.card_mult = FG.cards.steel_mult
+			--local i = 1
+			for _,v in ipairs(G.deck.cards) do
+				local enhancements = SMODS.get_enhancements(v)
+				if enhancements.m_fg_steel then 
+					FG.cards.steel_mult = FG.cards.steel_mult + card.ability.extra.card_gain
+					--print("Fuck yeah!")
 				end
-			end
-			for _,v in pairs(G.hand.cards) do
-				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
-					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
-				end
-			end
-			for _,v in pairs(G.discard.cards) do
-				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
-					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
-				end
-			end
-			for _,v in pairs(G.play.cards) do
-				if tostring(FG.FUNCS.get_card_info(v).key) == "m_fg_steel" then
-					FG.cards.steel.mult = FG.cards.steel.mult + card.ability.extra.card_gain
-				end
+				--print(SMODS.get_enhancements(v))
+				--print(i)
+				--i = i + 1
+				--print(FG.cards.steel_mult)
 			end
 		end
-		card.ability.extra.card_mult = FG.cards.steel.mult
+		card.ability.extra.card_mult = FG.cards.steel_mult
 		return {
 			vars = {
 				card.ability.extra.card_gain,
@@ -216,79 +228,7 @@ SMODS.Enhancement{
 		}
 	end,
 	calculate = function (self, card, context)
-		card.ability.h_x_mult = FG.cards.steel.mult
-	end
-}
-
-local stone = {
-	triggered = false, -- True if the function has been trigger already.
-	trigger = function (triggered) -- Very scuffed function to make stone card work. Only argument checks if the function has been triggered already.
-		if not triggered then
-			local c = 0
-			for k,v in pairs(G.hand.cards) do
-				local card = v
-				local lock = false
-				if FG.FUNCS.get_card_info(card).key == "m_fg_stone" then lock = card.ability.extra.lock end -- Find stone card in hand, check if it is locked.
-				c = c + 1
-				--print("c="..c)
-				if FG.FUNCS.get_card_info(v).key == "m_fg_stone" and not lock then -- If not locked, convert left and right card. Otherwise do nothing.
-					--print("Valid card found")
-					if c > 1 then -- If not leftmost card
-						--print("stone left")
-						local target = G.hand.cards[c-1]
-						target:set_ability("m_fg_stone")
-						target.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
-						target.ability.extra.lock = true
-					end
-					if c < #G.hand.cards then -- If not rightmost card
-						--print("stone right")
-						local target = G.hand.cards[c+1]
-						target:set_ability("m_fg_stone")
-						target.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
-						target.ability.extra.lock = true
-					end
-					card:start_dissolve()
-				end
-			end
-		end
-		return true
-	end
-}
-
-SMODS.Enhancement{
-	key = "stone",
-	atlas = "enhanced",
-	pos = { x = 5, y = 0 },
-	config = {
-		h_chips = 30,
-		extra = {
-			chips = 30,
-			gain = 15,
-			lock = false,
-			selected = false
-		}
-		},
-	loc_vars = function(self,info_queue, card)
-		return {vars = {
-			card.ability.h_chips,
-			card.ability.extra.chips,
-			card.ability.extra.gain,
-			card.ability.extra.lock,
-			card.ability.extra.selected
-		}}
-	end,
-	replace_base_card = false,
-	calculate = function (self, card, context)
-		if context.before and context.cardarea == G.hand then
-			stone.triggered = stone.trigger(stone.triggered)
-			card.ability.h_chips = card.ability.extra.chips
-			if not card.ability.extra.lock then card.ability.h_chips = 0 end
-		end
-		if context.after then
-			stone.triggered = false 
-			card.ability.extra.lock = false
-		end
-		--print(stone.triggered)
+		card.ability.h_x_mult = FG.cards.steel_mult
 	end
 }
 
@@ -346,6 +286,7 @@ SMODS.Enhancement{
 			card.ability.bonus = card.ability.extra.chips
 		end
 		local test_var = pseudorandom("mila",card.ability.extra.money_min,card.ability.extra.money_max)
+		print(test_var)
 		if test_var <= card.ability.extra.chips_min then
 			card.ability.p_dollars = card.ability.extra.money
 		else
