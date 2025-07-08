@@ -1,4 +1,4 @@
-FG.vouchers = {}
+
 
 SMODS.Atlas {
 	key = "vouchers",
@@ -15,23 +15,26 @@ SMODS.Voucher{
 		name = 'Violin',
 		text = {
 			"{C:attention}+1{} option and {C:attention}+1{} select in every",
-			"{C:purple}aberration{} pack."
+			"{C:purple}Abberation{} pack."
 		}
 	},
     atlas = "vouchers",
     pos = { x = 2, y = 0 },
     redeem = function(self,card)
-        for _,v in pairs(FG.boosters) do
-            v.config.choice = v.config.choice + 1
-            v.config.extra = v.config.extra + 1
-        end
+        abberation1.config.choose = abberation1.config.choose + 1
+        abberation2.config.extra = abberation2.config.extra + 1
+        abberation2.config.choose = abberation2.config.choose + 1
+        jumbo_abberation.config.extra = jumbo_abberation.config.extra + 1
+        jumbo_abberation.config.choose = jumbo_abberation.config.choose + 1
+        mega_abberation.config.extra = mega_abberation.config.extra + 1
+        mega_abberation.config.choose = mega_abberation.config.choose + 1
 
         local card_open_ref = Card.open
         function Card:open()
             sendInfoMessage("card open", "MyInfoLogger")
             sendInfoMessage(self.ability.name, "MyInfoLogger")
-            if self.ability.name:find('aberration') then
-                sendInfoMessage("aberration", "MyInfoLogger")
+            if self.ability.name:find('abberation') then
+                sendInfoMessage("abberation", "MyInfoLogger")
                 self.ability.extra = self.ability.extra + 1
             end
             card_open_ref(self)

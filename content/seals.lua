@@ -10,29 +10,15 @@ SMODS.Seal{
     key = "red",
     atlas = "enhanced",
     pos = {x = 5, y = 4},
-    badge_colour = G.C.RED,
-    loc_txt = {
-        label = "Red? Seal",
-        name = "Red? Seal",
+    loc_vars = {
+        label = "Red?",
+        name = "Red?",
         text = {
-            "Retrigger this card {C:attention}#1#{} times",
+            "Retrigger this card {C:attention}1{} additional times",
             "Decreases by {C:attention}1{} when scored",
             "{C:inactive}(Removes seal when reaches zero)"
         }
-    },
-    config = {
-        retriggers = 3
-        },
-    loc_vars = function (self, info_queue, card)
-        return {
-            vars = {
-                card.ability.seal
-            }
-        }
-    end,
-    calculate = function (self, card, context)
-        
-    end
+    }
 }
 
 --[[
@@ -45,7 +31,7 @@ SMODS.Seal {
         label = 'Tune',
         name = 'Tune',
         text = {
-            'Creates an {C:purple}aberration{} Card',
+            'Creates an {C:purple}Abberation{} Card',
             'when played but {C:attention}not{} scored'
         }
     },
@@ -54,7 +40,7 @@ SMODS.Seal {
 
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
-            return create_card("aberration", G.consumeables, nil, nil, false, true, nil)
+            return create_card("abberation", G.consumeables, nil, nil, false, true, nil)
         end
         -- does not work, i cant get it to calculate without being scored
     end

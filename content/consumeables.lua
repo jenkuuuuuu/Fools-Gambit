@@ -1,45 +1,49 @@
 SMODS.Atlas {
-	key = "aberrations",
-	path = "aberrationcards.png",
+	key = "abberations",
+	path = "abberationcards.png",
 	px = 71,
 	py = 95
 }
 
+SMODS.Atlas {
+	key = "PLACEHOLDERS",
+	path = "abberationcardsPLACEHOLDERS.png",
+	px = 71,
+	py = 95
+} -- added placeholder sprites before the actual ones are finished just so they can be differentiated in packs
+
+
+
 SMODS.ConsumableType{
-    key = "aberration",
+    key = "abberation",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
-    loc_txt = {
-        name = "Aberration Cards",
-        collection = "Aberration Cards",
-        undiscovered = {
-            name = "???",
-            text = {
-                "Use this card once to find out",
-                "what it does"
-            }
+    loc_txt ={
+        name = "Abberation Cards",
+        collection = "Abberation Cards",
         }
-    }
 }
 
 SMODS.Consumable{
     key = "tonal",
-    set = "aberration",
-    atlas = "aberrations",
-	pos = { x = 7, y = 0 },
-    loc_vars = function (self, info_queue, card)
-        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
-        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "v"
-        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable then
-                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents)]
-        end
-    end,
+    set = "abberation",
+    atlas = "PLACEHOLDERS",
+	pos = { x = 0, y = 0 },
+    loc_txt ={
+        name = "Tonal",
+        text = {
+            "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+            "to their {C:red}Original{} form",
+            "{C:inactive}Placeholder Sprite{}"
+        }
+    },
+
     can_use = function(self, card)
-        if #G.jokers.highlighted == 1
-        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "v" 
-        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable then
-            --print(FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents))
-            return true
+        if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
+            any_state then
+            if #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "v" then
+                return true
+            end
         end
     end,
     use = function(card, area, copier)
@@ -48,9 +52,9 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                    local c = FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
-                    FG.FUNCS.update_edition(c.original,c.alternate)
-                    FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    FG.alternate_card({
+                        card = G.jokers.highlighted[1],
+                    })
                 return true
             end
         }))
@@ -59,23 +63,24 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     key = "atonal",
-    set = "aberration",
-    atlas = "aberrations",
-	pos = { x = 5, y = 0 },
-    loc_vars = function (self, info_queue, card)
-        if not card.fake_card and G.jokers and #G.jokers.highlighted == 1 
-        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "k" 
-        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable
-        then
-            info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents)]
-        end
-    end,
+    set = "abberation",
+    atlas = "PLACEHOLDERS",
+	pos = { x = 1, y = 0 },
+    loc_txt ={
+        name = "Atonal",
+        text = {
+            "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+            "to their {C:purple}Alternate{} form",
+            "{C:inactive}Placeholder Sprite{}"
+        }
+    },
+
     can_use = function(self, card)
-        if #G.jokers.highlighted == 1
-        and FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents) == "k" 
-        and not FG.FUNCS.get_card_info(G.jokers.highlighted[1]).unchangeable then
-            --print(FG.FUNCS.is_alternate(G.jokers.highlighted[1].config.center_key,FG.ALTS.joker_equivalents))
-            return true
+        if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
+            any_state then
+            if #G.jokers.highlighted == 1 and FG.is_alternate(G.jokers.highlighted[1].config.center_key,FG.joker_equivalents) == "k" then
+                return true
+            end
         end
     end,
     use = function(card, area, copier)
@@ -84,9 +89,9 @@ SMODS.Consumable{
             trigger = 'after',
             delay = 0.4,
             func = function()
-                local c = FG.FUNCS.alternate_card(G.jokers.highlighted[1],FG.ALTS.joker_equivalents)
-                FG.FUNCS.update_edition(c.original,c.alternate)
-                FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                FG.alternate_card({
+                    card = G.jokers.highlighted[1],
+                })
                 return true
             end
         }))
@@ -95,11 +100,24 @@ SMODS.Consumable{
 if FG.config.debug_mode then
 SMODS.Consumable{
     key = "accelerando",
-    set = "aberration",
-    atlas = "aberrations",
-	pos = { x = 6, y = 0 },
+    set = "abberation",
+    atlas = "PLACEHOLDERS",
+	pos = { x = 2, y = 0 },
+    loc_txt ={
+        name = "Accelerando",
+        text = {
+            "Changes {C:attention}3{} selected cards",
+            "and turns their editions, seals and,",
+            "enhancements to their {C:purple}Alternate{} form",
+            "{C:inactive}Placeholder Sprite{}"
+        }
+    },
+
     can_use = function(self, card)
-        if #G.hand.highlighted > 0 and #G.hand.highlighted <= 3 then return true else return false end
+        if G.STATE ~= G.STATES.HAND_PLAYED and G.STATE ~= G.STATES.DRAW_TO_HAND and G.STATE ~= G.STATES.PLAY_TAROT or
+            any_state then
+            if #G.hand.highlighted > 0 and #G.hand.highlighted <= 3 then return true else return false end
+        end
     end,
     use = function(card, area, copier)
         local pitch = 0.9
@@ -118,9 +136,9 @@ SMODS.Consumable{
             trigger = 'immediate',
             func = function()
                     for k,v in pairs(G.hand.highlighted) do
-                        -- FG.FUNCS.flip_editions(G.hand.highlighted[i]) -- change to alternate editions when theyre implemented
-                        FG.FUNCS.alternate_enhancement(v)
-                        FG.FUNCS.alternate_edition(v)
+                        -- FG.flip_editions(G.hand.highlighted[i]) -- change to alternate editions when theyre implemented
+                        FG.alternate_enhancement(v)
+                        FG.alternate_edition(v)
                     end
                 return true
             end
@@ -144,90 +162,140 @@ end
 
 SMODS.Consumable{
     key = "treble",
-    set = "aberration",
-    atlas = "aberrations",
+    set = "abberation",
+    atlas = "abberations",
 	pos = { x = 2, y = 0 },
+    loc_txt ={
+        name = "Treble",
+        text = {
+            "Turns all Common Jokers in hand",
+            "into their {C:purple}Alternate{} form"
+        }
+    },
     can_use = function(self, card)
-        for _,v in pairs(G.jokers.cards) do
-            if v.config.center.rarity == 1 then return true end
+        for i in ipairs(G.jokers.cards) do
+            local currentJoker = G.jokers.cards[i]
+            if currentJoker.rarity == 1 then
+                FG.alternate_card({
+                    card = currentJoker,
+                })
+            end
         end
+    return true
     end,
     use = function(card, area, copier)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                for i in ipairs(G.jokers.cards) do
-                    local currentCard = G.jokers.cards[i]
-                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
-                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
-                        FG.FUNCS.update_edition(c.original,c.alternate)
-                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
-                    end
-                end
-                return true
-            end
-        }))
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					for i in ipairs(G.jokers.cards) do
+						local currentCard = G.jokers.cards[i]
+                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 1 then
+                            FG.alternate_card({
+                                card = currentCard,
+                            })
+                        end
+					end
+                    return true
+				end
+			}))
+        return true
     end
 }
 
 SMODS.Consumable{
     key = "bass",
-    set = "aberration",
-    atlas = "aberrations",
+    set = "abberation",
+    atlas = "abberations",
 	pos = { x = 0, y = 0 },
+    loc_txt ={
+        name = "Bass",
+        text = {
+            "Turns all Uncommon Jokers in hand",
+            "into their {C:purple}Alternate{} form"
+        }
+    },
     can_use = function(self, card)
-        for _,v in pairs(G.jokers.cards) do
-            if v.config.center.rarity == 2 then return true end
+        for i in ipairs(G.jokers.cards) do
+            local currentJoker = G.jokers.cards[i]
+            if currentJoker.rarity == 1 then
+                FG.alternate_card({
+                    card = currentJoker
+                })
+            end
         end
+    return true
     end,
     use = function(card, area, copier)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                for i in ipairs(G.jokers.cards) do
-                    local currentCard = G.jokers.cards[i]
-                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 2 then
-                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
-                        FG.FUNCS.update_edition(c.original,c.alternate)
-                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
-                    end
-                end
-                return true
-            end
-        }))
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					for i in ipairs(G.jokers.cards) do
+						local currentCard = G.jokers.cards[i]
+                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 2 then
+                            FG.alternate_card({
+                                card = currentCard,
+                            })
+                        end
+					end
+                    return true
+				end
+			}))
+        return true
     end
 }
 
 SMODS.Consumable{
     key = "alto",
-    set = "aberration",
-    atlas = "aberrations",
+    set = "abberation",
+    atlas = "abberations",
 	pos = { x = 1, y = 0 },
+    loc_txt ={
+        name = "Alto",
+        text = {
+            "Turns all Rare Jokers in hand",
+            "into their {C:purple}Alternate{} form"
+        }
+    },
     can_use = function(self, card)
-        for _,v in pairs(G.jokers.cards) do
-            if v.config.center.rarity == 3 then return true end
+        for i in ipairs(G.jokers.cards) do
+            local currentJoker = G.jokers.cards[i]
+            if currentJoker.rarity == 1 then
+                FG.alternate_card({
+                    card = currentJoker
+                })
+            end
         end
+    return true
     end,
     use = function(card, area, copier)
-        G.E_MANAGER:add_event(Event({
-            func = function()
-                for i in ipairs(G.jokers.cards) do
-                    local currentCard = G.jokers.cards[i]
-                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" and currentCard.config.center.rarity == 3 then
-                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
-                        FG.FUNCS.update_edition(c.original,c.alternate)
-                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
-                    end
-                end
-                return true
-            end
-        }))
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					for i in ipairs(G.jokers.cards) do
+						local currentCard = G.jokers.cards[i]
+                        if FG.is_alternate(currentCard.config.center_key, FG.joker_equivalents) == "k" and currentCard.config.center.rarity == 3 then
+                            FG.alternate_card({
+                                card = currentCard
+                            })
+                        end
+					end
+                    return true
+				end
+			}))
+        return true
     end
 }
 
 SMODS.Consumable{
     key = "stake",
-    set = "aberration",
-    atlas = "aberrations",
+    set = "abberation",
+    atlas = "abberations",
 	pos = { x = 4, y = 0 },
+    loc_txt ={
+        name = "Stake",
+        text = {
+            "Creates up to {C:attention}#1#",
+            "random {C:purple}Aberration{} cards",
+            "{C:inactive}(Must have room)",
+        }
+    },
 	 config = {
         extra = {
             cards = 2
@@ -235,22 +303,20 @@ SMODS.Consumable{
         }
     },
     can_use = function(self, card)
-        if #G.consumeables.cards < G.consumeables.config.card_limit then
-            return true
-        end
+    return true
     end,
 	loc_vars = function(self,info_queue, card)
          return {vars = {card.ability.extra.cards}}
 	end,
     use = function(card, area, copier)
-			if #G.consumeables.cards < G.consumeables.config.card_limit then
+			if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
 			for i = 1, math.min(card.config.extra.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
 			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
 			G.E_MANAGER:add_event(Event({
                 trigger = 'before',
                 delay = 0.0,
                 func = (function()
-                        local card = create_card('aberration',G.consumeables, nil, nil, nil, nil, nil, '8ba')
+                        local card = create_card('abberation',G.consumeables, nil, nil, nil, nil, nil, '8ba')
                         card:add_to_deck()
                         G.consumeables:emplace(card)
 					    G.GAME.consumeable_buffer = 0
@@ -263,10 +329,17 @@ end
 }
 
 SMODS.Consumable{
-    key = "fil_di_voce",
-    set = "aberration",
-    atlas = "aberrations",
+    key = "fildivoce",
+    set = "abberation",
+    atlas = "abberations",
 	pos = { x = 3, y = 0 },
+    loc_txt ={
+        name = "Fil Di Voce",
+        text = {
+             "Gives {C:money}$#1#{} for every",
+             "owned {C:purple}Alternate{} Joker",
+        }
+    },
 	 config = {
         extra = {
             dollars = 5
@@ -274,25 +347,21 @@ SMODS.Consumable{
         }
     },
     can_use = function(self, card)
-        for _,v in pairs(G.jokers.cards) do
-            if (v.config.center.yes_pool_flag == "alternate_spawn") then 
-                return true
-            end
-        end
+    return true
     end,
 	loc_vars = function(self,info_queue, card)
          return {vars = {card.ability.extra.dollars}}
 	end,
     use = function(card, area, copier)
-        for i = 1, #G.jokers.cards do
-            if (G.jokers.cards[i].config.center.yes_pool_flag == "alternate_spawn") then
-                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
-                play_sound('timpani')
-                G.jokers.cards[i]:juice_up(0.3, 0.5)
-                ease_dollars(card.config.extra.dollars, true)
-                return true end }))
-                delay(0.2)
+			for i = 1, #G.jokers.cards do
+                if (G.jokers.cards[i].config.center.yes_pool_flag == "alternate") then
+                     G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+                     play_sound('timpani')
+                     G.jokers.cards[i]:juice_up(0.3, 0.5)
+                     ease_dollars(card.config.extra.dollars, true)
+                     return true end }))
+                     delay(0.2)
+                end
             end
-        end
-    end
+end
 }

@@ -1,65 +1,13 @@
 return {
     descriptions = {
-        aberration={
-            c_fg_tonal = {
+        fg_Abberation={
+            fg_tonal = {
                 name = "Tonal",
                 text = {
                     "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
                     "to their {C:red}Original{} form",
                     "{C:inactive}Placeholder Sprite{}",
-                }
-            },
-            c_fg_atonal = {
-                name = "Atonal",
-                text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
-                    "to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
-                }
-            },
-            c_fg_accelerando = {
-                name = "Accelerando",
-                text = {
-                    "Changes {C:attention}3{} selected cards",
-                    "and turns their editions, seals and,",
-                    "enhancements to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
-                }
-            },
-            c_fg_treble = {
-                name = "Treble",
-                text = {
-                    "Turns all Common Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
-                }
-            },
-            c_fg_bass = {
-                name = "Bass",
-                text = {
-                    "Turns all Uncommon Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
-                }
-            },
-            c_fg_alto = {
-                name = "Alto",
-                text = {
-                    "Turns all Rare Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
-                }
-            },
-            c_fg_stake = {
-                name = "Stake",
-                text = {
-                    "Creates up to {C:attention}#1#",
-                    "random {C:purple}Aberration{} cards",
-                    "{C:inactive}(Must have room)",
-                }
-            },
-            c_fg_fil_di_voce = {
-                name = "Fil Di Voce",
-                text = {
-                    "Gives {C:money}$#1#{} for every",
-                    "owned {C:purple}Alternate{} Joker",
+                    "TEST!!!!!"
                 }
             }
         },
@@ -70,17 +18,17 @@ return {
             m_fg_glass = {
                 name = "Glass? Card",
                 text = {
-                    "Gains {C:white,X:red}X1{} Mult for each scoring card",
-                    "with this enhancement in playing hand",
+                    "Gives {C:attention}x#2#{} blind's chip requirements.",
                     "destroys after use",
                     "no rank or suit",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}"
                 }
             },
             m_fg_steel = {
                 name = "Steel? Card",
                 text = {
-                    "Gains {C:white,X:red}X#1#{} Mult for every",
-                    "{C:attention}steel? card{} in {C:attention}full deck{}",
+                    "Gains {C:white,X:red}X#1#{} mult for every",
+                    "steel card {C:attention}in deck{}",
                     "Triggers while this card is",
                     "held in hand.",
                     "{C:inactive}(Currently {C:white,X:red}X#2#{C:inactive} mult)"
@@ -92,13 +40,13 @@ return {
                     "{C:green}#1# in #2#{} chance",
                     "for {C:chips}+#3#{} Chips",
                     "{C:green}#4# in #5#{} chance",
-                    "for {C:gold}$#6#"
+                    "to win {C:gold}$#6#"
                 }
             },
             m_fg_gold = {
                 name = "Gold? Card",
                 text = {
-                    "Adds {C:attention}half{} the money equivalent",
+                    "Add {C:attention}half{} the money equivalent",
                     "to the cards {C:attention}held in hand{}",
                     "at the {C:attention}end of round{C:inactive} (Rounded up){}",
                     "{C:inactive}(Currently {C:gold}+$#1#{C:inactive})"
@@ -117,26 +65,9 @@ return {
                 name = "Mult? Card",
                 text = {
                     "{C:green}#1# in #2#{} chance",
-                    "for {C:mult}+#3#{} Mult",
+                    "for {C:mult}+#3#{} mult",
                     "{C:green}#4# in #5#{} chance",
-                    "for {C:mult}#6#{} Mult",
-                }
-            },
-            m_fg_stone = {
-                name = "Stone? Card",
-                text = {
-                    "When held in hand, destroy this card and ",
-                    "enhance adjacent non-enhanced cards to",
-                    "{C:attention}Stone? Cards{} with {C:chips}15 more Chips.",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} extra Chips)"
-                }
-            },
-            m_fg_wild = {
-                name = "Wild? Card",
-                text = {
-                    "When played randomly gives",
-                    "{C:chips}+#1#{} Chips, {C:mult}+#2#{} Mult,",
-                    "{C:white,X:mult}X#3#{} Mult or {C:gold}$#4#{}"
+                    "for {C:mult}#6#{} mult",
                 }
             }
         },
@@ -197,14 +128,14 @@ return {
                 name = 'Concert Ticket',
                 text = {
                      "Every {C:money}$#1#{} spent {C:inactive}(#2#){} creates",
-                     "an {C:purple}aberration{} card",
+                     "an {C:purple}Abberation{} card",
 					 "{C:inactive}(Must have room)",
                 }
             },
 			 j_fg_concertalt = {
                 name = 'Concert Ticket?',
                 text = {
-                     "Creates an {C:purple}aberration{} card",
+                     "Creates an {C:purple}Abberation{} card",
                      "when redeeming a {C:attention}Voucher{}",
 					 "{C:inactive}(Must have room)",
                 }
@@ -228,7 +159,7 @@ return {
 			j_fg_conductor={
                 name="Conductor",
                 text={
-                    "Creates #1# {C:purple}aberration{} card if",
+                    "Creates #1# {C:purple}Abberation{} card if",
                     "played poker hand contains only",
                     "{C:attention}Face{} cards",
                     "{C:inactive}(Must have room)",
@@ -238,27 +169,41 @@ return {
                 name="Conductor?",
                 text={
                     "Creates #1# {C:attention}Face{} cards",
-                    "every {C:purple}aberration{} card used",
+                    "every {C:purple}Abberation{} card used",
                 },
             },
-            j_fg_oscillator = {
-                name = "Oscillator",
-                text = {
-                    "Gains {C:chips}+#2#{} Chips when blind {C:attention}selected{}",
-                    "{C:chips}-#3#{} Chips when blind {C:attention}defeated{}",
-                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, can't be negative)",
-                    "{C:inactive}(Value is kept when {C:purple}alternating{C:inactive} this card)"
-                }
-            },
-            j_fg_oscillator_alt = {
-                name = "Oscillator?",
-                text = {
-                    "Gains {C:chips}+#3#{} Chips when blind {C:attention}defeated{}",
-                    "{C:chips}-#2#{} Chips when blind {C:attention}selected{}",
-                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, can't be negative)",
-                    "{C:inactive}(Value is kept when {C:red}alternating{C:inactive} this card)"
-                }
-            },
+			j_fg_mango={
+			    name="Mango",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Abberation{} card used",
+				},
+			},
+			j_fg_mangoalt={
+			    name="Mango?",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Alternate{} joker bought",
+				},
+			},
+			j_fg_rapper={
+			    name="Mango 2",
+				text={
+				    "Gains {C:mult}+#2#{} Mult every",
+					"{C:purple}Abberation{} card used",
+					"{C:inactive}Currently {C:mult}+#1#{} {C:inactive}Mult"
+				},
+			},
+			j_fg_rapperalt={
+			    name="Mango 2?",
+				text={
+				    "Gains {C:chips}+#2#{} Chips every",
+					"{C:purple}Abberation{} card used",
+					"{C:inactive}Currently {C:chips}+#1#{} {C:inactive}Chips"
+				},
+			},
             -- Normal jokers
             j_fg_joker = {
                 name = 'Joker?',
@@ -462,64 +407,11 @@ return {
                 },
             },
             j_fg_face = {
-                name = 'Scary Face?',
+                name = 'Scary face?',
                 text = {
                     'Gains {C:chips}+#2#{} chips per scored {C:attention}face{} card',
                     '{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}'
                 },
-            },
-            j_fg_gros_michel = {
-                name = "Gros Michel?",
-                text = {
-                    "{C:white,X:mult}X#1#{} Mult",
-                    "{C:green}#2# in #3#{} chance this",
-                    "card gets destroyed",
-                    "at end of round"
-                }
-            },
-            j_fg_even_steven = {
-                name = "Even Steven?",
-                text = {
-                    "Gains {C:mult}+#1#{} Mult for each",
-                    "{C:attention}even triggered{} card",
-                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
-                    "{C:inactive}(10, 8, 6, 4, 2){}"
-                }
-            },
-            j_fg_odd_todd = {
-                name = "Odd Todd?",
-                text = {
-                    "Gains {C:chips}+#1#{} Chips for each",
-                    "{C:attention}odd triggered{} card",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
-                    "{C:inactive}(A, 9, 7, 5, 3)"
-                }
-            },
-            j_fg_scholar = {
-                name = "Scholar?",
-                text = {
-                    "{C:white,X:mult}X#1#{} Mult if scoring hand",
-                    "contains at least {C:attention}#2#{} #3#s"
-                }
-            },
-            j_fg_business = {
-                name = "Business Card?",
-                text = {
-                    "{C:green}#1# in #2#{} chance to enhance",
-                    "scored {C:attention}face{} cards",
-                    "{C:inactive}(Applies effect after scoring){}"
-                }
-            },
-            j_fg_supernova = {
-
-            },
-            j_fg_ride_the_bus = {
-                name = "Ride the Bus?",
-                text = {
-                    "{C:mult}+#2#{} Mult",
-                    "{C:mult}-#1#{} Mult for every",
-                    "played {C:attention}face{} card"
-                }
             },
             j_fg_abstract = {
                 name = 'Abstract Joker?',
@@ -536,74 +428,6 @@ return {
                     "when sold lose",
                     "{C:mult}#2#{} hand and {C:mult}#3#{} discard"
                 },
-            },
-            j_fg_ice_cream = {
-                name = "Ice cream?",
-                text = {
-                    "{C:chips}+#1#{} Chips",
-                    "{C:chips}-#2#{} Chips when",
-                    "blind {C:attention}selected{}"
-                }
-            },
-            j_fg_faceless = {
-                name = "Faceless Joker?",
-                text = {
-                    "{C:white,X:mult}X#1#{} Mult if played hand",
-                    "contains no {C:attention}face{} cards"
-                }
-            },
-            j_fg_splash = {
-                name = "Splash?",
-                text = {
-                    "undebuffs {C:attention}scored cards{}",
-                }
-            },
-            j_fg_cavendish = {
-                name = "Cavendish?",
-                text = {
-                    "{C:white,X:mult}X#1#{} Mult",
-                    "{C:green}#3# in #4#{} chance of losing",
-                    "{C:white,X:mult}X#2#{} Mult at end of round.",
-                    "Self-destruct on {C:white,X:mult}X1{} Mult"
-                }
-            },
-            j_fg_card_sharp = {
-                name = "Card Sharp?",
-                text = {
-                    ""
-                }
-            },
-            j_fg_red_card = {
-                name = "Red Card?",
-                text = {
-                    "Gains {C:mult}+#2#{} Mult when",
-                    "skipping a blind is {C:attention}skipped{}",
-                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
-                }
-            },
-            j_fg_baron = {
-                name = "Baron?",
-                text = {
-                    "Gains {C:white,X:mult}X#2#{} Mult for",
-                    "each {C:attention}King{} held in hand",
-                    "at {C:attention}end of round",
-                    "{C:inactive}(Currently {X:mult,C:white}X#1#{}{C:inactive} Mult)"
-                }
-            },
-            j_fg_cloud_9 = {
-                name = "Cloud 9?",
-                text = {
-                    "Earn {C:gold}$#1#{} for each",
-                    "scored {C:attention}9{}"
-                }
-            },
-            j_fg_rocket = {
-                name = "Rocket?",
-                text = {
-                    "Earn {C:gold}$#1#{} at {C:attention}end of round{}",
-                    "Decrease payout by {C:gold}$#2#{}",
-                    "when {C:attention}skipping blind{}"
-                }
             },
             j_fg_duo = {
                 name = 'The Duo?',
@@ -641,54 +465,7 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
             },
-            j_fg_popcorn = {
-                name = "Popcorn?",
-                text = {
-                    "{C:mult}+#1#{} Mult",
-                    "{C:mult}-#2#{} per",
-                    "hand played"
-                }
-            },
-            j_fg_trouses = {},
-            j_fg_ancient = {
-                name = "Ancient Joker",
-                text = {
-                    "Gains {C:white,X:mult}X#2#{} Mult when",
-                    "all playing cards are {V:#1#}#3#{}",
-                    "Suit changes every round",
-                    "{C:inactive}(Currently{C:white,X:mult}#1#{C:inactive} Mult)",
-                    "{C:inactive}(Can't go below X0.75 Mult)"
-                }
-            },
-            j_fg_campfire = {
-                name = "Campfire?",
-                text = {
-                    "Gains {C:white,X:mult}X#2#{} Mult for each card {C:attention}discarded{}",
-                    "Losses {C:white,X:mult}X#3#{} Mult when {C:attention}boss blind{} defeated",
-                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult, can't go below {C:white,X:mult}X0.75{C:inactive} Mult)"
-                }
-            },
-            j_fg_throwback = {
-                name = "Throwback?",
-                text = {
-                    "{C:white,X:mult}X#2#{} Mult for each",
-                    "{C:attention}shop{} skipped this run",
-                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult){}"
-                }
-            },
-            j_fg_hanging_chad = {
-                name = "Hanging Chad?",
-                text = {
-                    "{C:green}#1# in #2#{} chance to add a random",
-                    "{C:attention}enhancement{} to scored cards",
-                    "If already enhanced, {C:green}#3# in #4#{}",
-                    "chance to add a random {C:attention}seal{}",
-                    "If already have a seal, {C:green}#5# in #6#{}",
-                    "chance add a random {C:attention}edition{}",
-                    "{C:inactive,s:0.8}(Effect applies after scoring){}"
-                },
-			},
-			j_fg_gem={
+			 j_fg_gem={
                 name="Rough Gem?",
                 text={
                     "If poker hand contains a {C:attention}#1#{}",
@@ -723,23 +500,6 @@ return {
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
-            j_fg_invisible = {
-                name = "Invisible Joker?",
-                text = {
-                    "When sold, remove a random {C:attention}Joker",
-                    "Create an {C:attention}Invisible memory?{}",
-                    "with the removed Joker",
-                    "{C:inactive}(Cannot copy eternal jokers{}",
-                }
-            },
-            j_fg_invisible_memory = {
-                name = "{C:dark_edition,E:1}Invisible memory?{}",
-                text = {
-                    "The memory of an {C:attention}Invisible Joker?{}",
-                    "After {C:attention}#1#{} round(s), {C:red,E:2}self-destruct{} and",
-                    "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
-                }
-            },
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
@@ -767,7 +527,7 @@ return {
                 },
             },
             j_fg_jogla_alt = {
-                name = "Joglalt",
+                name = "Jogla",
                 text = {
                     "Increases hand size by {C:attention}#1#{} when",
                     "{C:attention}Boos blind{} defeated",
@@ -785,15 +545,7 @@ return {
                 }
             }
         },
-        Other={
-            fg_unchangeable = {
-                name = "Unchangeable",
-                label = "Unchangeable",
-                text = {
-                    "Can't be alternated"
-                }
-            }
-        },
+        Other={},
         Planet={},
         Spectral={},
         Stake={},
@@ -830,13 +582,6 @@ return {
                     "{C:attention}without{} any enhancement",
                     "{C:inactive}(Copied cards must have{}",
                     "{C:inactive}an enhancement){}"
-                }
-            },
-            c_fg_emperor = {
-                name = "The Emperor",
-                text = {
-                    "{C:green}#1# in #2#{} chance to",
-                    "create a {C:legendary}Soul{}"
                 }
             },
             c_fg_empress = {
@@ -878,13 +623,6 @@ return {
                     "{C:attention}without{} any enhancement",
                     "{C:inactive}(Copied cards must have{}",
                     "{C:inactive}an enhancement){}"
-                }
-            },
-            c_fg_high_priestess = {
-                name = "highest Priestess",
-                text = {
-                    "{C:green}#1# in #2#{} chance to",
-                    "create a {C:legendary}Black Hole{}"
                 }
             },
             c_fg_justice = {
@@ -944,7 +682,7 @@ return {
                     "Gives {C:attention}double{} the total sell value",
                     "of {C:attention}all{} consumeables in posession",
                     "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
-                    "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
+                    "{C:inactive}(Will give {C:gold}$#1#{C:inactive})"
                 }
             },
             c_fg_wheel_of_fortune = {
@@ -968,16 +706,6 @@ return {
         Voucher={},
     },
     misc = {
-        -- This one is very important. I have moved every localization key we might need for FG here. 
-        -- See aux_functions > FG.FUNCS.card_eval_status_text for more info
-        FG = {
-            chipMult="Multiplied!",
-			plus_aberration="+1 aberration",
-			replaced="Replaced!",
-			replenished="Replenished!",
-			card_added="+1 Card",
-        },
-
         achievement_descriptions={},
         achievement_names={},
         blind_states={},
@@ -985,13 +713,11 @@ return {
         collabs={},
         dictionary={
             k_chipMult="Multiplied!",
-			k_plus_aberration="+1 Aberration",
+			k_plus_abberation="+1 Abberation",
 			k_replaced="Replaced!",
 			k_replenished="Replenished!",
 			k_card_added="+1 Card",
-            k_unchangeable_warning = "This card can't be alternated",
-            k_fg_active = "Active!",
-            k_fg_none = "None",
+			k_plus_stonealt="+1 Stone?",
         },
         high_scores={},
         labels={},

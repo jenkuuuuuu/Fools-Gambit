@@ -5,17 +5,16 @@ SMODS.Atlas {
 	py = 95
 }
 
-FG.boosters = {}
 
-FG.boosters.aberration1 = SMODS.Booster {
-    key = "aberration1",
-    kind = "aberration",
+abberation1 = SMODS.Booster {
+    key = "abberation1",
+    kind = "abberation",
     atlas = "pack",
     loc_txt = { 
         name = 'Melody Pack',
-        group_name = 'aberration',
+        group_name = 'abberation',
         text = { "Choose {C:attention}#1#{} of up to ",
-        " {C:attention}#2#{} {C:purple}aberration{} cards to",
+        " {C:attention}#2#{} {C:purple}Abberation{} cards to",
         "be used instantly." }
         },
     pos = { x = 0, y = 0 },
@@ -28,20 +27,20 @@ FG.boosters.aberration1 = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 
 
-FG.boosters.aberration2 = SMODS.Booster {
-    key = "aberration2",
-    kind = "aberration",
+abberation2 = SMODS.Booster {
+    key = "abberation2",
+    kind = "abberation",
     atlas = "pack",
     loc_txt = { 
-            name = 'aberration Pack',
-            group_name = 'aberration',
+            name = 'Abberation Pack',
+            group_name = 'abberation',
             text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}aberration{} cards to",
+            " {C:attention}#2#{} {C:purple}Abberation{} cards to",
             "be used instantly." }
             },
     pos = { x = 1, y = 0 },
@@ -54,19 +53,19 @@ FG.boosters.aberration2 = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 if FG.config.debug_mode then
-FG.boosters.jumbo_aberration = SMODS.Booster {
-    key = "aberration3",
-    kind = "aberration",
+jumbo_abberation = SMODS.Booster {
+    key = "abberation3",
+    kind = "abberation",
     atlas = "pack",
     loc_txt = { 
-            name = 'Jumbo aberration Pack',
-            group_name = 'aberration',
+            name = 'Jumbo Abberation Pack',
+            group_name = 'abberation',
             text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}aberration{} cards to",
+            " {C:attention}#2#{} {C:purple}Abberation{} cards to",
             "be used instantly." }
             },
     pos = { x = 2, y = 0 },
@@ -79,19 +78,19 @@ FG.boosters.jumbo_aberration = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 
-FG.boosters.mega_aberration = SMODS.Booster {
-    key = "aberration4",
-    kind = "aberration",
+mega_abberation = SMODS.Booster {
+    key = "abberation4",
+    kind = "abberation",
     atlas = "pack",
     loc_txt = { 
-            name = 'Mega aberration Pack',
-            group_name = 'aberration',
+            name = 'Mega Abberation Pack',
+            group_name = 'abberation',
             text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}aberration{} cards to",
+            " {C:attention}#2#{} {C:purple}Abberation{} cards to",
             "be used instantly." }
             },
     pos = { x = 3, y = 0 },
@@ -104,7 +103,7 @@ FG.boosters.mega_aberration = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 end
