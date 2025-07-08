@@ -1,5 +1,24 @@
 FG.test = {}
 
+function FG.test.toggle_unchangeable()
+    if not G.jokers then
+        sendWarnMessage("Please, execute this function while in a run.","FG/toggle_unchangeable")
+        return "not_in_game"
+    end
+    if not G.jokers.highlighted[1] then
+        sendWarnMessage("Please, select one Joker before executing this funciton","FG.toggle_unchangeable")
+        return "no_card_selected"
+    end
+    local target = G.jokers.highlighted[1]
+    if not FG.FUNCS.get_card_info(target).unchangeable then
+        target.ability.fg_unchangeable = true
+        return "enabled"
+    elseif FG.FUNCS.get_card_info(target).unchangeable then
+        target.ability.fg_unchangeable = nil
+        return "disabled"
+    end
+end
+
 
 if FG.config.debug_mode then
     SMODS.Joker {
@@ -12,19 +31,9 @@ if FG.config.debug_mode then
         },
         cost = 1,
         rarity = 1,
+        loc_vars = function (self, info_queue, card)
+        end,
         calculate = function (self, card, context)
-            if context.repetition and context.cardarea == G.play then
-                ----[[
-                FG.test.enhancements = SMODS.get_enhancements(context.other_card)
-                FG.test.enhancement_chosen = SMODS.poll_enhancement{
-                    key = "mila",
-                    guaranteed = true,
-                    options = {"m_lucky"}
-                }
-                context.other_card:set_ability(G.P_CENTERS[FG.test.enhancement_chosen])
-                --]]--
-                --FG.alternate_enhancement(context.other_card,context.other_card)
-            end
         end
     }
 end

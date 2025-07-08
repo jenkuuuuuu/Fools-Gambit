@@ -1,4 +1,4 @@
-FG.tarot_equivalents = {
+FG.ALTS.tarot_equivalents = {
     c_chariot = "c_fg_chariot",
     c_death = "c_fg_death",
     c_devil = "c_fg_devil",
@@ -34,42 +34,48 @@ local function tarot_convert (target_enhancement)
     play_sound("tarot1",1)
     local pitch = 0.9
     for _,v in ipairs(G.hand.highlighted) do -- Flip cards
-        cards[#cards+1] = v
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.2,
-            func = function()
-                v:flip()
-                play_sound("tarot2",pitch)
-                pitch = pitch + 0.2
-                return true
-            end
-        }))
+        if next(SMODS.get_enhancements(v)) then
+            cards[#cards+1] = v
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.2,
+                func = function()
+                    v:flip()
+                    play_sound("tarot2",pitch)
+                    pitch = pitch + 0.2
+                    return true
+                end
+            }))
+        end
     end
     for _,v in ipairs(G.hand.highlighted) do -- Duplicate and add enhancement
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.2,
-            func = function()
-                local new_card = FG.duplicate_playing_card(v)
-                cards[#cards+1] = new_card
-                new_card:set_ability(G.P_CENTERS.c_base)
-                v:set_ability(target_enhancement)
-                return true
-            end
-        }))
+        if next(SMODS.get_enhancements(v)) then
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.2,
+                func = function()
+                    local new_card = FG.FUNCS.duplicate_playing_card(v)
+                    cards[#cards+1] = new_card
+                    new_card:set_ability(G.P_CENTERS.c_base)
+                    v:set_ability(target_enhancement)
+                    return true
+                end
+            }))
+        end
     end
     for _,v in ipairs(cards) do -- Flip cards
-        G.E_MANAGER:add_event(Event({
-            trigger = "after",
-            delay = 0.2,
-            func = function()
-                v:flip()
-                play_sound("tarot2",pitch)
-                pitch = pitch + 0.2
-                return true
-            end
-        }))
+        if next(SMODS.get_enhancements(v)) then
+            G.E_MANAGER:add_event(Event({
+                trigger = "after",
+                delay = 0.2,
+                func = function()
+                    v:flip()
+                    play_sound("tarot2",pitch)
+                    pitch = pitch + 0.2
+                    return true
+                end
+            }))
+        end
     end
 end
 
@@ -186,6 +192,47 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     set = "Tarot",
+    key = "high_priestess",
+    atlas = "Consumeables",
+    pos = {x = 2, y = 0},
+    config = {
+        extra = {
+            min = 1,
+            max = 8
+        }
+    },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.c_black_hole
+        card.ability.extra.min = G.GAME.probabilities.normal or 1
+        return {
+            vars = {
+                card.ability.extra.min,
+                card.ability.extra.max
+            }
+        }
+    end,
+    can_use = function (self, card)
+        if not G.consumeables then return false end
+        if G.consumeables.config.card_count <= G.consumeables.config.card_limit then return true end
+    end,
+    use = function (self, card, area, copier)
+        if pseudorandom("mila",card.ability.extra.min,card.ability.extra.max) <= card.ability.extra.min then
+            SMODS.add_card{
+                key = "c_black_hole"
+            }
+        else
+            FG.FUNCS.card_eval_status_text{
+                card = card,
+                message = "Nope!",
+                mode = "literal"
+            }
+        end
+    end
+}
+
+
+SMODS.Consumable{
+    set = "Tarot",
     key = "empress",
     atlas = "Consumeables",
     pos = {x = 3 , y = 0},
@@ -219,6 +266,46 @@ SMODS.Consumable{
 
 SMODS.Consumable{
     set = "Tarot",
+    key = "emperor",
+    atlas = "Consumeables",
+    pos = {x = 4, y = 0},
+    config = {
+        extra = {
+            min = 1,
+            max = 16
+        }
+    },
+    loc_vars = function (self, info_queue, card)
+        info_queue[#info_queue+1] = G.P_CENTERS.c_soul
+        card.ability.extra.min = G.GAME.probabilities.normal or 1
+        return {
+            vars = {
+                card.ability.extra.min,
+                card.ability.extra.max
+            }
+        }
+    end,
+    can_use = function (self, card)
+        if not G.consumeables then return false end
+        if G.consumeables.config.card_count <= G.consumeables.config.card_limit then return true end
+    end,
+    use = function (self, card, area, copier)
+        if pseudorandom("mila",card.ability.extra.min,card.ability.extra.max) <= card.ability.extra.min then
+            SMODS.add_card{
+                key = "c_soul"
+            }
+        else
+            FG.FUNCS.card_eval_status_text{
+                card = card,
+                message = "Nope!",
+                mode = "literal"
+            }
+        end
+    end
+}
+
+SMODS.Consumable{
+    set = "Tarot",
     key = "hierophant",
     atlas = "Consumeables",
     pos = {x = 5 , y = 0},
@@ -238,11 +325,10 @@ SMODS.Consumable{
     can_use = function (self, card)
         if #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.convert then
             for _,v in ipairs(G.hand.highlighted) do
-                if not next(SMODS.get_enhancements(v)) then
-                    return false
+                if next(SMODS.get_enhancements(v)) then
+                    return true
                 end
             end
-            return true
         else return false end
     end,
     use = function (self, card, area, copier)
@@ -271,11 +357,10 @@ SMODS.Consumable{
     can_use = function (self, card)
         if #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.convert then
             for _,v in ipairs(G.hand.highlighted) do
-                if not next(SMODS.get_enhancements(v)) then
-                    return false
+                if next(SMODS.get_enhancements(v)) then
+                    return true
                 end
             end
-            return true
         else return false end
     end,
     use = function (self, card, area, copier)
@@ -304,11 +389,10 @@ SMODS.Consumable{
     can_use = function (self, card)
         if #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.extra.convert then
             for _,v in ipairs(G.hand.highlighted) do
-                if not next(SMODS.get_enhancements(v)) then
-                    return false
+                if next(SMODS.get_enhancements(v)) then
+                    return true
                 end
             end
-            return true
         else return false end
     end,
     use = function (self, card, area, copier)
@@ -385,6 +469,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.e_negative
+        card.ability.extra.min_chance = G.GAME.probabilities.normal or 1
         return {
             vars = {
                 card.ability.extra.min_chance,
@@ -477,12 +562,14 @@ SMODS.Consumable{
     pos = {x = 4, y = 1},
     config = {extra = {value = 0, max = 50}},
     loc_vars = function (self, info_queue, card)
-        card.ability.extra.value = 0
-        for _,v in pairs(G.consumeables.cards) do
-            card.ability.extra.value = card.ability.extra.value + v.config.center.cost
-        end
-        if card.ability.extra.value > card.ability.extra.max then
-            card.ability.extra.value = card.ability.extra.max
+        if G.consumeables then
+            card.ability.extra.value = 0
+            for _,v in pairs(G.consumeables.cards) do
+                card.ability.extra.value = card.ability.extra.value + v.config.center.cost
+            end
+            if card.ability.extra.value > card.ability.extra.max then
+                card.ability.extra.value = card.ability.extra.max
+            end
         end
         return {vars = {
             card.ability.extra.value,
@@ -541,7 +628,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "star",
     atlas = "Consumeables",
-    pos = {x = 6, y = 1},
+    pos = {x = 7, y = 1},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}
@@ -575,7 +662,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "moon",
     atlas = "Consumeables",
-    pos = {x = 7, y = 1},
+    pos = {x = 8, y = 1},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}
@@ -592,7 +679,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "sun",
     atlas = "Consumeables",
-    pos = {x = 6, y = 1},
+    pos = {x = 9, y = 1},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}
@@ -609,7 +696,7 @@ SMODS.Consumable{
     set = "Tarot",
     key = "world",
     atlas = "Consumeables",
-    pos = {x = 7, y = 1},
+    pos = {x = 1, y = 2},
     config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}

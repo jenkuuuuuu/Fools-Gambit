@@ -1,9 +1,21 @@
-FG = {}
+FG = {
+	ALTS = {},		-- Stores all alternating tables.
+	FUNCS = {}, 	-- Stores all funtions used in the mod, be it the API or not.
+	cards = {}
+}
 FG.config = SMODS.current_mod.config
 
 FG.config.version = SMODS.current_mod.version
 
 SMODS.current_mod.optional_features = { retrigger_joker = true }
+
+SMODS.Atlas{
+	key = "mod_icon",
+	path = "modicon.png",
+	px = 34,
+	py = 34
+}
+
 
 SMODS.Atlas{
 	key = 'Consumeables',
@@ -30,6 +42,9 @@ local mod_contents = {
 	"test",
 	"special_editions/mila",
 	"tarots",
+	"spectral",
+	--"seals", -- WIP, SMODS is acting rather silly now
+	"misc"
 }
 
 for k, v in pairs(mod_contents) do -- Load this mod's files
@@ -37,7 +52,7 @@ for k, v in pairs(mod_contents) do -- Load this mod's files
 end
 
 -- Pool flags
---G.GAME.pool_flags.FG_alternate_spawn = false
+--G.GAME.pool_flags.alternate_spawn = false
 
 
 

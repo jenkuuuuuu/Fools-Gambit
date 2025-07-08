@@ -1,4 +1,4 @@
-function FG.is_alternate(card,table)
+function FG.FUNCS.is_alternate(card,table)
     for k, v in pairs(table) do
         if card == v then
             return "v"
@@ -9,13 +9,13 @@ function FG.is_alternate(card,table)
     return "no"
 end
 
---- Gets the key/value pair associated with the passing data.
+--- Gets the key/value pair associated with the passing data. Returns `nil` if there is no alternate
 ---@param key string The provided card key.
 ---@param table table The reference table to look up.
----@param passing? "k"|"v" Key or value, and returns the other.
----@return string 
-function FG.get_equivalent(key,table,passing)
-	local _passing = passing or FG.is_alternate(key,table)
+---@param passing? string Key or value, and returns the other.
+---@return string|boolean key The key of the alternate card, or `false` (boolean) if not found
+function FG.FUNCS.get_alternate(key,table,passing)
+	local _passing = passing or FG.FUNCS.is_alternate(key,table)
 	if _passing == "k" then -- passing key, returning value
 		for k,v in pairs(table) do
 			if k == key then return v end
@@ -24,63 +24,37 @@ function FG.get_equivalent(key,table,passing)
 		for k,v in pairs(table) do
 			if v == key then return k end
 		end
-	end
+	else return false end
 end
 
 -- Alternates between this card and the associated alternative card.
----@param args table Arguments for this function.
----@param args.key string The key of the card to be altered.
----@param args.card table|card The card instance itself.
----@param args.ref table The table to compare the card when alternating it.
----@param args.edition string Weather to keep, alternate, or ignore the card's edition,
----@param args.edition_ref table The table to compare the edition when alternating it.
----@param args.enhancement string Weather to keep, alternate or ignore the card's enhancement
----@param args.enhancement_ref string The table to compare the enhancement when alternating it.
-function FG.alternate_card(args)
-	-- Definitions (Sets all the default values)
-	local args = args or {}
-	if not args.key or args.card then sendWarnMessage("Missing card key and/or card instance!","Fool's Gambit/alternate_card") end
-	local card = args.card -- can't provide default value
-	local ref = args.ref or FG.joker_equivalents
-	local edition = args.edition or 'keep' -- keep | alternate | ignore (other)
-	local edition_ref = args.edition_ref or FG.edition_equivalents
-	local enhancement = args.enhancement or 'keep' -- keep | alternate | ignore (other)
-	local enhancement_ref = args.enhancement_ref or FG.enhancement_equivalents
-
-	-- Extra definitions (Other definitions that are not set by args)
-
-	local key = card.config.center_key
-	local set = ref.meta.set or "jokers"
-
-	-- Function
-
-	local convert_to = FG.get_equivalent(key,ref,FG.is_alternate(key,ref))
+---@param card table|card The card instance itself.
+---@param ref table The table to compare the card when alternating it.
+---@return table|card table A table containing the old card and the new card.
+function FG.FUNCS.alternate_card(card,ref)
+	local ref = ref or FG.ALTS.joker_equivalents
+	local key = FG.FUNCS.get_card_info(card).key
+	local convert_to = FG.FUNCS.get_alternate(key,ref,FG.FUNCS.is_alternate(key,ref))
 	local new_card = SMODS.add_card({
-		set = set,
+		--set = 'Joker',
 		skip_materialize = true,
 		key = tostring(convert_to),
 	})
-
-	-- Edition management
-	
-	if edition == 'keep' then FG.update_edition(card,new_card) 
-	elseif edition == 'alternate' then FG.alternate_edition(card,new_card,edition_ref)
-	end
 	card:start_dissolve(nil,false,0,true)
 
-	-- Enhancement management
-	if enhancement == 'keep' then FG.update_enhancement(card,new_card)
-	elseif enhancement == 'alternate' then FG.alternate_enhancement(card,new_card,enhancement_ref)
-	end
+	return {
+		original = card,
+		alternate = new_card
+	}
 end
 
 --- Transfers the edition from the old card to the new card.
 ---@param source table|card The card to be altered.
----@param target table|card - The card to be created. If not provided, it will be the same as source.
-function FG.update_edition(source,target)
+---@param target? table|card - The card to be created. If not provided, it will be the same as source.
+function FG.FUNCS.update_edition(source,target)
 	target = target or source
 	if source.edition then
-		target:set_edition(source.edition.key,true,true)
+		target:set_edition(FG.FUNCS.get_card_info(source).edition,true,true)
 	else
 		target:set_edition(nil,true,true)
 	end
@@ -88,13 +62,13 @@ end
 
 --- Alternate card's editions.
 ---@param source table|card The card to be altered.
----@param target table|card The card to be created. If not provided, it will be the same as source.
----@param ref table The reference table to look up the edition. Defaults to `FG.edition_equivalents`.
-function FG.alternate_edition(source,target,ref)
-	ref = ref or FG.edition_equivalents
+---@param target? table|card The card to be created. If not provided, it will be the same as source.
+---@param ref? table The reference table to look up the edition. Defaults to `FG.ALTS.edition_equivalents`.
+function FG.FUNCS.alternate_edition(source,target,ref)
+	ref = ref or FG.ALTS.edition_equivalents
 	target = target or source
 	if source.edition then
-		target:set_edition(FG.get_equivalent(source.edition.key,FG.edition_equivalents),true,true)
+		target:set_edition(FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(source).edition,FG.ALTS.edition_equivalents),true,true)
 	else
 		target:set_edition(nil,true,true)
 	end
@@ -102,44 +76,44 @@ end
 
 --- Update enhancement
 ---@param source table|card The card to be altered.
----@param target table|card The card to be created. If not provided, it will be the same as source.
-function FG.update_enhancement(source,target)
+---@param target? table|card The card to be created. If not provided, it will be the same as source.
+function FG.FUNCS.update_enhancement(source,target)
 	target = target or source
 	local enhancement = nil
-	if source.config.center.key then 
-		enhancement = source.config.center.key 
+	if FG.FUNCS.get_card_info(source).key then 
+		enhancement = FG.FUNCS.get_card_info(source).key
 	end
 	target:set_ability(G.P_CENTERS[enhancement])
 end
 
 --- Alternate a card's enhancement
 ---@param source table|card The card to be altered.
----@param target table|card The card to be created. If not provided, it will be the same as source.
----@param ref table The reference table to look up the enhancement. Defaults to `FG.enhancement_equivalents`.
-function FG.alternate_enhancement(source,target,ref)
-	ref = ref or FG.enhancement_equivalents
+---@param target? table|card The card to be created. If not provided, it will be the same as source.
+---@param ref? table The reference table to look up the enhancement. Defaults to `FG.ALTS.enhancement_equivalents`.
+function FG.FUNCS.alternate_enhancement(source,target,ref)
+	ref = ref or FG.ALTS.enhancement_equivalents
 	target = target or source
-	local enhancement = FG.get_equivalent(source.config.center.key,ref)
+	local enhancement = FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(source).key,ref)
 	target:set_ability(G.P_CENTERS[enhancement])
 end
 
 
-function FG.update_seal(source,target) end
-function FG.alternate_seal(source,target) end
+function FG.FUNCS.update_seal(source,target) end
+function FG.FUNCS.alternate_seal(source,target) end
 
 --- Transfers and updates the values from any given card to any other card.
 ---@param source table|card is the old card, that is being deleted
 ---@param target table|card is the new card created for alternating.
-function FG.update_alternate_values(source,target,mode)
-	for k,v in ipairs(source.config.extra.alternating_values) do
-		target.config.extra.alternating_values[k] = v
-	end
+function FG.FUNCS.update_alternate_values(source,target,mode)
+	if not source.ability.fg_alternate then sendWarnMessage("This card lacks fg_alternate table inside it's ability table!","FG.FUNCS.update_alternate_values") return end
+	if not target.ability.fg_alternate then sendWarnMessage("The target card lacks fg_alternate table") return end
+	target.ability.fg_alternate = source.ability.fg_alternate
 end
 
 --- Allows to integrate original<>alternate entries to the mod's tables.
 ---@param target_table table The table you are adding entries to.
 ---@param source_table table The table you are taking entries from.
-function FG.register_alternate(target_table, source_table)
+function FG.FUNCS.register_alternate(target_table, source_table)
 	if not target_table or not source_table then
 		sendWarnMessage("Missing or incorrect arguments: target_table [table], source_table [table]","Fool's Gambit/register_cards")
 		return
@@ -150,8 +124,8 @@ function FG.register_alternate(target_table, source_table)
 end
 
 
--- DEPRECATED
-function FG.flip_editions(card)
+---@deprecated
+function FG.FUNCS.flip_editions(card)
 	if card.edition then
 		if card.edition.negative then
 			card:set_edition(nil, true)
@@ -169,39 +143,41 @@ function FG.flip_editions(card)
 	end
 end
 
-if FG.config.debug_mode then -- scary !!! broken!!!! (eats tags and is forced after reroll)
-	function FG.replace_shop_joker(key, index)
+--if FG.config.debug_mode then -- slightly less scary !!! still broken!!!! (eats tags) || buggy af, fix the UI please
+	function FG.FUNCS.replace_shop_joker(key, index)
 		if G.shop_jokers then
 			if G.shop_jokers.cards then
 				local replacee = G.shop_jokers.cards[index]
 				if replacee then
-				G.shop_jokers:remove_card(replacee)
-				replacee:remove()
-				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
-				create_shop_card_ui(replacement, joker, G.shop_jokers)
-				replacement:start_materialize()
+					G.shop_jokers:remove_card(replacee)
+					replacee:remove()
 				end
+				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
+				create_shop_card_ui(replacement, 'joker', G.shop_jokers)
+				replacement:start_materialize()
 			end
 		end
 	end
 
 	local shopref = create_card_for_shop
+	local cop_reroll = false
 
 	function create_card_for_shop(area)
 		local card = shopref(area)
 
-		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips then
-			FG.replace_shop_joker("j_fg_change_of_pace", 1)
-		end
+		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips and cop_reroll == false then
+			FG.FUNCS.replace_shop_joker("j_fg_change_of_pace", #G.shop_jokers.cards+1)
+			cop_reroll = true
+			end
 
 		return card
 	end
-end
+--end
 
 --- Allows to duplicate any given card and insert it into playing hand. Return value is the new card. Sourced from 'cryptid' (Spectral).
 ---@param card card The card that is being duplicated.
 ---@return card card The newly created card.
-FG.duplicate_playing_card = function (card)
+FG.FUNCS.duplicate_playing_card = function (card)
 	local _first_dissolve = nil
 	G.playing_card = (G.playing_card and G.playing_card + 1) or 1
 	local _card = copy_card(card, nil, nil, G.playing_card)
@@ -214,11 +190,110 @@ FG.duplicate_playing_card = function (card)
 	return _card
 end
 
+--- Wrapper function to not use card_eval_status_text (scroll down  [vvv])
+--- @param args.card table|card The card instance.
+--- @param args.message string The message. Can be literal or a key for translation.
+--- @param args.cat? string Defaults to `FG`.
+--- @param args.mode string `literal` Display the raw text in `args.message`. `localize` Use `args.message` as a localization entry
+--- @param colour string Refer to `G.C.<colours>` for all available colours.
+function FG.FUNCS.card_eval_status_text (args)
+	if not type(args) == "table" then return end
+	local args = args or {}
+	local card = args.card -- Target card
+	local eval_type = args.type or "extra"
+	local misc_cat = args.category or 'FG'
+	local message = args.message or "ERROR"
+	local mode = args.mode or "localize"
+	local colour = args.colour or args.color or string.upper("orange") -- The color of the square background.
+	colour = string.upper(colour)
+	
+	if not card then error("No target card selected!\nMake sure you specify the target card in the function arguments") return end
+
+	if mode == "literal" then
+		card_eval_status_text(card, eval_type, nil, nil, nil,
+		{ message = message, colour = G.C[colour] })
+	elseif mode == "localize" then
+		card_eval_status_text(card, eval_type, nil, nil, nil,
+		{ message = localize(message,misc_cat), colour = G.C[colour] })
+	end
+end
+--- Retrieves useful data for the specified card
+---@param card table|card  The target card to evaluate
+---@return table|nil ret
+--- Returns the card's `rank`, `suit`, `key` (or enhancement), `edition`, `seal` 
+--- and if it's `eternal`, `perishable` and how many rounds it has left, `rental` and
+--- the `raw` data of the card, or `nil` if no card is passed.
+function FG.FUNCS.get_card_info(card)
+	if not card then sendWarnMessage("No card was passed.","FG.FUNCS.get_card_info") return nil end
+	local ret = {
+		id = card.base.id,
+		rank = false,
+		suit = false,
+		is_face = false,
+		key = card.config.center.key,
+		edition = false,
+		seal = card.seal or false,
+		eternal = false,
+		perishable = false,
+		perish_tally = 0,
+		rental = false,
+		unchangeable = false,
+		raw = card
+	}
+	
+	if card.config.card then ret.rank = card.config.card.value end
+	if card.config.card then ret.suit = card.config.card.suit end
+	if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
+	if card.edition then ret.edition = card.edition.key end
+	if card.ability.eternal then ret.eternal = true end
+	if card.ability.perishable then
+		ret.perishable = true
+		ret.perish_tally = card.ability.perish_tally
+	end
+	if card.ability.rental then ret.rental = true end
+	if card.ability.fg_unchangeable then ret.unchangeable = true end
+	return ret
+end
+
+---Simple function to check for any given chance.
+---@param max number 1 in N chance, where N is `max`
+---@return boolean success If the random chance succeeds
+function FG.FUNCS.random_chance(max)
+	if pseudorandom('mila', G.GAME.probabilities.normal, max) <= G.GAME.probabilities.normal then
+		return true
+	else
+		return false
+	end
+end
+
+function FG.FUNCS.allow_duplicate (card)
+	if not G.jokers then sendWarnMessage("G.jokers doesn't exist!","FG.FUNCS.allow_duplicate") return end
+	local found_showman = false
+	local found_alternate = false
+	for _,v in ipairs(G.jokers) do
+		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true break end -- Find showman
+		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
+	end
+	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
+end
+
+local start_run_ref = Game.start_run 
+
+function Game:start_run(args)
+	start_run_ref(self,args)
+	if G.GAME.pool_flags.alternate_spawn then
+		for k, v in pairs(G.P_CENTERS) do
+			if string.find(k, 'j_') and not string.find(k, "_fg_") then
+				G.P_CENTERS[k]['no_pool_flag'] = 'alternate_spawn'
+			end
+		end
+	end
+end
+
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
 
 -- Settings, special edition
 G.FUNCS.FG_s_version = function (args)
-	FG.test.s_version = args
 	FG.config.s_version.selected = args.cycle_config.current_option
 	FG.config.s_version.active = args.to_val
 end
