@@ -88,6 +88,7 @@ FG.ALTS.joker_equivalents = {
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
 	j_invisible = "j_fg_invisible",
+	j_bootstraps = "j_fg_bootstraps",
 	-- COLLECTION
 	j_fg_jogla = "j_fg_jogla_alt",
 	j_fg_deathmodereal = "j_fg_deathmoderealalt",
@@ -2807,7 +2808,54 @@ SMODS.Joker{
 		end
 	end
 }
-
+-- Bootstraps
+SMODS.Joker{
+    key = "bootstraps",
+    atlas = "jokers_alt",
+    pos = { x = 9, y = 8},
+    rarity = 1,
+    cost = 5,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			mult = 0,
+			mult_i = 6,
+			cost = 3,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.mult,
+				card.ability.extra.mult_i,
+				card.ability.extra.cost
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.mult_i.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+			card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_i
+			
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "-$"..card.ability.extra.cost,
+				mode = "literal",
+				colour = "red"
+			}
+			ease_dollars(-card.ability.extra.cost)
+		end
+		if context.joker_main then return {mult = card.ability.extra.mult} end
+    end
+}
 -----------------
 ---Collectives---
 -----------------

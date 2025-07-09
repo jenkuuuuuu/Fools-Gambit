@@ -740,6 +740,14 @@ return {
                     "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
                 }
             },
+            j_fg_bootstraps = {
+                name = "Bootstraps?",
+                text = {
+                    "Gains {C:mult}+#2#{} Mult, {C:red}-$#3#{}",
+                    "at {C:attention}end of round{}",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+                }
+            },
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
