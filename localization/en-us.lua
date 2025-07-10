@@ -259,6 +259,22 @@ return {
                     "{C:inactive}(Value is kept when {C:red}alternating{C:inactive} this card)"
                 }
             },
+            j_fg_mango={
+			    name="Mango",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Aberration{} card used",
+				},
+			},
+			j_fg_mangoalt={
+			    name="Mango?",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Alternate{} joker bought",
+				},
+			},
             -- Normal jokers
             j_fg_joker = {
                 name = 'Joker?',
@@ -723,6 +739,14 @@ return {
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
+            j_fg_hit_the_road = {
+                name = "Hit the Road?",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult",
+                    "for every {C:attention}Jack{} discarded",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult)"
+                }
+            },
             j_fg_invisible = {
                 name = "Invisible Joker?",
                 text = {

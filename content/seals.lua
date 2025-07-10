@@ -24,14 +24,38 @@ SMODS.Seal{
         retriggers = 3
         },
     loc_vars = function (self, info_queue, card)
+        if not card.ability.seal then 
+            card.ability.seal = {
+                retriggers = 3
+            } 
+        end
         return {
             vars = {
-                card.ability.seal
+                card.ability.seal.retriggers or 3
             }
         }
     end,
     calculate = function (self, card, context)
-        
+        if context.after then
+            card.ability.seal.retriggers = card.ability.seal.retriggers - 1
+            FG.FUNCS.card_eval_status_text{
+                card = card,
+                message = "-1 Retrigger",
+                mode = "literal"
+            }
+            if card.ability.seal.retriggers <= 0 then
+                G.E_MANAGER:add_event(Event({
+                    func = function ()
+                        card.seal = nil
+                        return true
+                    end
+                }))
+            end
+        end
+        return {
+            repetitions = card.ability.seal.retriggers or 0,
+            card = card
+        }
     end
 }
 

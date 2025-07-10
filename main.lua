@@ -43,7 +43,7 @@ local mod_contents = {
 	"special_editions/mila",
 	"tarots",
 	"spectral",
-	--"seals", -- WIP, SMODS is acting rather silly now
+	"seals", -- WIP, SMODS is acting rather silly now
 	"misc"
 }
 
