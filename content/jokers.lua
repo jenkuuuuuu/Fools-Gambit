@@ -1527,21 +1527,21 @@ SMODS.Joker {
 	end,
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
-		local has_fired = false
-		if context.before then has_fired = false end
+		local found_card = false
 		if context.repetition and context.cardarea == G.play and
-			(context.other_card:get_id() == 14 or -- ACE
-				context.other_card:get_id() == 2 or
-				context.other_card:get_id() == 3 or
-				context.other_card:get_id() == 5 or
-				context.other_card:get_id() == 8 or
-				context.other_card:get_id() == 13) then
+		(context.other_card:get_id() == 14 or -- ACE
+		context.other_card:get_id() == 2 or
+		context.other_card:get_id() == 3 or
+		context.other_card:get_id() == 5 or
+		context.other_card:get_id() == 8 or
+		context.other_card:get_id() == 13) then
+			found_card = true
 			return {
 				repetitions = 1,
 				card = card
 			}
 		end
-		if context.after and not has_fired then
+		if context.after then
 			local sound_pitch = 0.8
 			for k, v in ipairs(context.scoring_hand) do
 				if v.base.value == "Ace" or
@@ -1559,27 +1559,51 @@ SMODS.Joker {
 						end
 					}))
 				end
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					delay = .25,
-					func = function()
-						if v.base.value == "Ace" then
-							SMODS.change_base(v, v.base.suit, "2")
-						elseif v.base.value == "2" then
-							SMODS.change_base(v, v.base.suit, "3")
-						elseif v.base.value == "3" then
-							SMODS.change_base(v, v.base.suit, "5")
-						elseif v.base.value == "5" then
-							SMODS.change_base(v, v.base.suit, "8")
-						elseif v.base.value == "8" then
-							SMODS.change_base(v, v.base.suit, "King")
-						elseif v.base.value == "King" then
-							SMODS.change_base(v, v.base.suit, "Ace")
-						end
+				if v.base.value == "Ace" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "2")
 						return true
 					end
-				}))
+					}))
+				elseif v.base.value == "2" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "3")
+						return true
+					end
+					}))
+				elseif v.base.value == "3" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "5")
+						return true
+					end
+					}))
+				elseif v.base.value == "5" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "8")
+						return true
+					end
+					}))
+				elseif v.base.value == "8" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "King")
+						return true
+					end
+					}))
+				elseif v.base.value == "King" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "Ace")
+						return true
+					end
+					}))
+				end
 			end
+			
 			for _, v in ipairs(context.scoring_hand) do
 				if v.base.value == "Ace" or
 				v.base.value == "2" or
@@ -1587,6 +1611,7 @@ SMODS.Joker {
 				v.base.value == "5" or
 				v.base.value == "8" or
 				v.base.value == "King" then
+					found_card = true
 					G.E_MANAGER:add_event(Event({
 						trigger = 'after',
 						delay = 0.25,
@@ -1599,11 +1624,13 @@ SMODS.Joker {
 					}))
 				end
 			end
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = 2,
-				func = function() return true end
-			}))
+			if found_card then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 2,
+					func = function() return true end
+				}))
+			end
 		end
 	end
 }
