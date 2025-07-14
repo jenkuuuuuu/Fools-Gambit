@@ -860,17 +860,18 @@ return {
             j_fg_goldenleaf = {
                 name = "GoldenLeaf",
                 text = {
-                    "Increases hand size by {C:attention}#1#{} when",
-                    "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
+                    "When a {C:gold}Gold{}{C:inactive}(?){} card",
+                    "is scored,",
+                    "{X:mult,C:white}X#1#{} Mult"
                 }
             },
             j_fg_goldenleafalt = {
                 name = "SilverAutumn",
                 text = {
-                    "Permanently increase amount of hands by {C:attention}#1#{} when",
+                    "Permanently increase amount of hands",
+                    "by {C:blue}#1#{} when",
                     "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hands)"
+                    "{C:inactive}(Currently {C:clue}+#2#{C:inactive} hands)"
                 }
             }
         },
