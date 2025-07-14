@@ -90,6 +90,12 @@ FG.ALTS.joker_equivalents = {
 	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
 	j_bootstraps = "j_fg_bootstraps",
+	-- Legendaries
+	j_caino = "j_fg_caino",
+	j_triboulet = "j_fg_triboulet",
+	j_yorick = "j_fg_yorick",
+	j_chicot = "j_fg_chicot",
+	j_perkeo = "j_fg_perkeo",
 	-- COLLECTION
 	j_fg_jogla = "j_fg_jogla_alt",
 	j_fg_deathmodereal = "j_fg_deathmoderealalt",
@@ -3024,6 +3030,123 @@ SMODS.Joker{
 			ease_dollars(-card.ability.extra.cost)
 		end
 		if context.joker_main then return {mult = card.ability.extra.mult} end
+    end
+}
+
+-- Legendaries
+-- Joker
+SMODS.Joker{
+    key = "caino",
+    atlas = "jokers_alt",
+    pos = { x = 3, y = 8},
+	soul_pos = { x = 3, y = 9},
+    rarity = 1,
+    cost = 2,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "triboulet",
+    atlas = "jokers_alt",
+    pos = { x = 4, y = 8},
+	soul_pos = { x = 4, y = 9},
+    rarity = 1,
+    cost = 2,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "yorick",
+    atlas = "jokers_alt",
+    pos = { x = 5, y = 8},
+	soul_pos = { x = 5, y = 9},
+    rarity = 1,
+    cost = 2,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "chicot",
+    atlas = "jokers_alt",
+    pos = { x = 6, y = 8},
+	soul_pos = { x = 6, y = 9},
+    rarity = 1,
+    cost = 2,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "perkeo",
+    atlas = "jokers_alt",
+    pos = { x = 7, y = 8},
+	soul_pos = { x = 7, y = 9},
+    rarity = 1,
+    cost = 2,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
     end
 }
 -----------------

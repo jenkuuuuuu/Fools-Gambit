@@ -772,6 +772,42 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 }
             },
+            -- Legendaries
+            j_fg_caino = {
+                name = "Canio?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_triboulet = {
+                name = "Triboulet?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_yorick = {
+                name = "Yorick?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_chicot = {
+                name = "Chicot?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_perkeo = {
+                name = "Perkeo?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
