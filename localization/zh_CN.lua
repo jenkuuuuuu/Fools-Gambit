@@ -2,64 +2,64 @@ return {
     descriptions = {
         aberration={
             c_fg_tonal = {
-                name = "Tonal",
+                name = "音律",
                 text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
-                    "to their {C:red}Original{} form",
-                    "{C:inactive}Placeholder Sprite{}",
+                    "转化{C:attention}三个{}靠左的小丑", -- should be 3, change this to 3 leftmost later
+                    "至它们的{C:red}本初{}形态",
+                    "{C:inactive}贴图非完成品{}"
                 }
             },
             c_fg_atonal = {
-                name = "Atonal",
+                name = "走调",
                 text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
-                    "to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
+                    "转化{C:attention}三个{}靠左的小丑", -- should be 3, change this to 3 leftmost later
+                    "至它们的{C:purple}迭代{}形态",
+                    "{C:inactive}贴图非完成品{}"
                 }
             },
             c_fg_accelerando = {
-                name = "Accelerando",
+                name = "提速",
                 text = {
-                    "Changes {C:attention}3{} selected cards",
-                    "and turns their editions, seals and,",
-                    "enhancements to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
+                    "将{C:attention}三个{}被选择的卡牌",
+                    "的版本、蜡封和增强效果",
+                    "转化它们的{C:purple}迭代{}形态",
+                    "{C:inactive}贴图非完成品{}"
                 }
             },
             c_fg_treble = {
-                name = "Treble",
+                name = "高音",
                 text = {
-                    "Turns all Common Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
+                    "将所有的普通小丑",
+                    "转化成它们的{C:purple}迭代{}形态"
                 }
             },
             c_fg_bass = {
-                name = "Bass",
+                name = "低音",
                 text = {
-                    "Turns all Uncommon Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
+                    "将所有的罕见小丑",
+                    "转化成它们的{C:purple}迭代{}形态"
                 }
             },
             c_fg_alto = {
-                name = "Alto",
+                name = "中音",
                 text = {
-                    "Turns all Rare Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
+                    "将所有的稀有小丑",
+                    "转化成它们的{C:purple}迭代{}形态"
                 }
             },
             c_fg_stake = {
-                name = "Stake",
+                name = "五线谱",
                 text = {
-                    "Creates up to {C:attention}#1#",
-                    "random {C:purple}Aberration{} cards",
-                    "{C:inactive}(Must have room)",
+                    "生成最多{C:attention}#1#个",
+                    "随机{C:purple}转变牌{}",
+                    "{C:inactive}(必须留有余地)",
                 }
             },
             c_fg_fil_di_voce = {
-                name = "Fil Di Voce",
+                name = "静音",
                 text = {
-                    "Gives {C:money}$#1#{} for every",
-                    "owned {C:purple}Alternate{} Joker",
+                    "根据{C:purple}迭代{}小丑的数量，",
+                    "每个{C:purple}迭代{}小丑给予{C:money}$#1#{}块钱",
                 }
             }
         },
@@ -68,75 +68,76 @@ return {
         Edition={},
         Enhanced={
             m_fg_glass = {
-                name = "Glass? Card",
+                name = "玻璃？牌",
                 text = {
-                    "Gains {C:white,X:red}X1{} Mult for each scoring card",
-                    "with this enhancement in playing hand",
-                    "destroys after use",
-                    "no rank or suit",
+                    "在手牌中，随着每张被打出的{C:attention}玻璃？牌{}，",
+                    "增加{C:white,X:red}X1{}倍率",
+                    "计分后摧毁此卡牌",
+                    "无点数无花色",
                 }
             },
             m_fg_steel = {
-                name = "Steel? Card",
+                name = "钢铁？牌",
                 text = {
-                    "Gains {C:white,X:red}X#1#{} Mult for every",
-                    "{C:attention}steel? card{} in {C:attention}full deck{}",
-                    "Triggers while this card is",
-                    "held in hand.",
-                    "{C:inactive}(Currently {C:white,X:red}X#2#{C:inactive} mult)"
+                    "随着每张{C:attention}牌组{}内的{C:attention}钢铁？牌{}",
+                    "增加{C:white,X:red}X#1#{}倍率",
+                    "当手中持有该牌时，",
+                    "触发效果",
+                    "{C:inactive}(目前倍率{C:white,X:red}X#2#{C:inactive})"
                 }
             },
             m_fg_lucky = {
-                name = "Lucky? Card",
+                name = "幸运？牌",
                 text = {
-                    "{C:green}#1# in #2#{} chance",
-                    "for {C:chips}+#3#{} Chips",
-                    "{C:green}#4# in #5#{} chance",
-                    "for {C:gold}$#6#"
+                    "{C:green}#1#/#2#{}的几率",
+                    "{C:chips}+#3#{}筹码",
+                    "{C:green}#4#/#5#{}的几率",
+                    "获得{C:gold}$#6#"
                 }
             },
             m_fg_gold = {
-                name = "Gold? Card",
+                name = "黄金？牌",
                 text = {
-                    "Adds {C:attention}half{} the money equivalent",
-                    "to the cards {C:attention}held in hand{}",
-                    "at the {C:attention}end of round{C:inactive} (Rounded up){}",
-                    "{C:inactive}(Currently {C:gold}+$#1#{C:inactive})"
+                    "如果这张卡牌在回合结束时还在手中",
+                    "获得{C:attention}手中牌数{}数目的{C:attention}一半{}作为金钱，",
+                    "{C:inactive}（四舍五入）{}",
+                    "{C:inactive}（目前获得{C:gold}$#1#{C:inactive}）"
                 },
             },
             m_fg_bonus = {
                 name = "Bonus? Card",
                 text = {
-                    "{C:green}#1# in #2#{} chance",
-                    "for {C:chips}+#3#{} Chips",
-                    "{C:green}#4# in #5#{} chance",
-                    "for {C:chips}#6#{} Chips",
+                    "{C:green}#1#/#2#{}的几率",
+                    "{C:chips}+#3#{}筹码",
+                    "{C:green}#4#/#5#{}的几率",
+                    "{C:chips}#6#{}筹码",
                 }
             },
             m_fg_mult = {
-                name = "Mult? Card",
+                name = "倍率？牌",
                 text = {
-                    "{C:green}#1# in #2#{} chance",
-                    "for {C:mult}+#3#{} Mult",
-                    "{C:green}#4# in #5#{} chance",
-                    "for {C:mult}#6#{} Mult",
+                    "{C:green}#1#/#2#{}的几率",
+                    "{C:mult}+#3#{}倍率",
+                    "{C:green}#4#/#5#{}的几率",
+                    "{C:mult}#6#{}倍率",
                 }
             },
             m_fg_stone = {
-                name = "Stone? Card",
+                name = "石头？牌",
                 text = {
-                    "When held in hand, destroy this card and ",
-                    "enhance adjacent non-enhanced cards to",
-                    "{C:attention}Stone? Cards{} with {C:chips}15 more Chips.",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} extra Chips)"
+                    "当出牌后手中还持有此牌时，",
+                    "摧毁此牌卡并且增强周围",
+                    "未被增强的卡牌至有多{C:chips}15{}筹码的{C:attention}石头？牌{}",
+                    "{C:inactive}（目前{C:chips}+#2#{C:inactive}额外筹码）"
                 }
             },
             m_fg_wild = {
-                name = "Wild? Card",
+                name = "万能？牌",
                 text = {
-                    "When played randomly gives",
-                    "{C:chips}+#1#{} Chips, {C:mult}+#2#{} Mult,",
-                    "{C:white,X:mult}X#3#{} Mult or {C:gold}$#4#{}"
+                    "当卡牌被打出时，",
+                    "在下列效果中随机挑选一个：",
+                    "{C:chips}+#1#{}筹码,、{C:mult}+#2#{}倍率、",
+                    "{C:white,X:mult}X#3#{}倍率或获得{C:gold}$#4#{}"
                 }
             }
         },
@@ -748,20 +749,20 @@ return {
                 }
             },
             j_fg_invisible = {
-                name = "Invisible Joker?",
+                name = "隐形小丑？",
                 text = {
-                    "When sold, remove a random {C:attention}Joker",
-                    "Create an {C:attention}Invisible memory?{}",
-                    "with the removed Joker",
-                    "{C:inactive}(Cannot copy eternal jokers{}",
+                    "被售卖时，摧毁一个随机{C:attention}小丑",
+                    "制造一个带有被摧毁的小丑的",
+                    "{C:attention}隐形回忆？{}",
+                    "{C:inactive}（无法复制永恒卡牌）{}",
                 }
             },
             j_fg_invisible_memory = {
-                name = "{C:dark_edition,E:1}Invisible memory?{}",
+                name = "{C:dark_edition,E:1}隐形回忆？{}",
                 text = {
-                    "The memory of an {C:attention}Invisible Joker?{}",
-                    "After {C:attention}#1#{} round(s), {C:red,E:2}self-destruct{} and",
-                    "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
+                    "一个{C:attention}隐形小丑？{}的回忆",
+                    "在{C:attention}#1#{}个回合后，{C:red,E:2}自我摧毁{}并",
+                    "制造{C:attention}#2#{}个{C:dark_edition}负片{}{C:attention}#3#{}",
                 }
             },
             j_fg_bootstraps = {
@@ -776,112 +777,106 @@ return {
             j_fg_caino = {
                 name = "Canio?",
                 text = {
-                    "Gains {X:mult,C:white}X#2#{} Mult for",
-                    "each {C:attention}discarded{} face card",
-                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
                 }
             },
             j_fg_triboulet = {
                 name = "Triboulet?",
                 text = {
-                    "Gains {X:mult,C:white}X#2#{} Mult for",
-                    "each {C:attention}scored{} face card",
-                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
                 }
             },
             j_fg_yorick = {
                 name = "Yorick?",
                 text = {
-                    "Gains {X:mult,C:white}X#2#{} Mult",
-                    "every {C:attention}#3# {C:inactive}(#4#){} hands",
-                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
                 }
             },
             j_fg_chicot = {
                 name = "Chicot?",
                 text = {
-                    "{C:red}+#2#{} discard when",
-                    "{C:attention}boss blind{} defeated",
-                    "{C:inactive}(Currently {C:red}+#1#{C:inactive} discards)"
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
                 }
             },
             j_fg_perkeo = {
                 name = "Perkeo?",
                 text = {
-                    "Creates {C:attention}#1#{C:inactive} perishable {C:dark_edition}negative{}",
-                    "copy of a non-{C:dark_edition}negative{C:attention} joker{}",
-                    "when {C:attention}boss blind{} defeated"
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
                 }
             },
             -- Collectives
             j_fg_deathmodereal = {
-                name = 'deathmodereal',
+                name = '真死模式',
                 text = {
-                    "He's {X:black,C:white}cool(ish){}",
-                    '{X:mult,C:white}X#1#{} mult.'
+                    "他很{X:black,C:white}酷（吧）{}",
+                    '{X:mult,C:white}X#1#{}倍率'
                 },
             },
             j_fg_deathmoderealalt = {
-                name = 'deathmodereal',
+                name = '真死模式',
                 text = {
-                    "He's {X:white,C:black}cool{}",
-                    'each scored card gives',
-                    '{X:mult,C:white}X#1#{} mult.'
+                    "他很{X:white,C:black}酷{}",
+                    '每张被打出的牌都',
+                    '{X:mult,C:white}X#1#{}倍率'
                }
             },
             j_fg_jogla = {
-                name = 'Jogla',
+                name = '乔戈拉',
                 text = {
-                    "Create {C:attention}#1# {C:dark_edition}Negative{} copies of",
-                    "the {C:attention}leftmost{} consumeable in posession",
-                    "at the end of the{C:attention} shop{}.",
-                    "{C:inactive}(Currently copying {C:attention}#2#{C:inactive})",
-                    "{C:inactive,s:0.7}\"I am NOT a wizard\""
+                    "在结束商店后，制造{C:attention}#1#{}个{C:dark_edition}负片{}",
+                    "{C:attention}最靠左{}的消耗牌",
+                    "{C:inactive}（目前正在针对{C:attention}#2#{C:inactive}）",
+                    "{C:inactive,s:0.7}\"我不是巫师啊(´；ω；‘)\""
                 },
             },
             j_fg_jogla_alt = {
-                name = "Joglalt",
+                name = "乔迭拉",
                 text = {
-                    "Increases hand size by {C:attention}#1#{} when",
-                    "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
+                    "在打败头目盲注时，增加{C:attention}#1#{}个",
+                    "手牌槽位",
+                    "{C:inactive}(目前增加{C:attention}+#2#{C:inactive}个槽位)"
                 }
             },
             j_fg_jenker = {
-                name = 'Jenku',
+                name = '盏枯',
                 text = {
-                    "Retriggers every {C:attention}Joker{}",
-                    "for every second {C:attention}Boss Blind{} defeated.",
-                    "starting at {C:mult}1{}",
-					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
-                    "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
+                    "每打败两个{C:attention}头目盲注{}，",
+                    "就多触发所有{C:attention}小丑牌{}1遍",
+                    "从{C:mult}一{}开始",
+					"{C:inactive}（目前触发{C:mult}#1#{}{C:inactive}遍）",
+                    "{C:inactive,s:0.7}“我估摸是制造最多卡死的（ﾉ´д｀）”"
                 }
             },
             j_fg_goldenleaf = {
-                name = "GoldenLeaf",
+                name = "金叶",
                 text = {
-                    "When a {C:gold}Gold{}{C:inactive}(?){} card",
-                    "is scored,",
-                    "{X:mult,C:white}X#1#{} Mult",
-                    "{C:inactive}\"get it cause im \"golden\"leaf\""
+                    "当一个{C:gold}黄金{}{C:inactive}（？）{} 牌",
+                    "被打出时，",
+                    "{X:mult,C:white}X#1#{}倍率",
+                    "{C:inactive}“因为我是“金”叶啊( • ω • )”"
                 }
             },
             j_fg_goldenleafalt = {
-                name = "SilverAutumn",
+                name = "银秋",
                 text = {
-                    "Permanently increase amount of hands",
-                    "by {C:blue}#1#{} when",
-                    "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:blue}+#2#{C:inactive} hands)"
+                    "当打败{C:attention}头目盲注{}时，",
+                    "永久增加{C:blue}#1#{}个",
+                    "出牌次数",
+                    "{C:inactive}（目前{C:blue}+#2#{C:inactive}出牌次数）"
                 }
             }
         },
         Other={
             fg_unchangeable = {
-                name = "Unchangeable",
-                label = "Unchangeable",
+                name = "非变",
+                label = "非变",
                 text = {
-                    "Can't be alternated"
+                    "无法被迭代转化"
                 }
             }
         },
@@ -1062,11 +1057,11 @@ return {
         -- This one is very important. I have moved every localization key we might need for FG here. 
         -- See aux_functions > FG.FUNCS.card_eval_status_text for more info
         FG = {
-            chipMult="Multiplied!",
-			plus_aberration="+1 aberration",
-			replaced="Replaced!",
-			replenished="Replenished!",
-			card_added="+1 Card",
+            chipMult="乘倍！",
+			plus_aberration="+1 转变牌",
+			replaced="替代！",
+			replenished="补充！",
+			card_added="+1 卡牌",
         },
 
         achievement_descriptions={},
@@ -1075,14 +1070,14 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
-            k_chipMult="Multiplied!",
-			k_plus_aberration="+1 Aberration",
-			k_replaced="Replaced!",
-			k_replenished="Replenished!",
-			k_card_added="+1 Card",
-            k_unchangeable_warning = "This card can't be alternated",
-            k_fg_active = "Active!",
-            k_fg_none = "None",
+            k_chipMult="乘倍！",
+			k_plus_aberration="+1 转变牌",
+			k_replaced="替代！",
+			k_replenished="补充！",
+			k_card_added="+1 卡牌",
+            k_unchangeable_warning = "这张卡牌无法被迭代转化",
+            k_fg_active = "激活！",
+            k_fg_none = "无",
         },
         high_scores={},
         labels={},
