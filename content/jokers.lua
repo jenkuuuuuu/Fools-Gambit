@@ -99,6 +99,7 @@ FG.ALTS.joker_equivalents = {
 	-- COLLECTION
 	j_fg_jogla = "j_fg_jogla_alt",
 	j_fg_deathmodereal = "j_fg_deathmoderealalt",
+	j_fg_goldenleaf = "j_fg_goldenleafalt",
 }
 --------------------
 ---SPECIAL JOKERS---
@@ -3326,6 +3327,33 @@ SMODS.Joker{
 					repetitions = card.ability.extra.repetitions
 				 } 
 			   end
+		end
+	}
+	-- goldenleaf alt
+	SMODS.Joker {
+		key = 'goldenleafalt',
+		config = { extra = { increase = 1, extra_size = 0} },
+		loc_vars = function(self, info_queue, card)
+			return {
+				vars = {
+					card.ability.extra.increase,
+					card.ability.extra.extra_size
+				}
+			}
+		end,
+		rarity = "fg_collective", 
+		atlas = 'collective',
+		pos = { x = 0, y = 0 },
+		soul_pos = { x = 0, y = 1 },
+		cost = 5,
+		blueprint_compat = false,
+		calculate = function(self, card, context)
+			if context.end_of_round and not context.blueprint and G.GAME.blind.boss and not context.repetition and not context.individual then
+				card.ability.extra.extra_size = card.ability.extra.extra_size + card.ability.extra.increase
+				G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.increase
+				ease_hands_played(card.ability.extra.increase)
+				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..card.ability.extra.extra_size.." hand(s)!" })
+			end
 		end
 	}
 	-- Jenku alt
