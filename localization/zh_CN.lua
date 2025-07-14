@@ -1,0 +1,1094 @@
+return {
+    descriptions = {
+        aberration={
+            c_fg_tonal = {
+                name = "音律",
+                text = {
+                    "转化{C:attention}三个{}靠左的小丑", -- should be 3, change this to 3 leftmost later
+                    "至它们的{C:red}本初{}形态",
+                    "{C:inactive}贴图非完成品{}"
+                }
+            },
+            c_fg_atonal = {
+                name = "走调",
+                text = {
+                    "转化{C:attention}三个{}靠左的小丑", -- should be 3, change this to 3 leftmost later
+                    "至它们的{C:purple}迭代{}形态",
+                    "{C:inactive}贴图非完成品{}"
+                }
+            },
+            c_fg_accelerando = {
+                name = "提速",
+                text = {
+                    "将{C:attention}三个{}被选择的卡牌",
+                    "的版本、蜡封和增强效果",
+                    "转化它们的{C:purple}迭代{}形态",
+                    "{C:inactive}贴图非完成品{}"
+                }
+            },
+            c_fg_treble = {
+                name = "高音",
+                text = {
+                    "将所有的普通小丑",
+                    "转化成它们的{C:purple}迭代{}形态"
+                }
+            },
+            c_fg_bass = {
+                name = "低音",
+                text = {
+                    "将所有的罕见小丑",
+                    "转化成它们的{C:purple}迭代{}形态"
+                }
+            },
+            c_fg_alto = {
+                name = "中音",
+                text = {
+                    "将所有的稀有小丑",
+                    "转化成它们的{C:purple}迭代{}形态"
+                }
+            },
+            c_fg_stake = {
+                name = "五线谱",
+                text = {
+                    "生成最多{C:attention}#1#个",
+                    "随机{C:purple}转变牌{}",
+                    "{C:inactive}(必须留有余地)",
+                }
+            },
+            c_fg_fil_di_voce = {
+                name = "静音",
+                text = {
+                    "根据{C:purple}迭代{}小丑的数量，",
+                    "每个{C:purple}迭代{}小丑给予{C:money}$#1#{}块钱",
+                }
+            }
+        },
+        Back={},
+        Blind={},
+        Edition={},
+        Enhanced={
+            m_fg_glass = {
+                name = "玻璃？牌",
+                text = {
+                    "在手牌中，随着每张被打出的{C:attention}玻璃？牌{}，",
+                    "增加{C:white,X:red}X1{}倍率",
+                    "计分后摧毁此卡牌",
+                    "无点数无花色",
+                }
+            },
+            m_fg_steel = {
+                name = "钢铁？牌",
+                text = {
+                    "随着每张{C:attention}牌组{}内的{C:attention}钢铁？牌{}",
+                    "增加{C:white,X:red}X#1#{}倍率",
+                    "当手中持有该牌时，",
+                    "触发效果",
+                    "{C:inactive}(目前倍率{C:white,X:red}X#2#{C:inactive})"
+                }
+            },
+            m_fg_lucky = {
+                name = "幸运？牌",
+                text = {
+                    "{C:green}#1#/#2#{}的几率",
+                    "{C:chips}+#3#{}筹码",
+                    "{C:green}#4#/#5#{}的几率",
+                    "获得{C:gold}$#6#"
+                }
+            },
+            m_fg_gold = {
+                name = "黄金？牌",
+                text = {
+                    "如果这张卡牌在回合结束时还在手中",
+                    "获得{C:attention}手中牌数{}数目的{C:attention}一半{}作为金钱，",
+                    "{C:inactive}（四舍五入）{}",
+                    "{C:inactive}（目前获得{C:gold}$#1#{C:inactive}）"
+                },
+            },
+            m_fg_bonus = {
+                name = "Bonus? Card",
+                text = {
+                    "{C:green}#1#/#2#{}的几率",
+                    "{C:chips}+#3#{}筹码",
+                    "{C:green}#4#/#5#{}的几率",
+                    "{C:chips}#6#{}筹码",
+                }
+            },
+            m_fg_mult = {
+                name = "倍率？牌",
+                text = {
+                    "{C:green}#1#/#2#{}的几率",
+                    "{C:mult}+#3#{}倍率",
+                    "{C:green}#4#/#5#{}的几率",
+                    "{C:mult}#6#{}倍率",
+                }
+            },
+            m_fg_stone = {
+                name = "石头？牌",
+                text = {
+                    "当出牌后手中还持有此牌时，",
+                    "摧毁此牌卡并且增强周围",
+                    "未被增强的卡牌至有多{C:chips}15{}筹码的{C:attention}石头？牌{}",
+                    "{C:inactive}（目前{C:chips}+#2#{C:inactive}额外筹码）"
+                }
+            },
+            m_fg_wild = {
+                name = "万能？牌",
+                text = {
+                    "当卡牌被打出时，",
+                    "在下列效果中随机挑选一个：",
+                    "{C:chips}+#1#{}筹码,、{C:mult}+#2#{}倍率、",
+                    "{C:white,X:mult}X#3#{}倍率或获得{C:gold}$#4#{}"
+                }
+            }
+        },
+        Joker={
+            -- Mod jokers
+            j_fg_change_of_pace = {
+                name = 'Change of Pace',
+                text = {
+                    "After being sold, changes spawned {C:red}jokers{}",
+                    "to their {C:purple}Alternate{} forms."
+                }
+            },
+            j_fg_change_of_pace_alt = {
+                name = 'Change of Pace?',
+                text = {
+                     "After being sold, changes spawned {C:purple}jokers{}",
+                    "to their {C:red}Original{} forms."
+                }
+            },
+            j_fg_flipped_script = {
+                name = 'Flipped Script',
+                text = {
+                    "When sold, changes all {C:purple}Alternate{}",
+                    "{C:attention}Jokers{} to their {C:red}Original{}"
+                }
+            },
+            j_fg_flipped_script_alt = {
+                name = 'Flipped Script',
+                text = {
+                    "When sold, changes all {C:red}Original{}",
+                    "{C:attention}Jokers{} to their {C:purple}Alternate{}"
+                }
+            },
+            j_fg_script_flipped = {
+                name = 'Script Flipped',
+                text = {
+                    "When sold, changes the edition of",
+                    "all other jokers to the opposite edition."
+                }
+            },
+			j_fg_delinquent = {
+			    name = 'Delinquent',
+			    text = {
+                    "{C:attention}Replaces{} consumeable cards",
+                    "with {C:purple}Aberration{} cards",
+                    "when a blind is skipped",
+                },
+            },
+            j_fg_delinquentalt = {
+			    name = 'Delinquent?',
+			    text = {
+                    "{C:attention}Replenishes{} empty consumeable",
+                    "card slots with {C:purple}Aberration{} cards",
+                    "when a blind is beaten",
+                },
+            },						
+            j_fg_concert = {
+                name = 'Concert Ticket',
+                text = {
+                     "Every {C:money}$#1#{} spent {C:inactive}(#2#){} creates",
+                     "an {C:purple}aberration{} card",
+					 "{C:inactive}(Must have room)",
+                }
+            },
+			 j_fg_concertalt = {
+                name = 'Concert Ticket?',
+                text = {
+                     "Creates an {C:purple}aberration{} card",
+                     "when redeeming a {C:attention}Voucher{}",
+					 "{C:inactive}(Must have room)",
+                }
+            },
+			j_fg_disc={
+                name="Disc Joker",
+                text={
+                    "{C:red}Original{C:attention} Jokers",
+                    "each give {C:chips}+#1#{} Chips",
+					 "{s:0.8}Disc Joker included",
+                },
+            },
+			j_fg_orchestral={
+                name="Orchestral Joker",
+                text={
+                    "{C:purple}Alternate{C:attention} Jokers",
+                    "each give {C:mult}+#1#{} Mult",
+					 "{s:0.8}Orchestral Joker included",
+                },
+            },
+			j_fg_conductor={
+                name="Conductor",
+                text={
+                    "Creates #1# {C:purple}aberration{} card if",
+                    "played poker hand contains only",
+                    "{C:attention}Face{} cards",
+                    "{C:inactive}(Must have room)",
+                },
+            },
+			j_fg_conductoralt={
+                name="Conductor?",
+                text={
+                    "Creates #1# {C:attention}Face{} cards",
+                    "every {C:purple}aberration{} card used",
+                },
+            },
+            j_fg_oscillator = {
+                name = "Oscillator",
+                text = {
+                    "Gains {C:chips}+#2#{} Chips when blind {C:attention}selected{}",
+                    "{C:chips}-#3#{} Chips when blind {C:attention}defeated{}",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, can't be negative)",
+                    "{C:inactive}(Value is kept when {C:purple}alternating{C:inactive} this card)"
+                }
+            },
+            j_fg_oscillator_alt = {
+                name = "Oscillator?",
+                text = {
+                    "Gains {C:chips}+#3#{} Chips when blind {C:attention}defeated{}",
+                    "{C:chips}-#2#{} Chips when blind {C:attention}selected{}",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips, can't be negative)",
+                    "{C:inactive}(Value is kept when {C:red}alternating{C:inactive} this card)"
+                }
+            },
+            j_fg_mango={
+			    name="Mango",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Aberration{} card used",
+				},
+			},
+			j_fg_mangoalt={
+			    name="Mango?",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Alternate{} joker bought",
+				},
+			},
+            -- Normal jokers
+            j_fg_joker = {
+                name = 'Joker?',
+                text = {
+                    "Every card scored",
+                    "gives {C:mult}+#1#{} Mult"
+                }
+            },
+            j_fg_greedy = {
+                name = 'Greedy Joker?',
+                text = {
+                    "Each scored card with {C:diamonds}Diamond{} suit",
+                    "temporarily gains {C:mult}+#1#{} mult, resets",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                }
+            },
+            j_fg_lusty = {
+                name = 'Lusty Joker?',
+                text = {
+                    "Each scored card with {C:hearts}Heart{} suit",
+                    "temporarily gains {C:mult}+#1#{} mult, resets",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                }
+            },
+            j_fg_wrathful = {
+                name = 'Wrathful Joker?',
+                text = {
+                    "Each scored card with {C:spades}Spade{} suit",
+                    "temporarily gains {C:mult}+#1#{} mult, resets",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                }
+            },
+            j_fg_gluttenous = {
+                name = "Gluttonous Joker?",
+                text = {
+                    "Each scored card with {C:clubs}Club{} suit",
+                    "temporarily gains {C:mult}+#1#{} mult, resets",
+                    "when {C:attention}Boss Blind{} is defeated",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                }
+            },
+            j_fg_jolly = {
+                name = 'Jolly Joker?',
+                text = {
+                    "{C:red}+#1#{} Mult and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_zany = {
+                name = 'Zany Joker?',
+                text = {
+                    "{C:red}+#1#{} Mult and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_mad = {
+                name = 'Mad Joker?',
+                text = {
+                    "{C:red}+#1#{} Mult and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_crazy = {
+                name = 'Crazy Joker?',
+                text = {
+                    "{C:red}+#1#{} Mult and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_droll = {
+                name = 'Droll Joker?',
+                text = {
+                    "{C:red}+#1#{} Mult and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_sly = {
+                name = 'Sly Joker?',
+                text = {
+                    "{C:chips}+#1#{} Chips and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_wily = {
+                name = 'Wily Joker?',
+                text = {
+                    "{C:chips}+#1#{} Chips and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_clever = {
+                name = 'Clever Joker?',
+                text = {
+                    "{C:chips}+#1#{} Chips and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_devious = {
+                name = 'Devious Joker?',
+                text = {
+                    "{C:chips}+#1#{} Chips and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_crafty = {
+                name = 'Crafty Joker?',
+                text = {
+                    "{C:chips}+#1#{} Chips and",
+                    "retrigger scoring cards {C:attention}#3#{} time",
+                    "if played hand contains",
+                    "a {C:attention}#2#",
+               }
+            },
+            j_fg_dagger = {
+                name = 'Ceremonial Dagger?',
+                text = {
+                    "When {C:attention}Blind{} is selected,",
+                    "destroy Joker to the left",
+                    "and permanently add {C:attention}X#2#",
+                    "its sell value to this {C:chips}Chips",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
+                }
+            },
+            j_fg_banner = {
+                name = 'Banner?',
+                text = {
+                    "{C:red}+#2#{} discards",
+                    "{C:chips}+#1#{} Chips for",
+                    "each remaining",
+                    "{C:attention}discard",
+                }
+            },
+            j_fg_summit = {
+                name = 'Mystic Summit?',
+                text = {
+                    "{C:red}-#2#{} discards",
+                    "{C:mult}+#1#{} Mult when",
+                    "{C:attention}#3#{} discards",
+                    "remaining",
+                }
+            },
+            j_fg_loyalty = {
+                name = 'Loyalty Card?',
+                text = {
+                     "Every {C:attention}#1#{} items",
+                     "purchased from the {C:attention}shop{} makes",
+                     "the next one {C:money}free{}",
+                     "{C:inactive}#2#",
+                }
+            },
+            j_fg_8ball = {
+                name = '8 Ball?',
+                text = {
+                        "Each scored {C:attention}8{} creates a",
+                        "{C:tarot}Tarot{} card when scored",
+                        "{C:inactive}(Must have room)",
+                },
+            },
+            j_fg_misprint = {
+                name = 'Misprint?',
+                text = {
+                    ""
+                }
+            },
+            j_fg_fist = {
+                name = 'Raised Fist?',
+                text = {
+                    "Adds {C:attention}#1#{} the rank",
+                    "of {C:attention}highest{} ranked card",
+                    "held in hand to Mult",
+                }
+            },
+            j_fg_fibonacci = {
+                name = 'Fibonacci?',
+                text = {
+                    "Retrigger each scored {C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{},",
+                    "{C:attention}8{} and {C:attention}King{} {C:attention}1{} time and permanently",
+                    "upgrades it to next rank when scored",
+                    "{C:inactive}(ex: Ace to 2, 8 to King, King to Ace){}",
+                },
+            },
+            j_fg_face = {
+                name = 'Scary Face?',
+                text = {
+                    'Gains {C:chips}+#2#{} chips per scored {C:attention}face{} card',
+                    '{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}'
+                },
+            },
+            j_fg_gros_michel = {
+                name = "Gros Michel?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult",
+                    "{C:green}#2# in #3#{} chance this",
+                    "card gets destroyed",
+                    "at end of round"
+                }
+            },
+            j_fg_even_steven = {
+                name = "Even Steven?",
+                text = {
+                    "Gains {C:mult}+#1#{} Mult for each",
+                    "{C:attention}even triggered{} card",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                    "{C:inactive}(10, 8, 6, 4, 2){}"
+                }
+            },
+            j_fg_odd_todd = {
+                name = "Odd Todd?",
+                text = {
+                    "Gains {C:chips}+#1#{} Chips for each",
+                    "{C:attention}odd triggered{} card",
+                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+                    "{C:inactive}(A, 9, 7, 5, 3)"
+                }
+            },
+            j_fg_scholar = {
+                name = "Scholar?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if scoring hand",
+                    "contains at least {C:attention}#2#{} #3#s"
+                }
+            },
+            j_fg_business = {
+                name = "Business Card?",
+                text = {
+                    "{C:green}#1# in #2#{} chance to enhance",
+                    "scored {C:attention}face{} cards",
+                    "{C:inactive}(Applies effect after scoring){}"
+                }
+            },
+            j_fg_supernova = {
+
+            },
+            j_fg_ride_the_bus = {
+                name = "Ride the Bus?",
+                text = {
+                    "{C:mult}+#2#{} Mult",
+                    "{C:mult}-#1#{} Mult for every",
+                    "played {C:attention}face{} card"
+                }
+            },
+            j_fg_abstract = {
+                name = 'Abstract Joker?',
+                text = {
+                    "{C:mult}+#1#{} Mult for",
+                    "each {C:attention}Joker{} card Sold",
+                    "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                },
+            },
+            j_fg_egg = {
+                name = 'Egg?',
+                text = {
+                    "Has {C:money}$#1#{} sell value.",
+                    "when sold lose",
+                    "{C:mult}#2#{} hand and {C:mult}#3#{} discard"
+                },
+            },
+            j_fg_ice_cream = {
+                name = "Ice cream?",
+                text = {
+                    "{C:chips}+#1#{} Chips",
+                    "{C:chips}-#2#{} Chips when",
+                    "blind {C:attention}selected{}"
+                }
+            },
+            j_fg_faceless = {
+                name = "Faceless Joker?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if played hand",
+                    "contains no {C:attention}face{} cards"
+                }
+            },
+            j_fg_splash = {
+                name = "Splash?",
+                text = {
+                    "undebuffs {C:attention}scored cards{}",
+                }
+            },
+            j_fg_cavendish = {
+                name = "Cavendish?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult",
+                    "{C:green}#3# in #4#{} chance of losing",
+                    "{C:white,X:mult}X#2#{} Mult at end of round.",
+                    "Self-destruct on {C:white,X:mult}X1{} Mult"
+                }
+            },
+            j_fg_card_sharp = {
+                name = "Card Sharp?",
+                text = {
+                    ""
+                }
+            },
+            j_fg_red_card = {
+                name = "Red Card?",
+                text = {
+                    "Gains {C:mult}+#2#{} Mult when",
+                    "skipping a blind is {C:attention}skipped{}",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+                }
+            },
+            j_fg_baron = {
+                name = "Baron?",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult for",
+                    "each {C:attention}King{} held in hand",
+                    "at {C:attention}end of round",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{}{C:inactive} Mult)"
+                }
+            },
+            j_fg_cloud_9 = {
+                name = "Cloud 9?",
+                text = {
+                    "Earn {C:gold}$#1#{} for each",
+                    "scored {C:attention}9{}"
+                }
+            },
+            j_fg_rocket = {
+                name = "Rocket?",
+                text = {
+                    "Earn {C:gold}$#1#{} at {C:attention}end of round{}",
+                    "Decrease payout by {C:gold}$#2#{}",
+                    "when {C:attention}skipping blind{}"
+                }
+            },
+            j_fg_duo = {
+                name = 'The Duo?',
+                text = {
+                    "Gains {X:mult,C:white}X#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+               }
+            },
+            j_fg_trio = {
+                name = 'The Trio?',
+                text = {
+                    "Gains {X:mult,C:white}X#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+               }
+            },
+            j_fg_family = {
+                name = 'The Family?',
+                text = {
+                    "Gains {X:mult,C:white}X#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+               }
+            },
+            j_fg_order = {
+                name = 'The Order?',
+                text = {
+                    "Gains {X:mult,C:white}X#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+               }
+            },
+            j_fg_popcorn = {
+                name = "Popcorn?",
+                text = {
+                    "{C:mult}+#1#{} Mult",
+                    "{C:mult}-#2#{} per",
+                    "hand played"
+                }
+            },
+            j_fg_trouses = {},
+            j_fg_ancient = {
+                name = "Ancient Joker",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult when",
+                    "all playing cards are {V:#1#}#3#{}",
+                    "Suit changes every round",
+                    "{C:inactive}(Currently{C:white,X:mult}#1#{C:inactive} Mult)",
+                    "{C:inactive}(Can't go below X0.75 Mult)"
+                }
+            },
+            j_fg_campfire = {
+                name = "Campfire?",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult for each card {C:attention}discarded{}",
+                    "Losses {C:white,X:mult}X#3#{} Mult when {C:attention}boss blind{} defeated",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult, can't go below {C:white,X:mult}X0.75{C:inactive} Mult)"
+                }
+            },
+            j_fg_throwback = {
+                name = "Throwback?",
+                text = {
+                    "{C:white,X:mult}X#2#{} Mult for each",
+                    "{C:attention}shop{} skipped this run",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult){}"
+                }
+            },
+            j_fg_hanging_chad = {
+                name = "Hanging Chad?",
+                text = {
+                    "{C:green}#1# in #2#{} chance to add a random",
+                    "{C:attention}enhancement{} to scored cards",
+                    "If already enhanced, {C:green}#3# in #4#{}",
+                    "chance to add a random {C:attention}seal{}",
+                    "If already have a seal, {C:green}#5# in #6#{}",
+                    "chance add a random {C:attention}edition{}",
+                    "{C:inactive,s:0.8}(Effect applies after scoring){}"
+                },
+			},
+			j_fg_gem={
+                name="Rough Gem?",
+                text={
+                    "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:diamonds}Diamond{} suit, earn",
+                    "{C:money}$#2#{} when scored",
+                },
+			},
+			j_fg_bloodstone={
+                name="Bloodstone?",
+                text={
+                   "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:hearts}Heart{} suit, gain",
+                    "{X:mult,C:white}X#2#{} Mult when scored",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+                },
+			},
+			j_fg_arrowhead={
+                name="Arrowhead?",
+                text={
+                   "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:spades}Spade{} suit, gain",
+                    "{C:chips}+#2#{} Chips when scored",
+					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips)",
+                },
+			},
+			j_fg_agate={
+                name="Onyx Agate?",
+                text={
+                   "If poker hand contains a {C:attention}#1#{}",
+                    "with only {C:clubs}Club{} suit, gain",
+                    "{C:mult}+#2#{} Mult when scored",
+					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
+                },
+			},
+            j_fg_hit_the_road = {
+                name = "Hit the Road?",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult",
+                    "for every {C:attention}Jack{} discarded",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult)"
+                }
+            },
+            j_fg_invisible = {
+                name = "Invisible Joker?",
+                text = {
+                    "When sold, remove a random {C:attention}Joker",
+                    "Create an {C:attention}Invisible memory?{}",
+                    "with the removed Joker",
+                    "{C:inactive}(Cannot copy eternal jokers{}",
+                }
+            },
+            j_fg_invisible_memory = {
+                name = "{C:dark_edition,E:1}Invisible memory?{}",
+                text = {
+                    "The memory of an {C:attention}Invisible Joker?{}",
+                    "After {C:attention}#1#{} round(s), {C:red,E:2}self-destruct{} and",
+                    "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
+                }
+            },
+            j_fg_bootstraps = {
+                name = "Bootstraps?",
+                text = {
+                    "Gains {C:mult}+#2#{} Mult, {C:red}-$#3#{}",
+                    "at {C:attention}end of round{}",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+                }
+            },
+            -- Legendaries
+            j_fg_caino = {
+                name = "Canio?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_triboulet = {
+                name = "Triboulet?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_yorick = {
+                name = "Yorick?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_chicot = {
+                name = "Chicot?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_perkeo = {
+                name = "Perkeo?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            -- Collectives
+            j_fg_deathmodereal = {
+                name = 'deathmodereal',
+                text = {
+                    "He's {X:black,C:white}cool(ish){}",
+                    '{X:mult,C:white}X#1#{} mult.'
+                },
+            },
+            j_fg_deathmoderealalt = {
+                name = 'deathmodereal',
+                text = {
+                    "He's {X:white,C:black}cool{}",
+                    'each scored card gives',
+                    '{X:mult,C:white}X#1#{} mult.'
+               }
+            },
+            j_fg_jogla = {
+                name = 'Jogla',
+                text = {
+                    "Create {C:attention}#1# {C:dark_edition}Negative{} copies of",
+                    "the {C:attention}leftmost{} consumeable in posession",
+                    "at the end of the{C:attention} shop{}.",
+                    "{C:inactive}(Currently copying {C:attention}#2#{C:inactive})",
+                    "{C:inactive,s:0.7}\"I am NOT a wizard\""
+                },
+            },
+            j_fg_jogla_alt = {
+                name = "Joglalt",
+                text = {
+                    "Increases hand size by {C:attention}#1#{} when",
+                    "{C:attention}Boss blind{} defeated",
+                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
+                }
+            },
+            j_fg_jenker = {
+                name = 'Jenku',
+                text = {
+                    "Retriggers every {C:attention}Joker{}",
+                    "for every second {C:attention}Boss Blind{} defeated.",
+                    "starting at {C:mult}1{}",
+					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
+                    "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
+                }
+            },
+            j_fg_goldenleaf = {
+                name = "GoldenLeaf",
+                text = {
+                    "When a {C:gold}Gold{}{C:inactive}(?){} card",
+                    "is scored,",
+                    "{X:mult,C:white}X#1#{} Mult"
+                }
+            },
+            j_fg_goldenleafalt = {
+                name = "SilverAutumn",
+                text = {
+                    "Permanently increase amount of hands",
+                    "by {C:blue}#1#{} when",
+                    "{C:attention}Boss blind{} defeated",
+                    "{C:inactive}(Currently {C:clue}+#2#{C:inactive} hands)"
+                }
+            }
+        },
+        Other={
+            fg_unchangeable = {
+                name = "Unchangeable",
+                label = "Unchangeable",
+                text = {
+                    "Can't be alternated"
+                }
+            }
+        },
+        Planet={},
+        Spectral={},
+        Stake={},
+        Tag={},
+        Tarot={
+            c_fg_chariot = {
+                name = "The Chariot?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Steel? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_death = {
+                name = "Death?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards",
+                    "Convert all cards into the {C:attention}rightmost card",
+                    "{C:inactive}(Only copies {C:attention}suit{C:inactive} and {C:attention}rank{C:inactive}){}",
+                    "{C:inactive}(Drag to rearrange){}"
+                }
+            },
+            c_fg_devil = {
+                name = "The Devil?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Gold? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_emperor = {
+                name = "The Emperor",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "create a {C:legendary}Soul{}"
+                }
+            },
+            c_fg_empress = {
+                name = "The Empress?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Mult? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_fool = {
+                name = "The Fool?",
+                text = {
+                    "Creates {C:attention}#1#{} random",
+                    "{C:tarot}Tarot{} or {C:planet}Planet{} card",
+                    "{C:inactive}({C:tarot}The Fool?{} excluded)"
+                }
+            },
+            c_fg_hermit = {
+                name = "The Hermit?",
+                text = {
+                    "Enhance {C:attention}#1#{} selected cards",
+                    "with a {C:attention}random{} enhancement",
+                    "{C:attention}Halves{} money",
+                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})"
+                }
+            },
+            c_fg_hierophant = {
+                name = "The Hierophant?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Bonus? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_high_priestess = {
+                name = "highest Priestess",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "create a {C:legendary}Black Hole{}"
+                }
+            },
+            c_fg_justice = {
+                name = "Justice?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Glass? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_magician = {
+                name = "The Magician?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Lucky? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_moon = {
+                name = "The Moon?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:clubs}Clubs",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:diamonds}Diamonds{}"
+                }
+            },
+            c_fg_star = {
+                name = "The Star?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:diamonds}Diamonds",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:clubs}Clubs{}"
+                }
+            },
+            c_fg_sun = {
+                name = "The Sun?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:hearts}Hearts",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:spades}Spades{}"
+                }
+            },
+            c_fg_temperance = {
+                name = "Temperance?",
+                text = {
+                    "Gives {C:attention}double{} the total sell value",
+                    "of {C:attention}all{} consumeables in posession",
+                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
+                    "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
+                }
+            },
+            c_fg_wheel_of_fortune = {
+                name = "The Wheel of Fortune?",
+                text = {
+                    "{C:green}#1# in #2#{} chance to",
+                    "add {C:dark_edition}Negative{} to",
+                    "a random {C:attention}Joker{}"
+                }
+            },
+            c_fg_world = {
+                name = "The World?",
+                text = {
+                    "Select up to {C:attention}#1#{} cards to",
+                    "turn them into {C:spades}Spades",
+                    "Turn the rest of the {C:attention}hand{}",
+                    "into {C:hearts}Hearts{}"
+                }
+            },
+        },
+        Voucher={},
+    },
+    misc = {
+        -- This one is very important. I have moved every localization key we might need for FG here. 
+        -- See aux_functions > FG.FUNCS.card_eval_status_text for more info
+        FG = {
+            chipMult="乘倍！",
+			plus_aberration="+1 转变牌",
+			replaced="替代！",
+			replenished="补充！",
+			card_added="+1 卡牌",
+        },
+
+        achievement_descriptions={},
+        achievement_names={},
+        blind_states={},
+        challenge_names={},
+        collabs={},
+        dictionary={
+            k_chipMult="乘倍！",
+			k_plus_aberration="+1 转变牌",
+			k_replaced="替代！",
+			k_replenished="补充！",
+			k_card_added="+1 卡牌",
+            k_unchangeable_warning = "这张卡牌无法被迭代转化",
+            k_fg_active = "激活！",
+            k_fg_none = "无",
+        },
+        high_scores={},
+        labels={},
+        poker_hand_descriptions={},
+        poker_hands={},
+        quips={},
+        ranks={},
+        suits_plural={},
+        suits_singular={},
+        tutorial={},
+        v_dictionary={},
+        v_text={},
+    },
+}
