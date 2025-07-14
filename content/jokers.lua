@@ -3346,15 +3346,11 @@ SMODS.Joker{
 		cost = 5,
 		blueprint_compat = false,
 		calculate = function(self, card, context)
-			if context.setting_blind and not context.blueprint then
-				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..card.ability.extra.extra_size.." hand(s)!" })
-			end
 			if context.end_of_round and not context.blueprint and G.GAME.blind.boss and not context.repetition and not context.individual then
 				card.ability.extra.extra_size = card.ability.extra.extra_size + card.ability.extra.increase
-				for i = 1, card.ability.extra.increase do
-					G.FUNCS.add_hand()
-				end
-				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Upgrade!" })
+				G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.increase
+				ease_hands_played(card.ability.extra.increase)
+				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..card.ability.extra.extra_size.." hand(s)!" })
 			end
 		end
 	}
