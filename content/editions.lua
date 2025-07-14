@@ -35,17 +35,10 @@ SMODS.Edition({
     extra_cost = 6,
     apply_to_float = false,
 	calculate = function(self, card, context)
-		if context.final_scoring_step then
-			update_hand_text({delay = 0}, {chips = hand_chips * self.config.extra.xchips})
-            card_eval_status_text(card, 'extra', nil, nil, nil, { message = 'Multiplied!' })
-			if hand_chips then
-			    hand_chips = hand_chips * self.config.extra.xchips
-			    return
-			else
-			    return 0
-			end
-            end
-		end,
+		if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
+            return {x_chips = self.config.extra.xchips}
+		end
+    end,
     loc_vars = function(self)
         return { vars = { self.config.extra.xchips } }
     end
@@ -101,6 +94,7 @@ SMODS.Edition({
 end
 
 
+--[[
 SMODS.Shader {
     key = 'holo',
     path = 'holo.fs'
@@ -136,7 +130,6 @@ SMODS.Edition({
 	  end
 	end
 })
-
 
 SMODS.Shader {
     key = 'foil',
@@ -174,6 +167,7 @@ SMODS.Edition({
 	end
 })
 
+]]
 
 --[[ broken
 SMODS.Shader {
