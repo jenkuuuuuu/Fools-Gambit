@@ -7,6 +7,13 @@ SMODS.current_mod.config_tab = function()
 		-- work your UI wizardry here, see 'Building a UI' page
 		{n = G.UIT.R, config = {align = "tm"}, nodes = {
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
+				{n = G.UIT.R, config = {align = "cm"}, nodes = {
+					{n = G.UIT.T, config = {text = "This mod is in early beta. Please keep in mind the game may crash", colour = G.C.RED, scale = .4}}
+				}}
+			}}
+		}},
+		{n = G.UIT.R, config = {align = "tm"}, nodes = {
+			{n = G.UIT.C, config = {align = "cm"}, nodes = {
 				{n = G.UIT.R, config = {align = "tm"}, nodes = {
 					create_toggle{
 						label = "Additional jokers",

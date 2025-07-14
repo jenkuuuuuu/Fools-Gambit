@@ -509,7 +509,7 @@ SMODS.Consumable{
     key = "death",
     atlas = "Consumeables",
     pos = {x = 3, y = 1},
-    config = {extra = {highlight = 5}},
+    config = {extra = {highlight = 4}},
     loc_vars = function (self, info_queue, card)
         return {vars = {card.ability.extra.highlight}}
     end,

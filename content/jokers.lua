@@ -108,12 +108,12 @@ FG.ALTS.joker_equivalents = {
 SMODS.Joker {
 	key = 'change_of_pace',
 	config = { extra = {} },
-	rarity = 3,
+	rarity = 1,
 	atlas = 'newjokers',
 	eternal_compat = false,
 	perishable_compat = false,
 	pos = { x = 5, y = 0 }, -- havent added the sprite to the sheet yet
-	cost = 8,
+	cost = 4,
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
 		if context.selling_self and FG.config.extra_jokers then
@@ -130,12 +130,12 @@ SMODS.Joker {
 SMODS.Joker {
 	key = 'change_of_pace_alt',
 	config = { extra = {} },
-	rarity = 2,
+	rarity = 1,
 	atlas = 'newjokers',
 	eternal_compat = false,
 	perishable_compat = false,
 	pos = { x = 5, y = 0 }, -- read above
-	cost = 8,
+	cost = 4,
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
 		if context.selling_self and FG.config.extra_jokers then
