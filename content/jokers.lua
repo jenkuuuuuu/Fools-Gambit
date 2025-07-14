@@ -1990,6 +1990,8 @@ SMODS.Joker {
 	end,
 	calculate = function(self, card, context)
 		if context.selling_self then
+			if G.GAME.round_resets.hands > 1 then G.GAME.round_resets.hands = G.GAME.round_resets.hands - 1 end
+			if G.GAME.round_resets.discards > 1 then G.GAME.round_resets.discards = G.GAME.round_resets.discards - 1 end
 			ease_hands_played(card.ability.extra.hands)
 			ease_discard(card.ability.extra.discards)
 		end
