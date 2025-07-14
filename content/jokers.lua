@@ -3040,8 +3040,8 @@ SMODS.Joker{
     atlas = "jokers_alt",
     pos = { x = 3, y = 8},
 	soul_pos = { x = 3, y = 9},
-    rarity = 1,
-    cost = 2,
+    rarity = 4,
+    cost = 20,
     yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
@@ -3063,8 +3063,8 @@ SMODS.Joker{
     atlas = "jokers_alt",
     pos = { x = 4, y = 8},
 	soul_pos = { x = 4, y = 9},
-    rarity = 1,
-    cost = 2,
+    rarity = 4,
+    cost = 20,
     yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
@@ -3086,8 +3086,8 @@ SMODS.Joker{
     atlas = "jokers_alt",
     pos = { x = 5, y = 8},
 	soul_pos = { x = 5, y = 9},
-    rarity = 1,
-    cost = 2,
+    rarity = 4,
+    cost = 20,
     yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
@@ -3109,8 +3109,8 @@ SMODS.Joker{
     atlas = "jokers_alt",
     pos = { x = 6, y = 8},
 	soul_pos = { x = 6, y = 9},
-    rarity = 1,
-    cost = 2,
+    rarity = 4,
+    cost = 20,
     yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
@@ -3132,8 +3132,8 @@ SMODS.Joker{
     atlas = "jokers_alt",
     pos = { x = 7, y = 8},
 	soul_pos = { x = 7, y = 9},
-    rarity = 1,
-    cost = 2,
+    rarity = 4,
+    cost = 20,
     yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
