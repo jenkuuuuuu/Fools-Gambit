@@ -259,6 +259,22 @@ return {
                     "{C:inactive}(Value is kept when {C:red}alternating{C:inactive} this card)"
                 }
             },
+            j_fg_mango={
+			    name="Mango",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Aberration{} card used",
+				},
+			},
+			j_fg_mangoalt={
+			    name="Mango?",
+				text={
+				    "Gives {C:mult}+#1#{} Mult,",
+					"{C:mult}-#2#{} Mult every",
+					"{C:purple}Alternate{} joker bought",
+				},
+			},
             -- Normal jokers
             j_fg_joker = {
                 name = 'Joker?',
@@ -723,6 +739,14 @@ return {
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
+            j_fg_hit_the_road = {
+                name = "Hit the Road?",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult",
+                    "for every {C:attention}Jack{} discarded",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult)"
+                }
+            },
             j_fg_invisible = {
                 name = "Invisible Joker?",
                 text = {
@@ -738,6 +762,50 @@ return {
                     "The memory of an {C:attention}Invisible Joker?{}",
                     "After {C:attention}#1#{} round(s), {C:red,E:2}self-destruct{} and",
                     "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
+                }
+            },
+            j_fg_bootstraps = {
+                name = "Bootstraps?",
+                text = {
+                    "Gains {C:mult}+#2#{} Mult, {C:red}-$#3#{}",
+                    "at {C:attention}end of round{}",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+                }
+            },
+            -- Legendaries
+            j_fg_caino = {
+                name = "Canio?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_triboulet = {
+                name = "Triboulet?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_yorick = {
+                name = "Yorick?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_chicot = {
+                name = "Chicot?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
+                }
+            },
+            j_fg_perkeo = {
+                name = "Perkeo?",
+                text = {
+                    "{C:inactive}Does nothing for now",
+                    "{C:inactive}Alternate this card"
                 }
             },
             -- Collectives
@@ -770,7 +838,7 @@ return {
                 name = "Joglalt",
                 text = {
                     "Increases hand size by {C:attention}#1#{} when",
-                    "{C:attention}Boos blind{} defeated",
+                    "{C:attention}Boss blind{} defeated",
                     "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
                 }
             },
@@ -782,6 +850,22 @@ return {
                     "starting at {C:mult}1{}",
 					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
                     "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
+                }
+            },
+            j_fg_goldenleaf = {
+                name = "GoldenLeaf",
+                text = {
+                    "Increases hand size by {C:attention}#1#{} when",
+                    "{C:attention}Boss blind{} defeated",
+                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
+                }
+            },
+            j_fg_goldenleafalt = {
+                name = "SilverAutumn",
+                text = {
+                    "Permanently increase amount of hands by {C:attention}#1#{} when",
+                    "{C:attention}Boss blind{} defeated",
+                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hands)"
                 }
             }
         },

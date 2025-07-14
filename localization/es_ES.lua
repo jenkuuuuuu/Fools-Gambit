@@ -499,6 +499,22 @@ return {
 					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
                     "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
                 }
+            },
+            j_fg_goldenleaf = {
+                name = "GoldenLeaf",
+                text = {
+                    "Increases hand size by {C:attention}#1#{} when",
+                    "{C:attention}Boss blind{} defeated",
+                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
+                }
+            },
+            j_fg_goldenleafalt = {
+                name = "SilverAutumn",
+                text = {
+                    "Permanently increase amount of hands by {C:attention}#1#{} when",
+                    "{C:attention}Boss blind{} defeated",
+                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hands)"
+                }
             }
         },
         Other={},

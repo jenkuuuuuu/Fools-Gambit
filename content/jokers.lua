@@ -87,10 +87,19 @@ FG.ALTS.joker_equivalents = {
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
+	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
+	j_bootstraps = "j_fg_bootstraps",
+	-- Legendaries
+	j_caino = "j_fg_caino",
+	j_triboulet = "j_fg_triboulet",
+	j_yorick = "j_fg_yorick",
+	j_chicot = "j_fg_chicot",
+	j_perkeo = "j_fg_perkeo",
 	-- COLLECTION
 	j_fg_jogla = "j_fg_jogla_alt",
 	j_fg_deathmodereal = "j_fg_deathmoderealalt",
+	j_fg_goldenleaf = "j_fg_goldenleafalt",
 }
 --------------------
 ---SPECIAL JOKERS---
@@ -525,7 +534,91 @@ SMODS.Joker {
 		end
 	end
 }
-
+-- Mango
+SMODS.Joker {
+	key = 'mango',
+	rarity = 1,
+	atlas = 'newjokers',
+	pos = { x = 8, y = 0 },
+	cost = 1,
+	config = { extra = { mult = 15, lessmult = 2.5 } },
+	in_pool = function (self, args)
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
+	end,
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.mult, card.ability.extra.lessmult } }
+	end,
+	calculate = function(self, card, context)
+		if context.using_consumeable then
+			if context.consumeable.ability.set == 'abberation' then
+				card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.lessmult
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						card:juice_up(0.5, 0.5)
+						return true
+					end
+				}))
+			if card.ability.extra.mult <= -1 then
+				card:start_dissolve(nil, true, 1, true)
+				return {
+						message = 'Eated!',
+						colour = G.C.MULT
+					}
+				end
+			end
+		end
+		if context.joker_main then 
+			return {
+				mult_mod = card.ability.extra.mult,
+				message = '+' .. card.ability.extra.mult,
+				colour = G.C.MULT
+			}
+		end
+	end
+}
+-- Mango alt
+SMODS.Joker {
+	key = 'mangoalt',
+	rarity = 1,
+	atlas = 'newjokers',
+	yes_pool_flag = 'alternate_spawn',
+	in_pool = function (self, args)
+		if FG.config.extra_jokers and FG.FUNCS.allow_duplicate(self) and not G.GAME.pool_flags.alternate_spawn then return true else return false end
+	end,
+	pos = { x = 8, y = 0 },
+	cost = 1,
+	config = { extra = { mult = 15, lessmult = 5 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.mult, card.ability.extra.lessmult } }
+	end,
+	calculate = function(self, card, context)
+		if context.buying_card then
+			if card.ability.set == 'Joker' then
+				card.ability.extra.mult = card.ability.extra.mult - card.ability.extra.lessmult
+				G.E_MANAGER:add_event(Event({
+					func = function()
+						card:juice_up(0.5, 0.5)
+						return true
+					end
+				}))
+				if card.ability.extra.mult <= -1 then
+					card:start_dissolve(nil, true, 1, true)
+					return {
+						message = 'Eated!',
+						colour = G.C.MULT
+					}
+				end
+			end
+		end
+		if context.joker_main then
+			return {
+				mult_mod = card.ability.extra.mult,
+				message = '+' .. card.ability.extra.mult,
+				colour = G.C.MULT
+			}
+		end
+	end
+}
 SMODS.Joker{
 	key = "oscillator",
 	atlas = "oscillator_atlas",
@@ -1441,21 +1534,21 @@ SMODS.Joker {
 	end,
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
-		local has_fired = false
-		if context.before then has_fired = false end
+		local found_card = false
 		if context.repetition and context.cardarea == G.play and
-			(context.other_card:get_id() == 14 or -- ACE
-				context.other_card:get_id() == 2 or
-				context.other_card:get_id() == 3 or
-				context.other_card:get_id() == 5 or
-				context.other_card:get_id() == 8 or
-				context.other_card:get_id() == 13) then
+		(context.other_card:get_id() == 14 or -- ACE
+		context.other_card:get_id() == 2 or
+		context.other_card:get_id() == 3 or
+		context.other_card:get_id() == 5 or
+		context.other_card:get_id() == 8 or
+		context.other_card:get_id() == 13) then
+			found_card = true
 			return {
 				repetitions = 1,
 				card = card
 			}
 		end
-		if context.after and not has_fired then
+		if context.after then
 			local sound_pitch = 0.8
 			for k, v in ipairs(context.scoring_hand) do
 				if v.base.value == "Ace" or
@@ -1465,8 +1558,6 @@ SMODS.Joker {
 				v.base.value == "8" or
 				v.base.value == "King" then
 					G.E_MANAGER:add_event(Event({
-							trigger = 'after',
-						delay = 0,
 						func = function()	
 							v:flip()
 							play_sound("tarot2", sound_pitch)
@@ -1475,32 +1566,51 @@ SMODS.Joker {
 						end
 					}))
 				end
-				G.E_MANAGER:add_event(Event({
-					trigger = 'after',
-					delay = .25,
-					func = function()
-						if v.base.value == "Ace" then
-							SMODS.change_base(v, v.base.suit, "2")
-						elseif v.base.value == "2" then
-							SMODS.change_base(v, v.base.suit, "3")
-						elseif v.base.value == "3" then
-							SMODS.change_base(v, v.base.suit, "5")
-						elseif v.base.value == "5" then
-							SMODS.change_base(v, v.base.suit, "8")
-						elseif v.base.value == "8" then
-							SMODS.change_base(v, v.base.suit, "King")
-						elseif v.base.value == "King" then
-							SMODS.change_base(v, v.base.suit, "Ace")
-						end
+				if v.base.value == "Ace" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "2")
 						return true
 					end
-				}))
+					}))
+				elseif v.base.value == "2" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "3")
+						return true
+					end
+					}))
+				elseif v.base.value == "3" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "5")
+						return true
+					end
+					}))
+				elseif v.base.value == "5" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "8")
+						return true
+					end
+					}))
+				elseif v.base.value == "8" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "King")
+						return true
+					end
+					}))
+				elseif v.base.value == "King" then
+					G.E_MANAGER:add_event(Event({
+					trigger = 'after', delay = .25, func = function()
+						local card,msg = SMODS.change_base(v, v.base.suit, "Ace")
+						return true
+					end
+					}))
+				end
 			end
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = .4,
-				func = function() return true end
-			}))
+			
 			for _, v in ipairs(context.scoring_hand) do
 				if v.base.value == "Ace" or
 				v.base.value == "2" or
@@ -1508,6 +1618,7 @@ SMODS.Joker {
 				v.base.value == "5" or
 				v.base.value == "8" or
 				v.base.value == "King" then
+					found_card = true
 					G.E_MANAGER:add_event(Event({
 						trigger = 'after',
 						delay = 0.25,
@@ -1520,11 +1631,13 @@ SMODS.Joker {
 					}))
 				end
 			end
-			G.E_MANAGER:add_event(Event({
-				trigger = 'after',
-				delay = 2,
-				func = function() return true end
-			}))
+			if found_card then
+				G.E_MANAGER:add_event(Event({
+					trigger = 'after',
+					delay = 2,
+					func = function() return true end
+				}))
+			end
 		end
 	end
 }
@@ -1632,7 +1745,7 @@ SMODS.Joker{
 		if context.individual and context.cardarea == G.play then
 			local id = FG.FUNCS.get_card_info(context.other_card).id
 			local value = FG.FUNCS.get_card_info(context.other_card).rank
-			if id % 2 == 0 and not ( value == "King" or value == "Queen" or value == "Jack") then
+			if (id == 2 or id == 4 or id == 6 or id == 8) then
 				card.ability.extra.mult_t = card.ability.extra.mult_t + card.ability.extra.mult_i
 				FG.FUNCS.card_eval_status_text{
 					card = card,
@@ -1671,7 +1784,7 @@ SMODS.Joker{
 		if context.individual and context.cardarea == G.play then
 			local id = FG.FUNCS.get_card_info(context.other_card).id
 			local value = FG.FUNCS.get_card_info(context.other_card).rank
-			if id % 2 ~= 0 and not ( value == "King" or value == "Queen" or value == "Jack") then
+			if (id == 1 or id == 3 or id == 5 or id == 7 or id == 9) then
 				card.ability.extra.chips_t = card.ability.extra.chips_t + card.ability.extra.chips_i
 				FG.FUNCS.card_eval_status_text{
 					card = card,
@@ -2209,6 +2322,11 @@ SMODS.Joker {
 		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
+				}
 			end
 		end
 		if context.joker_main then
@@ -2238,6 +2356,11 @@ SMODS.Joker {
 		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
+				}
 			end
 		end
 		if context.joker_main then
@@ -2267,6 +2390,11 @@ SMODS.Joker {
 		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
+				}
 			end
 		end
 		if context.joker_main then
@@ -2296,6 +2424,11 @@ SMODS.Joker {
 		if context.before and context.cardarea == G.jokers and not context.repetition and not context.blueprint then
 			if (next(context.poker_hands[card.ability.type])) then
 				card.ability.extra.Xmult = card.ability.extra.Xmult + card.ability.extra.Xmult_mod
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Upgrade!",
+					mode = "literal"
+				}
 			end
 		end
 		if context.joker_main then
@@ -2707,6 +2840,11 @@ SMODS.Joker {
 				end
 				if not extra_suit then
 					card.ability.extra.mult = card.ability.extra.mult_gain + card.ability.extra.mult
+					FG.FUNCS.card_eval_status_text{
+						card = card,
+						message = "Upgrade!",
+						mode = "literal",
+					}
 				end
 			end
 		end
@@ -2717,6 +2855,46 @@ SMODS.Joker {
 			}
 		end
 	end
+}
+-- Joker
+SMODS.Joker{
+    key = "hit_the_road",
+    atlas = "jokers_alt",
+    pos = { x = 8, y = 5},
+    rarity = 3,
+    cost = 6,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1,
+			xmult_i = 0.1
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.discard and not context.blueprint then
+			if FG.FUNCS.get_card_info(context.other_card).rank == "Jack" then
+				card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "+X"..card.ability.extra.xmult_i.." Mult",
+					mode = "literal",
+					colour = "mult"
+				}
+			end
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+    end
 }
 
 -- Invisible
@@ -2807,7 +2985,171 @@ SMODS.Joker{
 		end
 	end
 }
+-- Bootstraps
+SMODS.Joker{
+    key = "bootstraps",
+    atlas = "jokers_alt",
+    pos = { x = 9, y = 8},
+    rarity = 1,
+    cost = 5,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			mult = 0,
+			mult_i = 6,
+			cost = 3,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.mult,
+				card.ability.extra.mult_i,
+				card.ability.extra.cost
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round and context.cardarea == G.jokers and not context.blueprint then
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.mult_i.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+			card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_i
+			
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "-$"..card.ability.extra.cost,
+				mode = "literal",
+				colour = "red"
+			}
+			ease_dollars(-card.ability.extra.cost)
+		end
+		if context.joker_main then return {mult = card.ability.extra.mult} end
+    end
+}
 
+-- Legendaries
+-- Joker
+SMODS.Joker{
+    key = "caino",
+    atlas = "jokers_alt",
+    pos = { x = 3, y = 8},
+	soul_pos = { x = 3, y = 9},
+    rarity = 4,
+    cost = 20,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "triboulet",
+    atlas = "jokers_alt",
+    pos = { x = 4, y = 8},
+	soul_pos = { x = 4, y = 9},
+    rarity = 4,
+    cost = 20,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "yorick",
+    atlas = "jokers_alt",
+    pos = { x = 5, y = 8},
+	soul_pos = { x = 5, y = 9},
+    rarity = 4,
+    cost = 20,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "chicot",
+    atlas = "jokers_alt",
+    pos = { x = 6, y = 8},
+	soul_pos = { x = 6, y = 9},
+    rarity = 4,
+    cost = 20,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
+-- Joker
+SMODS.Joker{
+    key = "perkeo",
+    atlas = "jokers_alt",
+    pos = { x = 7, y = 8},
+	soul_pos = { x = 7, y = 9},
+    rarity = 4,
+    cost = 20,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+    end
+}
 -----------------
 ---Collectives---
 -----------------
@@ -2983,6 +3325,33 @@ SMODS.Joker{
 					repetitions = card.ability.extra.repetitions
 				 } 
 			   end
+		end
+	}
+	-- goldenleaf alt
+	SMODS.Joker {
+		key = 'goldenleafalt',
+		config = { extra = { increase = 1, extra_size = 0} },
+		loc_vars = function(self, info_queue, card)
+			return {
+				vars = {
+					card.ability.extra.increase,
+					card.ability.extra.extra_size
+				}
+			}
+		end,
+		rarity = "fg_collective", 
+		atlas = 'collective',
+		pos = { x = 0, y = 0 },
+		soul_pos = { x = 0, y = 1 },
+		cost = 5,
+		blueprint_compat = false,
+		calculate = function(self, card, context)
+			if context.end_of_round and not context.blueprint and G.GAME.blind.boss and not context.repetition and not context.individual then
+				card.ability.extra.extra_size = card.ability.extra.extra_size + card.ability.extra.increase
+				G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.increase
+				ease_hands_played(card.ability.extra.increase)
+				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..card.ability.extra.extra_size.." hand(s)!" })
+			end
 		end
 	}
 	-- Jenku alt
