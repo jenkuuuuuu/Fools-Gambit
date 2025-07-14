@@ -829,7 +829,7 @@ return {
                 name = '乔戈拉',
                 text = {
                     "在结束商店后，制造{C:attention}#1#{}个{C:dark_edition}负片{}",
-                    "the {C:attention}最靠左{}的消耗牌",
+                    "{C:attention}最靠左{}的消耗牌",
                     "{C:inactive}（目前正在针对{C:attention}#2#{C:inactive}）",
                     "{C:inactive,s:0.7}\"我不是巫师啊(´；ω；‘)\""
                 },
@@ -849,7 +849,7 @@ return {
                     "就多触发所有{C:attention}小丑牌{}1遍",
                     "从{C:mult}一{}开始",
 					"{C:inactive}（目前触发{C:mult}#1#{}{C:inactive}遍）",
-                    "{C:inactive,s:0.7}\"我估摸是制造最多卡死的（ﾉ´д｀）\""
+                    "{C:inactive,s:0.7}“我估摸是制造最多卡死的（ﾉ´д｀）”"
                 }
             },
             j_fg_goldenleaf = {
@@ -858,7 +858,7 @@ return {
                     "当一个{C:gold}黄金{}{C:inactive}（？）{} 牌",
                     "被打出时，",
                     "{X:mult,C:white}X#1#{}倍率",
-                    "{C:inactive}\"因为我是“金”叶啊( •̀ ω •́ )y\""
+                    "{C:inactive}“因为我是“金”叶啊( • ω • )”"
                 }
             },
             j_fg_goldenleafalt = {
@@ -867,7 +867,7 @@ return {
                     "当打败{C:attention}头目盲注{}时，",
                     "永久增加{C:blue}#1#{}个",
                     "出牌次数",
-                    "{C:inactive}（目前{C:clue}+#2#{C:inactive}出牌次数）"
+                    "{C:inactive}（目前{C:blue}+#2#{C:inactive}出牌次数）"
                 }
             }
         },

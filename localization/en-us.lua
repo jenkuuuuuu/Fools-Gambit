@@ -867,7 +867,7 @@ return {
                     "Permanently increase amount of hands",
                     "by {C:blue}#1#{} when",
                     "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:clue}+#2#{C:inactive} hands)"
+                    "{C:inactive}(Currently {C:blue}+#2#{C:inactive} hands)"
                 }
             }
         },
