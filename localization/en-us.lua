@@ -776,36 +776,41 @@ return {
             j_fg_caino = {
                 name = "Canio?",
                 text = {
-                    "{C:inactive}Does nothing for now",
-                    "{C:inactive}Alternate this card"
+                    "Gains {X:mult,C:white}X#2#{} Mult for",
+                    "each {C:attention}discarded{} face card",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
                 }
             },
             j_fg_triboulet = {
                 name = "Triboulet?",
                 text = {
-                    "{C:inactive}Does nothing for now",
-                    "{C:inactive}Alternate this card"
+                    "Gains {X:mult,C:white}X#2#{} Mult for",
+                    "each {C:attention}scored{} face card",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
                 }
             },
             j_fg_yorick = {
                 name = "Yorick?",
                 text = {
-                    "{C:inactive}Does nothing for now",
-                    "{C:inactive}Alternate this card"
+                    "Gains {X:mult,C:white}X#2#{} Mult",
+                    "every {C:attention}#3# {C:inactive}(#4#){} hands",
+                    "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
                 }
             },
             j_fg_chicot = {
                 name = "Chicot?",
                 text = {
-                    "{C:inactive}Does nothing for now",
-                    "{C:inactive}Alternate this card"
+                    "{C:red}+#2#{} discard when",
+                    "{C:attention}boss blind{} defeated",
+                    "{C:inactive}(Currently {C:red}+#1#{C:inactive} discards)"
                 }
             },
             j_fg_perkeo = {
                 name = "Perkeo?",
                 text = {
-                    "{C:inactive}Does nothing for now",
-                    "{C:inactive}Alternate this card"
+                    "Creates {C:attention}#1#{C:inactive} perishable {C:dark_edition}negative{}",
+                    "copy of a non-{C:dark_edition}negative{C:attention} joker{}",
+                    "when {C:attention}boss blind{} defeated"
                 }
             },
             -- Collectives
