@@ -3327,6 +3327,28 @@ SMODS.Joker{
 			   end
 		end
 	}
+SMODS.Joker {
+	key = 'goldenleaf',
+	config = { extra = { Xmult = 3 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.Xmult } }
+	end,
+	rarity = 'fg_collective',
+	atlas = 'collective',
+	pos = { x = 0, y = 0 },
+	soul_pos = { x = 0, y = 1 },
+	cost = 5,
+	blueprint_compat = true,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play then
+			if FG.FUNCS.get_card_info(context.other_card).key == "m_gold" or FG.FUNCS.get_card_info(context.other_card).key == "m_fg_gold" then
+				return{
+					xmult = card.ability.extra.Xmult
+				}
+			end
+		end
+	end
+}
 	-- goldenleaf alt
 	SMODS.Joker {
 		key = 'goldenleafalt',
