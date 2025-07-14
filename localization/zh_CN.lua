@@ -749,20 +749,20 @@ return {
                 }
             },
             j_fg_invisible = {
-                name = "Invisible Joker?",
+                name = "隐形小丑？",
                 text = {
-                    "When sold, remove a random {C:attention}Joker",
-                    "Create an {C:attention}Invisible memory?{}",
-                    "with the removed Joker",
-                    "{C:inactive}(Cannot copy eternal jokers{}",
+                    "被售卖时，摧毁一个随机{C:attention}小丑",
+                    "制造一个带有被摧毁的小丑的",
+                    "{C:attention}隐形回忆？{}",
+                    "{C:inactive}（无法复制永恒卡牌）{}",
                 }
             },
             j_fg_invisible_memory = {
-                name = "{C:dark_edition,E:1}Invisible memory?{}",
+                name = "{C:dark_edition,E:1}隐形回忆？{}",
                 text = {
-                    "The memory of an {C:attention}Invisible Joker?{}",
-                    "After {C:attention}#1#{} round(s), {C:red,E:2}self-destruct{} and",
-                    "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
+                    "一个{C:attention}隐形小丑？{}的回忆",
+                    "在{C:attention}#1#{}个回合后，{C:red,E:2}自我摧毁{}并",
+                    "制造{C:attention}#2#{}个{C:dark_edition}负片{}{C:attention}#3#{}",
                 }
             },
             j_fg_bootstraps = {
@@ -811,72 +811,72 @@ return {
             },
             -- Collectives
             j_fg_deathmodereal = {
-                name = 'deathmodereal',
+                name = '真死模式',
                 text = {
-                    "He's {X:black,C:white}cool(ish){}",
-                    '{X:mult,C:white}X#1#{} mult.'
+                    "他很{X:black,C:white}酷（吧）{}",
+                    '{X:mult,C:white}X#1#{}倍率'
                 },
             },
             j_fg_deathmoderealalt = {
-                name = 'deathmodereal',
+                name = '真死模式',
                 text = {
-                    "He's {X:white,C:black}cool{}",
-                    'each scored card gives',
-                    '{X:mult,C:white}X#1#{} mult.'
+                    "他很{X:white,C:black}酷{}",
+                    '每张被打出的牌都',
+                    '{X:mult,C:white}X#1#{}倍率'
                }
             },
             j_fg_jogla = {
-                name = 'Jogla',
+                name = '乔戈拉',
                 text = {
-                    "Create {C:attention}#1# {C:dark_edition}Negative{} copies of",
-                    "the {C:attention}leftmost{} consumeable in posession",
-                    "at the end of the{C:attention} shop{}.",
-                    "{C:inactive}(Currently copying {C:attention}#2#{C:inactive})",
-                    "{C:inactive,s:0.7}\"I am NOT a wizard\""
+                    "在结束商店后，制造{C:attention}#1#{}个{C:dark_edition}负片{}",
+                    "the {C:attention}最靠左{}的消耗牌",
+                    "{C:inactive}（目前正在针对{C:attention}#2#{C:inactive}）",
+                    "{C:inactive,s:0.7}\"我不是巫师啊(´；ω；‘)\""
                 },
             },
             j_fg_jogla_alt = {
-                name = "Joglalt",
+                name = "乔迭拉",
                 text = {
-                    "Increases hand size by {C:attention}#1#{} when",
-                    "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
+                    "在打败头目盲注时，增加{C:attention}#1#{}个",
+                    "手牌槽位",
+                    "{C:inactive}(目前增加{C:attention}+#2#{C:inactive}个槽位)"
                 }
             },
             j_fg_jenker = {
-                name = 'Jenku',
+                name = '盏枯',
                 text = {
-                    "Retriggers every {C:attention}Joker{}",
-                    "for every second {C:attention}Boss Blind{} defeated.",
-                    "starting at {C:mult}1{}",
-					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
-                    "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
+                    "每打败两个{C:attention}头目盲注{}，",
+                    "就多触发所有{C:attention}小丑牌{}1遍",
+                    "从{C:mult}一{}开始",
+					"{C:inactive}（目前触发{C:mult}#1#{}{C:inactive}遍）",
+                    "{C:inactive,s:0.7}\"我估摸是制造最多卡死的（ﾉ´д｀）\""
                 }
             },
             j_fg_goldenleaf = {
-                name = "GoldenLeaf",
+                name = "金叶",
                 text = {
-                    "When a {C:gold}Gold{}{C:inactive}(?){} card",
-                    "is scored,",
-                    "{X:mult,C:white}X#1#{} Mult"
+                    "当一个{C:gold}黄金{}{C:inactive}（？）{} 牌",
+                    "被打出时，",
+                    "{X:mult,C:white}X#1#{}倍率",
+                    "{C:inactive}\"因为我是“金”叶啊( •̀ ω •́ )y\""
                 }
             },
             j_fg_goldenleafalt = {
-                name = "SilverAutumn",
+                name = "银秋",
                 text = {
-                    "Permanently increase amount of hands",
-                    "by {C:blue}#1#{} when",
-                    "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:clue}+#2#{C:inactive} hands)"
+                    "当打败{C:attention}头目盲注{}时，",
+                    "永久增加{C:blue}#1#{}个",
+                    "出牌次数",
+                    "{C:inactive}（目前{C:clue}+#2#{C:inactive}出牌次数）"
                 }
             }
         },
         Other={
             fg_unchangeable = {
-                name = "Unchangeable",
-                label = "Unchangeable",
+                name = "非变",
+                label = "非变",
                 text = {
-                    "Can't be alternated"
+                    "无法被迭代转化"
                 }
             }
         },

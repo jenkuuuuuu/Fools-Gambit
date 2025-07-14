@@ -857,7 +857,8 @@ return {
                 text = {
                     "When a {C:gold}Gold{}{C:inactive}(?){} card",
                     "is scored,",
-                    "{X:mult,C:white}X#1#{} Mult"
+                    "{X:mult,C:white}X#1#{} Mult",
+                    "{C:inactive}\"get it cause im \"golden\"leaf\""
                 }
             },
             j_fg_goldenleafalt = {
