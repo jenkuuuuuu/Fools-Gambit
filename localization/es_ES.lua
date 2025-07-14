@@ -1,128 +1,241 @@
 return {
     descriptions = {
+        aberration = {
+            c_fg_tonal = {
+                name = "Tonal",
+                text = {
+                    "Convierte {C:attention}1{} comodín seleccionado",
+                    "en su versión {C:red}original{}"
+                }
+            },
+            c_fg_atonal = {
+                name = "Atonal",
+                text = {
+                    "Convierte {C:attention}1{} comodín seleccionado",
+                    "en su versión {C:purple}alternativa{}"
+                }
+            },
+            c_fg_accelerando = {
+                name = "Accelerando",
+                text = {
+                    "Selecciona hasta {C:attention}3{} cartas",
+                    "y alterna sus ediciones, sellos y mejoras"
+                }
+            },
+            c_fg_treble = {
+                name = "Clave de Sol",
+                text = {
+                    "Convierte todos los comodines {C:blue}comunes{}",
+                    "en sus versiones {C:purple}alternativas{}"
+                }
+            },
+            c_fg_bass = {
+                name = "Clave de Fa",
+                text = {
+                    "Convierte todos los comodines {C:green}Inusuales{}",
+                    "en sus versiones {C:purple}alternativas{}"
+                }
+            },
+            c_fg_alto = {
+                name = "Clave de Da",
+                text = {
+                    "Convierte todos los comodines {C:red}raros{}",
+                    "en sus versiones {C:purple}alternativas{}"
+                }
+            },
+            c_fg_stake = {
+                name = "Stake",
+                text = {
+                    "Crea hasta {C:attention}#1#{} cartas",
+                    "de aberración aleatorias"
+                }
+            },
+            c_fg_fil_di_voce = {
+                name = "Fil Di Voce",
+                text = {
+                    "Da {C:money}$#1#{} dólares por",
+                    "cada comodín {C:purple}alternativo{}"
+                }
+            },
+        },
         Back={},
         Blind={},
         Edition={},
         Enhanced={
             m_fg_glass = {
-                name = "Glass? Card",
+                name = "Carta de ¿Vidrio?",
                 text = {
-                    "Gives {C:attention}x#2#{} blind's chip requirements.",
-                    "destroys after use",
-                    "no rank or suit",
-                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}"
+                    "Gana {C:white,X:red}X1{} Multi por cada carta",
+                    "con esta mejora que puntue en la mano jugada",
+                    "Se destruye tras ser usada",
+                    "No tiene ni número ni palo"
                 }
             },
             m_fg_steel = {
-                name = "Steel? Card",
+                name = "Carta de ¿Acero?",
                 text = {
-                    "Gains {C:white,X:red}X#1#{} mult for every",
-                    "steel card played.",
-                    "Triggers when this card is",
-                    "held in hand.",
-                    "{C:inactive}(Currently {C:white,X:red}X#2#{C:inactive} mult)"
+                    "Gana {C:white,X:red}X#1#{} multi pr cada",
+                    "carta de acero en el",
+                    "mazo completo",
+                    "Se activa cuando se mantiene",
+                    "en la mano",
+                    "{C:inactive}(Actualmente {C:white,X:red}X#2#{C:inactive} multi)"
+                }
+            },
+            m_fg_lucky = {
+                name = "Carta ¿De la suerte?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades",
+                    "para {C:chips}+#3#{} Fichas",
+                    "{C:green}#4# in #5#{} probabilidades",
+                    "para {C:gold}$#6#"
+                }
+            },
+            m_fg_gold = {
+                name = "Carta de ¿Oro?",
+                text = {
+                    "Añade {C:attention}la mitad{} del dinero que",
+                    "cartas que {C:attention}tienes en la mano{}",
+                    "al {C:attention}final de la ronda{}",
+                    "{C:inactive}(Redondeado al alza{})",
+                    "{C:inactive}(Actualmente {C:money}+$#1#){C:inactive}"
+                }
+            },
+            m_fg_bonus = {
+                name = "Carta ¿Adicional?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades",
+                    "para {C:chips}+#3#{} Fichas",
+                    "{C:green}#4# en #5#{} probabilidades",
+                    "para {C:chips}#6#{} Fichas",
+                }
+            },
+            m_fg_mult = {
+                name = "Carta ¿Multi?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades",
+                    "para {C:mult}+#3#{} Multi",
+                    "{C:green}#4# en #5#{} probabilidades",
+                    "para {C:mult}#6#{} Multi",
+                }
+            },
+            m_fg_stone = {
+                name = "Carta de ¿Piedra?",
+                text = {
+                    "Cuando se mantenga en la mano, destroye esta",
+                    "carta y mejora las cartas adyacentes sin mejoras",
+                    "a {C:attention}Cartas de ¿Piedra?{} con {C:chips}15 Fichas extra.{}",
+                    "{C:inactive}(Actualmente {C:chips}+#2#{C:inactive} Fichas extra)"
+                }
+            },
+            m_fg_wild = {
+                name = "Carta ¿Versátil?",
+                text = {
+                    "Al ser jugada, aleatoriamente",
+                    "{C:chips}+#1#{} Fichas, {C:mult}+#2#{} Multi,",
+                    "{C:white,X:mult}X#3#{} Multi o {C:gold}$#4#{}"
                 }
             }
         },
         Joker={
             -- Mod jokers
             j_fg_change_of_pace = {
-                name = 'Change of Pace',
+                name = 'Cámbio de paso',
                 text = {
-                    "After being sold, changes spawned {C:red}jokers{}",
-                    "to their {C:purple}Alternate{} forms."
+                    "Tras ser vendida, cambia los {C:red}comodines{} generados",
+                    "a sus formas {C:purple}alternativas{}"
                 }
             },
             j_fg_change_of_pace_alt = {
-                name = 'Change of Pace?',
+                name = '¿Cámbio de paso?',
                 text = {
-                     "After being sold, changes spawned {C:purple}jokers{}",
-                    "to their {C:red}Original{} forms."
+                    "Tras ser vendido, cambia los {C:purple}comidines{} generados",
+                    "a sus formas {C:red}originales{}"
                 }
             },
             j_fg_flipped_script = {
-                name = 'Flipped Script',
+                name = 'Guión volteado',
                 text = {
-                    "When sold, changes all {C:purple}Alternate{}",
-                    "{C:attention}Jokers{} to their {C:red}Original{}"
+                    "All ser vendido, cambia todos {C:attention}comodines{}",
+                    "{C:purple}alternativos{} a sus formas {C:red}originales{}"
                 }
             },
             j_fg_flipped_script_alt = {
-                name = 'Flipped Script',
+                name = 'Guión volteado',
                 text = {
-                    "When sold, changes all {C:red}Original{}",
-                    "{C:attention}Jokers{} to their {C:purple}Alternate{}"
+                    "All ser vendido, cambia todos {C:attention}comodines{}",
+                    "{C:red}originales{} a sus formas {C:purple}alternativas{}"
                 }
             },
             j_fg_script_flipped = {
-                name = 'Script Flipped',
+                name = 'Volteado Guión',
                 text = {
                     "When sold, changes the edition of",
                     "all other jokers to the opposite edition."
                 }
             },
 			j_fg_delinquent = {
-			    name = 'Delinquent',
+			    name = 'Delincuente',
 			    text = {
-                    "{C:attention}Replaces{} consumeable cards",
-                    "with {C:purple}Aberration{} cards",
-                    "when a blind is skipped",
+                    "{C:attention}Reemplaza{} los consumibles en posesión",
+                    "con cartas de{C:purple}aberración{}",
+                    "cuando se omite una ciega",
                 },
             },
             j_fg_delinquentalt = {
-			    name = 'Delinquent?',
+			    name = '¿Delincuente?',
 			    text = {
-                    "{C:attention}Replenishes{} empty consumeable",
-                    "card slots with {C:purple}Aberration{} cards",
-                    "when a blind is beaten",
+                    "{C:attention}Rellena{} ranuras de consumible",
+                    "vacias con cartas de {C:purple}aberración{}",
+                    "cuando se derrota una ciega",
                 },
             },						
             j_fg_concert = {
-                name = 'Concert Ticket',
+                name = 'Entrada de concierto',
                 text = {
-                     "Every {C:money}$#1#{} spent {C:inactive}(#2#){} creates",
-                     "an {C:purple}aberration{} card",
-					 "{C:inactive}(Must have room)",
+                     "Cada {C:money}$#1#{} gastado {C:inactive}(#2#){} crea",
+                     "una carta de {C:purple}aberración{}",
+					 "{C:inactive}(Debe haber espacio)",
                 }
             },
 			 j_fg_concertalt = {
-                name = 'Concert Ticket?',
+                name = '¿Entrada de concierto?',
                 text = {
-                     "Creates an {C:purple}aberration{} card",
-                     "when redeeming a {C:attention}Voucher{}",
-					 "{C:inactive}(Must have room)",
+                     "Crea una carta de {C:purple}aberración{}",
+                     "cuando se canjea un {C:attention}cupón{}",
+					 "{C:inactive}(Debe haber espacio)",
                 }
             },
 			j_fg_disc={
-                name="Disc Joker",
+                name= "Disco comodín",
                 text={
-                    "{C:red}Original{C:attention} Jokers",
-                    "each give {C:chips}+#1#{} Chips",
-					 "{s:0.8}Disc Joker included",
+                    "{C:attention}Comodines {C:red}originales",
+                    "dan cada uno {C:chips}+#1#{} Fichas",
+					 "{s:0.8} Disco comodín incluido",
                 },
             },
 			j_fg_orchestral={
-                name="Orchestral Joker",
+                name="Comodín orquestral",
                 text={
-                    "{C:purple}Alternate{C:attention} Jokers",
-                    "each give {C:mult}+#1#{} Mult",
-					 "{s:0.8}Orchestral Joker included",
+                    "{C:attention}Comodines {C:purple}alternativos",
+                    "dan cada uno {C:mult}+#1#{} Multi",
+					"{s:0.8}Comodín orquestral incluido",
                 },
             },
 			j_fg_conductor={
-                name="Conductor",
+                name="Director",
                 text={
-                    "Creates #1# {C:purple}aberration{} card if",
-                    "played poker hand contains only",
-                    "{C:attention}Face{} cards",
-                    "{C:inactive}(Must have room)",
+                    "Crea #1# carta de{C:purple}aberración{} si",
+                    "la mano de poker jugada solo",
+                    "contiene {C:attention}figuras{}",
+                    "{C:inactive}(Debe haber espacio)",
                 },
             },
 			j_fg_conductoralt={
-                name="Conductor?",
+                name="¿Director?",
                 text={
-                    "Creates #1# {C:attention}Face{} cards",
-                    "every {C:purple}aberration{} card used",
+                    "Crea #1# carta de {C:attention}figura{} por cada",
+                    "carta de {C:purple}aberración{} usada",
                 },
             },
             j_fg_oscillator = {
@@ -143,302 +256,486 @@ return {
                     "{C:inactive}(Se mantiene el valor al {C:red}alternar{C:inactive} esta carta)"
                 }
             },
+            j_fg_mango={
+			    name="Mango",
+				text={
+				    "{C:mult}+#1#{} Multi,",
+					"{C:mult}-#2#{} Multi por cada",
+					"carta de {C:purple}aberración{} usada",
+				},
+			},
+			j_fg_mangoalt={
+			    name="¿Mango?",
+				text={
+				    "{C:mult}+#1#{} Multi,",
+					"{C:mult}-#2#{} Multi por cada",
+					"comidín {C:purple}alterno{} comprado",
+				},
+			},
             -- Normal jokers
             j_fg_joker = {
                 name = '¿Comodín?',
                 text = {
-                    "Every card scored",
-                    "gives {C:mult}+#1#{} Mult"
+                    "Cada carta jugada",
+                    "da {C:mult}+#1#{} Multi"
                 }
             },
             j_fg_greedy = {
-                name = 'Greedy Joker?',
+                name = '¿Comodín codicioso?',
                 text = {
-                    "Each scored card with {C:diamonds}Diamond{} suit",
-                    "temporarily gains {C:mult}+#1#{} mult, resets",
-                    "when {C:attention}Boss Blind{} is defeated",
-                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                    "Gana {C:mult}+#1#{} multi por cada carta",
+                    "con el palo de {C:diamonds}diamantes{}",
+                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
             j_fg_lusty = {
-                name = 'Lusty Joker?',
+                name = '¿Comodín lujurioso?',
                 text = {
-                    "Each scored card with {C:hearts}Heart{} suit",
-                    "temporarily gains {C:mult}+#1#{} mult, resets",
-                    "when {C:attention}Boss Blind{} is defeated",
-                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                    "Gana {C:mult}+#1#{} multi por cada carta",
+                    "con el palo de {C:hearts}corazones{}",
+                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
             j_fg_wrathful = {
-                name = 'Wrathful Joker?',
+                name = '¿Comodín irascible?',
                 text = {
-                    "Each scored card with {C:spades}Spade{} suit",
-                    "temporarily gains {C:mult}+#1#{} mult, resets",
-                    "when {C:attention}Boss Blind{} is defeated",
-                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                    "Gana {C:mult}+#1#{} multi por cada carta",
+                    "con el palo de {C:spades}picas{}",
+                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
             j_fg_gluttenous = {
-                name = "Gluttonous Joker?",
+                name = "¿Comodín glotón?",
                 text = {
-                    "Each scored card with {C:clubs}Club{} suit",
-                    "temporarily gains {C:mult}+#1#{} mult, resets",
-                    "when {C:attention}Boss Blind{} is defeated",
-                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+                    "Gana {C:mult}+#1#{} multi por cada carta",
+                    "con el palo de {C:clubs}tréboles{}",
+                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
             j_fg_jolly = {
-                name = 'Jolly Joker?',
+                name = '¿Comodín contento?',
                 text = {
-                    "{C:red}+#1#{} Mult and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:red}+#1#{} Multi",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "una {C:attention}#2#",
                }
             },
             j_fg_zany = {
-                name = 'Zany Joker?',
+                name = '¿Comodín chiflado?',
                 text = {
-                    "{C:red}+#1#{} Mult and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:red}+#1#{} Multi",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_mad = {
-                name = 'Mad Joker?',
+                name = '¿Comodín demente?',
                 text = {
-                    "{C:red}+#1#{} Mult and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:red}+#1#{} Multi",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_crazy = {
-                name = 'Crazy Joker?',
+                name = '¿Comodín loco?',
                 text = {
-                    "{C:red}+#1#{} Mult and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:red}+#1#{} Multi",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_droll = {
-                name = 'Droll Joker?',
+                name = '¿Comodín gracioso?',
                 text = {
-                    "{C:red}+#1#{} Mult and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:red}+#1#{} Multi",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_sly = {
-                name = 'Sly Joker?',
+                name = '¿Comodín artero?',
                 text = {
-                    "{C:chips}+#1#{} Chips and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:chips}+#1#{} Fichas",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_wily = {
-                name = 'Wily Joker?',
+                name = '¿Comodín taimado?',
                 text = {
-                    "{C:chips}+#1#{} Chips and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:chips}+#1#{} Fichas",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_clever = {
-                name = 'Clever Joker?',
+                name = '¿Comodín astuto?',
                 text = {
-                    "{C:chips}+#1#{} Chips and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:chips}+#1#{} Fichas",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_devious = {
-                name = 'Devious Joker?',
+                name = '¿Comodín ladino?',
                 text = {
-                    "{C:chips}+#1#{} Chips and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:chips}+#1#{} Fichas",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_crafty = {
-                name = 'Crafty Joker?',
+                name = '¿Comodín mañoso?',
                 text = {
-                    "{C:chips}+#1#{} Chips and",
-                    "retrigger scoring cards {C:attention}#3#{} time",
-                    "if played hand contains",
-                    "a {C:attention}#2#",
+                    "{C:chips}+#1#{} Fichas",
+                    "Reactiva las cartas jugadas {C:attention}#3#{} vez",
+                    "si la mano contiene",
+                    "un {C:attention}#2#",
                }
             },
             j_fg_dagger = {
-                name = 'Ceremonial Dagger?',
+                name = '¿Daga ceremonial?',
                 text = {
-                    "When {C:attention}Blind{} is selected,",
-                    "destroy Joker to the left",
-                    "and permanently add {C:attention}X#2#",
-                    "its sell value to this {C:chips}Chips",
-                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
+                    "Cuando se selecciona una {C:attention}ciega{},",
+                    "destruye el comodín a su izquierda y",
+                    "añade permanentemente {C:attention}X#2#",
+                    "su valor de venta en {C:chips}Fichas",
+                    "{C:inactive}(Actualmente {C:chips}+#1#{C:inactive} Fichas)",
                 }
             },
             j_fg_banner = {
-                name = 'Banner?',
+                name = '¿Estandarte?',
                 text = {
-                    "{C:red}+#2#{} discards",
-                    "{C:chips}+#1#{} Chips for",
-                    "each remaining",
-                    "{C:attention}discard",
+                    "{C:red}+#2#{} descartes",
+                    "{C:chips}+#1#{} Fichas por",
+                    "cada {C:attention}discard{}",
+                    "restante",
                 }
             },
             j_fg_summit = {
-                name = 'Mystic Summit?',
+                name = '¿Cumbre mística?',
                 text = {
-                    "{C:red}-#2#{} discards",
-                    "{C:mult}+#1#{} Mult when",
-                    "{C:attention}#3#{} discards",
-                    "remaining",
+                    "{C:red}-#2#{} descartes",
+                    "{C:mult}+#1#{} Multi cuando",
+                    "queden {C:attention}#3#{} descartes",
+                    "restantes",
                 }
             },
             j_fg_loyalty = {
-                name = 'Loyalty Card?',
+                name = '¿Tarjeta de fidelización?',
                 text = {
-                     "Every {C:attention}#1#{} items",
-                     "purchased from the {C:attention}shop{} makes",
-                     "the next one {C:money}free{}",
+                     "Cada {C:attention}#1#{} cartas",
+                     "compradas en la {C:attention}tienda{} hacen",
+                     "que el siguente sea {C:money}gratis{}",
                      "{C:inactive}#2#",
                 }
             },
             j_fg_8ball = {
-                name = '8 Ball?',
+                name = '¿Bola 8?',
                 text = {
-                        "Each scored {C:attention}8{} creates a",
-                        "{C:tarot}Tarot{} card when scored",
-                        "{C:inactive}(Must have room)",
+                        "Cada {C:attention}8{} jugado crea una",
+                        "carta {C:tarot}Tarot{} al puntuar",
+                        "{C:inactive}(Debe haber espacio)",
                 },
             },
             j_fg_misprint = {
-                name = 'Misprint?',
+                name = '¿Error de imprenta?',
                 text = {
                     ""
                 }
             },
             j_fg_fist = {
-                name = 'Raised Fist?',
+                name = '¿Puño en alto?',
                 text = {
-                    "Adds {C:attention}#1#{} the rank",
-                    "of {C:attention}highest{} ranked card",
-                    "held in hand to Mult",
+                    "Añade {C:attention}#1#{} del rango",
+                    "de la carta con el número más{C:attention}alto{}",
+                    "en la mano como Multi",
                 }
             },
             j_fg_fibonacci = {
-                name = 'Fibonacci?',
+                name = '¿Fibonacci?',
                 text = {
-                    "Retrigger each scored {C:attention}Ace{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{},",
-                    "{C:attention}8{} and {C:attention}King{} {C:attention}1{} time and permanently",
-                    "upgrades it to next rank when scored",
-                    "{C:inactive}(ex: Ace to 2, 8 to King, King to Ace){}",
+                    "Reactica cada {C:attention}As{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{},",
+                    "{C:attention}8{} y {C:attention}rey{} jugado {C:attention}1{} vez y mejora",
+                    "permanentemente la carta al siguiente número",
+                    "{C:inactive}(ej: As a 2, 8 a Rey, Rey to As){}",
                 },
             },
             j_fg_face = {
-                name = 'Scary face?',
+                name = '¿Cara aterradora?',
                 text = {
-                    'Gains {C:chips}+#2#{} chips per scored {C:attention}face{} card',
-                    'Currently {C:chips}+#1#{} chips.'
+                    'Gana {C:chips}+#2#{} Fichas por cada {C:attention}face{} que anota',
+                    '{C:inactive}Actualmente {C:chips}+#1#{C:inactive} Fichass{}'
                 },
             },
-            j_fg_abstract = {
-                name = 'Abstract Joker?',
+            j_fg_gros_michel = {
+                name = "¿Banano?",
                 text = {
-                    "{C:mult}+#1#{} Mult for",
-                    "each {C:attention}Joker{} card Sold",
-                    "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                    "{C:white,X:mult}X#1#{} Multi",
+                    "{C:green}#2# en #3#{} probabilidades de que",
+                    "se destruya al final de la ronda"
+                }
+            },
+            j_fg_even_steven = {
+                name = "¿Pares?",
+                text = {
+                    "Gana {C:mult}+#1#{} Multi por cada",
+                    "carta {C:attention}par anotada{}",
+                    "{C:inactive}(Actualmente {C:mult}+#2#{C:inactive} Multi)",
+                    "{C:inactive}(10, 8, 6, 4, 2){}"
+                }
+            },
+            j_fg_odd_todd = {
+                name = "¿Nones?",
+                text = {
+                    "Gana {C:chips}+#1#{} Fichas por cada",
+                    "carta {C:attention}inpar anotada{}",
+                    "{C:inactive}(Actualmente {C:chips}+#2#{C:inactive} Fichas)",
+                    "{C:inactive}(A, 9, 7, 5, 3)"
+                }
+            },
+            j_fg_scholar = {
+                name = "¿Erudito?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si la mano jugada",
+                    "contiene al menos {C:attention}#2#{} #3#es"
+                }
+            },
+            j_fg_business = {
+                name = "¿Tarjeta de presentación?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades de mejorar",
+                    "las {C:attention}figuras{} que anoten",
+                    "{C:inactive}(Se aplica tras jugar las cartas){}"
+                }
+            },
+            j_fg_supernova = {
+
+            },
+            j_fg_ride_the_bus = {
+                name = "¿Al autobús?",
+                text = {
+                    "{C:mult}+#2#{} Mulit",
+                    "{C:mult}-#1#{} Multi por cada",
+                    "{C:attention}figura{} jugada"
+                }
+            },
+            j_fg_abstract = {
+                name = '¿Comodín abstracto?',
+                text = {
+                    "{C:mult}+#1#{} Multi por cada",
+                    "{C:attention}comidín{} vendido",
+                    "{C:inactive}(Actualmente {C:red}+#2#{C:inactive} Multi)",
                 },
             },
             j_fg_egg = {
-                name = 'Egg?',
+                name = '¿Huevo?',
                 text = {
-                    "Has {C:money}$#1#{} sell value.",
-                    "when sold lose",
-                    "{C:mult}#2#{} hand and {C:mult}#3#{} discard"
+                    "Tiene un valor de venta",
+                    "de {C:money}$#1#{}",
+                    "Al ser vendido, pierde",
+                    "{C:mult}#2#{} mano y {C:mult}#3#{} descarte"
                 },
             },
-            j_fg_duo = {
-                name = 'The Duo?',
+            j_fg_ice_cream = {
+                name = "¿Helado?",
                 text = {
-                    "Gains {X:mult,C:white}X#1#{} Mult if played",
-                    "hand contains",
-                    "a {C:attention}#2#",
-                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+                    "{C:chips}+#1#{} Fichas",
+                    "{C:chips}-#2#{} Fichas cuando",
+                    "{C:attention}se selecciona{} una ciega"
+                }
+            },
+            j_fg_faceless = {
+                name = "¿Comodín sin cara?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si la mano jugada",
+                    "no contiene{C:attention}figuras{}"
+                }
+            },
+            j_fg_splash = {
+                name = "Salpicadura?",
+                text = {
+                    "Rehabilita las {C:attention}cartas jugadas{}",
+                }
+            },
+            j_fg_cavendish = {
+                name = "Cavendish?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi",
+                    "{C:green}#3# in #4#{} probabilidades de perder",
+                    "{C:white,X:mult}X#2#{} Multi al final de la ronda",
+                    "Se autodestruye cuando llega a {C:white,X:mult}X1{} Multi"
+                }
+            },
+            j_fg_card_sharp = {
+                name = "¿Fullero?",
+                text = {
+                    ""
+                }
+            },
+            j_fg_red_card = {
+                name = "¿Tarjeta roja?",
+                text = {
+                    "Gana {C:mult}+#2#{} Multi cuando se",
+                    "{C:attention}salta{} una ciega",
+                    "{C:inactive}(Actualmente {C:mult}+#1#{C:inactive} Multi)"
+                }
+            },
+            j_fg_baron = {
+                name = "¿Barón?",
+                text = {
+                    "Gana {C:white,X:mult}X#2#{} Multi por",
+                    "cada {C:attention}rey{} en la mano",
+                    "al {C:attention}final de la ronda",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#1#{}{C:inactive} Multi)"
+                }
+            },
+            j_fg_cloud_9 = {
+                name = "¿Nube 9?",
+                text = {
+                    "Gana {C:gold}$#1#{} por cada",
+                    "{C:attention}9{} anotado"
+                }
+            },
+            j_fg_rocket = {
+                name = "¿Cohete?",
+                text = {
+                    "Gana {C:gold}$#1#{} al {C:attention}final de la ronda{}",
+                    "El pago disminuye en {C:gold}$#2#{}",
+                    "cuando {C:attention}se salta una ciega{}"
+                }
+            },
+            j_fg_duo = {
+                name = '¿El dúo?',
+                text = {
+                    "Gana {X:mult,C:white}X#1#{} Multi si",
+                    "la mano contiene",
+                    "un {C:attention}#2#",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
             },
             j_fg_trio = {
-                name = 'The Trio?',
+                name = '¿El trío?',
                 text = {
-                    "Gains {X:mult,C:white}X#1#{} Mult if played",
-                    "hand contains",
-                    "a {C:attention}#2#",
-                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+                    "Gana {X:mult,C:white}X#1#{} Multi si",
+                    "la mano contiene",
+                    "un {C:attention}#2#",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
             },
             j_fg_family = {
-                name = 'The Family?',
+                name = '¿La familia?',
                 text = {
-                    "Gains {X:mult,C:white}X#1#{} Mult if played",
-                    "hand contains",
-                    "a {C:attention}#2#",
-                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+                    "Gana {X:mult,C:white}X#1#{} Multi si",
+                    "la mano contiene",
+                    "un {C:attention}#2#",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
             },
             j_fg_order = {
-                name = 'The Order?',
+                name = '¿La orden?',
                 text = {
-                    "Gains {X:mult,C:white}X#1#{} Mult if played",
-                    "hand contains",
-                    "a {C:attention}#2#",
-                    "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+                    "Gana {X:mult,C:white}X#1#{} Multi si",
+                    "la mano contiene",
+                    "un {C:attention}#2#",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
             },
-			 j_fg_gem={
-                name="Rough Gem?",
-                text={
-                    "If poker hand contains a {C:attention}#1#{}",
-                    "with only {C:diamonds}Diamond{} suit, earn",
-                    "{C:money}$#2#{} when scored",
+            j_fg_trouses = {},
+            j_fg_ancient = {
+                name = "¿Comodín antiguo?",
+                text = {
+                    "Gana {C:white,X:mult}X#2#{} Multi cuando",
+                    "todas las cartas jugadas son",
+                    "del palo de {V:#1#}#3#{}",
+                    "El palo cambia cada ronda",
+                    "{C:inactive}(Actualmente{C:white,X:mult}#1#{C:inactive} Multi)",
+                }
+            },
+            j_fg_campfire = {
+                name = "¿Fogata?",
+                text = {
+                    "Gana {C:white,X:mult}X#2#{} Multi por cada carta{C:attention}descartada{}",
+                    "Pierde {C:white,X:mult}X#3#{} Multi cuando se derrota a la {C:attention}ciega jefe{}",
+                    "{C:inactive}(Actualmente {C:white,X:mult}X#1#{C:inactive} Multi, no puede bajar más de {C:white,X:mult}X0.75{C:inactive} Multi)"
+                }
+            },
+            j_fg_throwback = {
+                name = "¿Retro?",
+                text = {
+                    "{C:white,X:mult}X#2#{} Multi por cada",
+                    "{C:attention}tienda{} omitida en esta partida",
+                    "{C:inactive}(Actualmente {C:white,X:mult}X#1#{C:inactive} Multi){}"
+                }
+            },
+            j_fg_hanging_chad = {
+                name = "¿Papel perforado?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades de añadir una",
+                    "{C:attention}mejora{} aleatoria a las cartas jugadas",
+                    "Si ya están mejoradas, {C:green}#3# en #4#{}",
+                    "probabilidades de añadir un {C:attention}sello{} aleatorio",
+                    "Si ya tienen un sello, {C:green}#5# en #6#{}",
+                    "probabilidades de añadir una {C:attention}edición{} aleatoria",
+                    "{C:inactive,s:0.8}(Se aplica tras jugar las cartas){}"
+                }
+            },
+			 j_fg_gem = {
+                name = "¿Gema en bruto?",
+                text = {
+                    "Si la mano de poker contiene un {C:attention}#1#{}",
+                    "con solo cartas del palo de {C:diamonds}corazones{},",
+                    "gana {C:money}$#2#{} al puntuar"
                 },
 			},
-			j_fg_bloodstone={
-                name="Bloodstone?",
-                text={
-                   "If poker hand contains a {C:attention}#1#{}",
-                    "with only {C:hearts}Heart{} suit, gain",
-                    "{X:mult,C:white}X#2#{} Mult when scored",
-					"{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
+			j_fg_bloodstone ={
+                name = "¿Heliotropo?",
+                text = {
+                    "Si la mano de poker contiene un {C:attention}#1#{}",
+                    "con solo cartas del palo de {C:hearts}corazones{},",
+                    "gana {X:mult,C:white}X#2#{} Multi",
+					"{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                 },
 			},
-			j_fg_arrowhead={
-                name="Arrowhead?",
-                text={
-                   "If poker hand contains a {C:attention}#1#{}",
-                    "with only {C:spades}Spade{} suit, gain",
-                    "{C:chips}+#2#{} Chips when scored",
-					"{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips)",
+			j_fg_arrowhead = {
+                name = "¿Punta de flecha?",
+                text = {
+                    "Si la mano de poker contiene un {C:attention}#1#{}",
+                    "con solo cartas del palo de {C:spades}picas{},",
+                    "gana {C:chips}+#2#{} Fichas",
+                    "{C:inactive}(Actualmente {X:chips,C:white}+#3#{}{C:inactive} Fichas)",
                 },
 			},
-			j_fg_agate={
-                name="Onyx Agate?",
-                text={
-                   "If poker hand contains a {C:attention}#1#{}",
-                    "with only {C:clubs}Club{} suit, gain",
-                    "{C:mult}+#2#{} Mult when scored",
-					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
+			j_fg_agate ={
+                name = "¿Ágata onix?",
+                text = {
+                    "Si la mano de poker contiene un {C:attention}#1#{}",
+                    "con solo cartas del palo de {C:clubs}tréboles{},",
+                    "gana {C:mult}+#2#{} Multi",
+                    "{C:inactive}(Actualmente {C:mult}+#3#{}{C:inactive} Multi)",
                 },
 			},
+            j_fg_hit_the_road = {
+                name = "¿Al camino?",
+                text = {
+                    "Gana {C:white,X:mult}X#2#{} Multi",
+                    "por cada {C:attention}sota{} descartada",
+                    "{C:inactive}(Actualmente {C:white,X:mult}X#1#{C:inactive} MultI)"
+                }
+            },
             j_fg_invisible = {
                 name = "¿Comodín Invisible?",
                 text = {
@@ -446,6 +743,14 @@ return {
                     "Crea una {C:attention}¿Memoria invisible?{}",
                     "con el comodín eliminado",
                     "{C:inactive}(No puede copiar comodines eternos){}",
+                }
+            },
+            j_fg_bootstraps = {
+                name = "¿Botas?",
+                text = {
+                    "Gana {C:mult}+#2#{} Multi, {C:red}-$#3#{}",
+                    "al {C:attention}final de la ronda{}",
+                    "{C:inactive}(Actualmente {C:mult}+#1#{C:inactive} Multi)"
                 }
             },
             j_fg_invisible_memory = {
@@ -456,28 +761,69 @@ return {
                     "crea {C:attention}#2#{} copias {C:dark_edition}negativas{} de {C:attention}#3#{}",
                 }
             },
+            -- Legendaries
+            j_fg_caino = {
+                name = "Canio?",
+                text = {
+                    "Gana {X:mult,C:white}X#2#{} Multi por",
+                    "cada figura {C:attention}descartada{}",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#1#{C:inactive} Multi)"
+                }
+            },
+            j_fg_triboulet = {
+                name = "Triboulet?",
+                text = {
+                    "Gana {X:mult,C:white}X#2#{} Multi por",
+                    "cada figura{C:attention}anotada{}",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#1#{C:inactive} Multi)"
+                }
+            },
+            j_fg_yorick = {
+                name = "Yorick?",
+                text = {
+                    "Gana {X:mult,C:white}X#2#{} Multi",
+                    "cada {C:attention}#3# {C:inactive}(#4#){} manos",
+                    "{C:inactive}(Actualmente {X:mult,C:white}X#1#{C:inactive} Multi)"
+                }
+            },
+            j_fg_chicot = {
+                name = "Chicot?",
+                text = {
+                    "{C:red}+#2#{} descarte cuando",
+                    "se derrota a la {C:attention}ciega jefe{}",
+                    "{C:inactive}(Actualmente {C:red}+#1#{C:inactive} descartes)"
+                }
+            },
+            j_fg_perkeo = {
+                name = "Perkeo?",
+                text = {
+                    "Crea {C:attention}#1#{} copia {C:inactive}perecedera{} y {C:dark_edition}negative{}",
+                    "de un {C:attention}comodín{} no {C:dark_edition}negativo",
+                    "cuando se derrota a la {C:attention}ciega jefe{}"
+                }
+            },
             -- Collectives
             j_fg_deathmodereal = {
                 name = 'deathmodereal',
                 text = {
-                    "He's {X:black,C:white}cool(ish){}",
-                    '{X:mult,C:white}X#1#{} mult.'
+                    "Él {X:black,C:white}mola {}(más o menos)",
+                    '{X:mult,C:white}X#1#{} multi.'
                 },
             },
             j_fg_deathmoderealalt = {
                 name = 'deathmodereal',
                 text = {
-                    "He's {X:white,C:black}cool{}",
-                    'each scored card gives',
-                    '{X:mult,C:white}X#1#{} mult.'
+                    "Él {X:white,C:black}mola{}",
+                    'Cada carta jugada da',
+                    '{X:mult,C:white}X#1#{} multi'
                }
             },
             j_fg_jogla = {
                 name = 'Jogla',
                 text = {
                     "Crea {C:attention}#1#{} copias {C:dark_edition}Negativa{} del consumible",
-                    "que poseas de más a la {C:attention}izquierda{} al salir",
-                    "de la{C:attention} tienda{}",
+                    "que poseas de más a la {C:attention}izquierda{}",
+                    "al salirde la{C:attention} tienda{}",
                     "{C:inactive}(Actualmente copiando {C:attention}#2#{C:inactive})",
                     "{C:inactive,s:0.7}\"NO soy un mago\""
                 },
@@ -493,36 +839,209 @@ return {
             j_fg_jenker = {
                 name = 'Jenku',
                 text = {
-                    "Retriggers every {C:attention}Joker{}",
-                    "for every second {C:attention}Boss Blind{} defeated.",
-                    "starting at {C:mult}1{}",
-					"{C:inactive}(Currently {C:mult}#1#{}{C:inactive} time(s))",
+                    "Reactiva cada {C:attention}comodín{}",
+                    "por cada dos {C:attention}ciegas jefes{} derrotadas.",
+                    "emplezando en {C:mult}1{}",
+					"{C:inactive}(Actualmente {C:mult}#1#{}{C:inactive} vez/veces)",
                     "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
                 }
             },
             j_fg_goldenleaf = {
-                name = "GoldenLeaf",
+                name = "HojaDorada",
                 text = {
-                    "Increases hand size by {C:attention}#1#{} when",
-                    "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hand size)"
+                    "Cada Carta ¿Dorada? jugada",
+                    "da {C:white,X:mult}X#1# Multi"
                 }
             },
             j_fg_goldenleafalt = {
-                name = "SilverAutumn",
+                name = "OtoñoPlateado",
                 text = {
-                    "Permanently increase amount of hands by {C:attention}#1#{} when",
-                    "{C:attention}Boss blind{} defeated",
-                    "{C:inactive}(Currently {C:attention}+#2#{C:inactive} hands)"
+                    "Aumenta la cantidad de manos en {C:attention}#1#{} cuando",
+                    "se derrota a {C:attention}ciega jefe{}",
+                    "{C:inactive}(Actualmente {C:attention}+#2#{C:inactive} manos)"
                 }
             }
         },
-        Other={},
+        Other={
+            fg_unchangeable = {
+                name = "Incambiable",
+                label = "Incambiable",
+                text = {
+                    "No puede ser alternada"
+                }
+            }
+        },
         Planet={},
         Spectral={},
         Stake={},
         Tag={},
-        Tarot={},
+        Tarot={
+            c_fg_chariot = {
+                name = "¿El carro?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas de ¿Acero?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_death = {
+                name = "¿La muerte?",
+                text = {
+                    "Selecciona hasta {C:attention}#1#{} cartas",
+                    "Convierte todas las cartas en la de {C:attention}más a la derecha{}",
+                    "{C:inactive}(Solo copia el {C:attention}palo{C:inactive} y el {C:attention}número{C:inactive}){}",
+                    "{C:inactive}(Arrastra para reorganizar){}"
+                }
+            },
+            c_fg_devil = {
+                name = "¿El diablo?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas de ¿Oro?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_emperor = {
+                name = "¿El emperador?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades de",
+                    "crear un {C:legendary}alma{}"
+                }
+            },
+            c_fg_empress = {
+                name = "¿La emperatriz?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas ¿Multi?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_fool = {
+                name = "¿El loco?",
+                text = {
+                    "Aleatoriamente crea {C:attention}#1#{} carta de",
+                    "{C:tarot}Tarot{} or de {C:planet}Planet{}",
+                    "{C:inactive}({C:tarot}The Fool?{} excluded)"
+                }
+            },
+            c_fg_hermit = {
+                name = "¿El ermitaño?",
+                text = {
+                    "Enhance {C:attention}#1#{} selected cards",
+                    "with a {C:attention}random{} enhancement",
+                    "{C:attention}Halves{} money",
+                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})"
+                }
+            },
+            c_fg_hierophant = {
+                name = "¿El hierofante?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas de ¿Bonus?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_high_priestess = {
+                name = "¿La sacerdotisa?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades de",
+                    "crear un {C:legendary}agujero negro{}"
+                }
+            },
+            c_fg_justice = {
+                name = "¿La justicia?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas de Vidrio?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_magician = {
+                name = "¿El mago?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas ¿De la suerte?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_moon = {
+                name = "¿La luna?",
+                text = {
+                    "Selecciona hasta{C:attention}#1#{} cartas",
+                    "para convertirlas en {C:clubs}tréboles",
+                    "Convierte el resto de la {C:attention}mano{}",
+                    "en {C:diamonds}Diamantes{}"
+                }
+            },
+            c_fg_star = {
+                name = "¿La estrella?",
+                text = {
+                    "Selecciona hasta {C:attention}#1#{} cartas",
+                    "para convertirlas en {C:diamonds}diamantes",
+                    "Convierte el resto de la {C:attention}mano{}",
+                    "en {C:clubs}tréboles{}"
+                }
+            },
+            c_fg_sun = {
+                name = "¿El sol?",
+                text = {
+                    "Selecciona hasta {C:attention}#1#{} carta",
+                    "para convertirlas en {C:hearts}corazones",
+                    "Convierte el resto de la {C:attention}mano{}",
+                    "en {C:spades}picas{}"
+                }
+            },
+            c_fg_temperance = {
+                name = "¿La templanza?",
+                text = {
+                    "Da el {C:attention}doble{} del valor total de venta",
+                    "de {C:attention}todos{} los consumibles en posesión",
+                    "{C:inactive}(Máximo de {C:gold}$#2#{C:inactive})",
+                    "{C:inactive}(Actualmente {C:gold}$#1#{C:inactive})"
+                }
+            },
+            c_fg_wheel_of_fortune = {
+                name = "¿La rueda de la fortuna?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades de",
+                    "añadir {C:dark_edition}negativo{} a",
+                    "un {C:attention}Joker{} aleatorio"
+                }
+            },
+            c_fg_world = {
+                name = "¿El mundo?",
+                text = {
+                    "Selecciona hasta {C:attention}#1#{} cartas",
+                    "para convertirlas en {C:spades}picas",
+                    "Convierte el resto de la {C:attention}mano{}",
+                    "en {C:hearts}corazones{}"
+                }
+            },
+        },
         Voucher={},
     },
     misc = {
