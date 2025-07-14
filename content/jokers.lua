@@ -3037,7 +3037,7 @@ SMODS.Joker{
 }
 
 -- Legendaries
--- Joker
+-- Canio
 SMODS.Joker{
     key = "caino",
     atlas = "jokers_alt",
@@ -3049,18 +3049,34 @@ SMODS.Joker{
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
-        extra = {}
+        extra = {
+			xmult = 1,
+			xmult_i = 0.2
+		}
     },
     loc_vars = function (self, info_queue, card)
         return {
-            vars = {}
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i
+			}
         }
     end,
     blueprint_compat = true,
     calculate = function (self, card, context)
+		if context.discard and FG.FUNCS.get_card_info(context.other_card).is_face and not context.blueprint then
+			card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+X"..card.ability.extra.xmult_i,
+				mode = "literal",
+				colour = "mult"
+			}
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end
 }
--- Joker
+-- Triboulet
 SMODS.Joker{
     key = "triboulet",
     atlas = "jokers_alt",
@@ -3072,18 +3088,34 @@ SMODS.Joker{
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
-        extra = {}
+        extra = {
+			xmult = 1,
+			xmult_i = 0.4
+		}
     },
     loc_vars = function (self, info_queue, card)
         return {
-            vars = {}
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i
+			}
         }
     end,
     blueprint_compat = true,
     calculate = function (self, card, context)
+		if context.individual and context.cardarea == G.play and FG.FUNCS.get_card_info(context.other_card).is_face and not context.blueprint then
+			card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+X"..card.ability.extra.xmult_i,
+				mode = "literal",
+				colour = "mult"
+			}
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end
 }
--- Joker
+-- Yorick
 SMODS.Joker{
     key = "yorick",
     atlas = "jokers_alt",
@@ -3095,18 +3127,42 @@ SMODS.Joker{
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
-        extra = {}
+        extra = {
+			xmult = 1,
+			xmult_i = 1.5,
+			req_hands = 12,
+			cur_hands = 0
+		}
     },
     loc_vars = function (self, info_queue, card)
         return {
-            vars = {}
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i,
+				card.ability.extra.req_hands or 12,
+				card.ability.extra.cur_hands or 0
+			}
         }
     end,
     blueprint_compat = true,
     calculate = function (self, card, context)
+		if context.before and not context.blueprint then
+			card.ability.extra.cur_hands = card.ability.extra.cur_hands + 1
+			if card.ability.extra.cur_hands >= card.ability.extra.req_hands then
+				card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+				card.ability.extra.cur_hands = 0
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "+X"..card.ability.extra.xmult_i,
+					mode = "literal",
+					colour = "mult"
+				}
+			end
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end
 }
--- Joker
+-- Chicot
 SMODS.Joker{
     key = "chicot",
     atlas = "jokers_alt",
@@ -3118,18 +3174,37 @@ SMODS.Joker{
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
-        extra = {}
+        extra = {
+			discards = 0,
+			discards_i = 1
+		}
     },
     loc_vars = function (self, info_queue, card)
         return {
-            vars = {}
+            vars = {
+				card.ability.extra.discards,
+				card.ability.extra.discards_i
+			}
         }
     end,
     blueprint_compat = true,
     calculate = function (self, card, context)
+		if context.end_of_round and not context.blueprint and G.GAME.blind.boss and not context.repetition and not context.individual then
+			card.ability.extra.discards = card.ability.extra.discards + card.ability.extra.discards_i
+			G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.discards_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.discards_i.." discards",
+				mode = "literal",
+			}
+		end
+		if context.selling_self then 
+			G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.discards
+			if G.GAME.round_resets.discards < 0 then G.GAME.round_resets.discards = 0 end
+		end
     end
 }
--- Joker
+-- Perkeo
 SMODS.Joker{
     key = "perkeo",
     atlas = "jokers_alt",
@@ -3141,15 +3216,36 @@ SMODS.Joker{
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
-        extra = {}
+        extra = {
+			count = 1
+		}
     },
     loc_vars = function (self, info_queue, card)
         return {
-            vars = {}
+            vars = {
+				card.ability.extra.count
+			}
         }
     end,
     blueprint_compat = true,
     calculate = function (self, card, context)
+		if context.setting_blind then
+			local ellegible_jokers = {}
+			local choosen_joker = {}
+			for _,v in ipairs(G.jokers.cards) do
+				--print("Checking jokers")
+				if FG.FUNCS.get_card_info(v).edition ~= "e_negative" then
+					table.insert(ellegible_jokers,v)
+					--print("joker added, key="..FG.FUNCS.get_card_info(v).key)
+				end
+			end
+			choosen_joker = ellegible_jokers[pseudorandom("mila",1,#ellegible_jokers)]
+			local new_card = copy_card(choosen_joker)
+			new_card:set_edition("e_negative")
+			new_card:set_perishable()
+			new_card:add_to_deck()
+            G.jokers:emplace(new_card)
+		end
     end
 }
 -----------------
