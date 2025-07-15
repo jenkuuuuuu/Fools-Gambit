@@ -132,51 +132,122 @@ SMODS.current_mod.extra_tabs = function()
 					-- config values here, see 'Building a UI' page
 					r = 0.1, minw = 10, minh = 6, align = "tm", padding = 0.2, colour = G.C.BLACK
 				}, nodes = {
-					-- work your UI wizardry here, see 'Building a UI' page
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Fool's Gambit", colour = G.C.PURPLE, scale = .7}}}},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = tostring("Version: "..FG.config.version), colour = G.C.GREY, scale = .3}}}},
-					{n = G.UIT.R, config = {align = "tm", minh = .2}},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Lead developer", colour = G.C.GOLD, scale = .5}}}},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {
-						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "CODE", colour = G.C.GREEN, scale = .5}}}},
-							{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Jogla", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "jenku", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "deathmodereal", colour = G.C.WHITE, scale = .3}}}},
-							}},
-						}},
-						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "ART", colour = G.C.BLUE, scale = .5}}}},
-							{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Gappie", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Samuran", colour = G.C.WHITE, scale = .3}}}},
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Hyperx", colour = G.C.WHITE, scale = .3}}}},
-							}},
-						}},
-						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "MUSIC", colour = G.C.PURPLE, scale = .5}}}},
-							{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
-								{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
-							}},
-						}},
+						{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Fool's Gambit", colour = G.C.DARK_EDITION, scale = .7}}}},
+						{n = G.UIT.R, config = {align = "tm", minh = .2}},
+						{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = tostring("Version: "..FG.config.version), colour = G.C.GREY, scale = .3}}}},
 					}},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Special thanks to", colour = G.C.GOLD, scale = .5}}}},
+					{n = G.UIT.R, config = {align = "tm"}, nodes = {
+						{n = G.UIT.C, config = {align = "tm"}, nodes = {
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Lead developer", colour = G.C.GOLD, scale = .5}}}},
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {
+								{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
+									{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "CODE", colour = G.C.GREEN, scale = .5}}}},
+									{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Jogla", colour = G.C.WHITE, scale = .3}}}},
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "jenku", colour = G.C.WHITE, scale = .3}}}},
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "deathmodereal", colour = G.C.WHITE, scale = .3}}}},
+									}},
+								}},
+								{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
+									{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "ART", colour = G.C.BLUE, scale = .5}}}},
+									{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Gappie", colour = G.C.WHITE, scale = .3}}}},
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Samuran", colour = G.C.WHITE, scale = .3}}}},
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Hyperx", colour = G.C.WHITE, scale = .3}}}},
+									}},
+								}},
+								{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
+									{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "MUSIC", colour = G.C.RED, scale = .5}}}},
+									{n = G.UIT.R, config = {align = "tm", padding = 0.05}, nodes = {
+										{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "GoldenLeaf", colour = G.C.WHITE, scale = .3}}}},
+									}},
+								}},
+							}},
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Special thanks to", colour = G.C.GOLD, scale = .5}}}},
 
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {
-						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "LocalThunk", colour = G.C.WHITE, scale = .3}}}},
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "MathIsFun_", colour = G.C.WHITE, scale = .3}}}},						
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {
+								{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
+									{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "LocalThunk", colour = G.C.WHITE, scale = .3}}}},
+									{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "MathIsFun_", colour = G.C.WHITE, scale = .3}}}},						
+								}},
+								{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
+									{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "RAV", colour = G.C.WHITE, scale = .3}}}},
+									{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Lavbubl", colour = G.C.WHITE, scale = .3}}}},						
+								}},
+							}},
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Everyone in the FG modding thread", colour = G.C.WHITE, scale = .3}}}},
 						}},
-						{n = G.UIT.C, config = {minw = 3, align = "tm", padding = 0.1}, nodes = {
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "RAV", colour = G.C.WHITE, scale = .3}}}},
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Lavbubl", colour = G.C.WHITE, scale = .3}}}},						
-						}},
-					}},
-					{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Everyone in the FG modding thread", colour = G.C.WHITE, scale = .3}}}},
+						{n = G.UIT.C, config = {align = "tm"}, nodes = {
+							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = "Useful link", colour = G.C.WHITE, scale = .45}}}},	
+							{n = G.UIT.R, config = {minh = 0.15}},
+							{n = G.UIT.R, config = {padding = 0.05}, nodes = {
+								UIBox_button{
+									label = {"Github repository"},
+									minw = 4,
+									minh = 0.5,
+									scale = 0.35,
+									button = "FG_link_website",
+									ref_table = "https://github.com/jenkuuuuuu/Fools-Gambit"
+								}
+							}},
+							{n = G.UIT.R, config = {padding = 0.05}, nodes = {
+								{n = G.UIT.C, nodes = {
+									UIBox_button{
+										label = {"Discord server"},
+										minw = 4,
+										minh = 0.5,
+										scale = 0.35,
+										button = "FG_link_website",
+										ref_table = "https://discord.gg/m6Hm6KyQRz"
+									}		
+								}},
+								
+							}},
+							{n = G.UIT.R, config = {padding = 0.05}, nodes = {
+								{n = G.UIT.C, nodes = {
+									UIBox_button{
+										label = {"Mod thread"},
+										minw = 4,
+										minh = 0.5,
+										scale = 0.35,
+										button = "FG_link_website",
+										ref_table = "https://discord.com/channels/1116389027176787968/1333809003829923900"
+									}		
+								}},
+							}},
+							{n = G.UIT.R, config = {padding = 0.05}, nodes = {
+								{n = G.UIT.C, nodes = {
+									UIBox_button{
+										label = {"Mod wiki"},
+										minw = 4,
+										minh = 0.5,
+										scale = 0.35,
+										button = "FG_link_website",
+										ref_table = "https://balatromods.miraheze.org/wiki/Fool%27s_Gambit"
+									}		
+								}},
+								
+							}},
+							{n = G.UIT.R, config = {padding = 0.05}, nodes = {
+								{n = G.UIT.C, nodes = {
+									UIBox_button{
+										label = {"Dev wiki"},
+										minw = 4,
+										minh = 0.5,
+										scale = 0.35,
+										button = "FG_link_website",
+										ref_table = "https://github.com/jenkuuuuuu/Fools-Gambit/wiki"
+									}		
+								}},
+							}}
+						}}
+					}}
+					-- work your UI wizardry here, see 'Building a UI' page
+					
 				}}
 			end,
 		},

@@ -297,3 +297,7 @@ G.FUNCS.FG_s_version = function (args)
 	FG.config.s_version.selected = args.cycle_config.current_option
 	FG.config.s_version.active = args.to_val
 end
+
+G.FUNCS.FG_link_website = function(args)
+	love.system.openURL(args.config.ref_table)
+end

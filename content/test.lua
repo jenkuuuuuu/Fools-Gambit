@@ -23,6 +23,7 @@ end
 if FG.config.debug_mode then
     SMODS.Joker {
         key = "test",
+        yes_pool_flag = "i_am_sorry_jenku",
         loc_txt = {
             name = "Test Joker",
             text = {
