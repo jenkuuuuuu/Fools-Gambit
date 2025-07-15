@@ -151,6 +151,10 @@ end
 				if replacee then
 					G.shop_jokers:remove_card(replacee)
 					replacee:remove()
+				else
+					--G.E_MANAGER:add_event(Event({func = function()
+					--change_shop_size(1)
+					--return true end }))
 				end
 				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
 				create_shop_card_ui(replacement, 'joker', G.shop_jokers)
@@ -161,11 +165,11 @@ end
 
 	local shopref = create_card_for_shop
 	local cop_reroll = false
-
 	function create_card_for_shop(area)
 		local card = shopref(area)
 
 		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips and cop_reroll == false then
+			
 			FG.FUNCS.replace_shop_joker("j_fg_change_of_pace", #G.shop_jokers.cards+1)
 			cop_reroll = true
 			end
@@ -226,11 +230,11 @@ end
 function FG.FUNCS.get_card_info(card)
 	if not card then sendWarnMessage("No card was passed.","FG.FUNCS.get_card_info") return nil end
 	local ret = {
-		id = card.base.id,
+		id = false,
 		rank = false,
 		suit = false,
 		is_face = false,
-		key = card.config.center.key,
+		key = false,
 		edition = false,
 		seal = card.seal or false,
 		eternal = false,
@@ -241,17 +245,23 @@ function FG.FUNCS.get_card_info(card)
 		raw = card
 	}
 	
-	if card.config.card then ret.rank = card.config.card.value end
-	if card.config.card then ret.suit = card.config.card.suit end
-	if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
-	if card.edition then ret.edition = card.edition.key end
-	if card.ability.eternal then ret.eternal = true end
-	if card.ability.perishable then
-		ret.perishable = true
-		ret.perish_tally = card.ability.perish_tally
+	if card.base then ret.id = card.base.id end
+	if card.config then
+		if card.config.card then ret.rank = card.config.card.value end
+		if card.config.card then ret.suit = card.config.card.suit end
+		if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
+		if card.config.center then ret.key = card.config.center.key end
 	end
-	if card.ability.rental then ret.rental = true end
-	if card.ability.fg_unchangeable then ret.unchangeable = true end
+	if card.edition then ret.edition = card.edition.key end
+	if card.ability then
+		if card.ability.eternal then ret.eternal = true end
+		if card.ability.perishable then
+			ret.perishable = true
+			ret.perish_tally = card.ability.perish_tally
+		end
+		if card.ability.rental then ret.rental = true end
+		if card.ability.fg_unchangeable then ret.unchangeable = true end
+	end
 	return ret
 end
 
@@ -259,18 +269,14 @@ end
 ---@param max number 1 in N chance, where N is `max`
 ---@return boolean success If the random chance succeeds
 function FG.FUNCS.random_chance(max)
-	if pseudorandom('mila', G.GAME.probabilities.normal, max) <= G.GAME.probabilities.normal then
-		return true
-	else
-		return false
-	end
+	return pseudorandom('mila', G.GAME.probabilities.normal, max) <= G.GAME.probabilities.normal
 end
 
 function FG.FUNCS.allow_duplicate (card)
 	if not G.jokers then sendWarnMessage("G.jokers doesn't exist!","FG.FUNCS.allow_duplicate") return end
 	local found_showman = false
 	local found_alternate = false
-	for _,v in ipairs(G.jokers) do
+	for _,v in ipairs(G.jokers.cards) do
 		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true break end -- Find showman
 		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
 	end
@@ -288,6 +294,61 @@ function Game:start_run(args)
 			end
 		end
 	end
+end
+
+---Allows to easily create multi-line texts.
+---@param args {text:table|string,colour:string,scale:number,padding:number,tooltip:{}|nil,align:"tl"|"tm"|"tr"|"cl"|"cm"|"cr"|"bl"|"bm"|"br",mode:"R"|"C"} The settings for the text.
+---@return table node The entire node structure. Do note it has a wrapper node.
+function FG.FUNCS.UIBox_text (args)
+	if not args or not type(args) == "table" then return 
+	{ n = G.UIT.R, nodes = {{n = G.UIT.T, config = {text = "ERROR", scale = 0.3, colour = G.C.RED}}}} end
+	
+	local text = args.text or {"No text"}
+	local colour = args.colour or "white"
+	local scale = args.scale or 0.3
+	local padding = args.padding or 0.05
+	local hover = args.tooltip or nil
+	local align = args.align or "cm"
+	local mode = args.mode or "R"
+	
+	local ret = {n = G.UIT[string.upper(mode)], config = {padding = padding}, nodes = {}}
+	
+	if type(text) ~= "table" then return ret end
+	for _,text in ipairs(text) do
+		local tooltip = nil
+
+		if hover then
+			tooltip = {text = {}}
+			for _,h_text in ipairs(hover) do
+				if h_text == "" then h_text = " " end
+				table.insert(tooltip.text,h_text)
+			end
+		end
+
+		local cur_txt = {n = G.UIT[string.upper(mode)], config = {align = align}, nodes = {
+			{n = G.UIT.T, config = { text = text, colour = G.C[string.upper(colour)], scale = scale, tooltip = tooltip}}
+		}}
+		
+		table.insert(ret.nodes,cur_txt)
+	end
+
+	return ret
+end
+
+
+--- Allows to search for any raw localization file, without formatting
+---@param args table
+---@return table|string
+function FG.FUNCS.localize(args)
+	local ret = G.localization
+	local function recursive_find(dir,index)
+		if index <= #args and dir ~= nil then
+			ret = dir[args[index]]
+			recursive_find(ret,index+1)
+		end
+	end
+	recursive_find(ret,1)
+	return ret
 end
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT

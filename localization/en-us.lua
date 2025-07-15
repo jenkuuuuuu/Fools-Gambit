@@ -764,6 +764,14 @@ return {
                     "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
                 }
             },
+            j_fg_drivers_license = {
+                name = "Driver's license?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if at least",
+                    "{C:attention}half{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} if your {C:attention}full deck{}",
+                    "contains {C:attention}enhanced{} cards",
+                }
+            },
             j_fg_bootstraps = {
                 name = "Bootstraps?",
                 text = {
@@ -1058,6 +1066,87 @@ return {
         },
         Voucher={},
     },
+    FG = {
+        config = {
+            disclaimer = {
+                "This mod is currently in early beta",
+                "Everything is subject to change",
+            },
+            extra_jokers = "Additional jokers",
+            extra_jokers_tooltip = {
+                "Prevents jokers added by Fool's Gambit ",
+                "that don't have a vanilla counterpart",
+                "from spawning",
+                " ",
+                "It is not recommended to toggle",
+                "this option during a run",
+                "{C:dark_edition}This option is experimental{}"
+            },
+            diplicate_jokers = "Duplicate jokers",
+            duplicate_jokers_tooltip = {
+                "Allows jokers to spawn even if",
+                "it's alternate is in your joker tray",
+                " ",
+                "It is not recommended to toggle",
+                "this option during a run",
+                "{C:dark_edition}This option is experimental{}"
+            },
+            alt_sfx = "Alternate SFX",
+            alt_sfx_tooltip = {
+                "Replaces balatro's sound effects",
+                "with custom ones",
+                " ",
+                "{C:red}Requires restart{}"
+            },
+            special_edition = "Special edition",
+            debug_mode = "Enable debug mode",
+            misc = {
+                ["?"] = "(?)",
+                require_restart = "(Requires restart)"
+            }
+        },
+        credits = {
+            names = {
+                goldenleaf = "GoldenLeaf",
+                jogla = "Jogla",
+                deathmodereal = "deathmodereal",
+                jenku = "Jenku",
+                gappie = "Gappie",
+                samuran = "Samuran",
+                hyperx = "Hyperx",
+                localthunk = "LocalThunk",
+                mathisfun_ = "MathIsFun_",
+                rav = "Rav",
+                lavbulb = "Lavbulb",
+            },
+            languages = {
+                ["en-us"] = "English",
+                ["es_ES"] = "Spanish",
+                ["zh-CN"] = "Chinese",
+                ["sn_bos"] = "Sendien"
+            },
+            misc = {
+                page_title = "Credits",
+                title = "Fool's Gambit",
+                version = "Version",
+                lead_developer = "Lead developer",
+                code = "CODE",
+                art = "ART",
+                music = "MUSIC",
+                special_thanks = "Special thanks to",
+                special_thanks_misc = "Everyone in the FG modding thread",
+                localization = "Localization",
+                links = {
+                    title = "Useful links",
+                    github = "Github repository",
+                    discord = "Discord server",
+                    d_thread = "Mod thread",
+                    wiki = "Mod wiki",
+                    wiki_dev = "Dev wiki",
+                },
+            }
+        },
+    },
     misc = {
         -- This one is very important. I have moved every localization key we might need for FG here. 
         -- See aux_functions > FG.FUNCS.card_eval_status_text for more info
@@ -1068,7 +1157,6 @@ return {
 			replenished="Replenished!",
 			card_added="+1 Card",
         },
-
         achievement_descriptions={},
         achievement_names={},
         blind_states={},
@@ -1076,10 +1164,10 @@ return {
         collabs={},
         dictionary={
             k_chipMult="Multiplied!",
-			k_plus_aberration="+1 Aberration",
-			k_replaced="Replaced!",
-			k_replenished="Replenished!",
-			k_card_added="+1 Card",
+            k_plus_aberration="+1 Aberration",
+            k_replaced="Replaced!",
+            k_replenished="Replenished!",
+            k_card_added="+1 Card",
             k_unchangeable_warning = "This card can't be alternated",
             k_fg_active = "Active!",
             k_fg_none = "None",
@@ -1095,5 +1183,5 @@ return {
         tutorial={},
         v_dictionary={},
         v_text={},
-    },
+    }
 }
