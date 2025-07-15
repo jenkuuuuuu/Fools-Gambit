@@ -89,6 +89,7 @@ FG.ALTS.joker_equivalents = {
 	j_onyx_agate = "j_fg_agate",
 	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
+	j_drivers_license = "j_fg_drivers_license",
 	j_bootstraps = "j_fg_bootstraps",
 	-- Legendaries
 	j_caino = "j_fg_caino",
@@ -2987,6 +2988,46 @@ SMODS.Joker{
 		end
 	end
 }
+-- Driver's license
+SMODS.Joker{
+    key = "drivers_license",
+    atlas = "jokers_alt",
+    pos = { x = 0, y = 7},
+    rarity = 3,
+    cost = 6,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 3
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+		local enhanced_cards = 0
+		local playing_cards = 0
+		if G.playing_cards then
+			for _,v in ipairs(G.playing_cards) do if FG.FUNCS.get_card_info(v).key ~= "c_base" then enhanced_cards = enhanced_cards + 1 end end 
+			playing_cards = #G.playing_cards
+		end
+		return {
+            vars = {
+				card.ability.extra.xmult,
+				enhanced_cards,
+				playing_cards/2 or 0
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.joker_main then
+			local enhanced_cards = 0
+			for _,v in ipairs(G.playing_cards) do if FG.FUNCS.get_card_info(v).key ~= "c_base" then enhanced_cards = enhanced_cards + 1 end end
+			if enhanced_cards >= (#G.playing_cards/2) then return {xmult = 3} end
+		end
+    end
+}
+
 -- Bootstraps
 SMODS.Joker{
     key = "bootstraps",

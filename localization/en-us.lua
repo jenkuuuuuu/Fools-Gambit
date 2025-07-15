@@ -764,6 +764,14 @@ return {
                     "create {C:attention}#2#{C:dark_edition} negative{} copies of {C:attention}#3#{}",
                 }
             },
+            j_fg_drivers_license = {
+                name = "Driver's license?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if at least",
+                    "{C:attention}half{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} if your {C:attention}full deck{}",
+                    "contains {C:attention}enhanced{} cards",
+                }
+            },
             j_fg_bootstraps = {
                 name = "Bootstraps?",
                 text = {

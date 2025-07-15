@@ -226,11 +226,11 @@ end
 function FG.FUNCS.get_card_info(card)
 	if not card then sendWarnMessage("No card was passed.","FG.FUNCS.get_card_info") return nil end
 	local ret = {
-		id = card.base.id,
+		id = false,
 		rank = false,
 		suit = false,
 		is_face = false,
-		key = card.config.center.key,
+		key = false,
 		edition = false,
 		seal = card.seal or false,
 		eternal = false,
@@ -241,17 +241,23 @@ function FG.FUNCS.get_card_info(card)
 		raw = card
 	}
 	
-	if card.config.card then ret.rank = card.config.card.value end
-	if card.config.card then ret.suit = card.config.card.suit end
-	if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
-	if card.edition then ret.edition = card.edition.key end
-	if card.ability.eternal then ret.eternal = true end
-	if card.ability.perishable then
-		ret.perishable = true
-		ret.perish_tally = card.ability.perish_tally
+	if card.base then ret.id = card.base.id end
+	if card.config then
+		if card.config.card then ret.rank = card.config.card.value end
+		if card.config.card then ret.suit = card.config.card.suit end
+		if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
+		if card.config.center then ret.key = card.config.center.key end
 	end
-	if card.ability.rental then ret.rental = true end
-	if card.ability.fg_unchangeable then ret.unchangeable = true end
+	if card.edition then ret.edition = card.edition.key end
+	if card.ability then
+		if card.ability.eternal then ret.eternal = true end
+		if card.ability.perishable then
+			ret.perishable = true
+			ret.perish_tally = card.ability.perish_tally
+		end
+		if card.ability.rental then ret.rental = true end
+		if card.ability.fg_unchangeable then ret.unchangeable = true end
+	end
 	return ret
 end
 
@@ -259,18 +265,14 @@ end
 ---@param max number 1 in N chance, where N is `max`
 ---@return boolean success If the random chance succeeds
 function FG.FUNCS.random_chance(max)
-	if pseudorandom('mila', G.GAME.probabilities.normal, max) <= G.GAME.probabilities.normal then
-		return true
-	else
-		return false
-	end
+	return pseudorandom('mila', G.GAME.probabilities.normal, max) <= G.GAME.probabilities.normal
 end
 
 function FG.FUNCS.allow_duplicate (card)
 	if not G.jokers then sendWarnMessage("G.jokers doesn't exist!","FG.FUNCS.allow_duplicate") return end
 	local found_showman = false
 	local found_alternate = false
-	for _,v in ipairs(G.jokers) do
+	for _,v in ipairs(G.jokers.cards) do
 		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true break end -- Find showman
 		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
 	end

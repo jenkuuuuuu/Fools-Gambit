@@ -745,6 +745,14 @@ return {
                     "{C:inactive}(No puede copiar comodines eternos){}",
                 }
             },
+            j_fg_drivers_license = {
+                name = "Permiso de conducir?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si al menos",
+                    "{C:attention}la mitad{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} de tu {C:attention}mazo entero{}",
+                    "contiene cartas {C:attention}mejoradas{}",
+                }
+            },
             j_fg_bootstraps = {
                 name = "¿Botas?",
                 text = {
@@ -774,7 +782,7 @@ return {
                 name = "Triboulet?",
                 text = {
                     "Gana {X:mult,C:white}X#2#{} Multi por",
-                    "cada figura{C:attention}anotada{}",
+                    "cada figura {C:attention}anotada{}",
                     "{C:inactive}(Actualmente {X:mult,C:white}X#1#{C:inactive} Multi)"
                 }
             },
@@ -850,7 +858,7 @@ return {
                 name = "HojaDorada",
                 text = {
                     "Cada Carta ¿Dorada? jugada",
-                    "da {C:white,X:mult}X#1# Multi"
+                    "da {C:white,X:mult}X#1#{} Multi"
                 }
             },
             j_fg_goldenleafalt = {
