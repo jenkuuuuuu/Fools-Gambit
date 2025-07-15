@@ -10,7 +10,6 @@ FG.ALTS.edition_equivalents = {
 -- POLISHED
 --
 
-
 SMODS.Shader {
     key = 'polished',
     path = 'polished.fs'
@@ -31,8 +30,8 @@ SMODS.Edition({
     unlocked = true,
     config = { extra = { xchips = 1.5 } },
     in_shop = true,
-    weight = 8,
-    extra_cost = 6,
+    weight = 3,
+    extra_cost = 4,
     apply_to_float = false,
 	calculate = function(self, card, context)
 		if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
@@ -44,6 +43,160 @@ SMODS.Edition({
     end
 })
 
+--
+-- FOIL
+--
+
+SMODS.Shader {
+    key = 'foil',
+    path = 'foil.fs'
+}
+
+SMODS.Edition({
+    key = "foil",
+    loc_txt = {
+        name = "Foil",
+        label = "Foil",
+        text = {
+            "{C:chips}+#1#{} Chips",
+            "{C:green}#2# in #3#{} chance to retrigger"
+        }
+    },
+    shader = "foil",
+    discovered = true,
+    unlocked = true,
+    config = { extra = { chips = 30, odds = 2 } },
+    in_shop = true,
+    weight = 8,
+    extra_cost = 2,
+    apply_to_float = false,
+    loc_vars = function(self)
+        return {
+            vars = {
+                self.config.extra.chips,
+                (G.GAME.probabilities.normal or 1),
+                self.config.extra.odds
+            }
+        }
+    end,
+    calculate = function(self, card, context)
+        local chips_total = 0
+        if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
+            repeat
+                chips_total = chips_total + self.config.extra.chips
+                if pseudorandom('holographic') < (G.GAME.probabilities.normal or 1) / self.config.extra.odds then
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..tostring(self.config.extra.chips).." "..localize("k_chip")})
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = localize("k_again_ex")})
+                else
+                    break
+                end
+            until false
+            return { chips_mod = chips_total }
+        end
+    end
+})
+
+--
+-- HOLOGRAPHIC
+--
+
+SMODS.Shader {
+    key = 'holo',
+    path = 'holo.fs'
+}
+
+SMODS.Edition({
+    key = "holographic",
+    loc_txt = {
+        name = "Holographic",
+        label = "Holographic",
+        text = {
+            "{C:mult}+#1#{} Mult",
+            "{C:green}#2# in #3#{} chance to retrigger"
+        }
+    },
+    shader = "holo",
+    discovered = true,
+    unlocked = true,
+    config = { extra = { mult = 7, odds = 2 } },
+    in_shop = true,
+    weight = 8,
+    extra_cost = 3,
+    apply_to_float = false,
+    loc_vars = function(self)
+        return {
+            vars = {
+                self.config.extra.mult,
+                (G.GAME.probabilities.normal or 1),
+                self.config.extra.odds
+            }
+        }
+    end,
+    calculate = function(self, card, context)
+        local mult_total = 0
+        if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
+            repeat
+                mult_total = mult_total + self.config.extra.mult
+                if pseudorandom('holographic') < (G.GAME.probabilities.normal or 1) / self.config.extra.odds then
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..tostring(self.config.extra.mult).." "..localize("k_mult")})
+                    card_eval_status_text(card, 'extra', nil, nil, nil, { message = localize("k_again_ex")})
+                else
+                    break
+                end
+            until false
+            return { mult_mod = mult_total }
+        end
+    end
+})
+
+--
+-- POLYCHROME
+--[[
+
+SMODS.Shader {
+    key = 'polychrome',
+    path = 'polychrome.fs'
+}
+
+SMODS.Edition({
+    key = "polychrome",
+    loc_txt = {
+        name = "Polychrome",
+        label = "Polychrome",
+        text = {
+            "Retriggers card scored",
+            "{C:attention}#2#/#3#{} chance to {C:mult}x#1#{} Mult"
+        }
+    },
+    shader = "polychrome",
+    discovered = true,
+    unlocked = true,
+    config = { extra = { xmult = 1.5, odds = 3 } },
+    in_shop = true,
+    weight = 8,
+    extra_cost = 5,
+    apply_to_float = false,
+	loc_vars = function(self)
+        return { vars = { self.config.extra.xmult, (G.GAME.probabilities.normal or 1), self.config.extra.odds } }
+    end,
+	calculate = function(self, card, context)
+        if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
+            if pseudorandom('polychrome') < G.GAME.probabilities.normal / self.config.extra.odds then
+                self.config.extra.retriggered = true
+                return { repetitions = 1, message = localize('k_again_ex'), Xmult_mod = self.config.extra.xmult }
+            else
+                return { repetitions = 1, message = localize('k_again_ex')}
+            end
+	    end
+      
+	end
+})
+
+]]
+
+--
+-- NEGATIVE
+--
 
 SMODS.Shader {
     key = 'negative',
@@ -67,7 +220,7 @@ SMODS.Edition({
     config = { extra = { slots = 1 } },
     in_shop = true,
     weight = 8,
-    extra_cost = 6,
+    extra_cost = 5,
     apply_to_float = false,
 	loc_vars = function(self)
         return { vars = { self.config.extra.slots } }
@@ -92,121 +245,3 @@ SMODS.Edition({
 	  end
 })
 end
-
-
---[[
-SMODS.Shader {
-    key = 'holo',
-    path = 'holo.fs'
-}
-
-SMODS.Edition({
-    key = "holographic",
-    loc_txt = {
-        name = "Holographic",
-        label = "Holographic",
-        text = {
-            "{C:mult}+#1#{} Mult",
-            "{C:green}#2# in #3#{} chance to retrigger"
-        }
-    },
-    shader = "holo",
-    discovered = true,
-    unlocked = true,
-    config = { extra = { mult = 7, odds = 2 } },
-    in_shop = true,
-    weight = 8,
-    extra_cost = 6,
-    apply_to_float = false,
-	loc_vars = function(self)
-        return { vars = { self.config.extra.mult, (G.GAME.probabilities.normal or 1), self.config.extra.odds } }
-    end,
-	calculate = function(self, card, context)
-        if context.pre_joker or (context.repetition and context.cardarea == G.play) then
-            if pseudorandom('holographic') < G.GAME.probabilities.normal / self.config.extra.odds then
-            return { message = localize('k_again_ex'), mult_mod = self.config.extra.mult, repetitions=1}
-            end
-            return { mult_mod = self.config.extra.mult}
-	  end
-	end
-})
-
-SMODS.Shader {
-    key = 'foil',
-    path = 'foil.fs'
-}
-
-SMODS.Edition({
-    key = "foil",
-    loc_txt = {
-        name = "Foil",
-        label = "Foil",
-        text = {
-            "{C:mult}+#1#{} Chips",
-            "{C:green}#2# in #3#{} chance to retrigger"
-        }
-    },
-    shader = "foil",
-    discovered = true,
-    unlocked = true,
-    config = { extra = { chips = 30, odds = 2 } },
-    in_shop = true,
-    weight = 8,
-    extra_cost = 6,
-    apply_to_float = false,
-	loc_vars = function(self)
-        return { vars = { self.config.extra.chips, (G.GAME.probabilities.normal or 1), self.config.extra.odds } }
-    end,
-	calculate = function(self, card, context)
-        if context.pre_joker or (context.repetition and context.cardarea == G.play) then
-            if pseudorandom('foil') < G.GAME.probabilities.normal / self.config.extra.odds then
-            return { message = localize('k_again_ex'), mult_mod = self.config.extra.chips, repetitions=1}
-            end
-            return { chips = self.config.extra.chips}
-	  end
-	end
-})
-
-]]
-
---[[ broken
-SMODS.Shader {
-    key = 'polychrome',
-    path = 'polychrome.fs'
-}
-
-SMODS.Edition({
-    key = "polychrome",
-    loc_txt = {
-        name = "Polychrome",
-        label = "Polychrome",
-        text = {
-            "Retriggers card scored",
-            "{C:attention}#2#/#3#{} chance to {C:mult}x#1#{} Mult"
-        }
-    },
-    shader = "polychrome",
-    discovered = true,
-    unlocked = true,
-    config = { extra = { xmult = 1.5, odds = 3 } },
-    in_shop = true,
-    weight = 8,
-    extra_cost = 6,
-    apply_to_float = false,
-	loc_vars = function(self)
-        return { vars = { self.config.extra.xmult, (G.GAME.probabilities.normal or 1), self.config.extra.odds } }
-    end,
-	calculate = function(self, card, context)
-        if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
-            if pseudorandom('polychrome') < G.GAME.probabilities.normal / self.config.extra.odds then
-                self.config.extra.retriggered = true
-                return { repetitions = 1, message = localize('k_again_ex'), Xmult_mod = self.config.extra.xmult }
-            else
-                return { repetitions = 1, message = localize('k_again_ex')}
-            end
-	    end
-      
-	end
-})
-
-]]
