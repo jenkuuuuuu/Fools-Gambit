@@ -151,6 +151,10 @@ end
 				if replacee then
 					G.shop_jokers:remove_card(replacee)
 					replacee:remove()
+				else
+					--G.E_MANAGER:add_event(Event({func = function()
+					--change_shop_size(1)
+					--return true end }))
 				end
 				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
 				create_shop_card_ui(replacement, 'joker', G.shop_jokers)
@@ -161,11 +165,11 @@ end
 
 	local shopref = create_card_for_shop
 	local cop_reroll = false
-
 	function create_card_for_shop(area)
 		local card = shopref(area)
 
 		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips and cop_reroll == false then
+			
 			FG.FUNCS.replace_shop_joker("j_fg_change_of_pace", #G.shop_jokers.cards+1)
 			cop_reroll = true
 			end
@@ -290,6 +294,61 @@ function Game:start_run(args)
 			end
 		end
 	end
+end
+
+---Allows to easily create multi-line texts.
+---@param args {text:table|string,colour:string,scale:number,padding:number,tooltip:{}|nil,align:"tl"|"tm"|"tr"|"cl"|"cm"|"cr"|"bl"|"bm"|"br",mode:"R"|"C"} The settings for the text.
+---@return table node The entire node structure. Do note it has a wrapper node.
+function FG.FUNCS.UIBox_text (args)
+	if not args or not type(args) == "table" then return 
+	{ n = G.UIT.R, nodes = {{n = G.UIT.T, config = {text = "ERROR", scale = 0.3, colour = G.C.RED}}}} end
+	
+	local text = args.text or {"No text"}
+	local colour = args.colour or "white"
+	local scale = args.scale or 0.3
+	local padding = args.padding or 0.05
+	local hover = args.tooltip or nil
+	local align = args.align or "cm"
+	local mode = args.mode or "R"
+	
+	local ret = {n = G.UIT[string.upper(mode)], config = {padding = padding}, nodes = {}}
+	
+	if type(text) ~= "table" then return ret end
+	for _,text in ipairs(text) do
+		local tooltip = nil
+
+		if hover then
+			tooltip = {text = {}}
+			for _,h_text in ipairs(hover) do
+				if h_text == "" then h_text = " " end
+				table.insert(tooltip.text,h_text)
+			end
+		end
+
+		local cur_txt = {n = G.UIT[string.upper(mode)], config = {align = align}, nodes = {
+			{n = G.UIT.T, config = { text = text, colour = G.C[string.upper(colour)], scale = scale, tooltip = tooltip}}
+		}}
+		
+		table.insert(ret.nodes,cur_txt)
+	end
+
+	return ret
+end
+
+
+--- Allows to search for any raw localization file, without formatting
+---@param args table
+---@return table|string
+function FG.FUNCS.localize(args)
+	local ret = G.localization
+	local function recursive_find(dir,index)
+		if index <= #args and dir ~= nil then
+			ret = dir[args[index]]
+			recursive_find(ret,index+1)
+		end
+	end
+	recursive_find(ret,1)
+	return ret
 end
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT

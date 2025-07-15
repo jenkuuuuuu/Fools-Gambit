@@ -1052,6 +1052,88 @@ return {
         },
         Voucher={},
     },
+    FG = {
+        config = {
+            disclaimer = {
+                "Este mod esta actualmente en desarollo",
+                "Todo el contenido está sugeto a cambiar",
+            },
+            extra_jokers = "Comodines adicionales",
+            extra_jokers_tooltip = {
+                "Hace que los comodines añadidos por Fool's Gambit",
+                "que no tienen versión vanilla original no aparezcan",
+                " ",
+                "No se recomienda cambiar esta opción",
+                "en medio de una partida",
+                "{C:dark_edition}Esta opción es experimental{}"
+            },
+            diplicate_jokers = "Comodines duplicados",
+            duplicate_jokers_tooltip = {
+                "Permite que aparezcan las versiones",
+                "alternativas de aquellos comodines",
+                "aunque ya tengas una de sus versiones",
+                "originales y vice-versa",
+                " ",
+                "No se recomienda cambiar esta opción",
+                "en medio de una partida",
+                "{C:dark_edition}Esta opción es experimental{}"
+            },
+            alt_sfx = "SFX alterno",
+            alt_sfx_tooltip = {
+                "Reemplaza los efectos de sonido de",
+                "balatro con unos personalizados",
+                " ",
+                "{C:red}Requiere reinicio{}"
+            },
+            special_edition = "Edición especial",
+            debug_mode = "Activar modo de desarollo",
+            misc = {
+                ["?"] = "(?)",
+                require_restart = "(Requiere reinicio)"
+            }
+        },
+        credits = {
+            names = {
+                goldenleaf = "GoldenLeaf",
+                jogla = "Jogla",
+                deathmodereal = "deathmodereal",
+                jenku = "Jenku",
+                gappie = "Gappie",
+                samuran = "Samuran",
+                hyperx = "Hyperx",
+                localthunk = "LocalThunk",
+                mathisfun_ = "MathIsFun_",
+                rav = "Rav",
+                lavbubl = "Lavbulb",
+            },
+            languages = {
+                ["en-us"] = "Ingés",
+                ["es_ES"] = "Español",
+                ["zh-CN"] = "Chino",
+                ["sn_bos"] = "Sendién"
+            },
+            misc = {
+                page_title = "Créditos",
+                title = "Fool's Gambit",
+                version = "Versión",
+                lead_developer = "Desarollador principal",
+                code = "CÓDIGO",
+                art = "ARTE",
+                music = "MÚSICA",
+                special_thanks = "Gracias a",
+                special_thanks_misc = "Todo el mundo en mundo en el canál de FG",
+                localization = "Localización",
+                links = {
+                    title = "Enlaces útiles",
+                    github = "Repositorio de Github",
+                    discord = "Servidor de Discord",
+                    d_thread = "Canál del mod (discord)",
+                    wiki = "Wiki del mod",
+                    wiki_dev = "Wiki de desarollo",
+                },
+            }
+        },
+    },
     misc = {
         achievement_descriptions={},
         achievement_names={},
