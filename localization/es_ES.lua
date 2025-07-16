@@ -209,7 +209,7 @@ return {
 			j_fg_disc={
                 name= "Disco comodín",
                 text={
-                    "{C:attention}Comodines {C:red}originales",
+                    "Los {C:attention}Comodines {C:red}originales",
                     "dan cada uno {C:chips}+#1#{} Fichas",
 					 "{s:0.8} Disco comodín incluido",
                 },
@@ -217,7 +217,7 @@ return {
 			j_fg_orchestral={
                 name="Comodín orquestral",
                 text={
-                    "{C:attention}Comodines {C:purple}alternativos",
+                    "Los {C:attention}Comodines {C:purple}alternativos",
                     "dan cada uno {C:mult}+#1#{} Multi",
 					"{s:0.8}Comodín orquestral incluido",
                 },
@@ -285,7 +285,7 @@ return {
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
                     "con el palo de {C:diamonds}diamantes{}",
-                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "Se reinicia cuando se derrota la {C:attention}ciega jefe{}",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
@@ -294,7 +294,7 @@ return {
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
                     "con el palo de {C:hearts}corazones{}",
-                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "Se reinicia cuando se derrota la {C:attention}ciega jefe{}",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
@@ -303,7 +303,7 @@ return {
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
                     "con el palo de {C:spades}picas{}",
-                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "Se reinicia cuando se derrota la {C:attention}ciega jefe{}",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
@@ -312,7 +312,7 @@ return {
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
                     "con el palo de {C:clubs}tréboles{}",
-                    "Se reinicia cuando se derrota la{C:attention}ciega jefe{}",
+                    "Se reinicia cuando se derrota la {C:attention}ciega jefe{}",
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
@@ -340,7 +340,7 @@ return {
                     "{C:red}+#1#{} Multi",
                     "Reactiva las cartas jugadas {C:attention}#3#{} vez",
                     "si la mano contiene",
-                    "un {C:attention}#2#",
+                    "una {C:attention}#2#",
                }
             },
             j_fg_crazy = {
@@ -349,7 +349,7 @@ return {
                     "{C:red}+#1#{} Multi",
                     "Reactiva las cartas jugadas {C:attention}#3#{} vez",
                     "si la mano contiene",
-                    "un {C:attention}#2#",
+                    "una {C:attention}#2#",
                }
             },
             j_fg_droll = {
@@ -367,7 +367,7 @@ return {
                     "{C:chips}+#1#{} Fichas",
                     "Reactiva las cartas jugadas {C:attention}#3#{} vez",
                     "si la mano contiene",
-                    "un {C:attention}#2#",
+                    "una {C:attention}#2#",
                }
             },
             j_fg_wily = {
@@ -385,7 +385,7 @@ return {
                     "{C:chips}+#1#{} Fichas",
                     "Reactiva las cartas jugadas {C:attention}#3#{} vez",
                     "si la mano contiene",
-                    "un {C:attention}#2#",
+                    "una {C:attention}#2#",
                }
             },
             j_fg_devious = {
@@ -394,7 +394,7 @@ return {
                     "{C:chips}+#1#{} Fichas",
                     "Reactiva las cartas jugadas {C:attention}#3#{} vez",
                     "si la mano contiene",
-                    "un {C:attention}#2#",
+                    "una {C:attention}#2#",
                }
             },
             j_fg_crafty = {
@@ -440,7 +440,7 @@ return {
                      "Cada {C:attention}#1#{} cartas",
                      "compradas en la {C:attention}tienda{} hacen",
                      "que el siguente sea {C:money}gratis{}",
-                     "{C:inactive}#2#",
+                     "{C:inactive}(#2#)",
                 }
             },
             j_fg_8ball = {
@@ -494,7 +494,7 @@ return {
                 name = "¿Pares?",
                 text = {
                     "Gana {C:mult}+#1#{} Multi por cada",
-                    "carta {C:attention}par anotada{}",
+                    "carta {C:attention}par{} anotada",
                     "{C:inactive}(Actualmente {C:mult}+#2#{C:inactive} Multi)",
                     "{C:inactive}(10, 8, 6, 4, 2){}"
                 }
@@ -503,7 +503,7 @@ return {
                 name = "¿Nones?",
                 text = {
                     "Gana {C:chips}+#1#{} Fichas por cada",
-                    "carta {C:attention}inpar anotada{}",
+                    "carta {C:attention}impar{} anotaad",
                     "{C:inactive}(Actualmente {C:chips}+#2#{C:inactive} Fichas)",
                     "{C:inactive}(A, 9, 7, 5, 3)"
                 }
@@ -545,8 +545,8 @@ return {
             j_fg_egg = {
                 name = '¿Huevo?',
                 text = {
-                    "Tiene un valor de venta",
-                    "de {C:money}$#1#{}",
+                    "Tiene un valor de",
+                    "venta de {C:money}$#1#{}",
                     "Al ser vendido, pierde",
                     "{C:mult}#2#{} mano y {C:mult}#3#{} descarte"
                 },
@@ -632,7 +632,7 @@ return {
                 text = {
                     "Gana {X:mult,C:white}X#1#{} Multi si",
                     "la mano contiene",
-                    "un {C:attention}#2#",
+                    "una {C:attention}#2#",
                     "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
             },
@@ -659,7 +659,7 @@ return {
                 text = {
                     "Gana {X:mult,C:white}X#1#{} Multi si",
                     "la mano contiene",
-                    "un {C:attention}#2#",
+                    "una {C:attention}#2#",
                     "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
             },
@@ -684,7 +684,7 @@ return {
                 name = "¿Walkie-talkie?",
                 text = {
                     "Gana {C:chips}+#3#{} Fichas y {C:mult}+#4#{} Multi por",
-                    "cada {C:attention}10{} or {C:attention}4{C:attention} anotado{}",
+                    "cada {C:attention}10{} or {C:attention}4{} anotado",
                     "{C:inactive}(Actualmente {C:chips}+#1#{C:inactive} Fichas y {C:mult}+#2#{C:inactive} Multi)"
                 }
             },
@@ -747,7 +747,7 @@ return {
                 name = "¿Gema en bruto?",
                 text = {
                     "Si la mano de poker contiene un {C:attention}#1#{}",
-                    "con solo cartas del palo de {C:diamonds}corazones{},",
+                    "con solo cartas del palo de {C:diamonds}diamantes{},",
                     "gana {C:money}$#2#{} al puntuar"
                 },
 			},
@@ -773,7 +773,7 @@ return {
                     "Si la mano de poker contiene un {C:attention}#1#{}",
                     "con solo cartas del palo de {C:spades}picas{},",
                     "gana {C:chips}+#2#{} Fichas",
-                    "{C:inactive}(Actualmente {X:chips,C:white}+#3#{}{C:inactive} Fichas)",
+                    "{C:inactive}(Actualmente {C:chips}+#3#{}{C:inactive} Fichas)",
                 },
 			},
 			j_fg_agate ={
@@ -803,7 +803,7 @@ return {
                 }
             },
             j_fg_drivers_license = {
-                name = "Permiso de conducir?",
+                name = "¿Permiso de conducir?",
                 text = {
                     "{C:white,X:mult}X#1#{} Multi si al menos",
                     "{C:attention}la mitad{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} de tu {C:attention}mazo entero{}",
@@ -862,7 +862,7 @@ return {
             j_fg_perkeo = {
                 name = "¿Perkeo?",
                 text = {
-                    "Crea {C:attention}#1#{} copia {C:inactive}perecedera{} y {C:dark_edition}negative{}",
+                    "Crea {C:attention}#1#{} copia {C:inactive}perecedera{} y {C:dark_edition}negativa{}",
                     "de un {C:attention}comodín{} no {C:dark_edition}negativo",
                     "cuando se derrota a la {C:attention}ciega jefe{}"
                 }
@@ -898,7 +898,7 @@ return {
                 text = {
                     "Aumenta el tamaño de la mano en {C:attention}#1#{}",
                     "cuando se derrota a la {C:attention}ciega jefe{}",
-                    "{C:inactive}(Actualmente {C:attention}+#2#{C:inactive} tamaño de mano"
+                    "{C:inactive}(Actualmente {C:attention}+#2#{C:inactive} tamaño de mano)"
                 }
             },
             j_fg_jenker = {
@@ -907,22 +907,23 @@ return {
                     "Reactiva cada {C:attention}comodín{}",
                     "por cada dos {C:attention}ciegas jefes{} derrotadas.",
                     "emplezando en {C:mult}1{}",
-					"{C:inactive}(Actualmente {C:mult}#1#{}{C:inactive} vez/veces)",
-                    "{C:inactive,s:0.7}\"Probably caused the most crashes.\""
+					"{C:inactive}(Actualmente {C:mult}#1#{}{C:inactive} veces)",
+                    "{C:inactive,s:0.7}\"Probablemente haya causado la mayor cantidad de crasheos.\""
                 }
             },
             j_fg_goldenleaf = {
                 name = "HojaDorada",
                 text = {
-                    "Cada Carta ¿Dorada? jugada",
-                    "da {C:white,X:mult}X#1#{} Multi"
+                    "Las cartas {C:inactive}¿{C:gold}Doradas{C:inactive}?{} dan",
+                    "{X:mult,C:white}X#1#{} Multi al anotar",
+                    "{C:inactive}\"Lo pillas, porque soy \"Hoja\"Dorada\""
                 }
             },
             j_fg_goldenleafalt = {
                 name = "OtoñoPlateado",
                 text = {
-                    "Aumenta la cantidad de manos en {C:attention}#1#{} cuando",
-                    "se derrota a {C:attention}ciega jefe{}",
+                    "Aumenta la cantidad de manos en {C:attention}#1#{}",
+                    "cuando se derrota a {C:attention}ciega jefe{}",
                     "{C:inactive}(Actualmente {C:attention}+#2#{C:inactive} manos)"
                 }
             }
