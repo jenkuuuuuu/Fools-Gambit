@@ -371,3 +371,4 @@ end
 G.FUNCS.FG_link_website = function(args)
 	love.system.openURL(args.config.ref_table)
 end
+--FG.fuck = 1

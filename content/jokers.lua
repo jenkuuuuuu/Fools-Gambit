@@ -77,6 +77,7 @@ FG.ALTS.joker_equivalents = {
 	j_baron = "j_fg_baron",
 	j_cloud_9 = "j_fg_cloud_9",
 	j_rocket = "j_fg_rocket",
+	j_stone = "j_fg_stone",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_red_card = "j_fg_red_card",
@@ -2239,6 +2240,24 @@ SMODS.Joker{
 		return card.ability.extra.payout
 	end
 }
+SMODS.Joker{
+    key = "stone",
+    atlas = "jokers_alt",
+    pos = { x = 9, y = 0},
+    rarity = 1,
+    cost = 2,
+	yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+	calculate = function (self, card, context)
+		if context.individual and context.cardarea == G.play then
+			if FG.FUNCS.get_card_info(context.other_card).key == "m_fg_stone" then
+				context.other_card.ability.extra.chips = 2 * context.other_card.ability.extra.chips
+				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Doubled!" })
+			end
+		end
+	end,
+    blueprint_compat = false,
+}
 --[[-- Splash | does not work help
 SMODS.Joker{
 	key = "splash",
@@ -3435,37 +3454,6 @@ SMODS.Joker{
 			end
 		end
 	}
-	-- Jenku
-	-- shes fucking op i will probably nerf her but its 4am
-	SMODS.Joker {
-		key = 'jenker',
-		config = { extra = { repetitions = 1, increase = false } },
-		loc_vars = function(self, info_queue, card)
-			return {
-				vars = {
-					card.ability.extra.repetitions
-				}
-			}
-		end,
-		rarity = "fg_collective",
-		atlas = 'collective',
-		pos = { x = 1, y = 0 },
-		soul_pos = { x = 1, y = 1 },
-		cost = 5,
-		calculate = function(self, card, context)
-			if card.ability.extra.repetitions == 0 then
-				card.ability.extra.repetitions = 1
-			end
-			if context.end_of_round and not context.repetition and not context.individual and G.GAME.blind.boss then
-				card.ability.extra.repetitions = card.ability.extra.repetitions + 1
-			end
-			if context.retrigger_joker_check and not context.retrigger_joker and card ~= self then
-				return { 
-					repetitions = card.ability.extra.repetitions
-				 } 
-			   end
-		end
-	}
 SMODS.Joker {
 	key = 'goldenleaf',
 	config = { extra = { Xmult = 3 } },
@@ -3513,6 +3501,37 @@ SMODS.Joker {
 				ease_hands_played(card.ability.extra.increase)
 				card_eval_status_text(card, 'extra', nil, nil, nil, { message = "+"..card.ability.extra.extra_size.." hand(s)!" })
 			end
+		end
+	}
+	-- Jenku
+	-- shes fucking op i will probably nerf her but its 4am
+	SMODS.Joker {
+		key = 'jenker',
+		config = { extra = { repetitions = 1, increase = false } },
+		loc_vars = function(self, info_queue, card)
+			return {
+				vars = {
+					card.ability.extra.repetitions
+				}
+			}
+		end,
+		rarity = "fg_collective",
+		atlas = 'collective',
+		pos = { x = 1, y = 0 },
+		soul_pos = { x = 1, y = 1 },
+		cost = 5,
+		calculate = function(self, card, context)
+			if card.ability.extra.repetitions == 0 then
+				card.ability.extra.repetitions = 1
+			end
+			if context.end_of_round and not context.repetition and not context.individual and G.GAME.blind.boss then
+				card.ability.extra.repetitions = card.ability.extra.repetitions + 1
+			end
+			if context.retrigger_joker_check and not context.retrigger_joker and card ~= self then
+				return { 
+					repetitions = card.ability.extra.repetitions
+				 } 
+			   end
 		end
 	}
 	-- Jenku alt
