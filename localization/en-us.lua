@@ -800,8 +800,8 @@ return {
             j_fg_yorick = {
                 name = "Yorick?",
                 text = {
-                    "Gains {X:mult,C:white}X#2#{} Mult",
-                    "every {C:attention}#3# {C:inactive}(#4#){} hands",
+                    "Gains {X:mult,C:white}X#2#{} Mult every",
+                    "{C:attention}#3# {C:inactive}(#4#){} hands played",
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
                 }
             },
@@ -1118,6 +1118,7 @@ return {
                 mathisfun_ = "MathIsFun_",
                 rav = "Rav",
                 lavbulb = "Lavbulb",
+                poker_the_poker = "Poker The Poker",
             },
             languages = {
                 ["en-us"] = "English",

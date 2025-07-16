@@ -771,7 +771,7 @@ return {
             },
             -- Legendaries
             j_fg_caino = {
-                name = "Canio?",
+                name = "¿Canio?",
                 text = {
                     "Gana {X:mult,C:white}X#2#{} Multi por",
                     "cada figura {C:attention}descartada{}",
@@ -779,7 +779,7 @@ return {
                 }
             },
             j_fg_triboulet = {
-                name = "Triboulet?",
+                name = "¿Triboulet?",
                 text = {
                     "Gana {X:mult,C:white}X#2#{} Multi por",
                     "cada figura {C:attention}anotada{}",
@@ -787,7 +787,7 @@ return {
                 }
             },
             j_fg_yorick = {
-                name = "Yorick?",
+                name = "¿Yorick?",
                 text = {
                     "Gana {X:mult,C:white}X#2#{} Multi",
                     "cada {C:attention}#3# {C:inactive}(#4#){} manos",
@@ -795,7 +795,7 @@ return {
                 }
             },
             j_fg_chicot = {
-                name = "Chicot?",
+                name = "¿Chicot?",
                 text = {
                     "{C:red}+#2#{} descarte cuando",
                     "se derrota a la {C:attention}ciega jefe{}",
@@ -803,7 +803,7 @@ return {
                 }
             },
             j_fg_perkeo = {
-                name = "Perkeo?",
+                name = "¿Perkeo?",
                 text = {
                     "Crea {C:attention}#1#{} copia {C:inactive}perecedera{} y {C:dark_edition}negative{}",
                     "de un {C:attention}comodín{} no {C:dark_edition}negativo",
@@ -1105,6 +1105,7 @@ return {
                 mathisfun_ = "MathIsFun_",
                 rav = "Rav",
                 lavbubl = "Lavbulb",
+                poker_the_poker = "Poker The Poker",
             },
             languages = {
                 ["en-us"] = "Ingés",

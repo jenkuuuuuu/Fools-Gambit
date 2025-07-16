@@ -113,9 +113,18 @@ SMODS.current_mod.extra_tabs = function()
 					r = 0.1, minw = 10, minh = 6, align = "tm", padding = 0.2, colour = G.C.BLACK
 				}, nodes = {
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {
-						{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","title"}, colour = G.C.DARK_EDITION, scale = .7}}}},
-						{n = G.UIT.R, config = {align = "tm", minh = .2}},
-						{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","version"}.." "..tostring(FG.config.version), colour = G.C.GREY, scale = .3}}}},
+						{n = G.UIT.C, config = {align = "cm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","title"}, colour = G.C.DARK_EDITION, scale = .7}}}},
+						{n = G.UIT.C, config = {minw = .2}},
+						{n = G.UIT.C, nodes = {
+							FG.FUNCS.UIBox_text{
+								text = {
+									FG.FUNCS.localize{"FG","credits","misc","version"},
+									tostring(FG.config.version)
+								},
+								scale = 0.3,
+								colour = "GREY"
+							}
+						}},
 					}},
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {
 						{n = G.UIT.C, config = {align = "tm", padding = 0}, nodes = {
@@ -130,6 +139,7 @@ SMODS.current_mod.extra_tabs = function()
 											FG.FUNCS.localize{"FG","credits","names","jogla"},
 											FG.FUNCS.localize{"FG","credits","names","jenku"},
 											FG.FUNCS.localize{"FG","credits","names","deathmodereal"},
+											FG.FUNCS.localize{"FG","credits","names","poker_the_poker"},
 										},
 										scale = 0.3,
 										align = "tm",
@@ -153,6 +163,7 @@ SMODS.current_mod.extra_tabs = function()
 									FG.FUNCS.UIBox_text{
 										text = {
 											FG.FUNCS.localize{"FG","credits","names","goldenleaf"},
+											FG.FUNCS.localize{"FG","credits","names","poker_the_poker"},
 										},
 										scale = 0.3,
 										align = "tm",

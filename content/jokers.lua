@@ -3170,8 +3170,8 @@ SMODS.Joker{
         fg_alternate = {}, -- Kept between alternations
         extra = {
 			xmult = 1,
-			xmult_i = 1.5,
-			req_hands = 12,
+			xmult_i = 1,
+			req_hands = 5,
 			cur_hands = 0
 		}
     },
@@ -3180,7 +3180,7 @@ SMODS.Joker{
             vars = {
 				card.ability.extra.xmult,
 				card.ability.extra.xmult_i,
-				card.ability.extra.req_hands or 12,
+				card.ability.extra.req_hands or 5,
 				card.ability.extra.cur_hands or 0
 			}
         }
