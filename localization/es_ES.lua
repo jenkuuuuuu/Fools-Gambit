@@ -1104,7 +1104,8 @@ return {
                 localthunk = "LocalThunk",
                 mathisfun_ = "MathIsFun_",
                 rav = "Rav",
-                lavbubl = "Lavbulb",
+                lavbubl = "Lavbubl",
+                poker_the_poker = "Poker The Poker",
             },
             languages = {
                 ["en-us"] = "Ingés",
