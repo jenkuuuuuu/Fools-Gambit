@@ -771,7 +771,7 @@ return {
             },
             -- Legendaries
             j_fg_caino = {
-                name = "Canio?",
+                name = "¿Canio?",
                 text = {
                     "Gana {X:mult,C:white}X#2#{} Multi por",
                     "cada figura {C:attention}descartada{}",
@@ -779,7 +779,7 @@ return {
                 }
             },
             j_fg_triboulet = {
-                name = "Triboulet?",
+                name = "¿Triboulet?",
                 text = {
                     "Gana {X:mult,C:white}X#2#{} Multi por",
                     "cada figura {C:attention}anotada{}",
@@ -787,7 +787,7 @@ return {
                 }
             },
             j_fg_yorick = {
-                name = "Yorick?",
+                name = "¿Yorick?",
                 text = {
                     "Gana {X:mult,C:white}X#2#{} Multi",
                     "cada {C:attention}#3# {C:inactive}(#4#){} manos",
@@ -795,7 +795,7 @@ return {
                 }
             },
             j_fg_chicot = {
-                name = "Chicot?",
+                name = "¿Chicot?",
                 text = {
                     "{C:red}+#2#{} descarte cuando",
                     "se derrota a la {C:attention}ciega jefe{}",
@@ -803,7 +803,7 @@ return {
                 }
             },
             j_fg_perkeo = {
-                name = "Perkeo?",
+                name = "¿Perkeo?",
                 text = {
                     "Crea {C:attention}#1#{} copia {C:inactive}perecedera{} y {C:dark_edition}negative{}",
                     "de un {C:attention}comodín{} no {C:dark_edition}negativo",
@@ -877,10 +877,35 @@ return {
                 text = {
                     "No puede ser alternada"
                 }
-            }
+            },
+            p_fg_aberration1 = {
+                name = 'Paquete melódico',
+                text = { 
+                    "Elige {C:attention}#1#{} de hasta ",
+                    "{C:attention}#2#{} cartas de {C:purple}aberration{} para",
+                    "usar de inmediato."
+                }
+            },
+            p_fg_aberration2 = {
+                name = 'Paquete de aberración',
+                text = { 
+                    "Elige {C:attention}#1#{} de hasta ",
+                    "{C:attention}#2#{} cartas de {C:purple}aberration{} para",
+                    "usar de inmediato."
+                }
+            },
         },
         Planet={},
-        Spectral={},
+        Spectral={
+            c_fg_soul = {
+                name = "¿El alma?",
+                text = {
+                    "Crea un",
+                    "comodín {C:gold,E:1}Colectivo{}",
+                    "{C:inactive}(Debe haber espacio){}"
+                }
+            }
+        },
         Stake={},
         Tag={},
         Tarot={
@@ -1151,12 +1176,15 @@ return {
 			k_replenished="Replenished!",
 			k_card_added="+1 carta",
             k_fg_active = "¡Activo!",
-            k_fg_none = "Ninguno"
+            k_fg_none = "Ninguno",
+            k_fg_collective = "Colectivo",
+            k_aberration = "Aberración",
+            b_aberration_cards = "Cartas de Aberración",
         },
         high_scores={},
         labels={
-            fg_collective = "Collective",
-            fg_aberration = "Aberration"
+            fg_collective = "Colectivo",
+            fg_aberration = "Aberración"
         },
         poker_hand_descriptions={},
         poker_hands={},

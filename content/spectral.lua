@@ -13,13 +13,6 @@ SMODS.Consumable{
     atlas = "Consumeables",
     pos = {x = 2, y = 2},
     soul_pos = {x = 6, y = 5},
-    loc_txt = {
-        name = "The Soul?",
-        text = {
-            "Creates a",
-            "{C:gold,E:1}Collective{} joker"
-        }
-    },
     can_use = function (self, card)
         if G.jokers and #G.jokers.cards < G.jokers.config.card_limit then
             return true

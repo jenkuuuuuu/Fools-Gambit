@@ -11,13 +11,6 @@ FG.boosters.aberration1 = SMODS.Booster {
     key = "aberration1",
     kind = "aberration",
     atlas = "pack",
-    loc_txt = { 
-        name = 'Melody Pack',
-        group_name = 'aberration',
-        text = { "Choose {C:attention}#1#{} of up to ",
-        " {C:attention}#2#{} {C:purple}aberration{} cards to",
-        "be used instantly." }
-        },
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
     draw_hand = true,
@@ -37,13 +30,6 @@ FG.boosters.aberration2 = SMODS.Booster {
     key = "aberration2",
     kind = "aberration",
     atlas = "pack",
-    loc_txt = { 
-            name = 'aberration Pack',
-            group_name = 'aberration',
-            text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}aberration{} cards to",
-            "be used instantly." }
-            },
     pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1 },
     draw_hand = true,

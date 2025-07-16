@@ -194,12 +194,13 @@ FG.FUNCS.duplicate_playing_card = function (card)
 	return _card
 end
 
---- Wrapper function to not use card_eval_status_text (scroll down  [vvv])
---- @param args.card table|card The card instance.
---- @param args.message string The message. Can be literal or a key for translation.
---- @param args.cat? string Defaults to `FG`.
---- @param args.mode string `literal` Display the raw text in `args.message`. `localize` Use `args.message` as a localization entry
---- @param colour string Refer to `G.C.<colours>` for all available colours.
+--- Wrapper function to not use card_eval_status_text (scroll down  [vvv])<br>
+--- @param args {card:table,type?:string|"extra",category?:string|"FG",message?:string|"ERROR",mode?:"localize"|"literal",colour?:string,color?:string}
+--- `card` table|card The card instance.<br>
+--- `message` string The message. Can be literal or a key for translation.<br>
+--- `category?` string Defaults to `FG`.<br>
+--- `mode` string `literal` Display the raw text in `args.message`. `localize` Use `args.message` as a localization entry<br>
+--- `colour|color` string Refer to `G.C.<colours>` for all available colours.<br>
 function FG.FUNCS.card_eval_status_text (args)
 	if not type(args) == "table" then return end
 	local args = args or {}
@@ -298,6 +299,14 @@ end
 
 ---Allows to easily create multi-line texts.
 ---@param args {text:table|string,colour:string,scale:number,padding:number,tooltip:{}|nil,align:"tl"|"tm"|"tr"|"cl"|"cm"|"cr"|"bl"|"bm"|"br",mode:"R"|"C"} The settings for the text.
+---`text = {"No text"}` is a table (array), each string represents an entire line.
+---`colour = "white` is the colour of the text.<br>
+---`scale = 0.3` is the size of the text.<br>
+---`padding = 0.05` is the distance between lines.<br>
+---`tooltip` is a tooltip that will appear when hovering over the text.<br>
+---`align = "cm"` sets the alignment of the text. `l`,`m`,`r` for horizontal, `t`,`m`,`b` for vertical alignment.<br>
+---`mode = "R"` sets the container alignment for rows or colums.<br>
+---
 ---@return table node The entire node structure. Do note it has a wrapper node.
 function FG.FUNCS.UIBox_text (args)
 	if not args or not type(args) == "table" then return 
@@ -325,7 +334,7 @@ function FG.FUNCS.UIBox_text (args)
 			end
 		end
 
-		local cur_txt = {n = G.UIT[string.upper(mode)], config = {align = align}, nodes = {
+		local cur_txt = {n = G.UIT.R, config = {align = align}, nodes = {
 			{n = G.UIT.T, config = { text = text, colour = G.C[string.upper(colour)], scale = scale, tooltip = tooltip}}
 		}}
 		

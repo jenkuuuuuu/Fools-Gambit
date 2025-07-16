@@ -807,8 +807,8 @@ return {
             j_fg_yorick = {
                 name = "Yorick?",
                 text = {
-                    "Gains {X:mult,C:white}X#2#{} Mult",
-                    "every {C:attention}#3# {C:inactive}(#4#){} hands",
+                    "Gains {X:mult,C:white}X#2#{} Mult every",
+                    "{C:attention}#3# {C:inactive}(#4#){} hands played",
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
                 }
             },
@@ -897,6 +897,22 @@ return {
                 label = "Unchangeable",
                 text = {
                     "Can't be alternated"
+                }
+            },
+            fg_aberration1 = {
+                name = 'Melody Pack',
+                text = { 
+                    "Choose {C:attention}#1#{} of up to ",
+                    "{C:attention}#2#{} {C:purple}aberration{} cards to",
+                    "be used instantly."
+                }
+            },
+            fg_aberration2 = {
+                name = 'aberration Pack',
+                text = {
+                    "Choose {C:attention}#1#{} of up to ",
+                    "{C:attention}#2#{} {C:purple}aberration{} cards to",
+                    "be used instantly."
                 }
             }
         },
@@ -1182,6 +1198,9 @@ return {
             k_unchangeable_warning = "This card can't be alternated",
             k_fg_active = "Active!",
             k_fg_none = "None",
+            k_fg_collective = "Collective",
+            k_aberration = "Aberration",
+            b_aberration_cards = "Aberration Cards",
         },
         high_scores={},
         labels={
