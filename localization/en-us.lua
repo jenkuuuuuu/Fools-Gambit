@@ -621,6 +621,14 @@ return {
                     "when {C:attention}skipping blind{}"
                 }
             },
+            j_fg_erosion = {
+                name = "Erosion?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if {C:attention}full deck{}",
+                    "consists of less",
+                    "than {C:attention}#2#{} cards"
+                }
+            },
             j_fg_duo = {
                 name = 'The Duo?',
                 text = {
@@ -663,6 +671,15 @@ return {
                     "{C:mult}+#1#{} Mult",
                     "{C:mult}-#2#{} per",
                     "hand played"
+                }
+            },
+            j_fg_ramen = {
+                name = "Ramen?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult",
+                    "Loses {C:white,X:mult}X#2#{} Mult for",
+                    "for card {C:attention}played{}",
+                    "{C:inactive}(Include non-scoring){}"
                 }
             },
             j_fg_trouses = {},

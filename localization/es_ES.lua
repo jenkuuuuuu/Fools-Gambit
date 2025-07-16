@@ -618,6 +618,14 @@ return {
                     "cuando {C:attention}se salta una ciega{}"
                 }
             },
+            j_fg_erosion = {
+                name = "¿Erosión?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si el {C:attention}mazo",
+                    "{C:attention}completo{} tiene menos",
+                    "de {C:attention}#2#{} cartas"
+                }
+            },
             j_fg_duo = {
                 name = '¿El dúo?',
                 text = {
@@ -653,6 +661,23 @@ return {
                     "un {C:attention}#2#",
                     "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
+            },
+            j_fg_popcorn = {
+                name = "¿Palomitas?",
+                text = {
+                    "{C:mult}+#1#{} Multi",
+                    "{C:mult}-#2#{} por cada",
+                    "mano jugada"
+                }
+            },
+            j_fg_ramen = {
+                name = "Ramen?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi",
+                    "Pierde {C:white,X:mult}X#2#{} Multi por",
+                    "cada carta {C:attention}jugada{}",
+                    "{C:inactive}(Aunque no anoten){}"
+                }
             },
             j_fg_trouses = {},
             j_fg_ancient = {
@@ -699,6 +724,13 @@ return {
                     "Si la mano de poker contiene un {C:attention}#1#{}",
                     "con solo cartas del palo de {C:diamonds}corazones{},",
                     "gana {C:money}$#2#{} al puntuar"
+                },
+			},
+			j_fg_stone={
+                name="¿Comodín de Piedra?",
+                text={
+                    "{C:attention}Dobla{} el aumento de {C:chips}Fichas{}",
+                    "de las {C:attention}Cartas de ¿Piedra?{}",
                 },
 			},
 			j_fg_bloodstone ={

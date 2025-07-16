@@ -77,11 +77,13 @@ FG.ALTS.joker_equivalents = {
 	j_baron = "j_fg_baron",
 	j_cloud_9 = "j_fg_cloud_9",
 	j_rocket = "j_fg_rocket",
+	j_erosion = "j_fg_erision",
 	j_stone = "j_fg_stone",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_red_card = "j_fg_red_card",
 	j_popcorn = "j_fg_popcorn",
+	j_ramen = "j_fg_ramen",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
@@ -2240,6 +2242,35 @@ SMODS.Joker{
 		return card.ability.extra.payout
 	end
 }
+-- Erosion
+SMODS.Joker{
+    key = "erosion",
+    atlas = "jokers_alt",
+    pos = { x = 5, y = 13},
+    rarity = 2,
+    cost = 5,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 4,
+			max_cards = 10
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.max_cards
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.joker_main and G.playing_cards and #G.playing_cards < card.ability.extra.max_cards then return {xmult = card.ability.extra.xmult} end
+    end
+}
 SMODS.Joker{
     key = "stone",
     atlas = "jokers_alt",
@@ -2639,6 +2670,69 @@ SMODS.Joker{
 		if context.joker_main then
 			return {mult = card.ability.extra.mult}
 		end
+    end
+}
+-- Ramen
+SMODS.Joker{
+    key = "ramen",
+    atlas = "jokers_alt",
+    pos = { x = 2, y = 15},
+    rarity = 1,
+    cost = 2,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 3,
+			xmult_d = 0.1,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_d
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.before and not context.blueprint then
+			local sent_eaten = false
+			for i=1, #G.play.cards do
+				if card.ability.extra.xmult > 1 then 
+					G.E_MANAGER:add_event(Event({
+						func = function ()
+							G.play.cards[i]:juice_up()
+							return true
+						end
+					}))
+					FG.FUNCS.card_eval_status_text{
+						card = card,
+						message = "-X0.1",
+						mode = "literal",
+						colour = "mult"
+					}
+					card.ability.extra.xmult = card.ability.extra.xmult - card.ability.extra.xmult_d
+				elseif card.ability.extra.xmult <= 1 and not sent_eaten then
+					FG.FUNCS.card_eval_status_text{
+						card = card,
+						message = "Eaten!",
+						mode = "literal",
+						colour = "mult"
+					}
+					G.E_MANAGER:add_event(Event({
+						func = function ()
+							card:start_dissolve()
+							return true
+						end
+					}))
+					sent_eaten = true
+				end
+			end
+		end
+		if context.joker_main and card.ability.extra.xmult > 1 then return {xmult = card.ability.extra.xmult} end
     end
 }
 -- Hanging chad
