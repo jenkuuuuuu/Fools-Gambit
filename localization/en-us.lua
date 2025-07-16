@@ -682,6 +682,15 @@ return {
                     "{C:inactive}(Include non-scoring){}"
                 }
             },
+            j_fg_walkie_talkie = {
+                name = "Walkie Talkie?",
+                text = {
+                    "Retriggers {C:attention}#5#{} time(s) each played {C:attention}10{} and {C:attention}4{}",
+                    "Gains {C:chips}+#2#{} Chips and {C:mult}+#3#{} Mult for",
+                    "each {C:attention}scored {C:attention}10{} or {C:attention}4{}",
+                    "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips and {C:mult}+#2#{C:inactive} Mult)"
+                }
+            },
             j_fg_trouses = {},
             j_fg_ancient = {
                 name = "Ancient Joker",

@@ -671,12 +671,21 @@ return {
                 }
             },
             j_fg_ramen = {
-                name = "Ramen?",
+                name = "¿Ramen?",
                 text = {
                     "{C:white,X:mult}X#1#{} Multi",
                     "Pierde {C:white,X:mult}X#2#{} Multi por",
                     "cada carta {C:attention}jugada{}",
                     "{C:inactive}(Aunque no anoten){}"
+                }
+            },
+            j_fg_walkie_talkie = {
+                name = "¿Walkie Talkie?",
+                text = {
+                    "Reactiva {C:attention}#5#{} vez(es) cada {C:attention}10{} y {C:attention}4{} jugado",
+                    "Gana {C:chips}+#2#{} Fichas y {C:mult}+#3#{} Multi por",
+                    "cada {C:attention}10{} or {C:attention}4{C:attention} anotado{}",
+                    "{C:inactive}(Actualmente {C:chips}+#1#{C:inactive} Fichas y {C:mult}+#2#{C:inactive} Multi)"
                 }
             },
             j_fg_trouses = {},
