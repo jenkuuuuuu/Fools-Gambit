@@ -477,10 +477,11 @@ return {
                     "{C:inactive}(ex: Ace to 2, 8 to King, King to Ace){}",
                 },
             },
-            j_fg_face = {
+            j_fg_scary_face = {
                 name = 'Scary Face?',
                 text = {
-                    'Gains {C:chips}+#2#{} chips per scored {C:attention}face{} card',
+                    'Gains {C:chips}+#2#{} chips for each',
+                    'scored {C:attention}face{} card',
                     '{C:inactive}(Currently {C:chips}+#1#{C:inactive} chips){}'
                 },
             },
@@ -696,6 +697,20 @@ return {
                     "Retrigger all played",
                     "cards {C:attention}#1#{} time(s) for the",
                     "next {C:attention}#2#{} hands(s)"
+                }
+            },
+            j_fg_castle = {
+                name = "Castle",
+                text = {
+
+                }
+            },
+            j_fg_smiley = {
+                name = "Smiley face?",
+                text = {
+                    "Gains {C:mult}+#2#{} Mult for",
+                    "each scored {C:attention}face{} card",
+                    "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 }
             },
             j_fg_trouses = {},

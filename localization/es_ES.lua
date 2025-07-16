@@ -474,11 +474,12 @@ return {
                     "{C:inactive}(ej: As a 2, 8 a Rey, Rey to As){}",
                 },
             },
-            j_fg_face = {
+            j_fg_scary_face = {
                 name = '¿Cara aterradora?',
                 text = {
-                    'Gana {C:chips}+#2#{} Fichas por cada {C:attention}face{} que anota',
-                    '{C:inactive}Actualmente {C:chips}+#1#{C:inactive} Fichass{}'
+                    'Gana {C:chips}+#2#{} Fichas por cada',
+                    '{C:attention}figura{} que anote',
+                    '{C:inactive}Actualmente {C:chips}+#1#{C:inactive} Fichas{}'
                 },
             },
             j_fg_gros_michel = {
@@ -562,7 +563,7 @@ return {
                 name = "¿Comodín sin cara?",
                 text = {
                     "{C:white,X:mult}X#1#{} Multi si la mano jugada",
-                    "no contiene{C:attention}figuras{}"
+                    "no contiene {C:attention}figuras{}"
                 }
             },
             j_fg_splash = {
@@ -693,6 +694,14 @@ return {
                     "Reactiva las cartas jugadas",
                     "{C:attention}#1#{} vez(es) durante las",
                     "siguientes {C:attention}#2#{} mano(s)"
+                }
+            },
+            j_fg_smiley = {
+                name = "¿Cara sonriente?",
+                text = {
+                    "Gana {C:mult}+#2#{} Multi por",
+                    "cada {C:attention}figura{} que anote",
+                    "{C:inactive}(Actualmente {C:mult}+#1#{C:inactive} Multi)"
                 }
             },
             j_fg_trouses = {},

@@ -86,6 +86,7 @@ FG.ALTS.joker_equivalents = {
 	j_ramen = "j_fg_ramen",
 	j_walkie_talkie = "j_fg_walkie_talkie",
 	J_selzer = "j_fg_selzer",
+	j_castle = "j_fg_castle",
 	j_campfire = "j_fg_campfire",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
@@ -2807,7 +2808,7 @@ SMODS.Joker{
 		end
     end
 }
--- Joker
+-- selzer
 SMODS.Joker{
     key = "selzer",
     atlas = "jokers_alt",
@@ -2856,6 +2857,82 @@ SMODS.Joker{
 				mode = "literal"
 			}
 		end
+    end
+}
+--[[ castle
+SMODS.Joker{
+    key = "castle",
+    atlas = "jokers_alt",
+    pos = { x = 9, y = 15},
+    rarity = 1,
+    cost = 4,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			chips = 0,
+			chips_i = 20,
+			rank = "Ace"
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.chips,
+				card.ability.extra.chips_i,
+				card.ability.extra.rank
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round then
+			local ranks = {}
+			for _,rank in ipairs(SMODS.Ranks) do
+				table.insert(ranks,rank.key)
+			end
+			card.ability.extra.rank = ranks[pseudorandom("mila",1,#ranks)]
+		end
+    end
+}
+]]
+-- Smiley
+SMODS.Joker{
+    key = "smiley",
+    atlas = "jokers_alt",
+    pos = { x = 6, y = 15},
+    rarity = 1,
+    cost = 2,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			mult = 0,
+			mult_i = 2
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.mult,
+				card.ability.extra.mult_i
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.individual and not context.blueprint and context.cardarea == G.play and FG.FUNCS.get_card_info(context.other_card).is_face then
+			card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.mult_i.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+		end
+		if context.joker_main then return {mult = card.ability.extra.mult} end
     end
 }
 -- Hanging chad
