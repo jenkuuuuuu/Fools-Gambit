@@ -685,10 +685,17 @@ return {
             j_fg_walkie_talkie = {
                 name = "Walkie Talkie?",
                 text = {
-                    "Retriggers {C:attention}#5#{} time(s) each played {C:attention}10{} and {C:attention}4{}",
-                    "Gains {C:chips}+#2#{} Chips and {C:mult}+#3#{} Mult for",
+                    "Gains {C:chips}+#3#{} Chips and {C:mult}+#4#{} Mult for",
                     "each {C:attention}scored {C:attention}10{} or {C:attention}4{}",
                     "{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips and {C:mult}+#2#{C:inactive} Mult)"
+                }
+            },
+            j_fg_selzer = {
+                name = "Seltzer",
+                text = {
+                    "Retrigger all played",
+                    "cards {C:attention}#1#{} time(s) for the",
+                    "next {C:attention}#2#{} hands(s)"
                 }
             },
             j_fg_trouses = {},

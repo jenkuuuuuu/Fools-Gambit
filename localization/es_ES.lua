@@ -680,12 +680,19 @@ return {
                 }
             },
             j_fg_walkie_talkie = {
-                name = "¿Walkie Talkie?",
+                name = "¿Walkie-talkie?",
                 text = {
-                    "Reactiva {C:attention}#5#{} vez(es) cada {C:attention}10{} y {C:attention}4{} jugado",
-                    "Gana {C:chips}+#2#{} Fichas y {C:mult}+#3#{} Multi por",
+                    "Gana {C:chips}+#3#{} Fichas y {C:mult}+#4#{} Multi por",
                     "cada {C:attention}10{} or {C:attention}4{C:attention} anotado{}",
                     "{C:inactive}(Actualmente {C:chips}+#1#{C:inactive} Fichas y {C:mult}+#2#{C:inactive} Multi)"
+                }
+            },
+            j_fg_selzer = {
+                name = "Agua con gas?",
+                text = {
+                    "Reactiva las cartas jugadas",
+                    "{C:attention}#1#{} vez(es) durante las",
+                    "siguientes {C:attention}#2#{} mano(s)"
                 }
             },
             j_fg_trouses = {},
