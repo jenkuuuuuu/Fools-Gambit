@@ -9,17 +9,6 @@ SMODS.ConsumableType{
     key = "aberration",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
-    loc_txt = {
-        name = "Aberration Cards",
-        collection = "Aberration Cards",
-        undiscovered = {
-            name = "???",
-            text = {
-                "Use this card once to find out",
-                "what it does"
-            }
-        }
-    }
 }
 
 SMODS.Consumable{
