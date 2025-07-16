@@ -877,10 +877,35 @@ return {
                 text = {
                     "No puede ser alternada"
                 }
-            }
+            },
+            p_fg_aberration1 = {
+                name = 'Paquete melódico',
+                text = { 
+                    "Elige {C:attention}#1#{} de hasta ",
+                    "{C:attention}#2#{} cartas de {C:purple}aberration{} para",
+                    "usar de inmediato."
+                }
+            },
+            p_fg_aberration2 = {
+                name = 'Paquete de aberración',
+                text = { 
+                    "Elige {C:attention}#1#{} de hasta ",
+                    "{C:attention}#2#{} cartas de {C:purple}aberration{} para",
+                    "usar de inmediato."
+                }
+            },
         },
         Planet={},
-        Spectral={},
+        Spectral={
+            c_fg_soul = {
+                name = "¿El alma?",
+                text = {
+                    "Crea un",
+                    "comodín {C:gold,E:1}Colectivo{}",
+                    "{C:inactive}(Debe haber espacio){}"
+                }
+            }
+        },
         Stake={},
         Tag={},
         Tarot={
@@ -1148,10 +1173,16 @@ return {
 			k_replenished="Replenished!",
 			k_card_added="+1 carta",
             k_fg_active = "¡Activo!",
-            k_fg_none = "Ninguno"
+            k_fg_none = "Ninguno",
+            k_fg_collective = "Colectivo",
+            k_aberration = "Aberración",
+            b_aberration_cards = "Cartas de Aberración",
         },
         high_scores={},
-        labels={},
+        labels={
+            fg_collective = "Colectivo",
+            fg_aberration = "Aberración"
+        },
         poker_hand_descriptions={},
         poker_hands={},
         quips={},
