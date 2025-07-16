@@ -1142,6 +1142,9 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
+            k_fg_collective = "Collective",
+            k_aberration = "Aberration",
+            b_aberration_cards= "Aberration Cards",
             k_chipMult="¡Multiplicado!",
 			k_plus_aberration="+1 aberración",
 			k_replaced="Reemplazado!",
@@ -1151,7 +1154,10 @@ return {
             k_fg_none = "Ninguno"
         },
         high_scores={},
-        labels={},
+        labels={
+            fg_collective = "Collective",
+            fg_aberration = "Aberration"
+        },
         poker_hand_descriptions={},
         poker_hands={},
         quips={},

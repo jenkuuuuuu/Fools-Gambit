@@ -712,6 +712,13 @@ return {
                     "{C:money}$#2#{} when scored",
                 },
 			},
+			j_fg_stone={
+                name="Stone Joker?",
+                text={
+                    "Scored {C:attention}Stone? Cards{}' Chip value",
+                    "{C:attention}Double{}"
+                },
+			},
 			j_fg_bloodstone={
                 name="Bloodstone?",
                 text={
@@ -1164,6 +1171,9 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
+            k_fg_collective = "Collective",
+            k_aberration = "Aberration",
+            b_aberration_cards= "Aberration Cards",
             k_chipMult="Multiplied!",
             k_plus_aberration="+1 Aberration",
             k_replaced="Replaced!",
@@ -1174,7 +1184,10 @@ return {
             k_fg_none = "None",
         },
         high_scores={},
-        labels={},
+        labels={
+            fg_collective = "Collective",
+            fg_aberration = "Aberration"
+        },
         poker_hand_descriptions={},
         poker_hands={},
         quips={},

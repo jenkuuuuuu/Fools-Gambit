@@ -1062,18 +1062,15 @@ return {
             extra_jokers = "多余小丑",
             extra_jokers_tooltip = {
                 "防止本模组所加的",
-                "新小丑（即非原游戏迭代小丑）",
-                "生成",
-                "{C:inactive,s:0.7}推荐在非游玩时",
-                "{C:inactive,s:0.7}改变这个选项",
+                "新小丑（即非原游戏迭代小丑）生成",
+                "{C:inactive,s:0.7}推荐在非游玩时改变这个选项",
                 "{C:dark_edition,s:0.7}实验性选项{}"
             },
             diplicate_jokers = "复数小丑",
             duplicate_jokers_tooltip = {
                 "允许在已有迭代版本的小丑下",
                 "生成同个非迭代小丑（反之亦然）",
-                "{C:inactive,s:0.7}推荐在非游玩时",
-                "{C:inactive,s:0.7}改变这个选项",
+                "{C:inactive,s:0.7}推荐在非游玩时改变这个选项",
                 "{C:dark_edition,s:0.7}实验性选项{}"
             },
             alt_sfx = "替代音效",
@@ -1139,6 +1136,9 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
+            k_fg_collective = "集群",
+            k_aberration = "转变",
+            b_aberration_cards= "转变牌",
             k_chipMult="乘倍！",
 			k_plus_aberration="+1 转变牌",
 			k_replaced="替代！",
@@ -1149,7 +1149,10 @@ return {
             k_fg_none = "无",
         },
         high_scores={},
-        labels={},
+        labels={
+            fg_collective = "集群",
+            fg_aberration = "转变"
+        },
         poker_hand_descriptions={},
         poker_hands={},
         quips={},

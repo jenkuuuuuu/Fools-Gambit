@@ -4,6 +4,7 @@ FG.ALTS.enhancement_equivalents = {
 	m_mult = "m_fg_mult",
 	m_glass = "m_fg_glass",
 	m_steel = "m_fg_steel",
+	m_stone = "m_fg_stone",
 	m_lucky = "m_fg_lucky",
 	m_gold = "m_fg_gold"
 }
