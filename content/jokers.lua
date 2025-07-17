@@ -78,6 +78,7 @@ FG.ALTS.joker_equivalents = {
 	j_cloud_9 = "j_fg_cloud_9",
 	j_rocket = "j_fg_rocket",
 	j_erosion = "j_fg_erision",
+	j_drunkard = "j_fg_drunkard",
 	j_stone = "j_fg_stone",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
@@ -88,12 +89,14 @@ FG.ALTS.joker_equivalents = {
 	J_selzer = "j_fg_selzer",
 	j_castle = "j_fg_castle",
 	j_campfire = "j_fg_campfire",
+	j_troubadour = "j_fg_troubadour",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
+	j_oops = "j_fg_oops",
 	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
 	j_drivers_license = "j_fg_drivers_license",
@@ -108,6 +111,7 @@ FG.ALTS.joker_equivalents = {
 	j_fg_jogla = "j_fg_jogla_alt",
 	j_fg_deathmodereal = "j_fg_deathmoderealalt",
 	j_fg_goldenleaf = "j_fg_goldenleafalt",
+	j_fg_jenker = "j_fg_jenkeralt"
 }
 --------------------
 ---SPECIAL JOKERS---
@@ -2276,6 +2280,32 @@ SMODS.Joker{
     end
 }
 SMODS.Joker{
+    key = "drunkard",
+    atlas = "jokers_alt",
+    pos = { x = 1, y = 1},
+    rarity = 2,
+    cost = 5,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = { extra = { d_size = -2 , h_size = 1} },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.d_size, card.ability.extra.h_size } }
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.d_size
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.h_size
+        ease_discard(card.ability.extra.d_size)
+        ease_hands_played(card.ability.extra.h_size)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.h_size
+        ease_discard(-card.ability.extra.d_size)
+        ease_hands_played(-card.ability.extra.h_size)
+    end,
+    blueprint_compat = false,
+}
+SMODS.Joker{
     key = "stone",
     atlas = "jokers_alt",
     pos = { x = 9, y = 0},
@@ -2581,6 +2611,27 @@ SMODS.Joker{
 			if card.ability.extra.xmult < card.ability.extra.xmult_m then card.ability.extra.xmult = card.ability.extra.xmult_m end
 		end
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+    end
+}
+-- troubador
+SMODS.Joker{
+	key = "troubadour",
+	yes_pool_flag = 'alternate_spawn',
+	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
+	atlas = "jokers_alt",
+	
+    pos = { x = 0, y = 2 },
+    config = { extra = { h_size = -2, h_plays = 1 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.h_size, card.ability.extra.h_plays } }
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.h_plays
+        G.hand:change_size(card.ability.extra.h_size)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.h_plays
+        G.hand:change_size(-card.ability.extra.h_size)
     end
 }
 -- Throwback
@@ -3170,6 +3221,34 @@ SMODS.Joker {
 				message = '+' .. card.ability.extra.mult .. ' Mult'
 			}
 		end
+	end
+}
+--oops all 6s
+SMODS.Joker {
+	key = 'oops',
+	rarity = 2,
+	atlas = 'jokers_alt',
+	config = { extra = { den_gain = 1, num_gain = 1 , den_rate = 8, num_rate = 9} },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.den_gain, card.ability.extra.num_gain, card.ability.extra.den_rate, card.ability.extra.num_rate } }
+	end,
+	yes_pool_flag = 'alternate_spawn',
+	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
+	pos = { x = 5, y = 6 },
+	cost = 2,
+	blueprint_compat = true,
+	calculate = function(self, card, context)
+		if context.pseudorandom_result and context.result then
+            card.ability.extra.num_gain = card.ability.extra.num_gain * card.ability.extra.num_rate
+            card.ability.extra.den_gain = card.ability.extra.den_gain * card.ability.extra.den_rate
+			card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Multiplied" })
+		end
+		if context.mod_probability and not context.blueprint then
+            return {
+                numerator = context.numerator * card.ability.extra.num_gain,
+                denominator = context.denominator * card.ability.extra.den_gain
+            }
+        end
 	end
 }
 -- Joker

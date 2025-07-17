@@ -835,6 +835,29 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 }
             },
+            j_fg_oops = {
+                name = "Oops all 6s?",
+                text = {
+                    "When a {C:green,E:1}listed probability{} hits,",
+                    "{X:green,C:white,E:1}X#4#{} the {C:green,E:1}numerator{} and",
+                    "{X:green,C:white,E:1}X#3#{} the {C:green,E:1}denominator",
+                    "{C:inactive}(Currently {C:green,E:1}X#2#/#1#{C:inactive} probability)"
+                }
+            },
+            j_fg_drunkard = {
+                name = "Drunkard?",
+                text = {
+                    "{C:red}#1#{} discards, {C:blue}+#2#{} hands",
+                    "each round",
+                }
+            },
+            j_fg_troubadour = {
+                name = "Troubadour?",
+                text = {
+                    "{C:attention}#1#{} hand size,",
+                    "{C:blue}+#2#{} hand each round",
+                }
+            },
             -- Legendaries
             j_fg_caino = {
                 name = "Canio?",
