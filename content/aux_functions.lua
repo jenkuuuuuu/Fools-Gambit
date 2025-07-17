@@ -364,6 +364,38 @@ function FG.FUNCS.localize(args)
 	return ret
 end
 
+-- Main menu override
+
+--- This shit fucks with the entire game engine
+
+local main_menu_ref = Game.main_menu
+
+function Game:main_menu(change_context)
+	main_menu_ref(self,change_context)
+	local SC_scale = 1.1*(G.debug_splash_size_toggle and 0.8 or 1)
+	local CAI = {
+        TITLE_TOP_W = G.CARD_W,
+        TITLE_TOP_H = G.CARD_H,
+    }
+
+   self.fg_title = CardArea(
+        20, 20,
+        CAI.TITLE_TOP_W,CAI.TITLE_TOP_H,
+        {card_limit = 1, type = 'title'})
+
+	G.fg_title:set_alignment({
+        major = G.SPLASH_LOGO,
+        type = 'cm',
+        bond = 'Strong',
+        offset = {x=4,y=3}
+    })
+
+
+    local replace_card = Card(self.fg_title.T.x, self.fg_title.T.y, 1.2*G.CARD_W*SC_scale*1.5, 1.2*G.CARD_H*SC_scale*0.5, G.P_CENTERS.j_fg_logo, G.P_CENTERS.j_fg_logo)
+    replace_card.no_ui = true
+	self.fg_title:emplace(replace_card)
+end
+
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
 
 -- Settings, special edition

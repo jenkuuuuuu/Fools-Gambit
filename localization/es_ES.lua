@@ -798,6 +798,14 @@ return {
                     "en cada ronda",
                 },
             },
+            j_fg_swashbuckler = {
+                name = "¿Aventurero?",
+                text = {
+                    "Añade el {C:attention}valor de venta{} de este comodín al",
+                    "resto de comodines que poseen al ser {C:attention}vendido{}",
+                    "{C:inactive}(Actualmente {C:gold}+#1#{C:inactive} valor de venta)"
+                }
+            },
             j_fg_troubadour = {
                 name = "¿Trovador?",
                 text = {
