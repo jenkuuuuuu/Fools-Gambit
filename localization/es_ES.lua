@@ -1266,6 +1266,11 @@ return {
             },
             special_edition = "Edición especial",
             debug_mode = "Activar modo de desarollo",
+            additional_title = "Mostrar título adicional",
+            additional_title_tooltip = {
+                "Muestra un logo, \"+Fool's Gambit\"",
+                "al lado del título principal de Balatro"
+            },
             misc = {
                 ["?"] = "(?)",
                 require_restart = "(Requiere reinicio)"

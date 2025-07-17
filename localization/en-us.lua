@@ -1273,6 +1273,11 @@ return {
                 " ",
                 "{C:red}Requires restart{}"
             },
+            additional_title = "Show additional title",
+            additional_title_tooltip = {
+                "Displays a \"+Fool's Gambit\" logo",
+                "next to the main Balatro title"
+            },
             special_edition = "Special edition",
             debug_mode = "Enable debug mode",
             misc = {

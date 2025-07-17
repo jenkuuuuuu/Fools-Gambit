@@ -383,15 +383,24 @@ function Game:main_menu(change_context)
         CAI.TITLE_TOP_W,CAI.TITLE_TOP_H,
         {card_limit = 1, type = 'title'})
 
-	G.fg_title:set_alignment({
-        major = G.SPLASH_LOGO,
-        type = 'cm',
-        bond = 'Strong',
-        offset = {x=4,y=3}
-    })
+	if FG.config.additional_title then
+		G.fg_title:set_alignment({
+			major = G.SPLASH_LOGO,
+			type = 'cm',
+			bond = 'Strong',
+			offset = {x=4,y=3}
+		})
+	else
+		G.fg_title:set_alignment({
+			major = G.SPLASH_LOGO,
+			type = 'cm',
+			bond = 'Strong',
+			offset = {x=4,y=12}
+		})
+	end
 
 
-    local replace_card = Card(self.fg_title.T.x, self.fg_title.T.y, 1.2*G.CARD_W*SC_scale*1.5, 1.2*G.CARD_H*SC_scale*0.5, G.P_CENTERS.j_fg_logo, G.P_CENTERS.j_fg_logo)
+    local replace_card = Card(self.fg_title.T.x, self.fg_title.T.y, 1.2*G.CARD_W*SC_scale*1.8, 1.2*G.CARD_H*SC_scale*0.5, G.P_CENTERS.j_fg_logo, G.P_CENTERS.j_fg_logo)
     replace_card.no_ui = true
 	self.fg_title:emplace(replace_card)
 end
@@ -407,4 +416,7 @@ end
 G.FUNCS.FG_link_website = function(args)
 	love.system.openURL(args.config.ref_table)
 end
+
+
+
 --FG.fuck = 1
