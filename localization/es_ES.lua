@@ -760,6 +760,19 @@ return {
                     "gana {C:money}$#2#{} al puntuar"
                 },
 			},
+            j_fg_juggler = {
+                name = "¿Malabarista?",
+                text = {
+                    "{C:attention}+#1#{} ranura de consumible"
+                }
+            },
+            j_fg_drunkard = {
+                name="¿Borracho?",
+                text={
+                    "{C:red}#1#{} descartes, {C:blue}+#2#{} manos",
+                    "en cada ronda",
+                },
+            },
 			j_fg_stone={
                 name="¿Comodín de Piedra?",
                 text={

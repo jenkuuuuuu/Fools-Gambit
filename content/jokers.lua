@@ -92,6 +92,7 @@ FG.ALTS.joker_equivalents = {
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
+	j_fg_juggler = "j_fg_juggler",
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
@@ -3050,7 +3051,38 @@ SMODS.Joker{
 		end
 	end
 }
-
+-- Juggler
+SMODS.Joker{
+    key = "juggler",
+    atlas = "jokers_alt",
+    pos = { x = 0, y = 1},
+    rarity = 1,
+    cost = 4,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			slots = 1
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				math.floor(card.ability.extra.slots)
+			}
+        }
+    end,
+    blueprint_compat = true,
+	add_to_deck = function (self, card, from_debuff)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit + math.floor(card.ability.extra.slots) -- Missprint deck
+	end,
+	remove_from_deck = function (self, card, from_debuff)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit - math.floor(card.ability.extra.slots) -- Go fucking die
+	end,
+    calculate = function (self, card, context)
+    end
+}
 -- Rough Gem
 SMODS.Joker {
 	key = 'gem',

@@ -180,7 +180,7 @@ return {
 			j_fg_delinquent = {
 			    name = 'Delinquent',
 			    text = {
-                    "{C:attention}Replaces{} consumeable cards",
+                    "{C:attention}Replaces{} consumable cards",
                     "with {C:purple}Aberration{} cards",
                     "when a blind is skipped",
                 },
@@ -188,7 +188,7 @@ return {
             j_fg_delinquentalt = {
 			    name = 'Delinquent?',
 			    text = {
-                    "{C:attention}Replenishes{} empty consumeable",
+                    "{C:attention}Replenishes{} empty consumable",
                     "card slots with {C:purple}Aberration{} cards",
                     "when a blind is beaten",
                 },
@@ -769,6 +769,12 @@ return {
                     "{C:money}$#2#{} when scored",
                 },
 			},
+            j_fg_juggler = {
+                name = "Juggler?",
+                text = {
+                    "{C:attention}+#1#{} consumable slot"
+                }
+            },
 			j_fg_stone={
                 name="Stone Joker?",
                 text={
@@ -922,7 +928,7 @@ return {
                 name = 'Jogla',
                 text = {
                     "Create {C:attention}#1# {C:dark_edition}Negative{} copies of",
-                    "the {C:attention}leftmost{} consumeable in posession",
+                    "the {C:attention}leftmost{} consumable in posession",
                     "at the end of the{C:attention} shop{}.",
                     "{C:inactive}(Currently copying {C:attention}#2#{C:inactive})",
                     "{C:inactive,s:0.7}\"I am NOT a wizard\""
@@ -1146,7 +1152,7 @@ return {
                 name = "Temperance?",
                 text = {
                     "Gives {C:attention}double{} the total sell value",
-                    "of {C:attention}all{} consumeables in posession",
+                    "of {C:attention}all{} consumables in posession",
                     "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
                     "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
                 }
