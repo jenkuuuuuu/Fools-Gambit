@@ -836,6 +836,15 @@ return {
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 }
             },
+            j_fg_oops = {
+                name = "六六大顺？",
+                text = {
+                    "当一个以{C:attention,E:1}数字标注{}出的{C:green,E:1}几率发生时，",
+                    "将所有以{C:attention,E:1}数字标注{}出的{C:green,E:1}几率{}",
+                    "{X:green,C:white,E:1}X#4#{}{C:green,E:1}分子并{X:green,C:white,E:1}X#3#{}{C:green,E:1}分母",
+                    "{C:inactive}（当前{C:green,E:1}X#2#/#1#{C:inactive}概率)"
+                }
+            },
             -- Legendaries
             j_fg_caino = {
                 name = "Canio?",
@@ -1145,7 +1154,7 @@ return {
         },
         Voucher={
             v_fg_violin = {
-                name = "提琴",
+                name = "小提琴",
                 text = {
                     "在所有的{C:purple}调律包{}中",
                     "{C:attention}+1{}选项并{C:attention}+1{}可选张数"
