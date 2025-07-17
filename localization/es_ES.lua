@@ -945,7 +945,7 @@ return {
                 }
             },
             p_fg_aberration2 = {
-                name = 'Paquete de aberración',
+                name = 'Paquete melódico',
                 text = { 
                     "Elige {C:attention}#1#{} de hasta ",
                     "{C:attention}#2#{} cartas de {C:purple}aberration{} para",
@@ -1133,7 +1133,15 @@ return {
                 }
             },
         },
-        Voucher={},
+        Voucher={
+            v_fg_violin = {
+                name = "Violin",
+                text = {
+                    "{C:attention}+1{} option and {C:attention}+1{} select in every",
+                    "{C:purple}Paquete melódico"
+                }
+            }
+        },
     },
     FG = {
         config = {
@@ -1225,9 +1233,9 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
-            k_fg_collective = "Collective",
-            k_aberration = "Aberration",
-            b_aberration_cards= "Aberration Cards",
+            k_fg_collective = "Colectivo",
+            k_aberration = "Aberración",
+            b_aberration_cards = "Cartas de Aberración",
             k_chipMult="¡Multiplicado!",
 			k_plus_aberration="+1 aberración",
 			k_replaced="Reemplazado!",
@@ -1235,9 +1243,6 @@ return {
 			k_card_added="+1 carta",
             k_fg_active = "¡Activo!",
             k_fg_none = "Ninguno",
-            k_fg_collective = "Colectivo",
-            k_aberration = "Aberración",
-            b_aberration_cards = "Cartas de Aberración",
         },
         high_scores={},
         labels={

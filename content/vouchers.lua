@@ -11,13 +11,6 @@ SMODS.Atlas {
 if FG.config.debug_mode then
 SMODS.Voucher{
 	key = 'violin',
-	loc_txt = {
-		name = 'Violin',
-		text = {
-			"{C:attention}+1{} option and {C:attention}+1{} select in every",
-			"{C:purple}aberration{} pack."
-		}
-	},
     atlas = "vouchers",
     pos = { x = 2, y = 0 },
     redeem = function(self,card)
