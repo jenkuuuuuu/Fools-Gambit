@@ -672,6 +672,14 @@ return {
                     "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
             },
+            j_fg_tribe = {
+                name = "¿La tribu?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si la mano",
+                    "de Póker consiste de 5 {C:attention}reinas",
+                    "todas del mismo {C:attention}palo{}"
+                }
+            },
             j_fg_popcorn = {
                 name = "¿Palomitas?",
                 text = {

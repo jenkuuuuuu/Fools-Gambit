@@ -71,6 +71,7 @@ FG.ALTS.joker_equivalents = {
 	j_trio = "j_fg_trio",
 	j_family = "j_fg_family",
 	j_order = "j_fg_order",
+	j_tribe = "j_fg_tribe",
 	j_egg = "j_fg_egg",
 	j_ice_cream = "j_fg_ice_cream",
 	j_faceless = "j_fg_faceless",
@@ -2598,6 +2599,53 @@ SMODS.Joker {
 		end
 	end
 }
+-- Tribe
+SMODS.Joker{
+    key = "tribe",
+    atlas = "jokers_alt",
+    pos = { x = 9, y = 4},
+    rarity = 3,
+    cost = 7,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 12
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.joker_main then
+			-- WHAT THE FUCK IS THIS
+			-- DON'T TOUCH. i DON'T KNOW HOW I MADE IT WORK
+			-- ASK ERNESTO IF YOU WANT TO KNOW IDK
+			local cards = {}
+			local suit = true -- True means wild card
+			for i,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).rank ~= "Queen" then if false then print("No queen found, iter:"..tostring(i)) end return end
+				if FG.FUNCS.get_card_info(v).key ~= "m_wild" then cards[i] = FG.FUNCS.get_card_info(v).suit else cards[i] = true end
+			end
+			if #cards ~= 5 then if false then print("Card count less than 5: "..tostring(#cards)) end return end
+			for _,v in ipairs(cards) do
+				if v ~= true then
+					if suit ~= v and suit ~= true then if false then print("Suits don't match. "..tostring(suit).." | "..tostring(v)) end return end
+					suit = v; if false then print("Updated suit to "..suit) end
+				end
+				if false then print("Loop completed with suit: "..tostring(suit)) end
+			end
+			return {xmult = card.ability.extra.xmult}
+		end
+    end
+}
+
 --[[ Joker
 SMODS.Joker{
     key = "ancient",
@@ -3104,7 +3152,7 @@ SMODS.Joker{
 	rarity = 3,
 	config = {
 		extra = {
-			enhancement_max = 2,
+			enhancement_max = 3,
 			seal_max = 6,
 			edition_max = 16,
 		}

@@ -675,6 +675,14 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
             },
+            j_fg_tribe = {
+                name = "The tribe",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if",
+                    "scoring hand consist of 5 {C:attention}Queens",
+                    "all sharing the same {C:attention}suit{}"
+                }
+            },
             j_fg_popcorn = {
                 name = "Popcorn?",
                 text = {

@@ -226,7 +226,7 @@ end
 ---@param card table|card  The target card to evaluate
 ---@return table|nil ret
 --- Returns the card's `id`, `rank`, `suit`, if it's a face card, `key` (or enhancement), `edition`, `seal` 
---- and if it's `eternal`, `perishable` and how many rounds it has left, `rental` and
+--- and if it's `eternal`, `perishable` and how many rounds it has left, `rental`, buy and sell cost and
 --- the `raw` data of the card, or `nil` if no card is passed.
 function FG.FUNCS.get_card_info(card)
 	if not card then sendWarnMessage("No card was passed.","FG.FUNCS.get_card_info") return nil end
@@ -243,6 +243,10 @@ function FG.FUNCS.get_card_info(card)
 		perish_tally = 0,
 		rental = false,
 		unchangeable = false,
+		base_cost = card.base_cost or 0,
+		cost = card.cost or 0,
+		mod_cost = (card.cost - card.base_cost) or 0,
+		sell_cost = card.sell_cost or 0,
 		raw = card
 	}
 	
