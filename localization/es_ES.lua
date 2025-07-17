@@ -628,6 +628,15 @@ return {
                     "cuando {C:attention}se salta una ciega{}"
                 }
             },
+            j_fg_gift = {
+                name = "¿Carta de regalo?",
+                text = {
+                    "Gana {C:attention}un cuarto{C:inactive} (redondeado al alza) {}del valor de",
+                    "venta de todos los comodines y consumibles",
+                    "{C:attention} en posesión{} al {C:attention}final de la ronda{}",
+                    "{C:inactive}(Actualmente {C:gold}$#1#{C:inactive})"
+                }
+            },
             j_fg_erosion = {
                 name = "¿Erosión?",
                 text = {
@@ -671,6 +680,14 @@ return {
                     "una {C:attention}#2#",
                     "{C:inactive}(Actualmente {X:mult,C:white}X#3#{}{C:inactive} Multi)",
                }
+            },
+            j_fg_tribe = {
+                name = "¿La tribu?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si la mano",
+                    "de Póker consiste de 5 {C:attention}reinas",
+                    "todas del mismo {C:attention}palo{}"
+                }
             },
             j_fg_popcorn = {
                 name = "¿Palomitas?",
@@ -732,6 +749,14 @@ return {
                     "{C:inactive}(Actualmente {C:white,X:mult}X#1#{C:inactive} Multi, no puede bajar más de {C:white,X:mult}X0.75{C:inactive} Multi)"
                 }
             },
+            j_fg_acrobat = {
+                name = "¿Acróbata?",
+                text = {
+                    "Gana {C:white,X:mult}X#2#{} Multi cuando se derrota",
+                    "una ciega en la {C:attention}primera{} mano",
+                    "{C:inactive}(Actualmente {C:white,X:mult}X#1#{C:inactive} Multi)"
+                }
+            },
             j_fg_throwback = {
                 name = "¿Retro?",
                 text = {
@@ -772,6 +797,13 @@ return {
                     "{C:red}#1#{} descartes, {C:blue}+#2#{} manos",
                     "en cada ronda",
                 },
+            },
+            j_fg_troubadour = {
+                name = "¿Trovador?",
+                text = {
+                    "{C:attention}#1#{} tamaño de mano,",
+                    "{C:blue}+#2#{} manos cada ronda",
+                }
             },
 			j_fg_stone={
                 name="¿Comodín de Piedra?",
@@ -847,6 +879,15 @@ return {
                     "{C:white,X:mult}X#1#{} Multi si al menos",
                     "{C:attention}la mitad{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} de tu {C:attention}mazo entero{}",
                     "contiene cartas {C:attention}mejoradas{}",
+                }
+            },
+            j_fg_oops = {
+                name = "¿Solo seises?",
+                text = {
+                    "Cuando ocurra una {C:green,E:1}probabilidad{},",
+                    "{X:green,C:white,E:1}X#4#{} el {C:green,E:1}numerador{} y",
+                    "{X:green,C:white,E:1}X#3#{} thel {C:green,E:1}denominador",
+                    "{C:inactive}(Actualmente probabilidad de {C:green,E:1}X#2#/#1#{C:inactive})"
                 }
             },
             j_fg_bootstraps = {

@@ -71,6 +71,7 @@ FG.ALTS.joker_equivalents = {
 	j_trio = "j_fg_trio",
 	j_family = "j_fg_family",
 	j_order = "j_fg_order",
+	j_tribe = "j_fg_tribe",
 	j_egg = "j_fg_egg",
 	j_ice_cream = "j_fg_ice_cream",
 	j_faceless = "j_fg_faceless",
@@ -78,7 +79,9 @@ FG.ALTS.joker_equivalents = {
 	j_riff_raff = "j_fg_riff_raff",
 	j_cloud_9 = "j_fg_cloud_9",
 	j_rocket = "j_fg_rocket",
+	j_gift = "j_fg_gift",
 	j_erosion = "j_fg_erision",
+	j_fg_juggler = "j_fg_juggler",
 	j_drunkard = "j_fg_drunkard",
 	j_stone = "j_fg_stone",
 	j_splash = "j_fg_splash",
@@ -90,12 +93,12 @@ FG.ALTS.joker_equivalents = {
 	J_selzer = "j_fg_selzer",
 	j_castle = "j_fg_castle",
 	j_campfire = "j_fg_campfire",
+	j_acrobat = "j_fg_acrobat",
 	j_swashbuckler = "j_fg_swashbuckler",
 	j_troubadour = "j_fg_troubadour",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
-	j_fg_juggler = "j_fg_juggler",
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
@@ -2288,6 +2291,41 @@ SMODS.Joker{
 		return card.ability.extra.payout
 	end
 }
+-- Joker
+SMODS.Joker{
+    key = "gift",
+    atlas = "jokers_alt",
+    pos = { x = 3, y = 13},
+    rarity = 1,
+    cost = 4,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				FG.FUNCS.get_card_info(card).sell_cost or 0
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round and context.cardarea == G.jokers then
+			local sell_i = 0
+			for _,v in ipairs(G.jokers.cards) do
+				if FG.FUNCS.get_card_info(v).key ~= FG.FUNCS.get_card_info(card).key then sell_i = sell_i + FG.FUNCS.get_card_info(v).sell_cost end
+			end
+			for _,v in ipairs(G.consumeables.cards) do
+				if FG.FUNCS.get_card_info(v).key ~= FG.FUNCS.get_card_info(card).key then sell_i = sell_i + FG.FUNCS.get_card_info(v).sell_cost end
+			end
+			card.sell_cost = card.sell_cost + math.ceil(sell_i/4)
+			if sell_i > 0 then FG.FUNCS.card_eval_status_text{card = card, message = "Value Up!",mode = "literal"} end
+		end
+    end
+}
 -- Erosion
 SMODS.Joker{
     key = "erosion",
@@ -2317,6 +2355,39 @@ SMODS.Joker{
 		if context.joker_main and G.playing_cards and #G.playing_cards < card.ability.extra.max_cards then return {xmult = card.ability.extra.xmult} end
     end
 }
+-- Juggler
+SMODS.Joker{
+    key = "juggler",
+    atlas = "jokers_alt",
+    pos = { x = 0, y = 1},
+    rarity = 1,
+    cost = 4,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			slots = 1
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				math.floor(card.ability.extra.slots)
+			}
+        }
+    end,
+    blueprint_compat = true,
+	add_to_deck = function (self, card, from_debuff)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit + math.floor(card.ability.extra.slots) -- Missprint deck
+	end,
+	remove_from_deck = function (self, card, from_debuff)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit - math.floor(card.ability.extra.slots) -- Go fucking die
+	end,
+    calculate = function (self, card, context)
+    end
+}
+-- Drunkard
 SMODS.Joker{
     key = "drunkard",
     atlas = "jokers_alt",
@@ -2565,6 +2636,53 @@ SMODS.Joker {
 		end
 	end
 }
+-- Tribe
+SMODS.Joker{
+    key = "tribe",
+    atlas = "jokers_alt",
+    pos = { x = 9, y = 4},
+    rarity = 3,
+    cost = 7,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 12
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.joker_main then
+			-- WHAT THE FUCK IS THIS
+			-- DON'T TOUCH. i DON'T KNOW HOW I MADE IT WORK
+			-- ASK ERNESTO IF YOU WANT TO KNOW IDK
+			local cards = {}
+			local suit = true -- True means wild card
+			for i,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).rank ~= "Queen" then if false then print("No queen found, iter:"..tostring(i)) end return end
+				if FG.FUNCS.get_card_info(v).key ~= "m_wild" then cards[i] = FG.FUNCS.get_card_info(v).suit else cards[i] = true end
+			end
+			if #cards ~= 5 then if false then print("Card count less than 5: "..tostring(#cards)) end return end
+			for _,v in ipairs(cards) do
+				if v ~= true then
+					if suit ~= v and suit ~= true then if false then print("Suits don't match. "..tostring(suit).." | "..tostring(v)) end return end
+					suit = v; if false then print("Updated suit to "..suit) end
+				end
+				if false then print("Loop completed with suit: "..tostring(suit)) end
+			end
+			return {xmult = card.ability.extra.xmult}
+		end
+    end
+}
+
 --[[ Joker
 SMODS.Joker{
     key = "ancient",
@@ -2599,14 +2717,51 @@ SMODS.Joker{
     calculate = function (self, card, context)
     end
 }]]
--- Joker
+-- Acrobat
+SMODS.Joker{
+    key = "acrobat",
+    atlas = "jokers_alt",
+    pos = { x = 2, y = 1},
+    rarity = 2,
+    cost = 6,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1,
+			xmult_i = 0.5,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i,
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round and not context.blueprint and context.cardarea == G.jokers and G.GAME.current_round.hands_left == G.GAME.round_resets.hands - 1 then
+			card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "Upgrade!",
+				mode = "literal"
+			}
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+    end
+}
+-- Campfire
 SMODS.Joker{
     key = "campfire",
     atlas = "jokers_alt",
     pos = { x = 5, y = 15},
     rarity = 3,
     cost = 6,
-      yes_pool_flag = 'alternate_spawn',
+    yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
@@ -3067,7 +3222,7 @@ SMODS.Joker{
 	rarity = 3,
 	config = {
 		extra = {
-			enhancement_max = 2,
+			enhancement_max = 3,
 			seal_max = 6,
 			edition_max = 16,
 		}
@@ -3135,38 +3290,6 @@ SMODS.Joker{
 			end
 		end
 	end
-}
--- Juggler
-SMODS.Joker{
-    key = "juggler",
-    atlas = "jokers_alt",
-    pos = { x = 0, y = 1},
-    rarity = 1,
-    cost = 4,
-    yes_pool_flag = 'alternate_spawn',
-    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
-    config = {
-        fg_alternate = {}, -- Kept between alternations
-        extra = {
-			slots = 1
-		}
-    },
-    loc_vars = function (self, info_queue, card)
-        return {
-            vars = {
-				math.floor(card.ability.extra.slots)
-			}
-        }
-    end,
-    blueprint_compat = true,
-	add_to_deck = function (self, card, from_debuff)
-		G.consumeables.config.card_limit = G.consumeables.config.card_limit + math.floor(card.ability.extra.slots) -- Missprint deck
-	end,
-	remove_from_deck = function (self, card, from_debuff)
-		G.consumeables.config.card_limit = G.consumeables.config.card_limit - math.floor(card.ability.extra.slots) -- Go fucking die
-	end,
-    calculate = function (self, card, context)
-    end
 }
 -- Rough Gem
 SMODS.Joker {
@@ -3879,7 +4002,7 @@ SMODS.Joker{
 	SMODS.Joker {
 		key = 'deathmodereal',
 		rarity = "fg_collective",
-		cost = 6,
+		cost = 30,
 		atlas = "collective",
 		pos = { x = 3, y = 0 },
 		config = { extra = { Xmult = 20, blindchipmult = 2 } },
@@ -3925,7 +4048,7 @@ SMODS.Joker{
 		rarity = "fg_collective",
 		atlas = 'collective',
 		pos = { x = 4, y = 0 },
-		cost = 16,
+		cost = 30,
 		calculate = function(self, card, context)
 			if context.individual and context.cardarea == G.play then
 				return {
@@ -3960,7 +4083,7 @@ SMODS.Joker{
 		atlas = 'collective',
 		pos = { x = 2, y = 0 },
 		soul_pos = { x = 2, y = 1 },
-		cost = 5,
+		cost = 30,
 		blueprint_compat = true,
 		calculate = function(self, card, context)
 			if context.ending_shop and G.consumeables.cards[1] then
@@ -4027,7 +4150,7 @@ SMODS.Joker {
 	atlas = 'collective',
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 0, y = 1 },
-	cost = 5,
+	cost = 30,
 	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play then
@@ -4055,7 +4178,7 @@ SMODS.Joker {
 		atlas = 'collective',
 		pos = { x = 0, y = 0 },
 		soul_pos = { x = 0, y = 1 },
-		cost = 5,
+		cost = 30,
 		blueprint_compat = false,
 		calculate = function(self, card, context)
 			if context.end_of_round and not context.blueprint and G.GAME.blind.boss and not context.repetition and not context.individual then
@@ -4084,7 +4207,7 @@ SMODS.Joker {
 		atlas = 'collective',
 		pos = { x = 1, y = 0 },
 		soul_pos = { x = 1, y = 1 },
-		cost = 5,
+		cost = 30,
 		calculate = function(self, card, context)
 			if card.ability.extra.repetitions == 0 then
 				card.ability.extra.repetitions = 1
@@ -4111,7 +4234,7 @@ SMODS.Joker {
 		},
 		pos = { x = 1, y = 0 },
 		soul_pos = { x = 1, y = 1 },
-		cost = 5,
+		cost = 30,
 		-- how the FUCK DO I MAKE THIS ABLE TO BE LOCALISED?????
 		-- I JUST OPENED CELESTE INSTEAD OF BALATRO ITS STILL 4AM
 		loc_vars = function(self, info_queue, card)

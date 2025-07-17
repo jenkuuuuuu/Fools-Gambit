@@ -631,6 +631,15 @@ return {
                     "when {C:attention}skipping blind{}"
                 }
             },
+            j_fg_gift = {
+                name = "Gift card",
+                text = {
+                    "Gains {C:attention}one quarter{C:inactive} (rounded up) {}",
+                    "of all jokers and consumables",
+                    "{C:attention} in possesion{} at {C:attention}end of round{}",
+                    "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
+                }
+            },
             j_fg_erosion = {
                 name = "Erosion?",
                 text = {
@@ -674,6 +683,14 @@ return {
                     "a {C:attention}#2#",
                     "{C:inactive}(Currently {X:mult,C:white}X#3#{}{C:inactive} Mult)",
                }
+            },
+            j_fg_tribe = {
+                name = "The tribe",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if",
+                    "scoring hand consist of 5 {C:attention}Queens",
+                    "all sharing the same {C:attention}suit{}"
+                }
             },
             j_fg_popcorn = {
                 name = "Popcorn?",
@@ -739,6 +756,14 @@ return {
                     "Gains {C:white,X:mult}X#2#{} Mult for each card {C:attention}discarded{}",
                     "Losses {C:white,X:mult}X#3#{} Mult when {C:attention}boss blind{} defeated",
                     "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult, can't go below {C:white,X:mult}X0.75{C:inactive} Mult)"
+                }
+            },
+            j_fg_acrobat = {
+                name = "Acrobat?",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult when blind",
+                    "is defeated on the {C:attention}first{} hand",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult)"
                 }
             },
             j_fg_throwback = {
