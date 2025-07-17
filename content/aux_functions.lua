@@ -270,7 +270,7 @@ end
 ---@param max number 1 in N chance, where N is `max`
 ---@return boolean success If the random chance succeeds
 function FG.FUNCS.random_chance(max)
-	return pseudorandom('mila', G.GAME.probabilities.normal, max) <= G.GAME.probabilities.normal
+	return pseudorandom('mila', G.GAME.probabilities.normal, math.max(max,G.GAME.probabilities.normal,1)) <= G.GAME.probabilities.normal
 end
 
 function FG.FUNCS.allow_duplicate (card)

@@ -180,7 +180,7 @@ return {
 			j_fg_delinquent = {
 			    name = 'Delinquent',
 			    text = {
-                    "{C:attention}Replaces{} consumeable cards",
+                    "{C:attention}Replaces{} consumable cards",
                     "with {C:purple}Aberration{} cards",
                     "when a blind is skipped",
                 },
@@ -188,7 +188,7 @@ return {
             j_fg_delinquentalt = {
 			    name = 'Delinquent?',
 			    text = {
-                    "{C:attention}Replenishes{} empty consumeable",
+                    "{C:attention}Replenishes{} empty consumable",
                     "card slots with {C:purple}Aberration{} cards",
                     "when a blind is beaten",
                 },
@@ -607,6 +607,15 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{}{C:inactive} Mult)"
                 }
             },
+            j_fg_riff_raff = {
+                name = "Riff-raff",
+                text = {
+                    "{C:green}#1# in #2#{} chance of creating a random",
+                    "{C:green}Uncommon{} joker when bind is {C:attention}selected{}",
+                    "{C:green}#1# in #3#{} chance of creating a random",
+                    "{C:red}Rare{} joker when bind is {C:attention}selected{}"
+                }
+            },
             j_fg_cloud_9 = {
                 name = "Cloud 9?",
                 text = {
@@ -760,6 +769,12 @@ return {
                     "{C:money}$#2#{} when scored",
                 },
 			},
+            j_fg_juggler = {
+                name = "Juggler?",
+                text = {
+                    "{C:attention}+#1#{} consumable slot"
+                }
+            },
 			j_fg_stone={
                 name="Stone Joker?",
                 text={
@@ -789,11 +804,28 @@ return {
                 name="Onyx Agate?",
                 text={
                    "If poker hand contains a {C:attention}#1#{}",
-                    "with only {C:clubs}Club{} suit, gain",
+                    "with only {C:clubs}Club{} {C:attention}suit{}, gain",
                     "{C:mult}+#2#{} Mult when scored",
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
+            j_fg_flower_pot = {
+                name = "Flower pot?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if {C:attention}scoring hand{} contains",
+                    "{C:spades}Spades{}, {C:hearts}Hearts{}, {C:clubs}Cubs{}, {C:diamonds}Diamonds{},",
+                    "{C:attention}face{} and {C:attention}number{} cards"
+                }
+            },
+            j_fg_seeing_double = {
+                name = "Seeing double?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if scoring hand",
+                    "contains {C:clubs}Clubs{} and any other {C:attention}suit{}",
+                    "Turn all scoring cards into {C:clubs}Clubs",
+                    "after scoring"
+                }
+            },
             j_fg_hit_the_road = {
                 name = "Hit the Road?",
                 text = {
@@ -919,7 +951,7 @@ return {
                 name = 'Jogla',
                 text = {
                     "Create {C:attention}#1# {C:dark_edition}Negative{} copies of",
-                    "the {C:attention}leftmost{} consumeable in posession",
+                    "the {C:attention}leftmost{} consumable in posession",
                     "at the end of the{C:attention} shop{}.",
                     "{C:inactive}(Currently copying {C:attention}#2#{C:inactive})",
                     "{C:inactive,s:0.7}\"I am NOT a wizard\""
@@ -1143,7 +1175,7 @@ return {
                 name = "Temperance?",
                 text = {
                     "Gives {C:attention}double{} the total sell value",
-                    "of {C:attention}all{} consumeables in posession",
+                    "of {C:attention}all{} consumables in posession",
                     "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
                     "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
                 }

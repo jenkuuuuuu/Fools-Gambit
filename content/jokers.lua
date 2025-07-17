@@ -75,6 +75,7 @@ FG.ALTS.joker_equivalents = {
 	j_ice_cream = "j_fg_ice_cream",
 	j_faceless = "j_fg_faceless",
 	j_baron = "j_fg_baron",
+	j_riff_raff = "j_fg_riff_raff",
 	j_cloud_9 = "j_fg_cloud_9",
 	j_rocket = "j_fg_rocket",
 	j_erosion = "j_fg_erision",
@@ -93,9 +94,12 @@ FG.ALTS.joker_equivalents = {
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
+	j_fg_juggler = "j_fg_juggler",
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
+	j_flower_pot = "j_fg_flower_pot",
+	j_seeing_double = "j_fg_seeing_double",
 	j_oops = "j_fg_oops",
 	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
@@ -2181,6 +2185,39 @@ SMODS.Joker{
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end
 }
+-- Riff-raff
+SMODS.Joker{
+    key = "riff_raff",
+    atlas = "jokers_alt",
+    pos = { x = 1, y = 12},
+    rarity = 1,
+    cost = 5,
+	yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			uncommon_chance = 3,
+			rare_chance = 6
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.uncommon_chance,
+				card.ability.extra.rare_chance
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.setting_blind then
+			if FG.FUNCS.random_chance(card.ability.extra.uncommon_chance) then SMODS.add_card{ set = "Joker", rarity = .9} end
+			if FG.FUNCS.random_chance(card.ability.extra.rare_chance) then SMODS.add_card{ set = "Joker", rarity = 1} end
+		end
+    end
+}
 -- Joker
 SMODS.Joker{
     key = "cloud_9",
@@ -3065,7 +3102,38 @@ SMODS.Joker{
 		end
 	end
 }
-
+-- Juggler
+SMODS.Joker{
+    key = "juggler",
+    atlas = "jokers_alt",
+    pos = { x = 0, y = 1},
+    rarity = 1,
+    cost = 4,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			slots = 1
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				math.floor(card.ability.extra.slots)
+			}
+        }
+    end,
+    blueprint_compat = true,
+	add_to_deck = function (self, card, from_debuff)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit + math.floor(card.ability.extra.slots) -- Missprint deck
+	end,
+	remove_from_deck = function (self, card, from_debuff)
+		G.consumeables.config.card_limit = G.consumeables.config.card_limit - math.floor(card.ability.extra.slots) -- Go fucking die
+	end,
+    calculate = function (self, card, context)
+    end
+}
 -- Rough Gem
 SMODS.Joker {
 	key = 'gem',
@@ -3223,6 +3291,94 @@ SMODS.Joker {
 		end
 	end
 }
+-- Flower pot
+SMODS.Joker{
+    key = "flower_pot",
+    atlas = "jokers_alt",
+    pos = { x = 0, y = 6 },
+    rarity = 2,
+    cost = 5,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 5
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		local function check ()
+			local has_spades = false
+			local has_hearts = false
+			local has_clubs = false
+			local has_diamonds = false
+			local has_face = false
+			local has_number = false
+
+			for _,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).suit == "Spades" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_spades = true end
+				if FG.FUNCS.get_card_info(v).suit == "Hearts" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_hearts = true end
+				if FG.FUNCS.get_card_info(v).suit == "Clubs" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_clubs = true end
+				if FG.FUNCS.get_card_info(v).suit == "Diamonds" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_diamonds = true end
+				
+				if FG.FUNCS.get_card_info(v).is_face then has_face = true end
+				if not FG.FUNCS.get_card_info(v).is_face then has_number = true end
+			end
+			if has_spades and has_hearts and has_clubs and has_diamonds and has_face and has_number then return true else return false end
+		end
+		if context.joker_main and check() then return {xmult = card.ability.extra.xmult} end
+    end
+}
+-- Seeing double
+SMODS.Joker{
+    key = "seeing_double",
+    atlas = "jokers_alt",
+    pos = { x = 4, y = 4 },
+    rarity = 1,
+    cost = 5,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1.5
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		local function check ()
+			local has_clubs = false
+			local has_other = false
+			for _,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).suit == "Clubs" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_clubs = true end
+				if FG.FUNCS.get_card_info(v).suit ~= "Clubs" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_other = true end
+			end
+			if has_clubs and has_other then return true else return false end
+		end
+		if context.joker_main and check() then return {xmult = card.ability.extra.xmult} end
+		if context.after and check() then
+			for _,v in ipairs(G.play.cards) do G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function() v:flip() return true end})) end
+			for _,v in ipairs(G.play.cards) do G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function() local fuck, you = SMODS.change_base(v, "Clubs", nil) return true end})) end
+			for _,v in ipairs(G.play.cards) do G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function() v:flip() return true end})) end
+			G.E_MANAGER:add_event(Event({trigger = "after", delay = 1, func = function() return true end}))
+		end
+    end
+}
 --oops all 6s
 SMODS.Joker {
 	key = 'oops',
@@ -3251,7 +3407,7 @@ SMODS.Joker {
         end
 	end
 }
--- Joker
+-- Hit the road
 SMODS.Joker{
     key = "hit_the_road",
     atlas = "jokers_alt",
