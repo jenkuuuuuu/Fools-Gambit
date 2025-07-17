@@ -607,6 +607,15 @@ return {
                     "{C:inactive}(Currently {X:mult,C:white}X#1#{}{C:inactive} Mult)"
                 }
             },
+            j_fg_riff_raff = {
+                name = "Riff-raff",
+                text = {
+                    "{C:green}#1# in #2#{} chance of creating a random",
+                    "{C:green}Uncommon{} joker when bind is {C:attention}selected{}",
+                    "{C:green}#1# in #3#{} chance of creating a random",
+                    "{C:red}Rare{} joker when bind is {C:attention}selected{}"
+                }
+            },
             j_fg_cloud_9 = {
                 name = "Cloud 9?",
                 text = {

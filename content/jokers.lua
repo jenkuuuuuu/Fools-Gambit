@@ -75,6 +75,7 @@ FG.ALTS.joker_equivalents = {
 	j_ice_cream = "j_fg_ice_cream",
 	j_faceless = "j_fg_faceless",
 	j_baron = "j_fg_baron",
+	j_riff_raff = "j_fg_riff_raff",
 	j_cloud_9 = "j_fg_cloud_9",
 	j_rocket = "j_fg_rocket",
 	j_erosion = "j_fg_erision",
@@ -2175,6 +2176,39 @@ SMODS.Joker{
 			end
 		end
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+    end
+}
+-- Riff-raff
+SMODS.Joker{
+    key = "riff_raff",
+    atlas = "jokers_alt",
+    pos = { x = 1, y = 12},
+    rarity = 1,
+    cost = 5,
+	yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			uncommon_chance = 3,
+			rare_chance = 6
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.uncommon_chance,
+				card.ability.extra.rare_chance
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.setting_blind then
+			if FG.FUNCS.random_chance(card.ability.extra.uncommon_chance) then SMODS.add_card{ set = "Joker", rarity = .9} end
+			if FG.FUNCS.random_chance(card.ability.extra.rare_chance) then SMODS.add_card{ set = "Joker", rarity = 1} end
+		end
     end
 }
 -- Joker

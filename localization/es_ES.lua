@@ -37,7 +37,7 @@ return {
                 }
             },
             c_fg_alto = {
-                name = "Clave de Da",
+                name = "Clave de Do",
                 text = {
                     "Convierte todos los comodines {C:red}raros{}",
                     "en sus versiones {C:purple}alternativas{}"
@@ -602,6 +602,15 @@ return {
                     "cada {C:attention}rey{} en la mano",
                     "al {C:attention}final de la ronda",
                     "{C:inactive}(Actualmente {X:mult,C:white}X#1#{}{C:inactive} Multi)"
+                }
+            },
+            j_fg_riff_raff = {
+                name = "¿Gentuza?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades de crear un comodín",
+                    "{C:green}Inusual{} cuando se {C:attention}selecciona{} una ciega",
+                    "{C:green}#1# en #3#{} probabilidades de crear un comodín",
+                    "{C:red}Raro{} cuando se {C:attention}selecciona{} una ciega"
                 }
             },
             j_fg_cloud_9 = {
