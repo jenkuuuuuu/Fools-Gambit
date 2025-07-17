@@ -95,6 +95,7 @@ FG.ALTS.joker_equivalents = {
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
+	j_seeing_double = "j_fg_seeing_double",
 	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
 	j_drivers_license = "j_fg_drivers_license",
@@ -3206,7 +3207,49 @@ SMODS.Joker {
 		end
 	end
 }
--- Joker
+-- Seeing double
+SMODS.Joker{
+    key = "seeing_double",
+    atlas = "jokers_alt",
+    pos = { x = 4, y = 4 },
+    rarity = 1,
+    cost = 5,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1.5
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		local function check ()
+			local has_clubs = false
+			local has_other = false
+			for _,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).suit == "Clubs" then has_clubs = true end
+				if FG.FUNCS.get_card_info(v).suit ~= "Clubs" then has_other = true end
+			end
+			if has_clubs and has_other then return true else return false end
+		end
+		if context.joker_main and check() then return {xmult = card.ability.extra.xmult} end
+		if context.after and check() then
+			for _,v in ipairs(G.play.cards) do G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function() v:flip() return true end})) end
+			for _,v in ipairs(G.play.cards) do G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function() local fuck, you = SMODS.change_base(v, "Clubs", nil) return true end})) end
+			for _,v in ipairs(G.play.cards) do G.E_MANAGER:add_event(Event({trigger = "after", delay = 0.2, func = function() v:flip() return true end})) end
+			G.E_MANAGER:add_event(Event({trigger = "after", delay = 1, func = function() return true end}))
+		end
+    end
+}
+-- Hit the road
 SMODS.Joker{
     key = "hit_the_road",
     atlas = "jokers_alt",

@@ -794,6 +794,15 @@ return {
                     "{C:inactive}(Actualmente {C:mult}+#3#{}{C:inactive} Multi)",
                 },
 			},
+            j_fg_seeing_double = {
+                name = "¿Visión doble?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si las cartas que anotan son",
+                    "del palo de {C:clubs}tréboles{} y cualquier otro {C:attention}palo{}",
+                    "Convierte todas las cartas al palo de",
+                    "{C:clubs}tréboles {}tras anotar"
+                }
+            },
             j_fg_hit_the_road = {
                 name = "¿Al camino?",
                 text = {

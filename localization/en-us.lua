@@ -798,11 +798,20 @@ return {
                 name="Onyx Agate?",
                 text={
                    "If poker hand contains a {C:attention}#1#{}",
-                    "with only {C:clubs}Club{} suit, gain",
+                    "with only {C:clubs}Club{} {C:attention}suit{}, gain",
                     "{C:mult}+#2#{} Mult when scored",
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
+            j_fg_seeing_double = {
+                name = "Seeing double?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if scoring hand",
+                    "contains {C:clubs}Clubs{} and any other {C:attention}suit{}",
+                    "Turn all scoring cards into {C:clubs}Clubs",
+                    "after scoring"
+                }
+            },
             j_fg_hit_the_road = {
                 name = "Hit the Road?",
                 text = {
