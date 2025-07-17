@@ -58,7 +58,7 @@ FG.ALTS.joker_equivalents = {
 	j_8_ball = "j_fg_8ball",
 	j_misprint = "j_fg_misprint",
 	j_fibonacci = "j_fg_fibonacci",
-	j_scary_face = "j_fg_face",
+	j_scary_face = "j_fg_scary_face",
 	j_gros_michel = "j_fg_gros_michel",
 	j_even_steven = "j_fg_even_steven",
 	j_odd_todd = "j_fg_odd_todd",
@@ -84,6 +84,10 @@ FG.ALTS.joker_equivalents = {
 	j_red_card = "j_fg_red_card",
 	j_popcorn = "j_fg_popcorn",
 	j_ramen = "j_fg_ramen",
+	j_walkie_talkie = "j_fg_walkie_talkie",
+	J_selzer = "j_fg_selzer",
+	j_castle = "j_fg_castle",
+	j_campfire = "j_fg_campfire",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
@@ -1647,7 +1651,7 @@ SMODS.Joker {
 }
 -- Face
 SMODS.Joker {
-	key = 'face',
+	key = 'scary_face',
 	rarity = 1,
 	cost = 2,
 	atlas = 'jokers_alt',
@@ -2733,6 +2737,202 @@ SMODS.Joker{
 			end
 		end
 		if context.joker_main and card.ability.extra.xmult > 1 then return {xmult = card.ability.extra.xmult} end
+    end
+}
+-- Walkie talkie
+SMODS.Joker{
+    key = "walkie_talkie",
+    atlas = "jokers_alt",
+    pos = { x = 8, y = 15},
+    rarity = 1,
+    cost = 4,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			chips = 0,
+			mult = 0,
+			chips_i = 2,
+			mult_i = 1,
+			repetitions = 1,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.chips,
+				card.ability.extra.mult,
+				card.ability.extra.chips_i,
+				card.ability.extra.mult_i,
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.individual and not context.blueprint and context.cardarea == G.play and
+		(FG.FUNCS.get_card_info(context.other_card).id == 4 or FG.FUNCS.get_card_info(context.other_card).id == 10) then
+			local other_card = context.other_card or {} -- shut up nil check
+			G.E_MANAGER:add_event(Event({
+				func = function ()
+					other_card:juice_up()
+					return true
+				end
+			}))
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.chips_i.."",
+				mode = "literal",
+				colour = "chips"
+			}
+			G.E_MANAGER:add_event(Event({
+				func = function ()
+					other_card:juice_up()
+					return true
+				end
+			}))
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.mult_i.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+			card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.chips_i
+			card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_i
+		end
+		if context.joker_main then
+			return {
+				chips = card.ability.extra.chips,
+				mult = card.ability.extra.mult
+			}
+		end
+    end
+}
+-- selzer
+SMODS.Joker{
+    key = "selzer",
+    atlas = "jokers_alt",
+    pos = { x = 3, y = 15},
+    rarity = 2,
+    cost = 5,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			repetitions = 2,
+			hands = 4,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.repetitions,
+				card.ability.extra.hands
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context) -- Drank!
+		if context.repetition and context.cardarea == G.play then return { repetitions = card.ability.extra.repetitions, card = card } end
+		if context.after then
+			card.ability.extra.hands = card.ability.extra.hands - 1
+			if card.ability.extra.hands <= 0 then 
+				G.E_MANAGER:add_event(Event({
+					func = function ()
+						card:start_dissolve() 
+						return true
+					end
+				}))
+				FG.FUNCS.card_eval_status_text{
+					card = card,
+					message = "Drank!",
+					mode = "literal"
+				} 
+				return
+			end
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "-1",
+				mode = "literal"
+			}
+		end
+    end
+}
+--[[ castle
+SMODS.Joker{
+    key = "castle",
+    atlas = "jokers_alt",
+    pos = { x = 9, y = 15},
+    rarity = 1,
+    cost = 4,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			chips = 0,
+			chips_i = 20,
+			rank = "Ace"
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.chips,
+				card.ability.extra.chips_i,
+				card.ability.extra.rank
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round then
+			local ranks = {}
+			for _,rank in ipairs(SMODS.Ranks) do
+				table.insert(ranks,rank.key)
+			end
+			card.ability.extra.rank = ranks[pseudorandom("mila",1,#ranks)]
+		end
+    end
+}
+]]
+-- Smiley
+SMODS.Joker{
+    key = "smiley",
+    atlas = "jokers_alt",
+    pos = { x = 6, y = 15},
+    rarity = 1,
+    cost = 2,
+      yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			mult = 0,
+			mult_i = 2
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.mult,
+				card.ability.extra.mult_i
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.individual and not context.blueprint and context.cardarea == G.play and FG.FUNCS.get_card_info(context.other_card).is_face then
+			card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "+"..card.ability.extra.mult_i.." Mult",
+				mode = "literal",
+				colour = "mult"
+			}
+		end
+		if context.joker_main then return {mult = card.ability.extra.mult} end
     end
 }
 -- Hanging chad
