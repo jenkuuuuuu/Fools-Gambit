@@ -947,7 +947,7 @@ return {
                     "Can't be alternated"
                 }
             },
-            fg_aberration1 = {
+            p_fg_aberration1 = {
                 name = 'Melody Pack',
                 text = { 
                     "Choose {C:attention}#1#{} of up to ",
@@ -955,8 +955,8 @@ return {
                     "be used instantly."
                 }
             },
-            fg_aberration2 = {
-                name = 'aberration Pack',
+            p_fg_aberration2 = {
+                name = 'Melody Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to ",
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
@@ -965,7 +965,15 @@ return {
             }
         },
         Planet={},
-        Spectral={},
+        Spectral={
+            c_fg_soul = {
+                name = "The Soul?",
+                text = {
+                    "Creates a",
+                    "{C:gold,E:1}Collective{} joker"
+                }
+            }
+        },
         Stake={},
         Tag={},
         Tarot={
@@ -1051,7 +1059,7 @@ return {
                 }
             },
             c_fg_high_priestess = {
-                name = "highest Priestess",
+                name = "High Priestess?",
                 text = {
                     "{C:green}#1# in #2#{} chance to",
                     "create a {C:legendary}Black Hole{}"
@@ -1135,7 +1143,15 @@ return {
                 }
             },
         },
-        Voucher={},
+        Voucher={
+            v_fg_violin = {
+                name = "Violin",
+                text = {
+                    "{C:attention}+1{} option and {C:attention}+1{} select in every",
+                    "{C:purple}Melody{} Pack"
+                }
+            }
+        },
     },
     FG = {
         config = {
@@ -1246,9 +1262,6 @@ return {
             k_unchangeable_warning = "This card can't be alternated",
             k_fg_active = "Active!",
             k_fg_none = "None",
-            k_fg_collective = "Collective",
-            k_aberration = "Aberration",
-            b_aberration_cards = "Aberration Cards",
         },
         high_scores={},
         labels={
