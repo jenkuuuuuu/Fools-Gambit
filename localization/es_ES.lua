@@ -794,6 +794,14 @@ return {
                     "{C:inactive}(Actualmente {C:mult}+#3#{}{C:inactive} Multi)",
                 },
 			},
+            j_fg_flower_pot = {
+                name = "¿Florero?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si la {C:attention}mano de póker{} contiene",
+                    "{C:spades}Picas{}, {C:hearts}Corazones{}, {C:clubs}Tréboles{},",
+                    "{C:diamonds}Diamantes{}, {C:attention}figuras{} y {C:attention}números{}"
+                }
+            },
             j_fg_seeing_double = {
                 name = "¿Visión doble?",
                 text = {

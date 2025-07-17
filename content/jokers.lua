@@ -95,6 +95,7 @@ FG.ALTS.joker_equivalents = {
 	j_bloodstone = "j_fg_bloodstone",
 	j_arrowhead = "j_fg_arrowhead",
 	j_onyx_agate = "j_fg_agate",
+	j_flower_pot = "j_fg_flower_pot",
 	j_seeing_double = "j_fg_seeing_double",
 	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
@@ -3207,6 +3208,52 @@ SMODS.Joker {
 		end
 	end
 }
+-- Flower pot
+SMODS.Joker{
+    key = "flower_pot",
+    atlas = "jokers_alt",
+    pos = { x = 0, y = 6 },
+    rarity = 2,
+    cost = 5,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 5
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		local function check ()
+			local has_spades = false
+			local has_hearts = false
+			local has_clubs = false
+			local has_diamonds = false
+			local has_face = false
+			local has_number = false
+
+			for _,v in ipairs(context.scoring_hand) do
+				if FG.FUNCS.get_card_info(v).suit == "Spades" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_spades = true end
+				if FG.FUNCS.get_card_info(v).suit == "Hearts" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_hearts = true end
+				if FG.FUNCS.get_card_info(v).suit == "Clubs" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_clubs = true end
+				if FG.FUNCS.get_card_info(v).suit == "Diamonds" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_diamonds = true end
+				
+				if FG.FUNCS.get_card_info(v).is_face then has_face = true end
+				if not FG.FUNCS.get_card_info(v).is_face then has_number = true end
+			end
+			if has_spades and has_hearts and has_clubs and has_diamonds and has_face and has_number then return true else return false end
+		end
+		if context.joker_main and check() then return {xmult = card.ability.extra.xmult} end
+    end
+}
 -- Seeing double
 SMODS.Joker{
     key = "seeing_double",
@@ -3235,8 +3282,8 @@ SMODS.Joker{
 			local has_clubs = false
 			local has_other = false
 			for _,v in ipairs(context.scoring_hand) do
-				if FG.FUNCS.get_card_info(v).suit == "Clubs" then has_clubs = true end
-				if FG.FUNCS.get_card_info(v).suit ~= "Clubs" then has_other = true end
+				if FG.FUNCS.get_card_info(v).suit == "Clubs" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_clubs = true end
+				if FG.FUNCS.get_card_info(v).suit ~= "Clubs" or FG.FUNCS.get_card_info(v).key == "m_wild" then has_other = true end
 			end
 			if has_clubs and has_other then return true else return false end
 		end

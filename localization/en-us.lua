@@ -803,6 +803,14 @@ return {
 					"{C:inactive}(Currently {C:mult}+#3#{}{C:inactive} Mult)",
                 },
 			},
+            j_fg_flower_pot = {
+                name = "Flower pot?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Mult if {C:attention}scoring hand{} contains",
+                    "{C:spades}Spades{}, {C:hearts}Hearts{}, {C:clubs}Cubs{}, {C:diamonds}Diamonds{},",
+                    "{C:attention}face{} and {C:attention}number{} cards"
+                }
+            },
             j_fg_seeing_double = {
                 name = "Seeing double?",
                 text = {
