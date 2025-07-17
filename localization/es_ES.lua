@@ -732,6 +732,14 @@ return {
                     "{C:inactive}(Actualmente {C:white,X:mult}X#1#{C:inactive} Multi, no puede bajar más de {C:white,X:mult}X0.75{C:inactive} Multi)"
                 }
             },
+            j_fg_acrobat = {
+                name = "¿Acróbata?",
+                text = {
+                    "Gana {C:white,X:mult}X#2#{} Multi cuando se derrota",
+                    "una ciega en la {C:attention}primera{} mano",
+                    "{C:inactive}(Actualmente {C:white,X:mult}X#1#{C:inactive} Multi)"
+                }
+            },
             j_fg_throwback = {
                 name = "¿Retro?",
                 text = {
@@ -772,6 +780,13 @@ return {
                     "{C:red}#1#{} descartes, {C:blue}+#2#{} manos",
                     "en cada ronda",
                 },
+            },
+            j_fg_troubadour = {
+                name = "¿Trovador?",
+                text = {
+                    "{C:attention}#1#{} tamaño de mano,",
+                    "{C:blue}+#2#{} manos cada ronda",
+                }
             },
 			j_fg_stone={
                 name="¿Comodín de Piedra?",
@@ -847,6 +862,15 @@ return {
                     "{C:white,X:mult}X#1#{} Multi si al menos",
                     "{C:attention}la mitad{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} de tu {C:attention}mazo entero{}",
                     "contiene cartas {C:attention}mejoradas{}",
+                }
+            },
+            j_fg_oops = {
+                name = "¿Solo seises?",
+                text = {
+                    "Cuando ocurra una {C:green,E:1}probabilidad{},",
+                    "{X:green,C:white,E:1}X#4#{} el {C:green,E:1}numerador{} y",
+                    "{X:green,C:white,E:1}X#3#{} thel {C:green,E:1}denominador",
+                    "{C:inactive}(Actualmente probabilidad de {C:green,E:1}X#2#/#1#{C:inactive})"
                 }
             },
             j_fg_bootstraps = {

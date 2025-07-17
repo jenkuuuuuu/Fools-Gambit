@@ -741,6 +741,14 @@ return {
                     "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult, can't go below {C:white,X:mult}X0.75{C:inactive} Mult)"
                 }
             },
+            j_fg_acrobat = {
+                name = "Acrobat?",
+                text = {
+                    "Gains {C:white,X:mult}X#2#{} Mult when blind",
+                    "is defeated on the {C:attention}first{} hand",
+                    "{C:inactive}(Currently {C:white,X:mult}X#1#{C:inactive} Mult)"
+                }
+            },
             j_fg_throwback = {
                 name = "Throwback?",
                 text = {

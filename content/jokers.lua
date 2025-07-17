@@ -91,6 +91,7 @@ FG.ALTS.joker_equivalents = {
 	J_selzer = "j_fg_selzer",
 	j_castle = "j_fg_castle",
 	j_campfire = "j_fg_campfire",
+	j_acrobat = "j_fg_acrobat",
 	j_troubadour = "j_fg_troubadour",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
@@ -2631,14 +2632,51 @@ SMODS.Joker{
     calculate = function (self, card, context)
     end
 }]]
--- Joker
+-- Acrobat
+SMODS.Joker{
+    key = "acrobat",
+    atlas = "jokers_alt",
+    pos = { x = 2, y = 1},
+    rarity = 2,
+    cost = 6,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {
+			xmult = 1,
+			xmult_i = 0.5,
+		}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmult_i,
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round and not context.blueprint and context.cardarea == G.jokers and G.GAME.current_round.hands_left == G.GAME.round_resets.hands - 1 then
+			card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmult_i
+			FG.FUNCS.card_eval_status_text{
+				card = card,
+				message = "Upgrade!",
+				mode = "literal"
+			}
+		end
+		if context.joker_main then return {xmult = card.ability.extra.xmult} end
+    end
+}
+-- Campfire
 SMODS.Joker{
     key = "campfire",
     atlas = "jokers_alt",
     pos = { x = 5, y = 15},
     rarity = 3,
     cost = 6,
-      yes_pool_flag = 'alternate_spawn',
+    yes_pool_flag = 'alternate_spawn',
     in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
     config = {
         fg_alternate = {}, -- Kept between alternations
