@@ -245,7 +245,7 @@ function FG.FUNCS.get_card_info(card)
 		unchangeable = false,
 		base_cost = card.base_cost or 0,
 		cost = card.cost or 0,
-		mod_cost = (card.cost - card.base_cost) or 0,
+		mod_cost = (card.cost or 0) - (card.base_cost or 0),
 		sell_cost = card.sell_cost or 0,
 		raw = card
 	}

@@ -628,6 +628,15 @@ return {
                     "cuando {C:attention}se salta una ciega{}"
                 }
             },
+            j_fg_gift = {
+                name = "¿Carta de regalo?",
+                text = {
+                    "Gana {C:attention}un cuarto{C:inactive} (redondeado al alza) {}del valor de",
+                    "venta de todos los comodines y consumibles",
+                    "{C:attention} en posesión{} al {C:attention}final de la ronda{}",
+                    "{C:inactive}(Actualmente {C:gold}$#1#{C:inactive})"
+                }
+            },
             j_fg_erosion = {
                 name = "¿Erosión?",
                 text = {

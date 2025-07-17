@@ -79,6 +79,7 @@ FG.ALTS.joker_equivalents = {
 	j_riff_raff = "j_fg_riff_raff",
 	j_cloud_9 = "j_fg_cloud_9",
 	j_rocket = "j_fg_rocket",
+	j_gift = "j_fg_gift",
 	j_erosion = "j_fg_erision",
 	j_fg_juggler = "j_fg_juggler",
 	j_drunkard = "j_fg_drunkard",
@@ -2289,6 +2290,41 @@ SMODS.Joker{
 		return card.ability.extra.payout
 	end
 }
+-- Joker
+SMODS.Joker{
+    key = "gift",
+    atlas = "jokers_alt",
+    pos = { x = 3, y = 13},
+    rarity = 1,
+    cost = 4,
+    yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+    config = {
+        fg_alternate = {}, -- Kept between alternations
+        extra = {}
+    },
+    loc_vars = function (self, info_queue, card)
+        return {
+            vars = {
+				FG.FUNCS.get_card_info(card).sell_cost or 0
+			}
+        }
+    end,
+    blueprint_compat = true,
+    calculate = function (self, card, context)
+		if context.end_of_round and context.cardarea == G.jokers then
+			local sell_i = 0
+			for _,v in ipairs(G.jokers.cards) do
+				if FG.FUNCS.get_card_info(v).key ~= FG.FUNCS.get_card_info(card).key then sell_i = sell_i + FG.FUNCS.get_card_info(v).sell_cost end
+			end
+			for _,v in ipairs(G.consumeables.cards) do
+				if FG.FUNCS.get_card_info(v).key ~= FG.FUNCS.get_card_info(card).key then sell_i = sell_i + FG.FUNCS.get_card_info(v).sell_cost end
+			end
+			card.sell_cost = card.sell_cost + math.ceil(sell_i/4)
+			if sell_i > 0 then FG.FUNCS.card_eval_status_text{card = card, message = "Value Up!",mode = "literal"} end
+		end
+    end
+}
 -- Erosion
 SMODS.Joker{
     key = "erosion",
@@ -3932,7 +3968,7 @@ SMODS.Joker{
 	SMODS.Joker {
 		key = 'deathmodereal',
 		rarity = "fg_collective",
-		cost = 6,
+		cost = 30,
 		atlas = "collective",
 		pos = { x = 3, y = 0 },
 		config = { extra = { Xmult = 20, blindchipmult = 2 } },
@@ -3978,7 +4014,7 @@ SMODS.Joker{
 		rarity = "fg_collective",
 		atlas = 'collective',
 		pos = { x = 4, y = 0 },
-		cost = 16,
+		cost = 30,
 		calculate = function(self, card, context)
 			if context.individual and context.cardarea == G.play then
 				return {
@@ -4013,7 +4049,7 @@ SMODS.Joker{
 		atlas = 'collective',
 		pos = { x = 2, y = 0 },
 		soul_pos = { x = 2, y = 1 },
-		cost = 5,
+		cost = 30,
 		blueprint_compat = true,
 		calculate = function(self, card, context)
 			if context.ending_shop and G.consumeables.cards[1] then
@@ -4080,7 +4116,7 @@ SMODS.Joker {
 	atlas = 'collective',
 	pos = { x = 0, y = 0 },
 	soul_pos = { x = 0, y = 1 },
-	cost = 5,
+	cost = 30,
 	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.individual and context.cardarea == G.play then
@@ -4108,7 +4144,7 @@ SMODS.Joker {
 		atlas = 'collective',
 		pos = { x = 0, y = 0 },
 		soul_pos = { x = 0, y = 1 },
-		cost = 5,
+		cost = 30,
 		blueprint_compat = false,
 		calculate = function(self, card, context)
 			if context.end_of_round and not context.blueprint and G.GAME.blind.boss and not context.repetition and not context.individual then
@@ -4137,7 +4173,7 @@ SMODS.Joker {
 		atlas = 'collective',
 		pos = { x = 1, y = 0 },
 		soul_pos = { x = 1, y = 1 },
-		cost = 5,
+		cost = 30,
 		calculate = function(self, card, context)
 			if card.ability.extra.repetitions == 0 then
 				card.ability.extra.repetitions = 1
@@ -4164,7 +4200,7 @@ SMODS.Joker {
 		},
 		pos = { x = 1, y = 0 },
 		soul_pos = { x = 1, y = 1 },
-		cost = 5,
+		cost = 30,
 		-- how the FUCK DO I MAKE THIS ABLE TO BE LOCALISED?????
 		-- I JUST OPENED CELESTE INSTEAD OF BALATRO ITS STILL 4AM
 		loc_vars = function(self, info_queue, card)

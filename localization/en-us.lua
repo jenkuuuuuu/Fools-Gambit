@@ -631,6 +631,15 @@ return {
                     "when {C:attention}skipping blind{}"
                 }
             },
+            j_fg_gift = {
+                name = "Gift card",
+                text = {
+                    "Gains {C:attention}one quarter{C:inactive} (rounded up) {}",
+                    "of all jokers and consumables",
+                    "{C:attention} in possesion{} at {C:attention}end of round{}",
+                    "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
+                }
+            },
             j_fg_erosion = {
                 name = "Erosion?",
                 text = {
