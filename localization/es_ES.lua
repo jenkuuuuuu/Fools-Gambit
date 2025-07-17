@@ -207,7 +207,7 @@ return {
                 }
             },
 			j_fg_disc={
-                name= "Disco comodín",
+                name= "Comodín disco",
                 text={
                     "Los {C:attention}Comodines {C:red}originales",
                     "dan cada uno {C:chips}+#1#{} Fichas",
