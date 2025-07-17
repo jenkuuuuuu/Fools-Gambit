@@ -37,7 +37,7 @@ return {
                 }
             },
             c_fg_alto = {
-                name = "Clave de Da",
+                name = "Clave de Do",
                 text = {
                     "Convierte todos los comodines {C:red}raros{}",
                     "en sus versiones {C:purple}alternativas{}"
@@ -185,7 +185,7 @@ return {
             j_fg_delinquentalt = {
 			    name = '¿Delincuente?',
 			    text = {
-                    "{C:attention}Rellena{} ranuras de consumible",
+                    "{C:attention}RellenaAgu{} ranuras de consumible",
                     "vacias con cartas de {C:purple}aberración{}",
                     "cuando se derrota una ciega",
                 },
@@ -207,7 +207,7 @@ return {
                 }
             },
 			j_fg_disc={
-                name= "Disco comodín",
+                name= "Comodín disco",
                 text={
                     "Los {C:attention}Comodines {C:red}originales",
                     "dan cada uno {C:chips}+#1#{} Fichas",
@@ -604,6 +604,15 @@ return {
                     "{C:inactive}(Actualmente {X:mult,C:white}X#1#{}{C:inactive} Multi)"
                 }
             },
+            j_fg_riff_raff = {
+                name = "¿Gentuza?",
+                text = {
+                    "{C:green}#1# en #2#{} probabilidades de crear un comodín",
+                    "{C:green}Inusual{} cuando se {C:attention}selecciona{} una ciega",
+                    "{C:green}#1# en #3#{} probabilidades de crear un comodín",
+                    "{C:red}Raro{} cuando se {C:attention}selecciona{} una ciega"
+                }
+            },
             j_fg_cloud_9 = {
                 name = "¿Nube 9?",
                 text = {
@@ -689,7 +698,7 @@ return {
                 }
             },
             j_fg_selzer = {
-                name = "Agua con gas?",
+                name = "¿Agua con gas?",
                 text = {
                     "Reactiva las cartas jugadas",
                     "{C:attention}#1#{} vez(es) durante las",
@@ -751,6 +760,19 @@ return {
                     "gana {C:money}$#2#{} al puntuar"
                 },
 			},
+            j_fg_juggler = {
+                name = "¿Malabarista?",
+                text = {
+                    "{C:attention}+#1#{} ranura de consumible"
+                }
+            },
+            j_fg_drunkard = {
+                name="¿Borracho?",
+                text={
+                    "{C:red}#1#{} descartes, {C:blue}+#2#{} manos",
+                    "en cada ronda",
+                },
+            },
 			j_fg_stone={
                 name="¿Comodín de Piedra?",
                 text={
@@ -785,6 +807,23 @@ return {
                     "{C:inactive}(Actualmente {C:mult}+#3#{}{C:inactive} Multi)",
                 },
 			},
+            j_fg_flower_pot = {
+                name = "¿Florero?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si la {C:attention}mano de póker{} contiene",
+                    "{C:spades}Picas{}, {C:hearts}Corazones{}, {C:clubs}Tréboles{},",
+                    "{C:diamonds}Diamantes{}, {C:attention}figuras{} y {C:attention}números{}"
+                }
+            },
+            j_fg_seeing_double = {
+                name = "¿Visión doble?",
+                text = {
+                    "{C:white,X:mult}X#1#{} Multi si las cartas que anotan son",
+                    "del palo de {C:clubs}tréboles{} y cualquier otro {C:attention}palo{}",
+                    "Convierte todas las cartas al palo de",
+                    "{C:clubs}tréboles {}tras anotar"
+                }
+            },
             j_fg_hit_the_road = {
                 name = "¿Al camino?",
                 text = {
