@@ -94,6 +94,7 @@ FG.ALTS.joker_equivalents = {
 	j_castle = "j_fg_castle",
 	j_campfire = "j_fg_campfire",
 	j_acrobat = "j_fg_acrobat",
+	j_swashbuckler = "j_fg_swashbuckler",
 	j_troubadour = "j_fg_troubadour",
 	j_throwback = "j_fg_throwback",
 	j_hanging_chad = "j_fg_hanging_chad",
@@ -2805,13 +2806,45 @@ SMODS.Joker{
 		if context.joker_main then return {xmult = card.ability.extra.xmult} end
     end
 }
--- troubador
+-- swashbuckler
 SMODS.Joker{
-	key = "troubadour",
+	key = "swashbuckler",
+    cost = 2,
 	yes_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	atlas = "jokers_alt",
-	
+    pos = { x = 9, y = 5 },
+    config = { extra = { sell_value = 1 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.sell_value } }
+    end,
+    calculate = function(self, card, context)
+		card.ability.extra.sell_value = card.sell_cost
+        if context.selling_self and not context.blueprint then
+            for _, area in ipairs({ G.jokers }) do
+            	for _, other_card in ipairs(area.cards) do
+                	if other_card.set_cost then
+                    	other_card.ability.extra_value = (other_card.ability.extra_value or 0) +
+                        	card.ability.extra.sell_value
+                    	other_card:set_cost()
+                	end
+            	end
+            end
+            return {
+            	message = localize('k_val_up'),
+            	colour = G.C.MONEY
+            }
+		end
+    end
+}
+-- troubador
+SMODS.Joker{
+	key = "troubadour",
+    cost = 2,
+	yes_pool_flag = 'alternate_spawn',
+	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
+	atlas = "jokers_alt",
+	blueprint_compat = false,
     pos = { x = 0, y = 2 },
     config = { extra = { h_size = -2, h_plays = 1 } },
     loc_vars = function(self, info_queue, card)
@@ -2834,6 +2867,7 @@ SMODS.Joker{
 	atlas = "jokers_alt",
 	pos = { x = 5 , y = 7},
 	rarity = 2,
+    cost = 2,
 	config = {
 		extra = {
 			xmult = 1,

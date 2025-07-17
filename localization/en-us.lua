@@ -915,6 +915,14 @@ return {
                     "{C:blue}+#2#{} hand each round",
                 }
             },
+            j_fg_swashbuckler = {
+                name = "Swashbuckler?",
+                text = {
+                    "Adds the {C:attention}sell value{} of this Joker",
+                    "to all other owned Jokers when {C:attention}sold",
+                    "{C:inactive}(Currently {C:gold}+#1#{C:inactive} sell value)"
+                }
+            },
             -- Legendaries
             j_fg_caino = {
                 name = "Canio?",
