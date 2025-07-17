@@ -3799,6 +3799,8 @@ SMODS.Joker {
 	}
 	-- Jenku
 	-- shes fucking op i will probably nerf her but its 4am
+	--hello chat it is i jenku it is 4am again! i am now going to fix. this. thINGOID
+	-- devlog time!!! violin voucher flashbacks
 	SMODS.Joker {
 		key = 'jenker',
 		config = { extra = { repetitions = 1, increase = false } },
@@ -3831,7 +3833,7 @@ SMODS.Joker {
 	-- Jenku alt
 	SMODS.Joker {
 		key = 'jenkeralt',
-		config = { extra = { retriggers = "jenku", repetitionsmax = 5, repetitionsmin=1 } },
+		config = { extra = { name = "jenku", repetitions = 5, odds = 4} },
 		rarity = "fg_collective",
 		atlas = 'collective',
 		loc_txt = {
@@ -3841,6 +3843,8 @@ SMODS.Joker {
 		pos = { x = 1, y = 0 },
 		soul_pos = { x = 1, y = 1 },
 		cost = 5,
+		-- how the FUCK DO I MAKE THIS ABLE TO BE LOCALISED?????
+		-- I JUST OPENED CELESTE INSTEAD OF BALATRO ITS STILL 4AM
 		loc_vars = function(self, info_queue, card)
 			return {
 				main_end = {
@@ -3913,38 +3917,46 @@ SMODS.Joker {
 						}}
 					}},
 				},
-				vars = {card.ability.extra.name,card.ability.extra.repetitionsmin,card.ability.extra.repetitionsmax}
+				vars = {card.ability.extra.name,card.ability.extra.repetitions,card.ability.extra.odds}
 			}
 		end,
 		calculate = function(self, card, context)
+
+			local debuffing = false
 			if context.before then
-				local retriggers = (pseudorandom('jenker', card.ability.extra.repetitionsmin, card.ability.extra.repetitionsmax))
-				if retriggers == 5 then
-						card.ability.extra.name = "janku"
-						card.children.center:set_sprite_pos({x = 5, y = 0})
-						card.children.floating_sprite:set_sprite_pos({x = 5, y = 1})
-						card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Nope!" })
-				end
-			end
-			if context.scoring_hand then
-				if retriggers == 5 then
+                if pseudorandom('jenker') < (G.GAME.probabilities.normal or 1) / self.config.extra.odds then
+					debuffing = true
+					card.ability.extra.name = "janku"
+					card.children.center:set_sprite_pos({x = 5, y = 0})
+					card.children.floating_sprite:set_sprite_pos({x = 5, y = 1})
+					card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Nope!" })
+					
 					for i in ipairs(context.scoring_hand) do
 						SMODS.debuff_card(context.scoring_hand[i], true, "jenkerdebuff")
 					end
 				end
 			end
-			if context.cardarea == G.play and context.repetition and not context.repetition_only then
+			-- random repetition logic
+			if context.repetition and context.cardarea == G.play then
+				if not debuffing then
+					local random_repetitions = pseudorandom('jenker', 1, card.ability.extra.repetitions)
+					return {
+						message = localize('k_again_ex'),
+						repetitions = random_repetitions,
+						card = card
+					}
+				end
+			end
+			-- reset card to default at end of round, go thru playing cards and un-debuff them all
+			-- i spent an hour and 20 minutes debugging this. my indentation was goofed. oh my god.
+			if context.end_of_round then
+				debuffing = nil
 				card.ability.extra.name = "jenku"
 				card.children.center:set_sprite_pos({x = 1, y = 0})
 				card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
-				return{
-					message = "And again!",
-					repetitions = retriggers
-				}
-			end
-			if context.end_of_round then
-				for i in ipairs(G.playing_cards) do
-				SMODS.debuff_card(G.playing_cards[i], false, "jenkerdebuff")
+				
+				for _, playing_card in pairs(G.playing_cards) do
+						SMODS.debuff_card(playing_card, false, "jenkerdebuff")
 				end
 			end
 		end
