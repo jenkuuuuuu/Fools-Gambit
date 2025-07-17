@@ -32,7 +32,31 @@ SMODS.Stake{
     end
 }
 
+SMODS.Atlas{
+    key = "logo_small",
+    path = "logo2.png",
+    px = 139,
+    py = 51
+}
 
+
+SMODS.Joker{
+    key = "logo",
+    set = "aberration",
+    atlas = "logo_small",
+    yes_pool_flag = "i_want_to_see_the_fg_logo_in_my_runs",
+    unlocked = true,
+    discovered = true,
+    no_collection = true,
+	pos = { x = 0, y = 0 },
+    loc_txt = {
+        name = "E",
+        text = {
+            "A",
+            "B"
+        }
+    }
+}
 
 --- 
 --- Sound replacer
