@@ -54,14 +54,44 @@ SMODS.current_mod.config_tab = function()
 						label = FG.FUNCS.localize{"FG","config","alt_sfx"},
 						ref_table = FG.config,
 						ref_value = "alternate_sfx",
-					},
-					
+					},	
 				}},
-				
 			}},
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
 				{n = G.UIT.R, config = {align = "cm"}, nodes = {
 					{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","alt_sfx_tooltip"}}}},
+				}},
+			}},
+			{n = G.UIT.C, config = {align = "cm", minw = 0.3}}, -- separator
+			{n = G.UIT.C, config = {align = "cm"}, nodes = {
+				{n = G.UIT.R, config = {align = "cm"}, nodes = {
+					create_toggle{
+						label = FG.FUNCS.localize{"FG","config","additional_title"},
+						ref_table = FG.config,
+						ref_value = "additional_title",
+						callback = function ()
+							if FG.config.additional_title then
+								G.fg_title:set_alignment({
+									major = G.SPLASH_LOGO,
+									type = 'cm',
+									bond = 'Strong',
+									offset = {x=4,y=3}
+								})
+							else
+								G.fg_title:set_alignment({
+									major = G.SPLASH_LOGO,
+									type = 'cm',
+									bond = 'Strong',
+									offset = {x=4,y=12}
+								})
+							end
+						end
+					},
+				}},
+			}},
+			{n = G.UIT.C, config = {align = "cm"}, nodes = {
+				{n = G.UIT.R, config = {align = "cm"}, nodes = {
+					{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","additional_title_tooltip"}}}},
 				}},
 			}},
 		}},
