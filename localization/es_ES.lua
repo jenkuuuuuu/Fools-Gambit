@@ -185,7 +185,7 @@ return {
             j_fg_delinquentalt = {
 			    name = '¿Delincuente?',
 			    text = {
-                    "{C:attention}Rellena{} ranuras de consumible",
+                    "{C:attention}RellenaAgu{} ranuras de consumible",
                     "vacias con cartas de {C:purple}aberración{}",
                     "cuando se derrota una ciega",
                 },
@@ -689,7 +689,7 @@ return {
                 }
             },
             j_fg_selzer = {
-                name = "Agua con gas?",
+                name = "¿Agua con gas?",
                 text = {
                     "Reactiva las cartas jugadas",
                     "{C:attention}#1#{} vez(es) durante las",
