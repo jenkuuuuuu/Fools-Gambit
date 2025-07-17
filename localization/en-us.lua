@@ -1257,7 +1257,7 @@ return {
                 "this option during a run",
                 "{C:dark_edition}This option is experimental{}"
             },
-            diplicate_jokers = "Duplicate jokers",
+            duplicate_jokers = "Duplicate jokers",
             duplicate_jokers_tooltip = {
                 "Allows jokers to spawn even if",
                 "it's alternate is in your joker tray",
@@ -1304,7 +1304,7 @@ return {
                 ["en-us"] = "English",
                 ["es_ES"] = "Spanish",
                 ["zh-CN"] = "Chinese",
-                ["sn_bos"] = "Sendien"
+                ["sn_bos"] = "Sendien",
             },
             misc = {
                 page_title = "Credits",
