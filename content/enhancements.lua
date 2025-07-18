@@ -316,7 +316,45 @@ SMODS.Enhancement{
 		card.ability.h_dollars = card.ability.extra.dollars
 	end
 }
-
+SMODS.Enhancement:take_ownership('lucky',
+    {
+	atlas = "enhanced",
+	pos = {x = 4, y = 1},
+	config = {
+		extra = {
+			mult_min = 1,
+			mult_max = 5,
+			mult = 20,
+			money_min = 1,
+			money_max = 15,
+			money = 20
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return { vars = {
+			card.ability.extra.mult_min,
+			card.ability.extra.mult_max,
+			card.ability.extra.mult,
+			card.ability.extra.money_min,
+			card.ability.extra.money_max,
+			card.ability.extra.money
+		}}
+	end,
+	calculate = function (self, card, context)
+		card.ability.bonus = 0
+		if pseudorandom("mila",card.ability.extra.mult_min,card.ability.extra.mult_max) <= card.ability.extra.mult_min then
+			card.ability.mult = card.ability.extra.mult
+		end
+		local var = pseudorandom("mila",card.ability.extra.money_min,card.ability.extra.money_max)
+		if var <= card.ability.extra.money_min then
+			card.ability.p_dollars = card.ability.extra.money
+		else
+			card.ability.p_dollars = 0
+		end
+	end
+    },
+    true
+)
 SMODS.Enhancement{
 	key = "lucky",
 	atlas = "enhanced",
@@ -346,8 +384,8 @@ SMODS.Enhancement{
 		if pseudorandom("mila",card.ability.extra.chips_min,card.ability.extra.chips_max) <= card.ability.extra.chips_min then
 			card.ability.bonus = card.ability.extra.chips
 		end
-		local test_var = pseudorandom("mila",card.ability.extra.money_min,card.ability.extra.money_max)
-		if test_var <= card.ability.extra.chips_min then
+		local var = pseudorandom("mila",card.ability.extra.money_min,card.ability.extra.money_max)
+		if var <= card.ability.extra.money_min then
 			card.ability.p_dollars = card.ability.extra.money
 		else
 			card.ability.p_dollars = 0

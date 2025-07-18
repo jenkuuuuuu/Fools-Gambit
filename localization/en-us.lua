@@ -92,7 +92,16 @@ return {
                     "{C:green}#1# in #2#{} chance",
                     "for {C:chips}+#3#{} Chips",
                     "{C:green}#4# in #5#{} chance",
-                    "for {C:gold}$#6#"
+                    "to win {C:gold}$#6#"
+                }
+            },
+            m_lucky = {
+                name = "Lucky Card",
+                text = {
+                    "{C:green}#1# in #2#{} chance",
+                    "for {C:mult}+#3#{} Mult",
+                    "{C:green}#4# in #5#{} chance",
+                    "to win {C:gold}$#6#"
                 }
             },
             m_fg_gold = {
@@ -921,6 +930,14 @@ return {
                     "Adds the {C:attention}sell value{} of this Joker",
                     "to all other owned Jokers when {C:attention}sold",
                     "{C:inactive}(Currently {C:gold}+#1#{C:inactive} sell value)"
+                }
+            },
+            j_fg_lucky_cat = {
+                name = "Lucky Cat?",
+                text = {
+                    "For every scored {C:attention}lucky{C:inactive}(?){} card, {C:green}#4# in #5#{} chance to",
+                    "permanantly {C:chips}+#1#{} Chips, {C:mult}+#2#{} mult and {C:gold}+$#3#",
+                    "to said card depending on it's version"
                 }
             },
             -- Legendaries
