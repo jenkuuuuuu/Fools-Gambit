@@ -106,6 +106,7 @@ FG.ALTS.joker_equivalents = {
 	j_flower_pot = "j_fg_flower_pot",
 	j_seeing_double = "j_fg_seeing_double",
 	j_oops = "j_fg_oops",
+	j_wee = "j_fg_wee",
 	j_hit_the_road = "j_fg_hit_the_road",
 	j_invisible = "j_fg_invisible",
 	j_drivers_license = "j_fg_drivers_license",
@@ -1399,33 +1400,47 @@ SMODS.Joker {
 	cost = 2,
 	atlas = 'jokers_alt',
 	pos = { x = 0, y = 5 },
-	config = { extra = { chips = 0, chip_gain = 15 } },
+	config = { extra = { max = 8, cur = 0 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.max, card.ability.extra.cur } }
+	end,
 	yes_pool_flag = 'alternate_spawn',
 	in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end,
 	calculate = function(self, card, context)
 		if context.cardarea == G.play and context.individual and (context.other_card:get_id() == 8) then
-			G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-			return {
-				extra = {
-					focus = card,
-					message = localize('k_plus_tarot'),
-					func = function()
-						G.E_MANAGER:add_event(Event({
-							trigger = 'before',
-							delay = 0.0,
-							func = (function()
-								local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, '8ba')
-								card:add_to_deck()
-								G.consumeables:emplace(card)
-								G.GAME.consumeable_buffer = 0
-								return true
-							end)
-						}))
-					end
-				},
-				colour = G.C.SECONDARY_SET.Tarot,
-				card = card
-			}
+			if card.ability.extra.cur == card.ability.extra.max - 1 then
+				card.ability.extra.cur = 0
+				G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+				return {
+					extra = {
+						focus = card,
+						message = localize('k_plus_tarot'),
+						func = function()
+							G.E_MANAGER:add_event(Event({
+								trigger = 'before',
+								delay = 0.0,
+								func = (function()
+									local card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, '8ba')
+									card:add_to_deck()
+									G.consumeables:emplace(card)
+									G.GAME.consumeable_buffer = 0
+									return true
+								end)
+							}))
+						end
+					},
+					colour = G.C.SECONDARY_SET.Tarot,
+					card = card
+				}
+			else
+				card.ability.extra.cur = card.ability.extra.cur + 1
+				return {
+					extra = {
+						message = "+1",
+						focus = card
+					}
+				}
+			end
 		end
 	end
 }
@@ -2467,13 +2482,19 @@ SMODS.Joker{
 				if FG.FUNCS.random_chance(card.ability.extra.chancemax) then
 					context.other_card.ability.extra.chips = context.other_card.ability.extra.chips + card.ability.extra.pluschips
 					context.other_card.ability.extra.money = context.other_card.ability.extra.money + card.ability.extra.plusmoney
-					card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Added!" })
+					return{
+						extra = {
+							message = "Added!",
+							focus = card
+						}
+					}
 				else
-					FG.FUNCS.card_eval_status_text{
-						card = card,
-						message = "Nope!",
-						mode = "literal",
-						colour = "purple"
+					return{
+						extra = {
+							message = "Nope!",
+							focus = card,
+							colour = G.C.SECONDARY_SET.Tarot
+						}
 					}
 				end
 			end
@@ -2481,13 +2502,19 @@ SMODS.Joker{
 				if FG.FUNCS.random_chance(card.ability.extra.chancemax) then
 					context.other_card.ability.extra.mult = context.other_card.ability.extra.mult + card.ability.extra.plusmult
 					context.other_card.ability.extra.money = context.other_card.ability.extra.money + card.ability.extra.plusmoney
-					card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Added!" })
+					return{
+						extra = {
+							message = "Added!",
+							focus = card
+						}
+					}
 				else
-					FG.FUNCS.card_eval_status_text{
-						card = card,
-						message = "Nope!",
-						mode = "literal",
-						colour = "purple"
+					return{
+						extra = {
+							message = "Nope!",
+							focus = card,
+							colour = G.C.SECONDARY_SET.Tarot
+						}
 					}
 				end
 			end
@@ -3617,7 +3644,12 @@ SMODS.Joker {
 		if context.pseudorandom_result and context.result then
             card.ability.extra.num_gain = card.ability.extra.num_gain * card.ability.extra.num_rate
             card.ability.extra.den_gain = card.ability.extra.den_gain * card.ability.extra.den_rate
-			card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Multiplied" })
+			return{
+				extra = {
+					message = "Multiplied!",
+					focus = card
+				}
+			}
 		end
 		if context.mod_probability and not context.blueprint then
             return {

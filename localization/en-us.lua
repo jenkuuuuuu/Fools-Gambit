@@ -458,9 +458,10 @@ return {
             j_fg_8ball = {
                 name = '8 Ball?',
                 text = {
-                        "Each scored {C:attention}8{} creates a",
+                        "Every {C:attention}#1#{} scored {C:attention}8{} creates a",
                         "{C:tarot}Tarot{} card when scored",
                         "{C:inactive}(Must have room)",
+                        "{C:inactive}(Currently at #2#)"
                 },
             },
             j_fg_misprint = {
