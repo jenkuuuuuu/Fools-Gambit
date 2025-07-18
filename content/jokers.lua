@@ -84,6 +84,7 @@ FG.ALTS.joker_equivalents = {
 	j_fg_juggler = "j_fg_juggler",
 	j_drunkard = "j_fg_drunkard",
 	j_stone = "j_fg_stone",
+	j_lucky_cat = "j_fg_lucky_cat",
 	j_splash = "j_fg_splash",
 	j_cavendish = "j_fg_cavendish",
 	j_red_card = "j_fg_red_card",
@@ -2431,6 +2432,68 @@ SMODS.Joker{
 		end
 	end,
     blueprint_compat = false,
+}
+
+SMODS.Joker{
+    key = "lucky_cat",
+    atlas = "jokers_alt",
+    pos = { x = 5, y = 14},
+    rarity = 1,
+    cost = 2,
+	config = {
+		extra = {
+			pluschips = 30,
+			plusmult = 5,
+			plusmoney = 25,
+			chancemax = 4
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return {
+			vars = {
+				card.ability.extra.pluschips,
+				card.ability.extra.plusmult,
+				card.ability.extra.plusmoney,
+				G.GAME.probabilities.normal or 1,
+				card.ability.extra.chancemax
+			}
+		}		
+	end,
+	yes_pool_flag = 'alternate_spawn',
+    in_pool = function (self, args) local ret = FG.FUNCS.allow_duplicate(self) return ret end, -- Custom logic for spawning
+	calculate = function (self, card, context)
+		if context.individual and context.cardarea == G.play then	
+			if FG.FUNCS.get_card_info(context.other_card).key == "m_fg_lucky" then
+				if FG.FUNCS.random_chance(card.ability.extra.chancemax) then
+					context.other_card.ability.extra.chips = context.other_card.ability.extra.chips + card.ability.extra.pluschips
+					context.other_card.ability.extra.money = context.other_card.ability.extra.money + card.ability.extra.plusmoney
+					card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Added!" })
+				else
+					FG.FUNCS.card_eval_status_text{
+						card = card,
+						message = "Nope!",
+						mode = "literal",
+						colour = "purple"
+					}
+				end
+			end
+			if FG.FUNCS.get_card_info(context.other_card).key == "m_lucky" then
+				if FG.FUNCS.random_chance(card.ability.extra.chancemax) then
+					context.other_card.ability.extra.mult = context.other_card.ability.extra.mult + card.ability.extra.plusmult
+					context.other_card.ability.extra.money = context.other_card.ability.extra.money + card.ability.extra.plusmoney
+					card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Added!" })
+				else
+					FG.FUNCS.card_eval_status_text{
+						card = card,
+						message = "Nope!",
+						mode = "literal",
+						colour = "purple"
+					}
+				end
+			end
+		end
+	end,
+    blueprint_compat = true,
 }
 --[[-- Splash | does not work help
 SMODS.Joker{

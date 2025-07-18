@@ -312,7 +312,42 @@ SMODS.Enhancement{
 		card.ability.h_dollars = card.ability.extra.dollars
 	end
 }
-
+SMODS.Enhancement:take_ownership('lucky',
+    {
+	atlas = "enhanced",
+	pos = {x = 4, y = 1},
+	config = {
+		extra = {
+			mult_max = 5,
+			mult = 20,
+			money_max = 15,
+			money = 20
+		}
+	},
+	loc_vars = function (self, info_queue, card)
+		return { vars = {
+			G.GAME.probabilities.normal or 1,,
+			card.ability.extra.mult_max,
+			card.ability.extra.mult,
+			G.GAME.probabilities.normal or 1,,
+			card.ability.extra.money_max,
+			card.ability.extra.money
+		}}
+	end,
+	calculate = function (self, card, context)
+		card.ability.bonus = 0
+		if FG.FUNCS.random_chance(card.ability.extra.mult_max) then
+			card.ability.mult = card.ability.extra.mult
+		end
+		if FG.FUNCS.random_chance(card.ability.extra.money_max) then
+			card.ability.p_dollars = card.ability.extra.money
+		else
+			card.ability.p_dollars = 0
+		end
+	end
+    },
+    true
+)
 SMODS.Enhancement{
 	key = "lucky",
 	atlas = "enhanced",
