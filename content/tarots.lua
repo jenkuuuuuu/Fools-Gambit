@@ -54,9 +54,9 @@ local function tarot_convert (target_enhancement)
                 trigger = "after",
                 delay = 0.2,
                 func = function()
-                    local new_card = FG.FUNCS.duplicate_playing_card(v)
-                    cards[#cards+1] = new_card
-                    new_card:set_ability(G.P_CENTERS.c_base)
+                    --local new_card = FG.FUNCS.duplicate_playing_card(v)
+                    --cards[#cards+1] = new_card
+                   -- new_card:set_ability(G.P_CENTERS.c_base)
                     v:set_ability(target_enhancement)
                     return true
                 end

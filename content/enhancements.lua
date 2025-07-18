@@ -25,22 +25,20 @@ SMODS.Enhancement{
 	pos = { x = 1, y = 1 },
 	config = {
 		extra = {
-			grant_min = 1,
 			grant_max = 2,
 			grant_amount = 60,
-			remove_min = 1,
 			remove_max = 4,
-			remove_amount = -15
+			remove_amount = 15
 		}
 	},
 	loc_vars = function (self, info_queue, card)
 		card.ability.bonus = 0
 		return {
 			vars = {
-				card.ability.extra.grant_min,
+				G.GAME.probabilities.normal or 1,
 				card.ability.extra.grant_max,
 				card.ability.extra.grant_amount,
-				card.ability.extra.remove_min,
+				G.GAME.probabilities.normal or 1,
 				card.ability.extra.remove_max,
 				card.ability.extra.remove_amount
 			}
@@ -48,11 +46,11 @@ SMODS.Enhancement{
 	end,
 	calculate = function (self, card, context)
 		card.ability.bonus = 0
-		if pseudorandom("mila",card.ability.extra.grant_min,card.ability.extra.grant_max) <= card.ability.extra.grant_min then
-			card.ability.bonus = card.ability.mult + card.ability.extra.grant_amount
+		if FG.FUNCS.random_chance(card.ability.extra.grant_max) then
+			card.ability.bonus = card.ability.bonus + card.ability.extra.grant_amount
 		end
-		if pseudorandom("mila",card.ability.extra.remove_min,card.ability.extra.remove_max) <= card.ability.extra.remove_min then
-			card.ability.bonus = card.ability.mult + card.ability.extra.remove_amount
+		if FG.FUNCS.random_chance(card.ability.extra.remove_max) then
+			card.ability.bonus = card.ability.bonus - card.ability.extra.remove_amount
 		end
 	end
 }
@@ -63,21 +61,19 @@ SMODS.Enhancement{
 	pos = { x = 2, y = 1 },
 	config = {
 		extra = {
-			grant_min = 1,
 			grant_max = 2,
 			grant_amount = 8,
-			remove_min = 1,
 			remove_max = 4,
-			remove_amount = -2
+			remove_amount = 2
 		}
 	},
 	loc_vars = function (self, info_queue, card)
 		return {
 			vars = {
-				card.ability.extra.grant_min,
+				G.GAME.probabilities.normal or 1,
 				card.ability.extra.grant_max,
 				card.ability.extra.grant_amount,
-				card.ability.extra.remove_min,
+				G.GAME.probabilities.normal or 1,
 				card.ability.extra.remove_max,
 				card.ability.extra.remove_amount
 			}
@@ -85,10 +81,10 @@ SMODS.Enhancement{
 	end,
 	calculate = function (self, card, context)
 		card.ability.mult = 0
-		if pseudorandom("mila",card.ability.extra.grant_min,card.ability.extra.grant_max) <= card.ability.extra.grant_min then
+		if FG.FUNCS.random_chance(card.ability.extra.grant_max) then
 			card.ability.mult = card.ability.mult + card.ability.extra.grant_amount
 		end
-		if pseudorandom("mila",card.ability.extra.remove_min,card.ability.extra.remove_max) <= card.ability.extra.remove_min then
+		if FG.FUNCS.random_chance(card.ability.extra.remove_max) then
 			card.ability.mult = card.ability.mult - card.ability.extra.remove_amount
 		end
 	end
@@ -323,31 +319,28 @@ SMODS.Enhancement{
 	pos = {x = 4, y = 1},
 	config = {
 		extra = {
-			chips_min = 1,
 			chips_max = 3,
 			chips = 30,
-			money_min = 1,
 			money_max = 30,
 			money = 50
 		}
 	},
 	loc_vars = function (self, info_queue, card)
 		return { vars = {
-			card.ability.extra.chips_min,
+			G.GAME.probabilities.normal or 1,
 			card.ability.extra.chips_max,
 			card.ability.extra.chips,
-			card.ability.extra.money_min,
+			G.GAME.probabilities.normal or 1,
 			card.ability.extra.money_max,
 			card.ability.extra.money
 		}}
 	end,
 	calculate = function (self, card, context)
 		card.ability.bonus = 0
-		if pseudorandom("mila",card.ability.extra.chips_min,card.ability.extra.chips_max) <= card.ability.extra.chips_min then
+		if FG.FUNCS.random_chance(card.ability.extra.chips_max) then
 			card.ability.bonus = card.ability.extra.chips
 		end
-		local test_var = pseudorandom("mila",card.ability.extra.money_min,card.ability.extra.money_max)
-		if test_var <= card.ability.extra.chips_min then
+		if FG.FUNCS.random_chance(card.ability.extra.money_max) then
 			card.ability.p_dollars = card.ability.extra.money
 		else
 			card.ability.p_dollars = 0
