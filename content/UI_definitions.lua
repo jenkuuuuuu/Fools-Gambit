@@ -4,128 +4,106 @@ SMODS.current_mod.config_tab = function()
 		-- config values here, see 'Building a UI' page
 		r = 0.1, minw = 10, minh = 6, align = "tm", padding = 0.2, colour = G.C.BLACK
 	}, nodes = {
-		-- work your UI wizardry here, see 'Building a UI' page
+		-- Disclaimer
 		{n = G.UIT.R, config = {align = "tm"}, nodes = {
-			{n = G.UIT.C, config = {align = "cm"}, nodes = {
+			{n = G.UIT.R, config = {align = "tm"}, nodes = {
 				FG.FUNCS.UIBox_text{
 					text = FG.FUNCS.localize{"FG","config","disclaimer"},
 					colour = "red",
 					scale = 0.4,
-					align = "tm"
+					align = "tm",
 				}
 			}}
 		}},
-		{n = G.UIT.R, config = {align = "tm"}, nodes = {
-			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "tm"}, nodes = {
-					create_toggle{
-						label = FG.FUNCS.localize{"FG","config","extra_jokers"},
-						ref_table = FG.config,
-						ref_value = "extra_jokers"
-					},
-				}},
+		-- Set 1
+		{n = G.UIT.R, nodes = {
+			{n = G.UIT.C, nodes = {
+				create_toggle{
+					label = FG.FUNCS.localize{"FG","config","extra_jokers"},
+					ref_table = FG.config,
+					ref_value = "extra_jokers"
+				},		
 			}},
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","extra_jokers_tooltip"}}}},
-				}},
+				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","extra_jokers_tooltip"}}}},
 			}},
-			{n = G.UIT.C, config = {align = "cm", minw = 0.3}}, -- separator
-			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					create_toggle{
-						label = FG.FUNCS.localize{"FG","config","diplicate_jokers"},
-						ref_table = FG.config,
-						ref_value = "duplicated_jokers"
-					},
-					
-				}},
+			{n = G.UIT.C, config = {minw = 0.1}}, -- Separator
+			{n = G.UIT.C, nodes = {
+				create_toggle{
+					label = FG.FUNCS.localize{"FG","config","duplicated_jokers"},
+					ref_table = FG.config,
+					ref_value = "duplicated_jokers"
+				},		
 			}},
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","duplicate_jokers_tooltip"}}}},
-				}},
-			}}
+				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","duplicated_jokers_tooltip"}}}},
+			}},
 		}},
-		{n = G.UIT.R, config = {align = "cm"}, nodes = {
-			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					create_toggle{
-						label = FG.FUNCS.localize{"FG","config","alt_sfx"},
-						ref_table = FG.config,
-						ref_value = "alternate_sfx",
-					},	
-				}},
+		-- Set 2
+		{n = G.UIT.R, nodes = {
+			{n = G.UIT.C, nodes = {
+				create_toggle{
+					label = FG.FUNCS.localize{"FG","config","alt_sfx"},
+					ref_table = FG.config,
+					ref_value = "alternate_sfx"
+				},		
 			}},
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","alt_sfx_tooltip"}}}},
-				}},
+				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","alt_sfx_tooltip"}}}},
 			}},
-			{n = G.UIT.C, config = {align = "cm", minw = 0.3}}, -- separator
-			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					create_toggle{
-						label = FG.FUNCS.localize{"FG","config","additional_title"},
-						ref_table = FG.config,
-						ref_value = "additional_title",
-						callback = function ()
-							if FG.config.additional_title then
-								G.fg_title:set_alignment({
-									major = G.SPLASH_LOGO,
-									type = 'cm',
-									bond = 'Strong',
-									offset = {x=4,y=3}
-								})
-							else
-								G.fg_title:set_alignment({
-									major = G.SPLASH_LOGO,
-									type = 'cm',
-									bond = 'Strong',
-									offset = {x=4,y=12}
-								})
-							end
+			{n = G.UIT.C, config = {minw = 0.1}}, -- Separator
+			{n = G.UIT.C, nodes = {
+				create_toggle{
+					label = FG.FUNCS.localize{"FG","config","additional_title"},
+					ref_table = FG.config,
+					ref_value = "additional_title",
+					callback = function ()
+						if FG.config.additional_title then
+							G.fg_title:set_alignment({
+								major = G.SPLASH_LOGO,
+								type = 'cm',
+								bond = 'Strong',
+								offset = {x=4,y=3}
+							})
+						else
+							G.fg_title:set_alignment({
+								major = G.SPLASH_LOGO,
+								type = 'cm',
+								bond = 'Strong',
+								offset = {x=4,y=12}
+							})
 						end
-					},
-				}},
+					end
+				},
 			}},
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","additional_title_tooltip"}}}},
-				}},
+				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","additional_title_tooltip"}}}},
 			}},
 		}},
+		-- Set 3
 		{n = G.UIT.R, config = {align = "cm"}, nodes = {
-			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					{n = G.UIT.R, config = {align = "cm"}, nodes = {
-						{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","special_edition"}, colour = G.C.WHITE, scale = .4, minw = 2, minh = 6, padding = 0.4}},
-					}},
-					{n = G.UIT.R, config = {align = "cm", minj = 0.2}}, -- separator
-					create_option_cycle{
-						options = FG.config.s_version.options,
-						current_option = FG.config.s_version.selected,
-						opt_callback = 'FG_s_version',
-						ref_table = FG.config.s_version,
-						ref_value = "selected",
-						w = 5.5
-					},
-				}}
-			}}
+			{n = G.UIT.R, config = {align = "cm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","special_edition"}, colour = G.C.WHITE, scale = .4, minw = 2, minh = 6, padding = 0.4}}}},
+			create_option_cycle{
+				options = FG.config.s_version.options,
+				current_option = FG.config.s_version.selected,
+				opt_callback = 'FG_s_version',
+				ref_table = FG.config.s_version,
+				ref_value = "selected",
+				w = 5.5
+			},
 		}},
+		--set 4
 		{n = G.UIT.R, config = {align = "cm"}, nodes = {
-			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					create_toggle{
-						label = FG.FUNCS.localize{"FG","config","debug_mode"},
-						ref_table = FG.config,
-						ref_value = "debug_mode"
-					},
-				}},
-				{n = G.UIT.R, config = {align = "cm"}, nodes = {
-					{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","require_restart"}, colour = G.C.GREY, scale = .4, minw = 2, minh = 6, padding = 0.4}},
-				}}
-			}}
+			{n = G.UIT.R, nodes = {
+				create_toggle{
+					label = FG.FUNCS.localize{"FG","config","debug_mode"},
+					ref_table = FG.config,
+					ref_value = "debug_mode"
+				},	
+			}},
+			{n = G.UIT.R, config = {align = "cm"}, nodes = {
+				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","require_restart"}, colour = G.C.GREY, scale = .4, minw = 2, minh = 6, padding = 0.4}},
+			}},
 		}},
 	}}
 end
@@ -142,6 +120,7 @@ SMODS.current_mod.extra_tabs = function()
 					-- config values here, see 'Building a UI' page
 					r = 0.1, minw = 10, minh = 6, align = "tm", padding = 0.2, colour = G.C.BLACK
 				}, nodes = {
+					-- Title
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {
 						{n = G.UIT.C, config = {align = "cm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","title"}, colour = G.C.DARK_EDITION, scale = .7}}}},
 						{n = G.UIT.C, config = {minw = .2}},
@@ -156,7 +135,9 @@ SMODS.current_mod.extra_tabs = function()
 							}
 						}},
 					}},
+					-- Pages
 					{n = G.UIT.R, config = {align = "tm"}, nodes = {
+						-- Main page
 						{n = G.UIT.C, config = {align = "tm", padding = 0}, nodes = {
 							{n = G.UIT.R, config = {align = "tm", padding = 0}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","lead_developer"}, colour = G.C.GOLD, scale = .5}}}},
 							{n = G.UIT.R, config = {align = "tm", padding = 0.15}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","names","goldenleaf"}, colour = G.C.WHITE, scale = .3}}}},
@@ -226,8 +207,10 @@ SMODS.current_mod.extra_tabs = function()
 							}},
 							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","special_thanks_misc"}, colour = G.C.WHITE, scale = .3}}}},
 						}},
+						-- Local 'n such
 						{n = G.UIT.C, config = {align = "tm"}, nodes = {
 							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","localization"}, colour = G.C.WHITE, scale = .45}}}},	
+							-- Local labels
 							{n = G.UIT.R, nodes = {
 								{n = G.UIT.C, config = {padding = 0.05}, nodes = {
 									FG.FUNCS.UIBox_text{
@@ -236,12 +219,12 @@ SMODS.current_mod.extra_tabs = function()
 											"",
 											FG.FUNCS.localize{"FG","credits","languages","es_ES"},
 											FG.FUNCS.localize{"FG","credits","languages","zh-CN"},
-											FG.FUNCS.localize{"FG","credits","languages","sn_bos"}
+											FG.FUNCS.localize{"FG","credits","languages","sn_bos"},
 										},
 										scale = 0.3,
-										align = "cl",
-										colour = "gold"
-									},
+										align = "tl",
+										colour = "gold",
+									}
 								}},
 								{n = G.UIT.C, config = {minw = 0.2}},
 								{n = G.UIT.C, config = {padding = 0.05}, nodes = {
@@ -257,8 +240,8 @@ SMODS.current_mod.extra_tabs = function()
 										align = "cl"
 									},
 								}},
-
 							}},
+							-- Links
 							{n = G.UIT.R, config = {minh = 0.3}},
 							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","links","title"}, colour = G.C.WHITE, scale = .45}}}},	
 							{n = G.UIT.R, config = {minh = 0.15}},

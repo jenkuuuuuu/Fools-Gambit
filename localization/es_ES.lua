@@ -1246,8 +1246,8 @@ return {
                 "en medio de una partida",
                 "{C:dark_edition}Esta opción es experimental{}"
             },
-            diplicate_jokers = "Comodines duplicados",
-            duplicate_jokers_tooltip = {
+            duplicated_jokers = "Comodines duplicados",
+            duplicated_jokers_tooltip = {
                 "Permite que aparezcan las versiones",
                 "alternativas de aquellos comodines",
                 "aunque ya tengas una de sus versiones",
@@ -1295,7 +1295,7 @@ return {
                 ["en-us"] = "Ingés",
                 ["es_ES"] = "Español",
                 ["zh-CN"] = "Chino",
-                ["sn_bos"] = "Sendién"
+                ["sn_bos"] = "Sendién",
             },
             misc = {
                 page_title = "Créditos",
