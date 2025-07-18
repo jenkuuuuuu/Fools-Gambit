@@ -1257,8 +1257,8 @@ return {
                 "this option during a run",
                 "{C:dark_edition}This option is experimental{}"
             },
-            duplicate_jokers = "Duplicate jokers",
-            duplicate_jokers_tooltip = {
+            duplicated_jokers = "Duplicate jokers",
+            duplicated_jokers_tooltip = {
                 "Allows jokers to spawn even if",
                 "it's alternate is in your joker tray",
                 " ",
@@ -1273,9 +1273,9 @@ return {
                 " ",
                 "{C:red}Requires restart{}"
             },
-            additional_title = "Show additional title",
+            additional_title = "Additional title",
             additional_title_tooltip = {
-                "Displays a \"+Fool's Gambit\" logo",
+                "Display a \"+Fool's Gambit\" logo",
                 "next to the main Balatro title"
             },
             special_edition = "Special edition",

@@ -27,6 +27,7 @@ SMODS.current_mod.config_tab = function()
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
 				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","extra_jokers_tooltip"}}}},
 			}},
+			{n = G.UIT.C, config = {minw = 0.1}}, -- Separator
 			{n = G.UIT.C, nodes = {
 				create_toggle{
 					label = FG.FUNCS.localize{"FG","config","duplicated_jokers"},
@@ -35,7 +36,7 @@ SMODS.current_mod.config_tab = function()
 				},		
 			}},
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
-				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","duplicate_jokers_tooltip"}}}},
+				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","duplicated_jokers_tooltip"}}}},
 			}},
 		}},
 		-- Set 2
@@ -50,6 +51,7 @@ SMODS.current_mod.config_tab = function()
 			{n = G.UIT.C, config = {align = "cm"}, nodes = {
 				{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","config","misc","?"}, colour = G.C.GREY, scale = .4, tooltip = {text = FG.FUNCS.localize{"FG","config","alt_sfx_tooltip"}}}},
 			}},
+			{n = G.UIT.C, config = {minw = 0.1}}, -- Separator
 			{n = G.UIT.C, nodes = {
 				create_toggle{
 					label = FG.FUNCS.localize{"FG","config","additional_title"},
