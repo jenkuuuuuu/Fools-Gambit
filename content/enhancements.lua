@@ -326,10 +326,10 @@ SMODS.Enhancement:take_ownership('lucky',
 	},
 	loc_vars = function (self, info_queue, card)
 		return { vars = {
-			G.GAME.probabilities.normal or 1,,
+			G.GAME.probabilities.normal or 1,
 			card.ability.extra.mult_max,
 			card.ability.extra.mult,
-			G.GAME.probabilities.normal or 1,,
+			G.GAME.probabilities.normal or 1,
 			card.ability.extra.money_max,
 			card.ability.extra.money
 		}}
