@@ -70,7 +70,7 @@ SMODS.current_mod.config_tab = function()
 								major = G.SPLASH_LOGO,
 								type = 'cm',
 								bond = 'Strong',
-								offset = {x=4,y=12}
+								offset = {x=12,y=8}
 							})
 						end
 					end
@@ -182,9 +182,9 @@ SMODS.current_mod.extra_tabs = function()
 								}},
 							}},
 							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","special_thanks"}, colour = G.C.GOLD, scale = .5}}}},
-
+							{n = G.UIT.R, config = {minh = 0.1}},
 							{n = G.UIT.R, config = {align = "tm"}, nodes = {
-								{n = G.UIT.C, config = {minw = 2, align = "tm", padding = 0.1}, nodes = {
+								{n = G.UIT.C, config = {minw = 2, align = "tm", padding = 0}, nodes = {
 									FG.FUNCS.UIBox_text{
 										text = {
 											FG.FUNCS.localize{"FG","credits","names","localthunk"},
@@ -194,18 +194,27 @@ SMODS.current_mod.extra_tabs = function()
 										align = "tm",
 									},					
 								}},
-								{n = G.UIT.C, config = {minw = 2, align = "tm", padding = 0.1}, nodes = {
+								{n = G.UIT.C, config = {minw = 2, align = "tm", padding = 0}, nodes = {
 									FG.FUNCS.UIBox_text{
 										text = {
 											FG.FUNCS.localize{"FG","credits","names","rav"},
 											FG.FUNCS.localize{"FG","credits","names","lavbulb"},
+											--FG.FUNCS.localize{"FG","credits","names","itscoldhere"},
 										},
 										scale = 0.3,
 										align = "tm",
 									},			
 								}},
 							}},
-							{n = G.UIT.R, config = {align = "tm"}, nodes = {{n = G.UIT.T, config = {text = FG.FUNCS.localize{"FG","credits","misc","special_thanks_misc"}, colour = G.C.WHITE, scale = .3}}}},
+							{n = G.UIT.R, config = {align = "tm", padding = 0}, nodes = {
+								FG.FUNCS.UIBox_text{
+									text = {
+										FG.FUNCS.localize{"FG","credits","misc","special_thanks_misc"}
+									},
+									align = "tm",
+									mode = "R",
+								}
+							}},			
 						}},
 						-- Local 'n such
 						{n = G.UIT.C, config = {align = "tm"}, nodes = {
@@ -220,6 +229,7 @@ SMODS.current_mod.extra_tabs = function()
 											FG.FUNCS.localize{"FG","credits","languages","es_ES"},
 											FG.FUNCS.localize{"FG","credits","languages","zh-CN"},
 											FG.FUNCS.localize{"FG","credits","languages","sn_bos"},
+											FG.FUNCS.localize{"FG","credits","languages","ja"},
 										},
 										scale = 0.3,
 										align = "tl",
@@ -235,6 +245,7 @@ SMODS.current_mod.extra_tabs = function()
 											FG.FUNCS.localize{"FG","credits","names","jogla"},
 											FG.FUNCS.localize{"FG","credits","names","goldenleaf"},
 											FG.FUNCS.localize{"FG","credits","names","goldenleaf"}..", "..FG.FUNCS.localize{"FG","credits","names","jogla"},
+											FG.FUNCS.localize{"FG","credits","names","mina_kitsune"},
 										},
 										scale = 0.3,
 										align = "cl"

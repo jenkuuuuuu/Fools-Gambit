@@ -1290,12 +1290,15 @@ return {
                 rav = "Rav",
                 lavbubl = "Lavbubl",
                 poker_the_poker = "Poker The Poker",
+                mina_kitsune = "Scientifically Insane",
+                itscoldhere = "itscoldhere",
             },
             languages = {
                 ["en-us"] = "Ingés",
                 ["es_ES"] = "Español",
                 ["zh-CN"] = "Chino",
                 ["sn_bos"] = "Sendién",
+                ["ja"] = "Japonés",
             },
             misc = {
                 page_title = "Créditos",
