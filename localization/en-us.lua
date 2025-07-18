@@ -1317,12 +1317,15 @@ return {
                 rav = "Rav",
                 lavbulb = "Lavbubl",
                 poker_the_poker = "Poker The Poker",
+                mina_kitsune = "Scientifically Insane",
+                itscoldhere = "itscoldhere",
             },
             languages = {
                 ["en-us"] = "English",
                 ["es_ES"] = "Spanish",
                 ["zh-CN"] = "Chinese",
                 ["sn_bos"] = "Sendien",
+                ["ja"] = "Japanese",
             },
             misc = {
                 page_title = "Credits",

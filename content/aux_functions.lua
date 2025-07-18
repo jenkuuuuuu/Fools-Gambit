@@ -395,7 +395,7 @@ function Game:main_menu(change_context)
 			major = G.SPLASH_LOGO,
 			type = 'cm',
 			bond = 'Strong',
-			offset = {x=4,y=12}
+			offset = {x=12,y=8}
 		})
 	end
 
