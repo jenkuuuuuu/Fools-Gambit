@@ -3814,7 +3814,7 @@ SMODS.Joker{
             vars = {
 				card.ability.extra.xmult,
 				enhanced_cards,
-				playing_cards/2 or 0
+				math.ceil(playing_cards/2) or 0
 			}
         }
     end,
@@ -3823,7 +3823,7 @@ SMODS.Joker{
 		if context.joker_main then
 			local enhanced_cards = 0
 			for _,v in ipairs(G.playing_cards) do if FG.FUNCS.get_card_info(v).key ~= "c_base" then enhanced_cards = enhanced_cards + 1 end end
-			if enhanced_cards >= (#G.playing_cards/2) then return {xmult = 3} end
+			if enhanced_cards >= math.ceil(#G.playing_cards/2) then return {xmult = 3} end
 		end
     end
 }
@@ -4070,12 +4070,12 @@ SMODS.Joker{
     end,
     blueprint_compat = true,
     calculate = function (self, card, context)
-		if context.setting_blind then
+		if context.end_of_round and G.GAME.blind.boss then
 			local ellegible_jokers = {}
 			local choosen_joker = {}
 			for _,v in ipairs(G.jokers.cards) do
 				--print("Checking jokers")
-				if FG.FUNCS.get_card_info(v).edition ~= "e_negative" then
+				if not ( FG.FUNCS.get_card_info(v).edition == "e_negative" or FG.FUNCS.get_card_info(v).key == self.key ) then
 					table.insert(ellegible_jokers,v)
 					--print("joker added, key="..FG.FUNCS.get_card_info(v).key)
 				end
