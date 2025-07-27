@@ -31,6 +31,7 @@ SMODS.Atlas{
 local mod_contents = {
 	"special_editions/sendien",
 	"aux_functions",
+	"overrides",
 	"jokers",
 	"editions",
 	"consumeables",

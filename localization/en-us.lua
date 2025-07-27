@@ -1143,6 +1143,13 @@ return {
                     "{C:inactive}({C:tarot}The Fool?{} excluded)"
                 }
             },
+            c_fg_hanged_man = {
+                name = "The Hanged Man?",
+                text = {
+                    "Destroys {C:attention}#1#{} random",
+                    "cards in hand"
+                }
+            },
             c_fg_hermit = {
                 name = "The Hermit?",
                 text = {
@@ -1171,12 +1178,34 @@ return {
                     "create a {C:legendary}Black Hole{}"
                 }
             },
+            c_fg_judgement = {
+                name = "Judgement?",
+                text = {
+                    "Destroy selected joker",
+                    "{C:green}#1# in #2#{} chance of creating up to {C:attention}#3#{}",
+                    "jokers with a {C:attention}lower{} rarity, otherwise",
+                    "create up to {C:attention}#3#{} with a {C:attention}higher{} rarity",
+                    "{C:inactive}(Cannot create legendary jokers)"
+                }
+            },
             c_fg_justice = {
                 name = "Justice?",
                 text = {
                     "Replaces the enhancement of",
                     "up to {C:attention}#1#{} selected cards",
                     "into {C:attention}Glass? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
+                }
+            },
+            c_fg_lovers = {
+                name = "The lovers?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Wild? Cards{}",
                     "Create a copy of each card",
                     "{C:attention}without{} any enhancement",
                     "{C:inactive}(Copied cards must have{}",
@@ -1213,6 +1242,18 @@ return {
                     "into {C:clubs}Clubs{}"
                 }
             },
+            c_fg_strength = {
+                name = "Strength?",
+                text = {
+                    {
+                        "Select {C:attention}2{} cards",
+                        "Increases the rank of",
+                        "the {C:attention}leftmost{} card by {C:attention}#1#{}",
+                        "Decreases the rank of the",
+                        "the {C:attention}rightmost{} card by {C:attention}#1#{}",
+                    },
+                }
+            },
             c_fg_sun = {
                 name = "The Sun?",
                 text = {
@@ -1229,6 +1270,18 @@ return {
                     "of {C:attention}all{} consumables in posession",
                     "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
                     "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
+                }
+            },
+            c_fg_tower = {
+                name = "The tower?",
+                text = {
+                    "Replaces the enhancement of",
+                    "up to {C:attention}#1#{} selected cards",
+                    "into {C:attention}Wild? Cards{}",
+                    "Create a copy of each card",
+                    "{C:attention}without{} any enhancement",
+                    "{C:inactive}(Copied cards must have{}",
+                    "{C:inactive}an enhancement){}"
                 }
             },
             c_fg_wheel_of_fortune = {
@@ -1321,10 +1374,14 @@ return {
                 itscoldhere = "itscoldhere",
             },
             languages = {
+                disclaimer = {
+                    "Some localizations may be incomplete",
+                    "*Sendien \'sold\' separately"
+                },
                 ["en-us"] = "English",
                 ["es_ES"] = "Spanish",
                 ["zh-CN"] = "Chinese",
-                ["sn_bos"] = "Sendien",
+                ["sn_bos"] = "Sendien*",
                 ["ja"] = "Japanese",
             },
             misc = {

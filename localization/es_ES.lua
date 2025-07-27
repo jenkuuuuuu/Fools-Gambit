@@ -1115,6 +1115,13 @@ return {
                     "{C:inactive}({C:tarot}The Fool?{} excluded)"
                 }
             },
+            c_fg_hanged_man = {
+                name = "¿El colgao?",
+                text = {
+                    "Destruye {C:attention}#1#{} cartas",
+                    "aleatorias en la mano"
+                }
+            },
             c_fg_hermit = {
                 name = "¿El ermitaño?",
                 text = {
@@ -1143,12 +1150,35 @@ return {
                     "crear un {C:legendary}agujero negro{}"
                 }
             },
+            c_fg_judgement = {
+                name = "¿El juicio?",
+                text = {
+                    "Destruye el comodín seleccionado",
+                    "{C:green}#1# en #2#{} probabilidades de crear hasta {C:attention}#3#{}",
+                    "comodines con una rareza {C:attention}inferior{}",
+                    "Si no, crea hasta {C:attention}#3#{} comodines",
+                    "con una rareza {C:attention}superior{}",
+                    "{C:inactive}(No puede crear comodines legendarios)"
+                }
+            },
             c_fg_justice = {
                 name = "¿La justicia?",
                 text = {
                     "Reemplaza la mejora de",
                     "hasta {C:attention}#1#{} cartas seleccionadas",
-                    "en {C:attention}cartas de Vidrio?{}",
+                    "en {C:attention}cartas de +Vidrio?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_lovers = {
+                name = "¿Los enamorados?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas ¿Versatil?{}",
                     "Crea una copia de cada carta",
                     "{C:attention}sin{} ninguna mejora",
                     "{C:inactive}(Las cartas copiadas han de{}",
@@ -1176,6 +1206,18 @@ return {
                     "en {C:diamonds}Diamantes{}"
                 }
             },
+            c_fg_strength = {
+                name = "¿La fuerza?",
+                text = {
+                    {
+                        "Selecciona {C:attention}2{} cartas",
+                        "Aumenta la categoría de",
+                        "la carta {C:attention}izquierda{} en {C:attention}#1#{}",
+                        "Aumenta la categoría de",
+                        "la carta {C:attention}derecha{} en {C:attention}#1#{}",
+                    },
+                }
+            },
             c_fg_star = {
                 name = "¿La estrella?",
                 text = {
@@ -1201,6 +1243,18 @@ return {
                     "de {C:attention}todos{} los consumibles en posesión",
                     "{C:inactive}(Máximo de {C:gold}$#2#{C:inactive})",
                     "{C:inactive}(Actualmente {C:gold}$#1#{C:inactive})"
+                }
+            },
+            c_fg_tower = {
+                name = "¿La torre?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas de ¿Piedra?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
                 }
             },
             c_fg_wheel_of_fortune = {
@@ -1294,10 +1348,14 @@ return {
                 itscoldhere = "itscoldhere",
             },
             languages = {
+                disclaimer = {
+                    "Algunas traducciones pueden estar incompletas",
+                    "*Sendién \'se vende\' por separado"
+                },
                 ["en-us"] = "Ingés",
                 ["es_ES"] = "Español",
                 ["zh-CN"] = "Chino",
-                ["sn_bos"] = "Sendién",
+                ["sn_bos"] = "Sendién*",
                 ["ja"] = "Japonés",
             },
             misc = {
