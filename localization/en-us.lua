@@ -1227,7 +1227,7 @@ return {
             c_fg_moon = {
                 name = "The Moon?",
                 text = {
-                    "Select up to {C:attention}#1#{} cards to",
+                    "Select {C:attention}#1#{} cards to",
                     "turn them into {C:clubs}Clubs",
                     "Turn the rest of the {C:attention}hand{}",
                     "into {C:diamonds}Diamonds{}"
@@ -1236,7 +1236,7 @@ return {
             c_fg_star = {
                 name = "The Star?",
                 text = {
-                    "Select up to {C:attention}#1#{} cards to",
+                    "Select {C:attention}#1#{} cards to",
                     "turn them into {C:diamonds}Diamonds",
                     "Turn the rest of the {C:attention}hand{}",
                     "into {C:clubs}Clubs{}"
@@ -1257,7 +1257,7 @@ return {
             c_fg_sun = {
                 name = "The Sun?",
                 text = {
-                    "Select up to {C:attention}#1#{} cards to",
+                    "Select {C:attention}#1#{} cards to",
                     "turn them into {C:hearts}Hearts",
                     "Turn the rest of the {C:attention}hand{}",
                     "into {C:spades}Spades{}"
@@ -1295,7 +1295,7 @@ return {
             c_fg_world = {
                 name = "The World?",
                 text = {
-                    "Select up to {C:attention}#1#{} cards to",
+                    "Select {C:attention}#1#{} cards to",
                     "turn them into {C:spades}Spades",
                     "Turn the rest of the {C:attention}hand{}",
                     "into {C:hearts}Hearts{}"

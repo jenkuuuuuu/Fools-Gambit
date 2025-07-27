@@ -1200,7 +1200,7 @@ return {
             c_fg_moon = {
                 name = "¿La luna?",
                 text = {
-                    "Selecciona hasta{C:attention}#1#{} cartas",
+                    "Selecciona {C:attention}#1#{} cartas",
                     "para convertirlas en {C:clubs}tréboles",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:diamonds}Diamantes{}"
@@ -1221,7 +1221,7 @@ return {
             c_fg_star = {
                 name = "¿La estrella?",
                 text = {
-                    "Selecciona hasta {C:attention}#1#{} cartas",
+                    "Selecciona {C:attention}#1#{} cartas",
                     "para convertirlas en {C:diamonds}diamantes",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:clubs}tréboles{}"
@@ -1230,7 +1230,7 @@ return {
             c_fg_sun = {
                 name = "¿El sol?",
                 text = {
-                    "Selecciona hasta {C:attention}#1#{} carta",
+                    "Selecciona {C:attention}#1#{} carta",
                     "para convertirlas en {C:hearts}corazones",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:spades}picas{}"
@@ -1268,7 +1268,7 @@ return {
             c_fg_world = {
                 name = "¿El mundo?",
                 text = {
-                    "Selecciona hasta {C:attention}#1#{} cartas",
+                    "Selecciona {C:attention}#1#{} cartas",
                     "para convertirlas en {C:spades}picas",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:hearts}corazones{}"
