@@ -4,15 +4,15 @@ return {
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
-                    "Convierte {C:attention}1{} comodín seleccionado",
-                    "en su versión {C:red}original{}"
+                    "Convierte {C:attention}#1#{} #2# de más a la izquierda",
+                    "a su versión {C:red}original{}"
                 }
             },
             c_fg_atonal = {
                 name = "Atonal",
                 text = {
-                    "Convierte {C:attention}1{} comodín seleccionado",
-                    "en su versión {C:purple}alternativa{}"
+                    "Convierte {C:attention}#1#{} #2# de más a la izquierda",
+                    "a su versión {C:purple}alternativa{}"
                 }
             },
             c_fg_accelerando = {
@@ -1379,6 +1379,10 @@ return {
                 },
             }
         },
+        language_adaptations = {
+            w_joker_singular = "Comodín",
+            w_joker_plural = "Comodines"
+        }
     },
     misc = {
         achievement_descriptions={},

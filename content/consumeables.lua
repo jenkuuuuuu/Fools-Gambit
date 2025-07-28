@@ -26,7 +26,11 @@ SMODS.Consumable{
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
-        return {vars = {math.ceil(card.ability.extra.cards)}}
+
+        local jk_txt = ""
+        if card.ability.extra.cards == 1 then jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_singular"} else jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_plural"} end
+        
+        return {vars = {math.ceil(card.ability.extra.cards),jk_txt}}
     end,
     can_use = function(self, card)
         if G.jokers and #G.jokers.cards >= 1 then
@@ -73,7 +77,11 @@ SMODS.Consumable{
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
-        return {vars = {math.ceil(card.ability.extra.cards)}}
+
+        local jk_txt = ""
+        if card.ability.extra.cards == 1 then jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_singular"} else jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_plural"} end
+
+        return {vars = {math.ceil(card.ability.extra.cards),jk_txt}}
     end,
     can_use = function(self, card)
         if G.jokers and #G.jokers.cards >= 1 then

@@ -4,7 +4,7 @@ return {
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:red}Original{} form",
                     "{C:inactive}Placeholder Sprite{}",
                 }
@@ -12,7 +12,7 @@ return {
             c_fg_atonal = {
                 name = "Atonal",
                 text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:purple}Alternate{} form",
                     "{C:inactive}Placeholder Sprite{}"
                 }
@@ -1405,6 +1405,10 @@ return {
                 },
             }
         },
+        language_adaptations = {
+            w_joker_singular = "Joker",
+            w_joker_plural = "Jokers"
+        }
     },
     misc = {
         -- This one is very important. I have moved every localization key we might need for FG here. 
