@@ -1,3 +1,11 @@
+FG.ALTS.aberration_equivalents = {
+    c_fg_tonal = "c_fg_tonal_alt",
+    c_fg_atonal = "c_fg_atonal_alt",
+    c_fg_treble = "c_fg_treble_alt",
+    c_fg_alto = "c_fg_alto_alt",
+    c_fg_bass = "c_fg_bass_alt"
+}
+
 SMODS.Atlas {
 	key = "aberrations",
 	path = "aberrationcards.png",
@@ -9,6 +17,7 @@ SMODS.ConsumableType{
     key = "aberration",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
+    collection_rows = { 7, 7}
 }
 
 SMODS.Consumable{
@@ -30,7 +39,7 @@ SMODS.Consumable{
         local jk_txt = ""
         if card.ability.extra.cards == 1 then jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_singular"} else jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_plural"} end
         
-        return {vars = {math.ceil(card.ability.extra.cards),jk_txt}}
+        return {vars = {math.ceil(card.ability.extra.cards),jk_txt or FG.FUNCS.localize{"FG","language_adaptations","w_joker_singular"}}}
     end,
     can_use = function(self, card)
         if G.jokers and #G.jokers.cards >= 1 then
@@ -81,7 +90,7 @@ SMODS.Consumable{
         local jk_txt = ""
         if card.ability.extra.cards == 1 then jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_singular"} else jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_joker_plural"} end
 
-        return {vars = {math.ceil(card.ability.extra.cards),jk_txt}}
+        return {vars = {math.ceil(card.ability.extra.cards),jk_txt or FG.FUNCS.localize{"FG","language_adaptations","w_joker_singular"}}}
     end,
     can_use = function(self, card)
         if G.jokers and #G.jokers.cards >= 1 then
@@ -112,6 +121,7 @@ SMODS.Consumable{
         }))
     end
 }
+
 if FG.config.debug_mode then
 SMODS.Consumable{
     key = "accelerando",
@@ -167,6 +177,15 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 2, y = 0 },
+        loc_vars = function (self, info_queue, card)
+        if not G.jokers then return end
+        for i=1, #G.jokers.cards do
+            if not card.fake_card and not FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 1 then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
+            end
+        end
+    end,
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
             if v.config.center.rarity == 1 then return true end
@@ -194,6 +213,15 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 0, y = 0 },
+        loc_vars = function (self, info_queue, card)
+        if not G.jokers then return end
+        for i=1, #G.jokers.cards do
+            if not card.fake_card and not FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 2 then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
+            end
+        end
+    end,
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
             if v.config.center.rarity == 2 then return true end
@@ -221,6 +249,15 @@ SMODS.Consumable{
     set = "aberration",
     atlas = "aberrations",
 	pos = { x = 1, y = 0 },
+        loc_vars = function (self, info_queue, card)
+        if not G.jokers then return end
+        for i=1, #G.jokers.cards do
+            if not card.fake_card and not FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 3 then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
+            end
+        end
+    end,
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
             if v.config.center.rarity == 3 then return true end
@@ -314,5 +351,221 @@ SMODS.Consumable{
                 delay(0.2)
             end
         end
+    end
+}
+
+
+-----------------------------
+--- Alternate aberrations ---
+-----------------------------
+
+SMODS.Consumable{
+    key = "tonal_alt",
+    set = "aberration",
+    atlas = "aberrations",
+	pos = { x = 7, y = 0 },
+    config = {extra = {cards = 1}},
+    loc_vars = function (self, info_queue, card)
+        if not G.consumeables then return {vars = {math.ceil(card.ability.extra.cards)}} end
+        for i=1, math.min(math.ceil(card.ability.extra.cards),#G.consumeables.cards) do
+            if not card.fake_card and #G.consumeables.cards >= 1
+            and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
+            and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)]
+            end
+        end
+
+        local jk_txt = ""
+        if card.ability.extra.cards == 1 then jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_consumable_singular"} else jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_consumable_plural"} end
+        
+        return {vars = {math.ceil(card.ability.extra.cards),jk_txt or FG.FUNCS.localize{"FG","language_adaptations","w_consumable_singular"}}}
+    end,
+    can_use = function(self, card)
+        if G.consumeables and #G.consumeables.cards >= 1 then
+            if not card.ability then card.ability = {extra = { cards = 1}} end
+            for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
+                if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
+                and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then return true end
+            end
+        end
+    end,
+    use = function(card, area, copier)
+        local used_tarot = (copier or card)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                if not card.ability then card.ability = {extra = { cards = 1}} end
+                for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
+                    if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
+                    and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+                        local c = FG.FUNCS.alternate_card(G.consumeables.cards[i])
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    end
+                end
+                return true
+            end
+        }))
+    end
+}
+
+SMODS.Consumable{
+    key = "atonal_alt",
+    set = "aberration",
+    atlas = "aberrations",
+	pos = { x = 5, y = 0 },
+    config = {extra = {cards = 1}},
+    loc_vars = function (self, info_queue, card)
+        if not G.consumeables then return {vars = {math.ceil(card.ability.extra.cards)}} end
+        for i=1, math.min(math.ceil(card.ability.extra.cards),#G.consumeables.cards) do
+            if not card.fake_card and #G.consumeables.cards >= 1
+            and not FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
+            and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)]
+            end
+        end
+
+        local jk_txt = ""
+        if card.ability.extra.cards == 1 then jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_consumable_singular"} else jk_txt = FG.FUNCS.localize{"FG","language_adaptations","w_consumable_plural"} end
+
+        return {vars = {math.ceil(card.ability.extra.cards),jk_txt or FG.FUNCS.localize{"FG","language_adaptations","w_consumable_singular"}}}
+    end,
+    can_use = function(self, card)
+        if G.consumeables and #G.consumeables.cards >= 1 then
+            if not card.ability then card.ability = {extra = { cards = 1}} end
+            for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
+                if not FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
+                and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then return true end
+            end
+        end
+    end,
+    use = function(card, area, copier)
+        local used_tarot = (copier or card)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                if not card.ability then card.ability = {extra = { cards = 1}} end
+                for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
+                    if not FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
+                    and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+                        local c = FG.FUNCS.alternate_card(G.consumeables.cards[i])
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    end
+                end
+                return true
+            end
+        }))
+    end
+}
+
+
+SMODS.Consumable{
+    key = "treble_alt",
+    set = "aberration",
+    atlas = "aberrations",
+	pos = { x = 2, y = 0 },
+    loc_vars = function (self, info_queue, card)
+        if not G.jokers then return end
+        for i=1, #G.jokers.cards do
+            if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 1 then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
+            end
+        end
+    end,
+    can_use = function(self, card)
+        for _,v in pairs(G.jokers.cards) do
+            if v.config.center.rarity == 1 then return true end
+        end
+    end,
+    use = function(card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                for i in ipairs(G.jokers.cards) do
+                    local currentCard = G.jokers.cards[i]
+                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) and currentCard.config.center.rarity == 1 then
+                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    end
+                end
+                return true
+            end
+        }))
+    end
+}
+
+SMODS.Consumable{
+    key = "bass_alt",
+    set = "aberration",
+    atlas = "aberrations",
+	pos = { x = 0, y = 0 },
+    loc_vars = function (self, info_queue, card)
+        if not G.jokers then return end
+        for i=1, #G.jokers.cards do
+            if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 2 then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
+            end
+        end
+    end,
+    can_use = function(self, card)
+        for _,v in pairs(G.jokers.cards) do
+            if v.config.center.rarity == 2 then return true end
+        end
+    end,
+    use = function(card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                for i in ipairs(G.jokers.cards) do
+                    local currentCard = G.jokers.cards[i]
+                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) and currentCard.config.center.rarity == 2 then
+                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    end
+                end
+                return true
+            end
+        }))
+    end
+}
+
+SMODS.Consumable{
+    key = "alto_alt",
+    set = "aberration",
+    atlas = "aberrations",
+	pos = { x = 1, y = 0 },
+    loc_vars = function (self, info_queue, card)
+        if not G.jokers then return end
+        for i=1, #G.jokers.cards do
+            if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 3 then
+                info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
+            end
+        end
+    end,
+    can_use = function(self, card)
+        for _,v in pairs(G.jokers.cards) do
+            if v.config.center.rarity == 3 then return true end
+        end
+    end,
+    use = function(card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                for i in ipairs(G.jokers.cards) do
+                    local currentCard = G.jokers.cards[i]
+                    if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) and currentCard.config.center.rarity == 3 then
+                        local c = FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
+                        FG.FUNCS.update_edition(c.original,c.alternate)
+                        FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    end
+                end
+                return true
+            end
+        }))
     end
 }

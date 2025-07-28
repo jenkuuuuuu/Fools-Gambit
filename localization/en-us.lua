@@ -61,7 +61,45 @@ return {
                     "Gives {C:money}$#1#{} for every",
                     "owned {C:purple}Alternate{} Joker",
                 }
-            }
+            },
+            -- alts
+            c_fg_tonal_alt = {
+                name = "Tonal?",
+                text = {
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
+                    "to their {C:red}Original{} form",
+                    "{C:inactive}Placeholder Sprite{}",
+                }
+            },
+            c_fg_atonal_alt = {
+                name = "Atonal?",
+                text = {
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
+                    "to their {C:purple}Alternate{} form",
+                    "{C:inactive}Placeholder Sprite{}"
+                }
+            },
+            c_fg_treble_alt = {
+                name = "Treble?",
+                text = {
+                    "Turns all Common Jokers in hand",
+                    "into their {C:red}Original{} form"
+                }
+            },
+            c_fg_bass_alt = {
+                name = "Bass?",
+                text = {
+                    "Turns all Uncommon Jokers in hand",
+                    "into their {C:red}Original{} form"
+                }
+            },
+            c_fg_alto_alt = {
+                name = "Alto?",
+                text = {
+                    "Turns all Rare Jokers in hand",
+                    "into their {C:red}Original{} form"
+                }
+            },
         },
         Back={},
         Blind={},
@@ -1407,7 +1445,9 @@ return {
         },
         language_adaptations = {
             w_joker_singular = "Joker",
-            w_joker_plural = "Jokers"
+            w_joker_plural = "Jokers",
+            w_consumable_singular = "Consumable",
+            w_consumable_plural = "Consumables"
         }
     },
     misc = {

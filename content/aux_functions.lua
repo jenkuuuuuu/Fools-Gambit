@@ -1,8 +1,24 @@
+--- Fallback function to search through `FG.ALTS`
+---@return table t The resulting table of the search. Should contain key-pair values
+function FG.FUNCS.full_search_alternate ()
+	local t = {}
+	t = {}
+	for _,v in pairs(FG.ALTS) do
+		for kk,vv in pairs(v) do
+			t[kk] = vv
+		end
+	end
+	return t
+end
+
+
 --- Checks if a card is an alternate or not in the given table. Stops at the first instance of it's key.
 --- @param key string
---- @param table table
+--- @param table? table
 --- @return boolean|nil
 function FG.FUNCS.is_alternate(key,table)
+	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
+
     for k, v in pairs(table) do
         if key == v then
             return true
@@ -15,12 +31,16 @@ end
 
 --- Gets the key/value pair associated with the passing data. Returns `nil` if there is no alternate
 ---@param key string The provided card key.
----@param table table The reference table to look up.
----@param passing? string Key or value, and returns the other.
+---@param table? table The reference table to look up.
 ---@return string|boolean key The key of the alternate card, or `false` (boolean) if not found
 function FG.FUNCS.get_alternate(key,table)
+
+	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
+
 	local _passing = "k" 
 	if FG.FUNCS.is_alternate(key,table) then _passing = "v" end
+	if not table then return false end
+
 	if _passing == "k" then -- passing key, returning value
 		for k,v in pairs(table) do
 			if k == key then return v end
@@ -34,10 +54,12 @@ end
 
 -- Alternates between this card and the associated alternative card.
 ---@param card table|card The card instance itself.
----@param ref table The table to compare the card when alternating it.
+---@param ref? table The table to compare the card when alternating it.
 ---@return table|card table A table containing the old card and the new card.
 function FG.FUNCS.alternate_card(card,ref)
-	local ref = ref or FG.ALTS.joker_equivalents
+
+	if not ref or type(ref) ~= "table" then ref = FG.FUNCS.full_search_alternate() end
+
 	local key = FG.FUNCS.get_card_info(card).key
 	local convert_to = FG.FUNCS.get_alternate(key,ref)
 	local new_card = SMODS.add_card({
