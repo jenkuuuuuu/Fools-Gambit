@@ -29,21 +29,21 @@ return {
             c_fg_treble = {
                 name = "Treble",
                 text = {
-                    "Turns all Common Jokers in hand",
+                    "Turns all {C:blue}Common{} Jokers in hand",
                     "into their {C:purple}Alternate{} form"
                 }
             },
             c_fg_bass = {
                 name = "Bass",
                 text = {
-                    "Turns all Uncommon Jokers in hand",
+                    "Turns all {C:green}Uncommon{} Jokers in hand",
                     "into their {C:purple}Alternate{} form"
                 }
             },
             c_fg_alto = {
                 name = "Alto",
                 text = {
-                    "Turns all Rare Jokers in hand",
+                    "Turns all {C:red}Rare{} Jokers in hand",
                     "into their {C:purple}Alternate{} form"
                 }
             },
@@ -82,21 +82,21 @@ return {
             c_fg_treble_alt = {
                 name = "Treble?",
                 text = {
-                    "Turns all Common Jokers in hand",
+                    "Turns all {C:blue}Common{} Jokers in hand",
                     "into their {C:red}Original{} form"
                 }
             },
             c_fg_bass_alt = {
                 name = "Bass?",
                 text = {
-                    "Turns all Uncommon Jokers in hand",
+                    "Turns all {C:green}Uncommon{} Jokers in hand",
                     "into their {C:red}Original{} form"
                 }
             },
             c_fg_alto_alt = {
                 name = "Alto?",
                 text = {
-                    "Turns all Rare Jokers in hand",
+                    "Turns all {C:red}Rare{} Jokers in hand",
                     "into their {C:red}Original{} form"
                 }
             },
