@@ -1,12 +1,16 @@
-function FG.FUNCS.is_alternate(card,table)
+--- Checks if a card is an alternate or not in the given table. Stops at the first instance of it's key.
+--- @param key string
+--- @param table table
+--- @return boolean|nil
+function FG.FUNCS.is_alternate(key,table)
     for k, v in pairs(table) do
-        if card == v then
-            return "v"
-		elseif card == tostring(k) then
-			return "k"
+        if key == v then
+            return true
+		elseif key == tostring(k) then
+			return false
         end
     end
-    return "no"
+    return nil
 end
 
 --- Gets the key/value pair associated with the passing data. Returns `nil` if there is no alternate
@@ -14,8 +18,9 @@ end
 ---@param table table The reference table to look up.
 ---@param passing? string Key or value, and returns the other.
 ---@return string|boolean key The key of the alternate card, or `false` (boolean) if not found
-function FG.FUNCS.get_alternate(key,table,passing)
-	local _passing = passing or FG.FUNCS.is_alternate(key,table)
+function FG.FUNCS.get_alternate(key,table)
+	local _passing = "k" 
+	if FG.FUNCS.is_alternate(key,table) then _passing = "v" end
 	if _passing == "k" then -- passing key, returning value
 		for k,v in pairs(table) do
 			if k == key then return v end
@@ -34,7 +39,7 @@ end
 function FG.FUNCS.alternate_card(card,ref)
 	local ref = ref or FG.ALTS.joker_equivalents
 	local key = FG.FUNCS.get_card_info(card).key
-	local convert_to = FG.FUNCS.get_alternate(key,ref,FG.FUNCS.is_alternate(key,ref))
+	local convert_to = FG.FUNCS.get_alternate(key,ref)
 	local new_card = SMODS.add_card({
 		--set = 'Joker',
 		skip_materialize = true,

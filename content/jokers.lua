@@ -31,6 +31,7 @@ FG.ALTS.joker_equivalents = {
 		set = "jokers"
 	},
 	-- Mod jokers
+	j_fg_change_of_pace = "j_fg_change_of_pace_alt",
 	j_fg_flipped_script = "j_fg_flipped_script_alt",
 	j_fg_concert = "j_fg_concertalt",
 	j_fg_delinquent = "j_fg_delinquentalt",
@@ -183,7 +184,7 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-						if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "v" then
+						if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) then
 							FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
 							currentCard:start_dissolve(nil, false, 0, true)
 						end
@@ -212,7 +213,7 @@ SMODS.Joker {
 				func = function()
 					for i in ipairs(G.jokers.cards) do
 						local currentCard = G.jokers.cards[i]
-						if FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) == "k" then
+						if not FG.FUNCS.is_alternate(currentCard.config.center_key, FG.ALTS.joker_equivalents) then
 							FG.FUNCS.alternate_card(currentCard,FG.ALTS.joker_equivalents)
 							currentCard:start_dissolve(nil, false, 0, true)
 						end

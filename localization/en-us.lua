@@ -1201,7 +1201,7 @@ return {
                 }
             },
             c_fg_lovers = {
-                name = "The lovers?",
+                name = "The Lovers?",
                 text = {
                     "Replaces the enhancement of",
                     "up to {C:attention}#1#{} selected cards",
@@ -1273,7 +1273,7 @@ return {
                 }
             },
             c_fg_tower = {
-                name = "The tower?",
+                name = "The Tower?",
                 text = {
                     "Replaces the enhancement of",
                     "up to {C:attention}#1#{} selected cards",
