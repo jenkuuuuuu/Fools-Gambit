@@ -34,7 +34,7 @@ SMODS.Consumable{
         for i=1, math.min(math.ceil(card.ability.extra.cards),#G.jokers.cards) do
             if not card.fake_card and #G.jokers.cards >= 1
             and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
-            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable then
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
@@ -46,7 +46,7 @@ SMODS.Consumable{
             if not card.ability then card.ability = {extra = { cards = 1}} end
             for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.jokers.cards) do
                 if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
-                and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable then return true end
+                and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable then return true end
             end
         end
     end,
@@ -59,7 +59,7 @@ SMODS.Consumable{
                 if not card.ability then card.ability = {extra = { cards = 1}} end
                 for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.jokers.cards) do
                     if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
-                    and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable then
+                    and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable then
                         local c = FG.FUNCS.alternate_card(G.jokers.cards[i],FG.ALTS.joker_equivalents)
                         FG.FUNCS.update_edition(c.original,c.alternate)
                         FG.FUNCS.update_alternate_values(c.original,c.alternate)
@@ -85,7 +85,7 @@ SMODS.Consumable{
         for i=1, math.min(math.ceil(card.ability.extra.cards),#G.jokers.cards) do
             if not card.fake_card and #G.jokers.cards >= 1
             and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents) == false
-            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable then
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
@@ -97,7 +97,7 @@ SMODS.Consumable{
             if not card.ability then card.ability = {extra = { cards = 1}} end
             for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.jokers.cards) do
                 if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents) == false
-                and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable then return true end
+                and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable then return true end
             end
         end
     end,
@@ -110,7 +110,7 @@ SMODS.Consumable{
                 if not card.ability then card.ability = {extra = { cards = 1}} end
                 for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.jokers.cards) do
                     if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents) == false
-                    and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable then
+                    and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable then
                         local c = FG.FUNCS.alternate_card(G.jokers.cards[i],FG.ALTS.joker_equivalents)
                         FG.FUNCS.update_edition(c.original,c.alternate)
                         FG.FUNCS.update_alternate_values(c.original,c.alternate)
@@ -217,7 +217,7 @@ SMODS.Consumable{
         if not G.jokers then return end
         for i=1, #G.jokers.cards do
             if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents) == false
-            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 2 then
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 2 then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
@@ -253,7 +253,7 @@ SMODS.Consumable{
         if not G.jokers then return end
         for i=1, #G.jokers.cards do
             if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents) == false
-            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 3 then
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 3 then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
@@ -373,7 +373,7 @@ SMODS.Consumable{
         for i=1, math.min(math.ceil(card.ability.extra.cards),#G.consumeables.cards) do
             if not card.fake_card and #G.consumeables.cards >= 1
             and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
-            and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+            and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).stickers.unchangeable then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)]
             end
         end
@@ -385,7 +385,7 @@ SMODS.Consumable{
             if not card.ability then card.ability = {extra = { cards = 1}} end
             for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
                 if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
-                and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then return true end
+                and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).stickers.unchangeable then return true end
             end
         end
     end,
@@ -398,7 +398,7 @@ SMODS.Consumable{
                 if not card.ability then card.ability = {extra = { cards = 1}} end
                 for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
                     if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)
-                    and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+                    and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).stickers.unchangeable then
                         local c = FG.FUNCS.alternate_card(G.consumeables.cards[i])
                         FG.FUNCS.update_edition(c.original,c.alternate)
                         FG.FUNCS.update_alternate_values(c.original,c.alternate)
@@ -424,7 +424,7 @@ SMODS.Consumable{
         for i=1, math.min(math.ceil(card.ability.extra.cards),#G.consumeables.cards) do
             if not card.fake_card and #G.consumeables.cards >= 1
             and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key) == false
-            and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+            and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).stickers.unchangeable then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key)]
             end
         end
@@ -436,7 +436,7 @@ SMODS.Consumable{
             if not card.ability then card.ability = {extra = { cards = 1}} end
             for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
                 if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key) == false
-                and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then return true end
+                and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).stickers.unchangeable then return true end
             end
         end
     end,
@@ -449,7 +449,7 @@ SMODS.Consumable{
                 if not card.ability then card.ability = {extra = { cards = 1}} end
                 for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G.consumeables.cards) do
                     if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.consumeables.cards[i]).key) == false
-                    and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).unchangeable then
+                    and not FG.FUNCS.get_card_info(G.consumeables.cards[i]).stickers.unchangeable then
                         local c = FG.FUNCS.alternate_card(G.consumeables.cards[i])
                         FG.FUNCS.update_edition(c.original,c.alternate)
                         FG.FUNCS.update_alternate_values(c.original,c.alternate)
@@ -471,7 +471,7 @@ SMODS.Consumable{
         if not G.jokers then return end
         for i=1, #G.jokers.cards do
             if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
-            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 1 then
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 1 then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
@@ -507,7 +507,7 @@ SMODS.Consumable{
         if not G.jokers then return end
         for i=1, #G.jokers.cards do
             if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
-            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 2 then
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 2 then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end
@@ -543,7 +543,7 @@ SMODS.Consumable{
         if not G.jokers then return end
         for i=1, #G.jokers.cards do
             if not card.fake_card and FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)
-            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 3 then
+            and not FG.FUNCS.get_card_info(G.jokers.cards[i]).stickers.unchangeable and FG.FUNCS.get_card_info(G.jokers.cards[i]).rarity == 3 then
                 info_queue[#info_queue+1] = G.P_CENTERS[FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(G.jokers.cards[i]).key,FG.ALTS.joker_equivalents)]
             end
         end

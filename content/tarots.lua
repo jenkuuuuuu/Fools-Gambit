@@ -564,11 +564,11 @@ SMODS.Consumable{
         G.E_MANAGER:add_event(Event{
             trigger = 'after', delay = 0.2,
             func = function ()
-                local lefthmost, rightmost = G.hand.highlighted[1], G.hand.highlighted[1]
-                for i=1, #G.hand.highlighted do if G.hand.highlighted[i].T.x < lefthmost.T.x then lefthmost = G.hand.highlighted[i] end end
+                local leftmost, rightmost = G.hand.highlighted[1], G.hand.highlighted[1]
+                for i=1, #G.hand.highlighted do if G.hand.highlighted[i].T.x < leftmost.T.x then leftmost = G.hand.highlighted[i] end end
                 for i=1, #G.hand.highlighted do if G.hand.highlighted[i].T.x > rightmost.T.x then rightmost = G.hand.highlighted[i] end end
                 for i=1, (card.ability.extra.ranks) or 2 do
-                    local fuck, you = SMODS.change_base(lefthmost,nil,SMODS.Ranks[FG.FUNCS.get_card_info(lefthmost).rank].next[1])
+                    local fuck, you = SMODS.change_base(leftmost,nil,SMODS.Ranks[FG.FUNCS.get_card_info(leftmost).rank].next[1])
                     local fuck, you = SMODS.change_base(rightmost,nil,SMODS.Ranks[FG.FUNCS.get_card_info(rightmost).rank].prev[1])
                 end
                 return true

@@ -2,7 +2,7 @@
 ---@return table t The resulting table of the search. Should contain key-pair values
 function FG.FUNCS.full_search_alternate ()
 	local t = {}
-	t = {}
+
 	for _,v in pairs(FG.ALTS) do
 		for kk,vv in pairs(v) do
 			t[kk] = vv
@@ -29,9 +29,9 @@ function FG.FUNCS.is_alternate(key,table)
     return nil
 end
 
---- Gets the key/value pair associated with the passing data. Returns `nil` if there is no alternate
+--- Gets the key/value pair associated with the passing data.
 ---@param key string The provided card key.
----@param table? table The reference table to look up.
+---@param table? table The reference table to look up. If not specified looks through all alternate tables in FG.ALTS
 ---@return string|boolean key The key of the alternate card, or `false` (boolean) if not found
 function FG.FUNCS.get_alternate(key,table)
 
@@ -217,7 +217,7 @@ function FG.FUNCS.card_eval_status_text (args)
 end
 --- Retrieves useful data for the specified card
 ---@param card table|card  The target card to evaluate
----@return {id:boolean,rank:false|string,suit:false|string,is_face:boolean,key:false|string,edition:false|string,seal:false|string,eternal:boolean,perishable:boolean,perish_tally:number,rental:boolean,unchangeable:boolean,base_cost:number,cost:number,mod_cost:number,sell_cost:number,rarity:number|string,raw:table|nil}|nil
+---@return {id:boolean|number,rank:false|string,suit:false|string,is_face:boolean,key:false|string,edition:false|string,seal:false|string,stickers:{},base_cost:number,cost:number,mod_cost:number,sell_cost:number,rarity:number|string,raw:table|nil}|nil
 --- Returns the card's `id`, `rank`, `suit`, if it's a face card, `key` (or enhancement), `edition`, `seal` 
 --- and if it's `eternal`, `perishable` and how many rounds it has left, `rental`, buy and sell cost and
 --- the `raw` data of the card, or `nil` if no card is passed.
@@ -231,11 +231,7 @@ function FG.FUNCS.get_card_info(card)
 		key = false,
 		edition = false,
 		seal = card.seal or false,
-		eternal = false,
-		perishable = false,
-		perish_tally = 0,
-		rental = false,
-		unchangeable = false,
+		stickers = {},
 		base_cost = card.base_cost or 0,
 		cost = card.cost or 0,
 		mod_cost = (card.cost or 0) - (card.base_cost or 0),
@@ -248,7 +244,11 @@ function FG.FUNCS.get_card_info(card)
 	if card.config then
 		if card.config.card then ret.rank = card.config.card.value end
 		if card.config.card then ret.suit = card.config.card.suit end
-		if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
+		if ret.rank then
+			for k,v in pairs(SMODS.Ranks) do
+				if ret.rank == v.key and v.face then ret.is_face = true end
+			end
+		end
 		if card.config.center then 
 			ret.key = card.config.center.key 
 			ret.rarity = card.config.center.rarity
@@ -256,13 +256,11 @@ function FG.FUNCS.get_card_info(card)
 	end
 	if card.edition then ret.edition = card.edition.key end
 	if card.ability then
-		if card.ability.eternal then ret.eternal = true end
-		if card.ability.perishable then
-			ret.perishable = true
-			ret.perish_tally = card.ability.perish_tally
+		for _,ability in pairs(card.ability) do
+			for _,sticker in pairs(SMODS.Stickers) do
+				if ability == sticker.key then ret.stickers[ability] = true end
+			end
 		end
-		if card.ability.rental then ret.rental = true end
-		if card.ability.fg_unchangeable then ret.unchangeable = true end
 	end
 	return ret
 end
@@ -280,7 +278,7 @@ function FG.FUNCS.allow_duplicate (card)
 	local found_alternate = false
 	for _,v in ipairs(G.jokers.cards) do
 		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true end -- Find showman
-		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
+		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key) then found_alternate = true end -- Find alternate card
 	end
 	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
 end
@@ -362,4 +360,4 @@ end
 
 
 
---FG.fuck = 1
+--FG.fuck = math.pi/math.sqrt(-1)

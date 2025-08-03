@@ -99,6 +99,7 @@ FG.ALTS.joker_equivalents = {
 	j_swashbuckler = "j_fg_swashbuckler",
 	j_troubadour = "j_fg_troubadour",
 	j_throwback = "j_fg_throwback",
+	j_smiley = "j_fg_smiley",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
 	j_bloodstone = "j_fg_bloodstone",
@@ -800,7 +801,7 @@ end
 -- Joker
 SMODS.Joker {
 	key = 'joker',
-	config = { extra = { mult = 0.5 } },
+	config = { extra = { mult = 1 } },
 	loc_vars = function(self, info_queue, card)
 		--info_queue[#info_queue + 1] = G.P_CENTERS['j_joker']
 		return { vars = { card.ability.extra.mult } }
@@ -1687,7 +1688,7 @@ SMODS.Joker {
 	pos = { x = 2, y = 3 },
 	yes_pool_flag = 'alternate_spawn',
 	blueprint_compat = true,
-	config = { extra = { chips = 0, chip_gain = 15 } },
+	config = { extra = { chips = 0, chip_gain = 5 } },
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {
@@ -2550,7 +2551,7 @@ SMODS.Joker{
 		extra = {
 			xmult = 10,
 			xmult_r = 1,
-			xmult_c = 10
+			xmult_c = 6
 		}
 	},
 	loc_vars = function (self, info_queue, card)
@@ -2821,7 +2822,7 @@ SMODS.Joker{
         fg_alternate = {}, -- Kept between alternations
         extra = {
 			xmult = 1,
-			xmult_i = 0.5,
+			xmult_i = 0.2,
 		}
     },
     loc_vars = function (self, info_queue, card)
@@ -2859,7 +2860,7 @@ SMODS.Joker{
         extra = {
 			xmult = 1,
 			xmult_i = 0.04,
-			xmult_d = 0.5,
+			xmult_d = 0.6,
 			xmult_m = 0.75
 		}
     },

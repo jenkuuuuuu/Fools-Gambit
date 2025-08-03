@@ -6,7 +6,6 @@ return {
                 text = {
                     "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:red}Original{} form",
-                    "{C:inactive}Placeholder Sprite{}",
                 }
             },
             c_fg_atonal = {
@@ -14,7 +13,6 @@ return {
                 text = {
                     "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
                 }
             },
             c_fg_accelerando = {
@@ -23,7 +21,6 @@ return {
                     "Changes {C:attention}3{} selected cards",
                     "and turns their editions, seals and,",
                     "enhancements to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
                 }
             },
             c_fg_treble = {
@@ -68,7 +65,6 @@ return {
                 text = {
                     "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:red}Original{} form",
-                    "{C:inactive}Placeholder Sprite{}",
                 }
             },
             c_fg_atonal_alt = {
@@ -76,7 +72,6 @@ return {
                 text = {
                     "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
                 }
             },
             c_fg_treble_alt = {
@@ -766,7 +761,7 @@ return {
                 }
             },
             j_fg_selzer = {
-                name = "Seltzer",
+                name = "Seltzer?",
                 text = {
                     "Retrigger all played",
                     "cards {C:attention}#1#{} time(s) for the",
