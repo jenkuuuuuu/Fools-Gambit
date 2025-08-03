@@ -1461,7 +1461,12 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
+            k_fg_common_alt = "Common?",
+            k_fg_uncommon_alt = "Uncommon?",
+            k_fg_rare_alt = "Rare?",
+            k_fg_legendary_alt = "Legendary?",
             k_fg_collective = "Collective",
+            k_fg_collective_alt = "Collective?",
             k_aberration = "Aberration",
             b_aberration_cards= "Aberration Cards",
             k_chipMult="Multiplied!",
@@ -1475,7 +1480,12 @@ return {
         },
         high_scores={},
         labels={
+            fg_common_alt = "Common?",
+            fg_uncommon_alt = "Uncommon?",
+            fg_rare_alt = "Rare?",
+            fg_legendary_alt = "Legendary?",
             fg_collective = "Collective",
+            fg_collective_alt = "Collective?",
             fg_aberration = "Aberration"
         },
         poker_hand_descriptions={},

@@ -48,13 +48,46 @@ local start_run_ref = Game.start_run
 
 function Game:start_run(args)
 	start_run_ref(self,args)
-	if G.GAME.pool_flags.alternate_spawn then
+
+	-- Reset tables
+	FG.rarities.alternate = {}
+	FG.rarities.original = {}
+
+	for _,v in pairs(SMODS.Rarities) do
+		-- Populate tables
+		if v.fg_data and v.fg_data.is_alternate then
+			table.insert(FG.rarities.alternate,v.key)
+		else
+			table.insert(FG.rarities.original,v.key)
+		end
+	end
+
+	if not G.GAME.fg_data then 
+		-- stores (default) run values 
+		G.GAME.fg_data = {
+			original_rarities_multiply = 0.85,
+			alternate_rarities_multiply = 0.15
+		}
+	end
+
+	-- Modify rarity rate accordingly.
+	for _,v in ipairs(FG.rarities.original) do
+		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.original_rarities_multiply or 0.85
+	end
+	for _,v in ipairs(FG.rarities.alternate) do
+		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.alternate_rarities_multiply or 0.15
+	end
+	
+
+	-- [ DEPRECATED ]
+	if G.GAME.pool_flags.alternate_spawn and false then
 		for k, v in pairs(G.P_CENTERS) do
 			if string.find(k, 'j_') and not string.find(k, "_fg_") then
 				G.P_CENTERS[k]['no_pool_flag'] = 'alternate_spawn'
 			end
 		end
 	end
+	-- [ #end ]
 end
 
 
@@ -84,7 +117,7 @@ end
 	function create_card_for_shop(area)
 		local card = shopref(area)
 
-		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and G.GAME.round == 3 - G.GAME.skips then
+		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and G.GAME.round == 3 - G.GAME.skips and false then
             FG.FUNCS.replace_shop_joker("j_fg_change_of_pace", #G.shop_jokers.cards+1)
 		end
 
