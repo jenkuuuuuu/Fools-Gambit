@@ -346,6 +346,47 @@ function FG.FUNCS.localize(args)
 	return ret
 end
 
+---Modifies the likelyhood of alternate/original rarities to appear.
+---@param rate? number The new rate to set alternate spawn. A value between 0 and 1.
+---@return boolean success Returns false if the function fails, true otherwise
+function FG.FUNCS.recalculate_alt_rates(rate)
+	if not G.GAME then sendErrorMessage("Could not find G.GAME.fg_data","FG/recalculate_alt_rates") return false end
+	rate = rate or 0.15
+	-- clamp result
+	if rate > 1 then rate = 1 elseif rate < 0 then rate = 0 end
+
+	-- Reset tables
+	FG.rarities.alternate = {}
+	FG.rarities.original = {}
+	sendDebugMessage("Reset tables")
+
+	for _,v in pairs(SMODS.Rarities) do
+		-- Populate tables
+		if v.fg_data and v.fg_data.is_alternate then
+			table.insert(FG.rarities.alternate,v.key)
+		else
+			table.insert(FG.rarities.original,v.key)
+		end
+	end
+
+	sendDebugMessage("Pupulate tables")
+
+	G.GAME.fg_data = {
+		original_rarities_multiply = 1-rate,
+		alternate_rarities_multiply = rate
+	}
+
+	-- Modify rarity rate accordingly.
+	for _,v in ipairs(FG.rarities.original) do
+		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.original_rarities_multiply
+	end
+	for _,v in ipairs(FG.rarities.alternate) do
+		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.alternate_rarities_multiply
+	end
+
+	return true
+end
+
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
 
 -- Settings, special edition

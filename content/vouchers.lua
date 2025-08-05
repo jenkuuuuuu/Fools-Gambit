@@ -7,6 +7,23 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Voucher{
+    key = "voucher_1",
+    atlas = "vouchers",
+    pos = { x = 0, y = 0},
+    redeem = function (self, voucher)
+        FG.FUNCS.recalculate_alt_rates(0.30)
+    end
+}
+
+SMODS.Voucher{
+    key = "voucher_2",
+    atlas = "vouchers",
+    pos = { x = 1, y = 0},
+    redeem = function (self, voucher)
+        FG.FUNCS.recalculate_alt_rates(0.45)
+    end
+}
 
 if FG.config.debug_mode then
 SMODS.Voucher{

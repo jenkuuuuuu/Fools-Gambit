@@ -1342,6 +1342,20 @@ return {
                     "{C:attention}+1{} option and {C:attention}+1{} select in every",
                     "{C:purple}Melody{} Pack"
                 }
+            },
+            v_fg_voucher_1 = {
+                name = "voucher 1",
+                text = {
+                    "{C:purple}Alternate{} Jokers appear",
+                    "{C:attention}X2{} more frequently",
+                }
+            },
+            v_fg_voucher_2 = {
+                name = "voucher 2",
+                text = {
+                    "{C:purple}Alternate{} Jokers appear",
+                    "{C:attention}X3{} more frequently",
+                }
             }
         },
     },

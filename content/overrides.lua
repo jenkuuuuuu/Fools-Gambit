@@ -44,40 +44,13 @@ end
 
 -- Injects FG alternate flag
 
-local start_run_ref = Game.start_run 
+local start_run_ref = Game.start_run
 
 function Game:start_run(args)
 	start_run_ref(self,args)
 
-	-- Reset tables
-	FG.rarities.alternate = {}
-	FG.rarities.original = {}
-
-	for _,v in pairs(SMODS.Rarities) do
-		-- Populate tables
-		if v.fg_data and v.fg_data.is_alternate then
-			table.insert(FG.rarities.alternate,v.key)
-		else
-			table.insert(FG.rarities.original,v.key)
-		end
-	end
-
-	if not G.GAME.fg_data then 
-		-- stores (default) run values 
-		G.GAME.fg_data = {
-			original_rarities_multiply = 0.85,
-			alternate_rarities_multiply = 0.15
-		}
-	end
-
-	-- Modify rarity rate accordingly.
-	for _,v in ipairs(FG.rarities.original) do
-		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.original_rarities_multiply or 0.85
-	end
-	for _,v in ipairs(FG.rarities.alternate) do
-		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.alternate_rarities_multiply or 0.15
-	end
-	
+	-- Load and reset alt rates
+	FG.FUNCS.recalculate_alt_rates(0.15)
 
 	-- [ DEPRECATED ]
 	if G.GAME.pool_flags.alternate_spawn and false then

@@ -1317,6 +1317,20 @@ return {
                     "{C:attention}+1{} option and {C:attention}+1{} select in every",
                     "{C:purple}Paquete melódico"
                 }
+            },
+            v_fg_voucher_1 = {
+                name = "Cupón 1",
+                text = {
+                    "Los comodines {C:purple}alternativos{}",
+                    "aparecen {C:attention}X2{} más seguidos",
+                }
+            },
+            v_fg_voucher_2 = {
+                name = "Cupón 2",
+                text = {
+                    "Los comodines {C:purple}alternativos{}",
+                    "aparecen {C:attention}X3{} más seguidos",
+                }
             }
         },
     },
