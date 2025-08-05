@@ -1343,15 +1343,15 @@ return {
                     "{C:purple}Melody{} Pack"
                 }
             },
-            v_fg_voucher_1 = {
-                name = "voucher 1",
+            v_fg_change_of_pace = {
+                name = "Change of Pace",
                 text = {
                     "{C:purple}Alternate{} Jokers appear",
                     "{C:attention}X2{} more frequently",
                 }
             },
-            v_fg_voucher_2 = {
-                name = "voucher 2",
+            v_fg_modulation = {
+                name = "Metric modulation",
                 text = {
                     "{C:purple}Alternate{} Jokers appear",
                     "{C:attention}X3{} more frequently",

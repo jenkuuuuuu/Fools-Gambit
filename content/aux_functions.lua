@@ -358,7 +358,7 @@ function FG.FUNCS.recalculate_alt_rates(rate)
 	-- Reset tables
 	FG.rarities.alternate = {}
 	FG.rarities.original = {}
-	sendDebugMessage("Reset tables")
+	--sendDebugMessage("Reset tables")
 
 	for _,v in pairs(SMODS.Rarities) do
 		-- Populate tables
@@ -369,14 +369,11 @@ function FG.FUNCS.recalculate_alt_rates(rate)
 		end
 	end
 
-	sendDebugMessage("Pupulate tables")
-
 	G.GAME.fg_data = {
 		original_rarities_multiply = 1-rate,
 		alternate_rarities_multiply = rate
 	}
 
-	-- Modify rarity rate accordingly.
 	for _,v in ipairs(FG.rarities.original) do
 		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.original_rarities_multiply
 	end

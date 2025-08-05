@@ -1318,15 +1318,15 @@ return {
                     "{C:purple}Paquete melódico"
                 }
             },
-            v_fg_voucher_1 = {
-                name = "Cupón 1",
+            v_fg_change_of_pace = {
+                name = "Cámbio de paso",
                 text = {
                     "Los comodines {C:purple}alternativos{}",
                     "aparecen {C:attention}X2{} más seguidos",
                 }
             },
-            v_fg_voucher_2 = {
-                name = "Cupón 2",
+            v_fg_modulation = {
+                name = "Modulación métrica",
                 text = {
                     "Los comodines {C:purple}alternativos{}",
                     "aparecen {C:attention}X3{} más seguidos",

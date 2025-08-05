@@ -8,7 +8,7 @@ SMODS.Atlas {
 }
 
 SMODS.Voucher{
-    key = "voucher_1",
+    key = "change_of_pace",
     atlas = "vouchers",
     pos = { x = 0, y = 0},
     redeem = function (self, voucher)
@@ -17,7 +17,7 @@ SMODS.Voucher{
 }
 
 SMODS.Voucher{
-    key = "voucher_2",
+    key = "modulation",
     atlas = "vouchers",
     pos = { x = 1, y = 0},
     redeem = function (self, voucher)
