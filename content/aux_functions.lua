@@ -369,11 +369,9 @@ function FG.FUNCS.recalculate_alt_rates(rate)
 		end
 	end
 
-	G.GAME.fg_data = {
-		original_rarities_multiply = 1-rate,
-		alternate_rarities_multiply = rate
-	}
-
+	G.GAME.fg_data.original_rarities_multiply = 1-rate
+	G.GAME.fg_data.alternate_rarities_multiply = rate
+	
 	for _,v in ipairs(FG.rarities.original) do
 		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.original_rarities_multiply
 	end

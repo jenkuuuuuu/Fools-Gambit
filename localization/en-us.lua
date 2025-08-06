@@ -1101,6 +1101,22 @@ return {
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
                     "be used instantly."
                 }
+            },
+            p_fg_aberration3 = {
+                name = 'Jumbo Melody Pack',
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:purple}aberration{} cards to",
+                    "be used instantly."
+                }
+            },
+            p_fg_aberration4 = {
+                name = 'Mega Melody Pack',
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:purple}aberration{} cards to",
+                    "be used instantly."
+                }
             }
         },
         Planet={},
@@ -1339,8 +1355,8 @@ return {
             v_fg_violin = {
                 name = "Violin",
                 text = {
-                    "{C:attention}+1{} option and {C:attention}+1{} select in every",
-                    "{C:purple}Melody{} Pack"
+                    "{C:attention}+1{} available choice and {C:attention}+1{} select",
+                    "in every {C:purple}Melody{} Pack",
                 }
             },
             v_fg_change_of_pace = {
@@ -1355,6 +1371,21 @@ return {
                 text = {
                     "{C:purple}Alternate{} Jokers appear",
                     "{C:attention}X3{} more frequently",
+                }
+            },
+            v_fg_music_merchant = {
+                name = "Music Merchant",
+                text = {
+                    "{C:purple}Aberration{} cards can",
+                    "now appear in the shop"
+                }
+            },
+            v_fg_music_tycoon = {
+                name = "Music Tycoon",
+                text = {
+                    "{C:purple}Aberration{} cards appear",
+                    "{C:attention}X3{} more frequently",
+                    "in the shop"
                 }
             }
         },

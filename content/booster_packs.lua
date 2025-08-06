@@ -48,13 +48,6 @@ FG.boosters.jumbo_aberration = SMODS.Booster {
     key = "aberration3",
     kind = "aberration",
     atlas = "pack",
-    loc_txt = { 
-            name = 'Jumbo aberration Pack',
-            group_name = 'aberration',
-            text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}aberration{} cards to",
-            "be used instantly." }
-            },
     pos = { x = 2, y = 0 },
     config = { extra = 5, choose = 1 },
     draw_hand = true,
@@ -73,13 +66,6 @@ FG.boosters.mega_aberration = SMODS.Booster {
     key = "aberration4",
     kind = "aberration",
     atlas = "pack",
-    loc_txt = { 
-            name = 'Mega aberration Pack',
-            group_name = 'aberration',
-            text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}aberration{} cards to",
-            "be used instantly." }
-            },
     pos = { x = 3, y = 0 },
     config = { extra = 5, choose = 2 },
     draw_hand = true,
