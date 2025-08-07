@@ -1355,8 +1355,9 @@ return {
             v_fg_violin = {
                 name = "Violin",
                 text = {
-                    "{C:attention}+1{} available choice and {C:attention}+1{} select",
-                    "in every {C:purple}Melody{} Pack",
+                    "{C:attention}+1{} available choice",
+                    "{C:attention}+1{} select choice",
+                    "in every {C:purple}Melody Pack{}",
                 }
             },
             v_fg_change_of_pace = {
@@ -1367,7 +1368,7 @@ return {
                 }
             },
             v_fg_modulation = {
-                name = "Metric modulation",
+                name = "Metric Modulation",
                 text = {
                     "{C:purple}Alternate{} Jokers appear",
                     "{C:attention}X3{} more frequently",

@@ -30,6 +30,9 @@ SMODS.Atlas{
 
 ---@alias card table
 
+G.C.FG_ALTERNATE = HEX('8867a5')
+G.C.FG_ORIGINAL = HEX('FE5F55')
+
 -- This is in preparation for file splitting. I'll do that later. - Jogla
 -- im splitting jokers and stuff into sections to make this easier later - jenku
 local mod_contents = {

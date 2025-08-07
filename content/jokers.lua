@@ -3555,7 +3555,7 @@ SMODS.Joker{
     config = {
         fg_alternate = {}, -- Kept between alternations
         extra = {
-			xmult = 5
+			xmult = 12
 		}
     },
     loc_vars = function (self, info_queue, card)

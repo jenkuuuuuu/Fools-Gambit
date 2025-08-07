@@ -43,7 +43,7 @@ FG.boosters.aberration2 = SMODS.Booster {
         return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
     end
 }
-if FG.config.debug_mode then
+
 FG.boosters.jumbo_aberration = SMODS.Booster {
     key = "aberration3",
     kind = "aberration",
@@ -79,4 +79,3 @@ FG.boosters.mega_aberration = SMODS.Booster {
         return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
     end
 }
-end

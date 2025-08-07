@@ -1160,7 +1160,7 @@ return {
             c_fg_hermit = {
                 name = "¿El ermitaño?",
                 text = {
-                    "Enhance {C:attention}#1#{} selected cards",
+                    "{C:attention}#1#{} selected cards",
                     "with a {C:attention}random{} enhancement",
                     "{C:attention}Halves{} money",
                     "{C:inactive}(Max of {C:gold}$#2#{C:inactive})"
@@ -1314,8 +1314,9 @@ return {
             v_fg_violin = {
                 name = "Violin",
                 text = {
-                    "{C:attention}+1{} option and {C:attention}+1{} select in every",
-                    "{C:purple}Paquete melódico"
+                    "{C:attention}+1{} opción disponible",
+                    "{C:attention}+1{} opción para elegir",
+                    "en los {C:purple}paquetes melódico{}"
                 }
             },
             v_fg_change_of_pace = {

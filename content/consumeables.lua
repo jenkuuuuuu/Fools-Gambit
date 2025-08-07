@@ -15,6 +15,7 @@ SMODS.Atlas {
 
 SMODS.ConsumableType{
     key = "aberration",
+    default = "c_fg_atonal",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
     collection_rows = {7, 7}
