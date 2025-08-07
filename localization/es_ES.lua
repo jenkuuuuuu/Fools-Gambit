@@ -1125,10 +1125,10 @@ return {
             c_fg_hermit = {
                 name = "¿El ermitaño?",
                 text = {
-                    "Enhance {C:attention}#1#{} selected cards",
-                    "with a {C:attention}random{} enhancement",
-                    "{C:attention}Halves{} money",
-                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})"
+                    "Mejora {C:attention}#1#{} carta seleccionada",
+                    "con una mejora {C:attention}aleatoria{}",
+                    "{C:attention}Divide a la mitad{} el dinero",
+                    "{C:inactive}(Máximo de {C:gold}$#2#{C:inactive})"
                 }
             },
             c_fg_hierophant = {
