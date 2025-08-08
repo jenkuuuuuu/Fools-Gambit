@@ -14,7 +14,37 @@ SMODS.Sticker{
     rate = 1,
     needs_enabled_flag = false
 }
-
+SMODS.JimboQuip{
+    key = 'goldenleaf_wq',
+    type = 'win',
+    extra = { center = 'j_fg_goldenleaf', particle_colours = { G.C.PURPLE, G.C.YELLOW, G.C.GOLD } },
+    filter = function()
+        if next(SMODS.find_card('j_fg_goldenleaf')) or next(SMODS.find_card('j_fg_goldenleafalt')) then
+            return true, { weight = 100 }
+        end
+        return false
+    end,
+    loc_txt = {
+        "Travis scott, lock into a stud",
+        "NOW!"
+    }
+}
+SMODS.JimboQuip{
+    key = 'goldenleaf_lq',
+    type = 'loss',
+    extra = { center = 'j_fg_goldenleaf', particle_colours = { G.C.PURPLE, G.C.YELLOW, G.C.GOLD } },
+    filter = function()
+        if next(SMODS.find_card('j_fg_goldenleaf')) or next(SMODS.find_card('j_fg_goldenleafalt')) then
+            return true, { weight = 100 }
+        end
+        return false
+    end,
+    loc_txt = {
+        "How the fuck do you lose",
+        "with a collective joker????"
+    }
+}
+print("Testicles")
 SMODS.Stake{
     key = "pink",
     applied_stakes = {
