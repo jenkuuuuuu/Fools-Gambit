@@ -1115,6 +1115,13 @@ return {
                     "{C:inactive}({C:tarot}The Fool?{} excluded)"
                 }
             },
+            c_fg_hanged_man = {
+                name = "¿El colgao?",
+                text = {
+                    "Destruye {C:attention}#1#{} cartas",
+                    "aleatorias en la mano"
+                }
+            },
             c_fg_hermit = {
                 name = "¿El ermitaño?",
                 text = {
@@ -1143,12 +1150,35 @@ return {
                     "crear un {C:legendary}agujero negro{}"
                 }
             },
+            c_fg_judgement = {
+                name = "¿El juicio?",
+                text = {
+                    "Destruye el comodín seleccionado",
+                    "{C:green}#1# en #2#{} probabilidades de crear hasta {C:attention}#3#{}",
+                    "comodines con una rareza {C:attention}inferior{}",
+                    "Si no, crea hasta {C:attention}#3#{} comodines",
+                    "con una rareza {C:attention}superior{}",
+                    "{C:inactive}(No puede crear comodines legendarios)"
+                }
+            },
             c_fg_justice = {
                 name = "¿La justicia?",
                 text = {
                     "Reemplaza la mejora de",
                     "hasta {C:attention}#1#{} cartas seleccionadas",
-                    "en {C:attention}cartas de Vidrio?{}",
+                    "en {C:attention}cartas de +Vidrio?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
+            c_fg_lovers = {
+                name = "¿Los enamorados?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas ¿Versatil?{}",
                     "Crea una copia de cada carta",
                     "{C:attention}sin{} ninguna mejora",
                     "{C:inactive}(Las cartas copiadas han de{}",
@@ -1170,16 +1200,28 @@ return {
             c_fg_moon = {
                 name = "¿La luna?",
                 text = {
-                    "Selecciona hasta{C:attention}#1#{} cartas",
+                    "Selecciona {C:attention}#1#{} cartas",
                     "para convertirlas en {C:clubs}tréboles",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:diamonds}Diamantes{}"
                 }
             },
+            c_fg_strength = {
+                name = "¿La fuerza?",
+                text = {
+                    {
+                        "Selecciona {C:attention}2{} cartas",
+                        "Aumenta la categoría de",
+                        "la carta {C:attention}izquierda{} en {C:attention}#1#{}",
+                        "Aumenta la categoría de",
+                        "la carta {C:attention}derecha{} en {C:attention}#1#{}",
+                    },
+                }
+            },
             c_fg_star = {
                 name = "¿La estrella?",
                 text = {
-                    "Selecciona hasta {C:attention}#1#{} cartas",
+                    "Selecciona {C:attention}#1#{} cartas",
                     "para convertirlas en {C:diamonds}diamantes",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:clubs}tréboles{}"
@@ -1188,7 +1230,7 @@ return {
             c_fg_sun = {
                 name = "¿El sol?",
                 text = {
-                    "Selecciona hasta {C:attention}#1#{} carta",
+                    "Selecciona {C:attention}#1#{} carta",
                     "para convertirlas en {C:hearts}corazones",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:spades}picas{}"
@@ -1203,6 +1245,18 @@ return {
                     "{C:inactive}(Actualmente {C:gold}$#1#{C:inactive})"
                 }
             },
+            c_fg_tower = {
+                name = "¿La torre?",
+                text = {
+                    "Reemplaza la mejora de",
+                    "hasta {C:attention}#1#{} cartas seleccionadas",
+                    "en {C:attention}cartas de ¿Piedra?{}",
+                    "Crea una copia de cada carta",
+                    "{C:attention}sin{} ninguna mejora",
+                    "{C:inactive}(Las cartas copiadas han de{}",
+                    "{C:inactive}tener una mejora){}"
+                }
+            },
             c_fg_wheel_of_fortune = {
                 name = "¿La rueda de la fortuna?",
                 text = {
@@ -1214,7 +1268,7 @@ return {
             c_fg_world = {
                 name = "¿El mundo?",
                 text = {
-                    "Selecciona hasta {C:attention}#1#{} cartas",
+                    "Selecciona {C:attention}#1#{} cartas",
                     "para convertirlas en {C:spades}picas",
                     "Convierte el resto de la {C:attention}mano{}",
                     "en {C:hearts}corazones{}"
@@ -1290,12 +1344,19 @@ return {
                 rav = "Rav",
                 lavbubl = "Lavbubl",
                 poker_the_poker = "Poker The Poker",
+                mina_kitsune = "Scientifically Insane",
+                itscoldhere = "itscoldhere",
             },
             languages = {
+                disclaimer = {
+                    "Algunas traducciones pueden estar incompletas",
+                    "*Sendién \'se vende\' por separado"
+                },
                 ["en-us"] = "Ingés",
                 ["es_ES"] = "Español",
                 ["zh-CN"] = "Chino",
-                ["sn_bos"] = "Sendién",
+                ["sn_bos"] = "Sendién*",
+                ["ja"] = "Japonés",
             },
             misc = {
                 page_title = "Créditos",

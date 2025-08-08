@@ -143,40 +143,6 @@ function FG.FUNCS.flip_editions(card)
 	end
 end
 
---if FG.config.debug_mode then -- slightly less scary !!! still broken!!!! (eats tags) || buggy af, fix the UI please
-	function FG.FUNCS.replace_shop_joker(key, index)
-		if G.shop_jokers then
-			if G.shop_jokers.cards then
-				local replacee = G.shop_jokers.cards[index]
-				if replacee then
-					G.shop_jokers:remove_card(replacee)
-					replacee:remove()
-				else
-					--G.E_MANAGER:add_event(Event({func = function()
-					--change_shop_size(1)
-					--return true end }))
-				end
-				local replacement = SMODS.add_card({set = "Joker", area = G.shop_jokers, key = key})
-				create_shop_card_ui(replacement, 'joker', G.shop_jokers)
-				replacement:start_materialize()
-			end
-		end
-	end
-
-	local shopref = create_card_for_shop
-	local cop_reroll = false
-	function create_card_for_shop(area)
-		local card = shopref(area)
-
-		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and  G.GAME.round == 3 - G.GAME.skips and cop_reroll == false then
-			
-			FG.FUNCS.replace_shop_joker("j_fg_change_of_pace", #G.shop_jokers.cards+1)
-			cop_reroll = true
-			end
-
-		return card
-	end
---end
 
 --- Allows to duplicate any given card and insert it into playing hand. Return value is the new card. Sourced from 'cryptid' (Spectral).
 ---@param card card The card that is being duplicated.
@@ -224,7 +190,7 @@ function FG.FUNCS.card_eval_status_text (args)
 end
 --- Retrieves useful data for the specified card
 ---@param card table|card  The target card to evaluate
----@return table|nil ret
+---@return {id:boolean,rank:false|string,suit:false|string,is_face:boolean,key:false|string,edition:false|string,seal:false|string,eternal:boolean,perishable:boolean,perish_tally:number,rental:boolean,unchangeable:boolean,base_cost:number,cost:number,mod_cost:number,sell_cost:number,rarity:number|string,raw:table|nil}|nil
 --- Returns the card's `id`, `rank`, `suit`, if it's a face card, `key` (or enhancement), `edition`, `seal` 
 --- and if it's `eternal`, `perishable` and how many rounds it has left, `rental`, buy and sell cost and
 --- the `raw` data of the card, or `nil` if no card is passed.
@@ -247,6 +213,7 @@ function FG.FUNCS.get_card_info(card)
 		cost = card.cost or 0,
 		mod_cost = (card.cost or 0) - (card.base_cost or 0),
 		sell_cost = card.sell_cost or 0,
+		rarity = 0,
 		raw = card
 	}
 	
@@ -255,7 +222,10 @@ function FG.FUNCS.get_card_info(card)
 		if card.config.card then ret.rank = card.config.card.value end
 		if card.config.card then ret.suit = card.config.card.suit end
 		if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
-		if card.config.center then ret.key = card.config.center.key end
+		if card.config.center then 
+			ret.key = card.config.center.key 
+			ret.rarity = card.config.center.rarity
+		end
 	end
 	if card.edition then ret.edition = card.edition.key end
 	if card.ability then
@@ -282,23 +252,10 @@ function FG.FUNCS.allow_duplicate (card)
 	local found_showman = false
 	local found_alternate = false
 	for _,v in ipairs(G.jokers.cards) do
-		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true break end -- Find showman
+		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true end -- Find showman
 		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
 	end
 	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
-end
-
-local start_run_ref = Game.start_run 
-
-function Game:start_run(args)
-	start_run_ref(self,args)
-	if G.GAME.pool_flags.alternate_spawn then
-		for k, v in pairs(G.P_CENTERS) do
-			if string.find(k, 'j_') and not string.find(k, "_fg_") then
-				G.P_CENTERS[k]['no_pool_flag'] = 'alternate_spawn'
-			end
-		end
-	end
 end
 
 ---Allows to easily create multi-line texts.
@@ -362,47 +319,6 @@ function FG.FUNCS.localize(args)
 	end
 	recursive_find(ret,1)
 	return ret
-end
-
--- Main menu override
-
---- This shit fucks with the entire game engine
-
-local main_menu_ref = Game.main_menu
-
-function Game:main_menu(change_context)
-	main_menu_ref(self,change_context)
-	local SC_scale = 1.1*(G.debug_splash_size_toggle and 0.8 or 1)
-	local CAI = {
-        TITLE_TOP_W = G.CARD_W,
-        TITLE_TOP_H = G.CARD_H,
-    }
-
-   self.fg_title = CardArea(
-        20, 20,
-        CAI.TITLE_TOP_W,CAI.TITLE_TOP_H,
-        {card_limit = 1, type = 'title'})
-
-	if FG.config.additional_title then
-		G.fg_title:set_alignment({
-			major = G.SPLASH_LOGO,
-			type = 'cm',
-			bond = 'Strong',
-			offset = {x=4,y=3}
-		})
-	else
-		G.fg_title:set_alignment({
-			major = G.SPLASH_LOGO,
-			type = 'cm',
-			bond = 'Strong',
-			offset = {x=4,y=12}
-		})
-	end
-
-
-    local replace_card = Card(self.fg_title.T.x, self.fg_title.T.y, 1.2*G.CARD_W*SC_scale*1.8, 1.2*G.CARD_H*SC_scale*0.5, G.P_CENTERS.j_fg_logo, G.P_CENTERS.j_fg_logo)
-    replace_card.no_ui = true
-	self.fg_title:emplace(replace_card)
 end
 
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
