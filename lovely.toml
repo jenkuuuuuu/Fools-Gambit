@@ -1,0 +1,30 @@
+[manifest]
+version = "1.0.0"
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "UI_definitions.lua"
+pattern = '''
+for _, v in ipairs({
+    {type = 'Joker', val = G.GAME.joker_rate},
+    {type = 'Tarot', val = G.GAME.tarot_rate},
+    {type = 'Planet', val = G.GAME.planet_rate},
+    {type = (G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.6) and 'Enhanced' or 'Base', val = G.GAME.playing_card_rate},
+    {type = 'Spectral', val = G.GAME.spectral_rate},
+}) do
+'''
+position = "after"
+payload = '''
+    for _, v in ipairs({
+        {type = 'Joker', val = G.GAME.joker_rate},
+        {type = 'Tarot', val = G.GAME.tarot_rate},
+        {type = 'Planet', val = G.GAME.planet_rate},
+        {type = (G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.6) and 'Enhanced' or 'Base', val = G.GAME.playing_card_rate},
+        {type = 'Spectral', val = G.GAME.spectral_rate},
+        {type = 'fg_aberration', val = G.GAME.fg_data.aberration_rate},
+        
+    }) do"
+'''
+match_indent = false
+times = 1

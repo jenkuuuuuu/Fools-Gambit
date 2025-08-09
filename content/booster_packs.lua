@@ -5,18 +5,12 @@ SMODS.Atlas {
 	py = 95
 }
 
+FG.boosters = {}
 
-abberation1 = SMODS.Booster {
-    key = "abberation1",
-    kind = "abberation",
+FG.boosters.aberration1 = SMODS.Booster {
+    key = "aberration1",
+    kind = "aberration",
     atlas = "pack",
-    loc_txt = { 
-        name = 'Abberation Pack',
-        group_name = 'abberation',
-        text = { "Choose {C:attention}#1#{} of up to ",
-        " {C:attention}#2#{} {C:purple}Abberation{} cards to",
-        "be used instantly." }
-        },
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1 },
     draw_hand = true,
@@ -27,22 +21,15 @@ abberation1 = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 
 
-abberation2 = SMODS.Booster {
-    key = "abberation2",
-    kind = "abberation",
+FG.boosters.aberration2 = SMODS.Booster {
+    key = "aberration2",
+    kind = "aberration",
     atlas = "pack",
-    loc_txt = { 
-            name = 'Abberation Pack',
-            group_name = 'abberation',
-            text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}Abberation{} cards to",
-            "be used instantly." }
-            },
     pos = { x = 1, y = 0 },
     config = { extra = 3, choose = 1 },
     draw_hand = true,
@@ -53,19 +40,19 @@ abberation2 = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 if FG.config.debug_mode then
-jumbo_abberation = SMODS.Booster {
-    key = "abberation3",
-    kind = "abberation",
+FG.boosters.jumbo_aberration = SMODS.Booster {
+    key = "aberration3",
+    kind = "aberration",
     atlas = "pack",
     loc_txt = { 
-            name = 'Jumbo Abberation Pack',
-            group_name = 'abberation',
+            name = 'Jumbo aberration Pack',
+            group_name = 'aberration',
             text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}Abberation{} cards to",
+            " {C:attention}#2#{} {C:purple}aberration{} cards to",
             "be used instantly." }
             },
     pos = { x = 2, y = 0 },
@@ -78,19 +65,19 @@ jumbo_abberation = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 
-mega_abberation = SMODS.Booster {
-    key = "abberation4",
-    kind = "abberation",
+FG.boosters.mega_aberration = SMODS.Booster {
+    key = "aberration4",
+    kind = "aberration",
     atlas = "pack",
     loc_txt = { 
-            name = 'Mega Abberation Pack',
-            group_name = 'abberation',
+            name = 'Mega aberration Pack',
+            group_name = 'aberration',
             text = { "Choose {C:attention}#1#{} of up to ",
-            " {C:attention}#2#{} {C:purple}Abberation{} cards to",
+            " {C:attention}#2#{} {C:purple}aberration{} cards to",
             "be used instantly." }
             },
     pos = { x = 3, y = 0 },
@@ -103,7 +90,7 @@ mega_abberation = SMODS.Booster {
         return { vars = { card.config.center.config.choose, self.config.extra or card.config.center.config.extra } }
     end,
     create_card = function(self, card)
-        return create_card("abberation", G.pack_cards, nil, nil, true, true, nil)
+        return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
     end
 }
 end

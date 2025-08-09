@@ -5,7 +5,61 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
-
+if FG.config.debug_mode then
+SMODS.Seal{
+    key = "red",
+    atlas = "enhanced",
+    pos = {x = 5, y = 4},
+    badge_colour = G.C.RED,
+    loc_txt = {
+        label = "Red? Seal",
+        name = "Red? Seal",
+        text = {
+            "Retrigger this card {C:attention}#1#{} times",
+            "Decreases by {C:attention}1{} when scored",
+            "{C:inactive}(Removes seal when reaches zero)"
+        }
+    },
+    config = {
+        retriggers = 3
+        },
+    loc_vars = function (self, info_queue, card)
+        if not card.ability.seal then 
+            card.ability.seal = {
+                retriggers = 3
+            } 
+        end
+        return {
+            vars = {
+                card.ability.seal.retriggers or 3
+            }
+        }
+    end,
+    calculate = function (self, card, context)
+        if context.after then
+            card.ability.seal.retriggers = card.ability.seal.retriggers - 1
+            FG.FUNCS.card_eval_status_text{
+                card = card,
+                message = "-1 Retrigger",
+                mode = "literal"
+            }
+            if card.ability.seal.retriggers <= 0 then
+                G.E_MANAGER:add_event(Event({
+                    func = function ()
+                        card.seal = nil
+                        return true
+                    end
+                }))
+            end
+        end
+        return {
+            repetitions = card.ability.seal.retriggers or 0,
+            card = card
+        }
+    end
+}
+end
+--[[
 SMODS.Seal {
     name = "Tune",
     key = "Tune",
@@ -15,7 +69,7 @@ SMODS.Seal {
         label = 'Tune',
         name = 'Tune',
         text = {
-            'Creates an {C:purple}Abberation{} Card',
+            'Creates an {C:purple}aberration{} Card',
             'when played but {C:attention}not{} scored'
         }
     },
@@ -24,8 +78,9 @@ SMODS.Seal {
 
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
-            return create_card("abberation", G.consumeables, nil, nil, false, true, nil)
+            return create_card("aberration", G.consumeables, nil, nil, false, true, nil)
         end
         -- does not work, i cant get it to calculate without being scored
     end
 }
+]]
