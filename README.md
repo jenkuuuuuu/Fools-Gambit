@@ -26,7 +26,6 @@ Fool's Gambit is an unused title for Balatro. This mod aims to add (some)new jok
 Currently, there is little new content. Alternating has been implemented, and we're working on implementing the effects; pace should pick up Very soon! 
 Wanna contribute or just keep up on progress? Join the Discord! 
 
-I WILL KILL MYSELF IF THIS DOESNT WORK
 # Contributors
 <a href="https://github.com/jenkuuuuuu/Fools-Gambit/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=jenkuuuuuu/Fools-Gambit" />
