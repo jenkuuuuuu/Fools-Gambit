@@ -5,6 +5,7 @@
   [![Discord](https://img.shields.io/discord/1333746061784649768?&logo=discord&label=discord)](https://discord.gg/m6Hm6KyQRz)
   ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/jenkuuuuuu/Fools-Gambit)
   ![GitHub forks](https://img.shields.io/github/forks/jenkuuuuuu/Fools-Gambit)
+  ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/jenkuuuuuu/Fools-Gambit)
 </div>
 
 # Fool's Gambit - Yet ANOTHER Alternate Balatro Mod
