@@ -1539,7 +1539,7 @@ return {
             fg_legendary_alt = "Legendary?",
             fg_collective = "Collective",
             fg_collective_alt = "Collective?",
-            fg_aberration = "Aberration"
+            fg_unchangeable = "Unchangeable"
         },
         poker_hand_descriptions={},
         poker_hands={},
