@@ -1,21 +1,46 @@
-function FG.FUNCS.is_alternate(card,table)
-    for k, v in pairs(table) do
-        if card == v then
-            return "v"
-		elseif card == tostring(k) then
-			return "k"
-        end
-    end
-    return "no"
+--- Fallback function to search through `FG.ALTS`
+---@return table t The resulting table of the search. Should contain key-pair values
+function FG.FUNCS.full_search_alternate ()
+	local t = {}
+
+	for _,v in pairs(FG.ALTS) do
+		for kk,vv in pairs(v) do
+			t[kk] = vv
+		end
+	end
+	return t
 end
 
---- Gets the key/value pair associated with the passing data. Returns `nil` if there is no alternate
+
+--- Checks if a card is an alternate or not in the given table. Stops at the first instance of it's key.
+--- @param key string
+--- @param table? table
+--- @return boolean|nil
+function FG.FUNCS.is_alternate(key,table)
+	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
+
+    for k, v in pairs(table) do
+        if key == v then
+            return true
+		elseif key == tostring(k) then
+			return false
+        end
+    end
+    return nil
+end
+
+--- Gets the key/value pair associated with the passing data.
 ---@param key string The provided card key.
----@param table table The reference table to look up.
----@param passing? string Key or value, and returns the other.
+---@param table? table The reference table to look up. If not specified looks through all alternate tables in FG.ALTS
 ---@return string|boolean key The key of the alternate card, or `false` (boolean) if not found
-function FG.FUNCS.get_alternate(key,table,passing)
-	local _passing = passing or FG.FUNCS.is_alternate(key,table)
+function FG.FUNCS.get_alternate(key,table)
+
+	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
+
+	local _passing = "k" 
+	if FG.FUNCS.is_alternate(key,table) then _passing = "v" end
+	if not table then return false end
+
 	if _passing == "k" then -- passing key, returning value
 		for k,v in pairs(table) do
 			if k == key then return v end
@@ -29,12 +54,14 @@ end
 
 -- Alternates between this card and the associated alternative card.
 ---@param card table|card The card instance itself.
----@param ref table The table to compare the card when alternating it.
+---@param ref? table The table to compare the card when alternating it.
 ---@return table|card table A table containing the old card and the new card.
 function FG.FUNCS.alternate_card(card,ref)
-	local ref = ref or FG.ALTS.joker_equivalents
+
+	if not ref or type(ref) ~= "table" then ref = FG.FUNCS.full_search_alternate() end
+
 	local key = FG.FUNCS.get_card_info(card).key
-	local convert_to = FG.FUNCS.get_alternate(key,ref,FG.FUNCS.is_alternate(key,ref))
+	local convert_to = FG.FUNCS.get_alternate(key,ref)
 	local new_card = SMODS.add_card({
 		--set = 'Joker',
 		skip_materialize = true,
@@ -190,7 +217,7 @@ function FG.FUNCS.card_eval_status_text (args)
 end
 --- Retrieves useful data for the specified card
 ---@param card table|card  The target card to evaluate
----@return {id:boolean,rank:false|string,suit:false|string,is_face:boolean,key:false|string,edition:false|string,seal:false|string,eternal:boolean,perishable:boolean,perish_tally:number,rental:boolean,unchangeable:boolean,base_cost:number,cost:number,mod_cost:number,sell_cost:number,rarity:number|string,raw:table|nil}|nil
+---@return {id:boolean|number,rank:false|string,suit:false|string,is_face:boolean,key:false|string,edition:false|string,seal:false|string,stickers:{},base_cost:number,cost:number,mod_cost:number,sell_cost:number,rarity:number|string,raw:table|nil}|nil
 --- Returns the card's `id`, `rank`, `suit`, if it's a face card, `key` (or enhancement), `edition`, `seal` 
 --- and if it's `eternal`, `perishable` and how many rounds it has left, `rental`, buy and sell cost and
 --- the `raw` data of the card, or `nil` if no card is passed.
@@ -204,11 +231,7 @@ function FG.FUNCS.get_card_info(card)
 		key = false,
 		edition = false,
 		seal = card.seal or false,
-		eternal = false,
-		perishable = false,
-		perish_tally = 0,
-		rental = false,
-		unchangeable = false,
+		stickers = {},
 		base_cost = card.base_cost or 0,
 		cost = card.cost or 0,
 		mod_cost = (card.cost or 0) - (card.base_cost or 0),
@@ -221,7 +244,11 @@ function FG.FUNCS.get_card_info(card)
 	if card.config then
 		if card.config.card then ret.rank = card.config.card.value end
 		if card.config.card then ret.suit = card.config.card.suit end
-		if ret.id and ret.id >= 11 and ret.id <= 13 then ret.is_face = true end
+		if ret.rank then
+			for k,v in pairs(SMODS.Ranks) do
+				if ret.rank == v.key and v.face then ret.is_face = true end
+			end
+		end
 		if card.config.center then 
 			ret.key = card.config.center.key 
 			ret.rarity = card.config.center.rarity
@@ -229,13 +256,11 @@ function FG.FUNCS.get_card_info(card)
 	end
 	if card.edition then ret.edition = card.edition.key end
 	if card.ability then
-		if card.ability.eternal then ret.eternal = true end
-		if card.ability.perishable then
-			ret.perishable = true
-			ret.perish_tally = card.ability.perish_tally
+		for _,ability in pairs(card.ability) do
+			for _,sticker in pairs(SMODS.Stickers) do
+				if ability == sticker.key then ret.stickers[ability] = true end
+			end
 		end
-		if card.ability.rental then ret.rental = true end
-		if card.ability.fg_unchangeable then ret.unchangeable = true end
 	end
 	return ret
 end
@@ -253,7 +278,7 @@ function FG.FUNCS.allow_duplicate (card)
 	local found_alternate = false
 	for _,v in ipairs(G.jokers.cards) do
 		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true end -- Find showman
-		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key,FG.ALTS.joker_equivalents) then found_alternate = true end -- Find alternate card
+		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key) then found_alternate = true end -- Find alternate card
 	end
 	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
 end
@@ -321,6 +346,42 @@ function FG.FUNCS.localize(args)
 	return ret
 end
 
+---Modifies the likelyhood of alternate/original rarities to appear.
+---@param rate? number The new rate to set alternate spawn. A value between 0 and 1.
+---@return boolean success Returns false if the function fails, true otherwise
+function FG.FUNCS.recalculate_alt_rates(rate)
+	if not G.GAME then sendErrorMessage("Could not find G.GAME.fg_data","FG/recalculate_alt_rates") return false end
+	rate = rate or 0.15
+	-- clamp result
+	if rate > 1 then rate = 1 elseif rate < 0 then rate = 0 end
+
+	-- Reset tables
+	FG.rarities.alternate = {}
+	FG.rarities.original = {}
+	--sendDebugMessage("Reset tables")
+
+	for _,v in pairs(SMODS.Rarities) do
+		-- Populate tables
+		if v.fg_data and v.fg_data.is_alternate then
+			table.insert(FG.rarities.alternate,v.key)
+		else
+			table.insert(FG.rarities.original,v.key)
+		end
+	end
+
+	G.GAME.fg_data.original_rarities_multiply = 1-rate
+	G.GAME.fg_data.alternate_rarities_multiply = rate
+	
+	for _,v in ipairs(FG.rarities.original) do
+		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.original_rarities_multiply
+	end
+	for _,v in ipairs(FG.rarities.alternate) do
+		G.GAME[v:lower().."_mod"] = G.GAME.fg_data.alternate_rarities_multiply
+	end
+
+	return true
+end
+
 -- CALLBACK FUNCTIONS FOR BUTTONS AND SHIT
 
 -- Settings, special edition
@@ -335,4 +396,4 @@ end
 
 
 
---FG.fuck = 1
+--FG.fuck = math.pi/math.sqrt(-1)

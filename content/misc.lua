@@ -15,23 +15,6 @@ SMODS.Sticker{
     needs_enabled_flag = false
 }
 
-SMODS.Stake{
-    key = "pink",
-    applied_stakes = {
-        "black"
-    },
-    loc_txt = {
-        name = "Pink stake",
-        text = {
-            "Shop can have {C:attention}unchangeable{} jokers",
-            "{C:inactive,s:0.8}(Can't be alternated)",
-        }
-    },
-    modifiers = function ()
-        
-    end
-}
-
 SMODS.Atlas{
     key = "logo_small",
     path = "logo2.png",
@@ -58,6 +41,17 @@ SMODS.Joker{
     }
 }
 
+---
+--- Quips
+---
+--[[
+SMODS.JimboQuip{
+    key = 'fg_jogla_w1',
+    type = 'win',
+	extra = {center = 'j_fg_jogla'},
+	filter = function () return true, {weight = 512} end,
+}
+]]
 --- 
 --- Sound replacer
 --- 

@@ -4,15 +4,15 @@ return {
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
-                    "Convierte {C:attention}1{} comodín seleccionado",
-                    "en su versión {C:red}original{}"
+                    "Convierte {C:attention}#1#{} #2# de más a la",
+                    "izquierda a su versión {C:red}alternativa{}"
                 }
             },
             c_fg_atonal = {
                 name = "Atonal",
                 text = {
-                    "Convierte {C:attention}1{} comodín seleccionado",
-                    "en su versión {C:purple}alternativa{}"
+                    "Convierte {C:attention}#1#{} #2# de más a la",
+                    "izquierda a su versión {C:purple}alternativa{}"
                 }
             },
             c_fg_accelerando = {
@@ -32,7 +32,7 @@ return {
             c_fg_bass = {
                 name = "Clave de Fa",
                 text = {
-                    "Convierte todos los comodines {C:green}Inusuales{}",
+                    "Convierte todos los comodines {C:green}inusuales{}",
                     "en sus versiones {C:purple}alternativas{}"
                 }
             },
@@ -55,6 +55,41 @@ return {
                 text = {
                     "Da {C:money}$#1#{} dólares por",
                     "cada comodín {C:purple}alternativo{}"
+                }
+            },
+            c_fg_tonal_alt = {
+                name = "¿Tonal?",
+                text = {
+                    "Convierte {C:attention}#1#{} #2# de más a",
+                    "la izquierda a su versión {C:red}original{}"
+                }
+            },
+            c_fg_atonal_alt = {
+                name = "¿Atonal?",
+                text = {
+                    "Convierte {C:attention}#1#{} #2# de más a",
+                    "la izquierda a su versión {C:purple}alternativa{}"
+                }
+            },
+            c_fg_treble_alt = {
+                name = "¿Clave de Sol?",
+                text = {
+                    "Convierte todos los comodines {C:blue}comunes{}",
+                    "en sus versiones {C:red}originales{}"
+                }
+            },
+            c_fg_bass_alt = {
+                name = "¿Clave de Fa?",
+                text = {
+                    "Convierte todos los comodines {C:green}inusuales{}",
+                    "en sus versiones {C:red}originales{}"
+                }
+            },
+            c_fg_alto_alt = {
+                name = "¿Clave de Do?",
+                text = {
+                    "Convierte todos los comodines {C:red}raros{}",
+                    "en sus versiones {C:red}originales{}"
                 }
             },
         },
@@ -1125,10 +1160,10 @@ return {
             c_fg_hermit = {
                 name = "¿El ermitaño?",
                 text = {
-                    "Enhance {C:attention}#1#{} selected cards",
-                    "with a {C:attention}random{} enhancement",
-                    "{C:attention}Halves{} money",
-                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})"
+                    "Mejora {C:attention}#1#{} carta seleccionada",
+                    "con una mejora {C:attention}aleatoria{}",
+                    "{C:attention}Divide a la mitad{} el dinero",
+                    "{C:inactive}(Máximo de {C:gold}$#2#{C:inactive})"
                 }
             },
             c_fg_hierophant = {
@@ -1277,10 +1312,45 @@ return {
         },
         Voucher={
             v_fg_violin = {
-                name = "Violin",
+                name = "Violín",
                 text = {
-                    "{C:attention}+1{} option and {C:attention}+1{} select in every",
-                    "{C:purple}Paquete melódico"
+                    "{C:attention}+1{} opción disponible",
+                    "en los {C:purple}paquetes melódico{}"
+                }
+            },
+            v_fg_cello = {
+                name = "Violonchelo",
+                text = {
+                    "{C:attention}+1{} opción para elegir",
+                    "en los {C:purple}paquetes melódico{}"
+                }
+            },
+            v_fg_change_of_pace = {
+                name = "Cámbio de paso",
+                text = {
+                    "Los comodines {C:purple}alternativos{}",
+                    "aparecen {C:attention}X2{} más seguidos",
+                }
+            },
+            v_fg_modulation = {
+                name = "Modulación métrica",
+                text = {
+                    "Los comodines {C:purple}alternativos{}",
+                    "aparecen {C:attention}X3{} más seguidos",
+                }
+            },
+            v_fg_music_merchant = {
+                name = "Mercader musical",
+                text = {
+                    "Las cartas de {C:purple}aberración{} pueden",
+                    "aparecer en la tienda"
+                }
+            },
+            v_fg_music_tycoon = {
+                name = "Magnate musical",
+                text = {
+                    "Las cartas de {C:purple}aberración{} aparecen",
+                    "{C:attention}X3{} veces más seguido en la tienda",
                 }
             }
         },
@@ -1379,6 +1449,12 @@ return {
                 },
             }
         },
+        language_adaptations = {
+            w_joker_singular = "comodín",
+            w_joker_plural = "comodines",
+            w_consumable_singular = "consumible",
+            w_consumeable_plural = "consumibles",
+        }
     },
     misc = {
         achievement_descriptions={},
