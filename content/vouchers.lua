@@ -7,28 +7,84 @@ SMODS.Atlas {
 	py = 95
 }
 
+SMODS.Voucher{
+    key = "change_of_pace",
+    atlas = "vouchers",
+    pos = { x = 2, y = 0},
+    redeem = function (self, voucher)
+        FG.FUNCS.recalculate_alt_rates(0.30)
+    end
+}
 
-if FG.config.debug_mode then
+SMODS.Voucher{
+    key = "modulation",
+    atlas = "vouchers",
+    pos = { x = 2, y = 1},
+    redeem = function (self, voucher)
+        FG.FUNCS.recalculate_alt_rates(0.45)
+    end
+}
+
+SMODS.Voucher{
+    key = "music_merchant",
+    atlas = "vouchers",
+    pos = { x = 1, y = 0},
+    redeem = function (self, voucher)
+        G.GAME.aberration_rate = 4
+    end
+}
+
+SMODS.Voucher{
+    key = "music_tycoon",
+    atlas = "vouchers",
+    pos = { x = 1, y = 1},
+    redeem = function (self, voucher)
+        G.GAME.aberration_rate = 12
+    end
+}
+
+
 SMODS.Voucher{
 	key = 'violin',
     atlas = "vouchers",
-    pos = { x = 2, y = 0 },
+    pos = { x = 1, y = 0 },
     redeem = function(self,card)
-        for _,v in pairs(FG.boosters) do
-            v.config.choice = v.config.choice + 1
-            v.config.extra = v.config.extra + 1
+
+        -- Overrides any pack that generates aberrations
+        for _,v in pairs(G.P_CENTERS) do
+            if v.kind == "aberration" then
+                v.config.extra = v.config.extra + 1
+            end
         end
 
-        local card_open_ref = Card.open
-        function Card:open()
-            sendInfoMessage("card open", "MyInfoLogger")
-            sendInfoMessage(self.ability.name, "MyInfoLogger")
-            if self.ability.name:find('aberration') then
-                sendInfoMessage("aberration", "MyInfoLogger")
-                self.ability.extra = self.ability.extra + 1
+        -- Modifies existing packs
+        for _,v in ipairs(G.shop_booster.cards) do
+            if v.config.center.kind == "aberration" then
+                v.ability.extra = v.ability.extra + 1
             end
-            card_open_ref(self)
         end
     end
 }
-end
+
+
+SMODS.Voucher{
+	key = 'cello',
+    atlas = "vouchers",
+    pos = { x = 1, y = 1 },
+    redeem = function(self,card)
+
+        -- Overrides any pack that generates aberrations
+        for _,v in pairs(G.P_CENTERS) do
+            if v.kind == "aberration" then
+                v.config.choose = v.config.choose + 1
+            end
+        end
+
+        -- Modifies existing packs
+        for _,v in ipairs(G.shop_booster.cards) do
+            if v.config.center.kind == "aberration" then
+                v.ability.choose = v.ability.choose + 1
+            end
+        end
+    end
+}

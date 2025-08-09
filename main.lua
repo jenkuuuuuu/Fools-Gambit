@@ -1,7 +1,11 @@
 FG = {
 	ALTS = {},		-- Stores all alternating tables.
 	FUNCS = {}, 	-- Stores all funtions used in the mod, be it the API or not.
-	cards = {}
+	cards = {},
+	rarities = {
+		original = {},
+		alternate = {}
+	}
 }
 FG.config = SMODS.current_mod.config
 
@@ -9,13 +13,14 @@ FG.config.version = SMODS.current_mod.version
 
 SMODS.current_mod.optional_features = { retrigger_joker = true }
 
+--[[
 SMODS.Atlas{
 	key = "mod_icon",
 	path = "modicon.png",
 	px = 34,
 	py = 34
 }
-
+]]
 
 SMODS.Atlas{
 	key = 'Consumeables',
@@ -25,6 +30,9 @@ SMODS.Atlas{
 }
 
 ---@alias card table
+
+G.C.FG_ALTERNATE = HEX('8867a5')
+G.C.FG_ORIGINAL = HEX('FE5F55')
 
 -- This is in preparation for file splitting. I'll do that later. - Jogla
 -- im splitting jokers and stuff into sections to make this easier later - jenku
