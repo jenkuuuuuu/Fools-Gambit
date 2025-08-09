@@ -23,7 +23,7 @@ Fool's Gambit is an unused title for Balatro. This mod aims to add (some)new jok
 - New seal~~s~~
 - Alternate editions
 - An alternate ~~soundtrack and~~ SFX
-
+* *
 Currently, there is little new content. Alternating has been implemented, and we're working on implementing the effects; pace should pick up Very soon! 
 Wanna contribute or just keep up on progress? Join the Discord! 
 
