@@ -1,11 +1,7 @@
 FG = {
 	ALTS = {},		-- Stores all alternating tables.
 	FUNCS = {}, 	-- Stores all funtions used in the mod, be it the API or not.
-	cards = {},
-	rarities = {
-		original = {},
-		alternate = {}
-	}
+	cards = {}
 }
 FG.config = SMODS.current_mod.config
 
@@ -29,9 +25,6 @@ SMODS.Atlas{
 }
 
 ---@alias card table
-
-G.C.FG_ALTERNATE = HEX('8867a5')
-G.C.FG_ORIGINAL = HEX('FE5F55')
 
 -- This is in preparation for file splitting. I'll do that later. - Jogla
 -- im splitting jokers and stuff into sections to make this easier later - jenku
