@@ -1437,7 +1437,8 @@ return {
         high_scores={},
         labels={
             fg_collective = "Collective",
-            fg_aberration = "Aberration"
+            fg_aberration = "Aberration",
+            fg_unchangeable = "Unchangeable"
         },
         poker_hand_descriptions={},
         poker_hands={},

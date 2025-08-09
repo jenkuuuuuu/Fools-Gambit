@@ -4,6 +4,18 @@ SMODS.Atlas{
     px = 71,
     py = 95
 }
+SMODS.Atlas{
+    key = "istickers",
+    path = "uhhhh.png",
+    px = 71,
+    py = 95
+}
+SMODS.Atlas{
+    key = "stakes",
+    path = "pink_stake.png",
+    px = 29,
+    py = 29
+}
 SMODS.Atlas{key = "modicon", path = "icon.png", px = 34, py = 34}
 SMODS.Sticker{
     key = "unchangeable",
@@ -11,24 +23,73 @@ SMODS.Sticker{
     pos = { x = 0, y = 0},
     badge_colour = HEX("e083b0"),
     default_compat = true,
-    rate = 1,
-    needs_enabled_flag = false
+    rate = 0.3,
+    should_apply = function(self, card, center, area, bypass_roll)
+        if math.random(0,1) <= 0.3 and not (card.ability.set == "Planet") then
+            return G.GAME.modifiers.enable_unchangeable_in_shop
+        end
+    end,
 }
-
+SMODS.JimboQuip{
+    key = 'goldenleaf_wq',
+    type = 'win',
+    extra = { center = 'j_fg_goldenleaf', particle_colours = { G.C.PURPLE, G.C.YELLOW, G.C.GOLD } },
+    filter = function()
+        if next(SMODS.find_card('j_fg_goldenleaf')) or next(SMODS.find_card('j_fg_goldenleafalt')) then
+            return true, { weight = 100 }
+        end
+        return false
+    end,
+    loc_txt = {
+        "Travis scott, lock into a stud",
+        "NOW!"
+    }
+}
+SMODS.JimboQuip{
+    key = 'goldenleaf_lq',
+    type = 'loss',
+    extra = { center = 'j_fg_goldenleaf', particle_colours = { G.C.PURPLE, G.C.YELLOW, G.C.GOLD } },
+    filter = function()
+        if next(SMODS.find_card('j_fg_goldenleaf')) or next(SMODS.find_card('j_fg_goldenleafalt')) then
+            return true, { weight = 100 }
+        end
+        return false
+    end,
+    loc_txt = {
+        "How the fuck do you lose",
+        "with a collective joker????"
+    }
+}
 SMODS.Stake{
     key = "pink",
-    applied_stakes = {
-        "black"
-    },
+    atlas = "stakes",
+    pos = {x = 0, y = 0},
+    unlocked_stake = "blue",
+    applied_stakes = {"black"},
+    above_stake = "black",
+    sticker_atlas = 'istickers',
+    sticker_pos = {x = 0, y = 0},
+    unlocked = false,
+    colour = G.C.PINK,
+    prefix_config = { applied_stakes = { mod = false }, above_stake = { mod = false } },
     loc_txt = {
         name = "Pink stake",
         text = {
             "Shop can have {C:attention}unchangeable{} jokers",
             "{C:inactive,s:0.8}(Can't be alternated)",
+        },
+        sticker = {
+            name = "Pink Sticker",
+            text = {
+                "Used this joker",
+                "to win on{C:attention} Pink",
+                "{C:attention}Stake{} difficulty"
+            }
         }
     },
     modifiers = function ()
-        
+        G.GAME.modifiers.enable_unchangeable_in_shop = true
+        print("peepeepoopoo")
     end
 }
 
