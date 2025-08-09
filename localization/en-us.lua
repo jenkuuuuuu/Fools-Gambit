@@ -565,7 +565,7 @@ return {
                 },
             },
             j_fg_ice_cream = {
-                name = "Ice cream?",
+                name = "Ice Cream?",
                 text = {
                     "{C:chips}+#1#{} Chips",
                     "{C:chips}-#2#{} Chips when",
@@ -642,7 +642,7 @@ return {
                 }
             },
             j_fg_gift = {
-                name = "Gift card",
+                name = "Gift Card",
                 text = {
                     "Gains {C:attention}one quarter{C:inactive} (rounded up) {}",
                     "of all jokers and consumables",
@@ -695,7 +695,7 @@ return {
                }
             },
             j_fg_tribe = {
-                name = "The tribe",
+                name = "The Tribe",
                 text = {
                     "{C:white,X:mult}X#1#{} Mult if",
                     "scoring hand consist of 5 {C:attention}Queens",
@@ -742,7 +742,7 @@ return {
                 }
             },
             j_fg_smiley = {
-                name = "Smiley face?",
+                name = "Smiley Face?",
                 text = {
                     "Gains {C:mult}+#2#{} Mult for",
                     "each scored {C:attention}face{} card",
@@ -845,7 +845,7 @@ return {
                 },
 			},
             j_fg_flower_pot = {
-                name = "Flower pot?",
+                name = "Flower Pot?",
                 text = {
                     "{C:white,X:mult}X#1#{} Mult if {C:attention}scoring hand{} contains",
                     "{C:spades}Spades{}, {C:hearts}Hearts{}, {C:clubs}Cubs{}, {C:diamonds}Diamonds{},",
@@ -853,7 +853,7 @@ return {
                 }
             },
             j_fg_seeing_double = {
-                name = "Seeing double?",
+                name = "Seeing Double?",
                 text = {
                     "{C:white,X:mult}X#1#{} Mult if scoring hand",
                     "contains {C:clubs}Clubs{} and any other {C:attention}suit{}",
@@ -887,7 +887,7 @@ return {
                 }
             },
             j_fg_drivers_license = {
-                name = "Driver's license?",
+                name = "Driver's License?",
                 text = {
                     "{C:white,X:mult}X#1#{} Mult if at least",
                     "{C:attention}half{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} if your {C:attention}full deck{}",
