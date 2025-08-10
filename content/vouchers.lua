@@ -20,6 +20,7 @@ SMODS.Voucher{
     key = "modulation",
     atlas = "vouchers",
     pos = { x = 2, y = 1},
+    requires = {"v_fg_change_of_pace"},
     redeem = function (self, voucher)
         FG.FUNCS.recalculate_alt_rates(0.45)
     end
@@ -38,6 +39,7 @@ SMODS.Voucher{
     key = "music_tycoon",
     atlas = "vouchers",
     pos = { x = 1, y = 1},
+    requires = {"v_fg_music_merchant"},
     redeem = function (self, voucher)
         G.GAME.aberration_rate = 12
     end
@@ -71,6 +73,7 @@ SMODS.Voucher{
 	key = 'cello',
     atlas = "vouchers",
     pos = { x = 1, y = 1 },
+    requires = {"v_fg_violin"},
     redeem = function(self,card)
 
         -- Overrides any pack that generates aberrations
