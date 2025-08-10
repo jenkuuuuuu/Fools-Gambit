@@ -1091,32 +1091,32 @@ return {
                 text = { 
                     "Choose {C:attention}#1#{} of up to ",
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
-                    "be used instantly."
-                }
+                    "be used immediately."
+                },
             },
             p_fg_aberration2 = {
                 name = 'Melody Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to ",
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
-                    "be used instantly."
-                }
+                    "be used immediately."
+                },
             },
             p_fg_aberration3 = {
                 name = 'Jumbo Melody Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
-                    "be used instantly."
-                }
+                    "be used immediately."
+                },
             },
             p_fg_aberration4 = {
                 name = 'Mega Melody Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to",
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
-                    "be used instantly."
-                }
+                    "be used immediately."
+                },
             }
         },
         Planet={},
@@ -1529,6 +1529,7 @@ return {
             k_unchangeable_warning = "This card can't be alternated",
             k_fg_active = "Active!",
             k_fg_none = "None",
+            k_fg_aberration2 = { group_name = "fuck"}
         },
         high_scores={},
         labels={

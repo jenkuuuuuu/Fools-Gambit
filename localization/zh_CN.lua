@@ -971,6 +971,22 @@ return {
                     "选择{C:attention}#2#{}张",
                     "即选即用"
                 }
+            },
+            p_fg_aberration3 = {
+                name = '巨型调律包',
+                text = {
+                    "从最多{C:attention}#1#{}张{C:purple}转变牌{}中",
+                    "选择{C:attention}#2#{}张",
+                    "即选即用"
+                }
+            },
+            p_fg_aberration4 = {
+                name = '超级调律包',
+                text = {
+                    "从最多{C:attention}#1#{}张{C:purple}转变牌{}中",
+                    "选择{C:attention}#2#{}张",
+                    "即选即用"
+                }
             }
         },
         Planet={},

@@ -22,7 +22,14 @@ FG.boosters.aberration1 = SMODS.Booster {
     end,
     create_card = function(self, card)
         return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
-    end
+    end,
+    loc_txt = {
+        ['en-us'] = {
+            group_name = "Aberration pack"
+        },
+        ['zh_CN'] = {
+            group_name = "调律包"
+        }}
 }
 
 
@@ -41,7 +48,14 @@ FG.boosters.aberration2 = SMODS.Booster {
     end,
     create_card = function(self, card)
         return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
-    end
+    end,
+    loc_txt = {
+        ['en-us'] = {
+            group_name = "Aberration pack"
+        },
+        ['zh_CN'] = {
+            group_name = "调律包"
+        }}
 }
 
 FG.boosters.jumbo_aberration = SMODS.Booster {
@@ -59,7 +73,14 @@ FG.boosters.jumbo_aberration = SMODS.Booster {
     end,
     create_card = function(self, card)
         return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
-    end
+    end,
+    loc_txt = {
+        ['en-us'] = {
+            group_name = "Jumbo aberration pack"
+        },
+        ['zh_CN'] = {
+            group_name = "巨型调律包"
+        }}
 }
 
 FG.boosters.mega_aberration = SMODS.Booster {
@@ -77,5 +98,12 @@ FG.boosters.mega_aberration = SMODS.Booster {
     end,
     create_card = function(self, card)
         return create_card("aberration", G.pack_cards, nil, nil, true, true, nil)
-    end
+    end,
+    loc_txt = {
+        ['en-us'] = {
+            group_name = "Mega aberration pack"
+        },
+        ['zh_CN'] = {
+            group_name = "超级调律包"
+        }}
 }
