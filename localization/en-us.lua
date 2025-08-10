@@ -1545,11 +1545,11 @@ return {
         quips={
             fg_jogla_w1 = {
                 "WIZ"
-            }
+            },
             fg_goldenleaf_wq = {
                 "Travis scott, lock into a stud",
                 "NOW!"
-            }
+            },
             fg_goldenleaf_lq = {
                 "How the fuck do you lose",
                 "with a collective joker????"
