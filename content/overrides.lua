@@ -44,17 +44,47 @@ end
 
 -- Injects FG alternate flag
 
-local start_run_ref = Game.start_run 
+local start_run_ref = Game.start_run
 
 function Game:start_run(args)
 	start_run_ref(self,args)
-	if G.GAME.pool_flags.alternate_spawn then
+
+	-- Initialize FG's default data table
+	G.GAME.fg_data = {
+		original_rarities_multiply = 1,
+		alternate_rarities_multiply = 0,
+		aberration_rate = 200
+	}
+
+	-- Load and reset alt rates
+	FG.FUNCS.recalculate_alt_rates(0.15)
+
+	-- Reset pack sizes to default
+	for k,v in pairs(G.P_CENTERS) do
+		if k == "p_fg_aberration1" then
+			v.config.choose = 1
+			v.config.extra = 3
+		elseif k == "p_fg_aberration2" then
+			v.config.choose = 1
+			v.config.extra = 3
+		elseif k == "p_fg_aberration3" then
+			v.config.choose = 1
+			v.config.extra = 5
+		elseif k == "p_fg_aberration4" then
+			v.config.choose = 2
+			v.config.extra = 5
+		end
+	end
+
+	-- [ DEPRECATED ]
+	if G.GAME.pool_flags.alternate_spawn and false then
 		for k, v in pairs(G.P_CENTERS) do
 			if string.find(k, 'j_') and not string.find(k, "_fg_") then
 				G.P_CENTERS[k]['no_pool_flag'] = 'alternate_spawn'
 			end
 		end
 	end
+	-- [ #end ]
 end
 
 
@@ -84,7 +114,7 @@ end
 	function create_card_for_shop(area)
 		local card = shopref(area)
 
-		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and G.GAME.round == 3 - G.GAME.skips then
+		if G.shop_jokers and G.shop_jokers.cards and #G.shop_jokers.cards > 0 and G.GAME.round == 3 - G.GAME.skips and false then
             FG.FUNCS.replace_shop_joker("j_fg_change_of_pace", #G.shop_jokers.cards+1)
 		end
 

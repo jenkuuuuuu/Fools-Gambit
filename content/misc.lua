@@ -60,6 +60,7 @@ SMODS.JimboQuip{
         "with a collective joker????"
     }
 }
+
 SMODS.Stake{
     key = "pink",
     atlas = "stakes",
@@ -93,6 +94,7 @@ SMODS.Stake{
     end
 }
 
+
 SMODS.Atlas{
     key = "logo_small",
     path = "logo2.png",
@@ -119,6 +121,17 @@ SMODS.Joker{
     }
 }
 
+---
+--- Quips
+---
+--[[
+SMODS.JimboQuip{
+    key = 'fg_jogla_w1',
+    type = 'win',
+	extra = {center = 'j_fg_jogla'},
+	filter = function () return true, {weight = 512} end,
+}
+]]
 --- 
 --- Sound replacer
 --- 
