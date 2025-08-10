@@ -31,7 +31,7 @@ SMODS.Sticker{
     end,
 }
 SMODS.JimboQuip{
-    key = 'goldenleaf_wq',
+    key = 'fg_goldenleaf_wq',
     type = 'win',
     extra = { center = 'j_fg_goldenleaf', particle_colours = { G.C.PURPLE, G.C.YELLOW, G.C.GOLD } },
     filter = function()
@@ -39,14 +39,10 @@ SMODS.JimboQuip{
             return true, { weight = 100 }
         end
         return false
-    end,
-    loc_txt = {
-        "Travis scott, lock into a stud",
-        "NOW!"
-    }
+    end
 }
 SMODS.JimboQuip{
-    key = 'goldenleaf_lq',
+    key = 'fg_goldenleaf_lq',
     type = 'loss',
     extra = { center = 'j_fg_goldenleaf', particle_colours = { G.C.PURPLE, G.C.YELLOW, G.C.GOLD } },
     filter = function()
@@ -54,11 +50,7 @@ SMODS.JimboQuip{
             return true, { weight = 100 }
         end
         return false
-    end,
-    loc_txt = {
-        "How the fuck do you lose",
-        "with a collective joker????"
-    }
+    end
 }
 
 SMODS.Stake{
@@ -90,7 +82,7 @@ SMODS.Stake{
     },
     modifiers = function ()
         G.GAME.modifiers.enable_unchangeable_in_shop = true
-        print("peepeepoopoo")
+        -- print("peepeepoopoo")
     end
 }
 

@@ -1457,7 +1457,6 @@ return {
                 poker_the_poker = "Poker The Poker",
                 mina_kitsune = "Scientifically Insane",
                 itscoldhere = "itscoldhere",
-                silly_goober_0nthewall = "silly_goober_0nthewall"
             },
             languages = {
                 disclaimer = {
@@ -1546,6 +1545,14 @@ return {
         quips={
             fg_jogla_w1 = {
                 "WIZ"
+            }
+            fg_goldenleaf_wq = {
+                "Travis scott, lock into a stud",
+                "NOW!"
+            }
+            fg_goldenleaf_lq = {
+                "How the fuck do you lose",
+                "with a collective joker????"
             }
         },
         ranks={},

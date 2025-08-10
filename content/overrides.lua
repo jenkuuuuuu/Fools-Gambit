@@ -30,7 +30,7 @@ function Game:main_menu(change_context)
 			major = G.SPLASH_LOGO,
 			type = 'cm',
 			bond = 'Strong',
-			offset = {x=12,y=8}
+			offset = {x=50,y=20}
 		})
 	end
 
