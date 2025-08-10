@@ -184,15 +184,6 @@ G.FUNCS.FG_credits = function (e,page,from_callback)
 							},	
 						}},
 					}},
-					{n = G.UIT.R, config = {minw = 2, align = "tm", padding = 0}, nodes = {
-						FG.FUNCS.UIBox_text{
-							text = {
-								FG.FUNCS.localize{"FG","credits","names","silly_goober_0nthewall"},
-							},
-							scale = 0.3,
-							align = "tm",
-						},
-					}},
 					{n = G.UIT.R, config = {align = "tm", padding = 0}, nodes = {
 						FG.FUNCS.UIBox_text{
 							text = {
