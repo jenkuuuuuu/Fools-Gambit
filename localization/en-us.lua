@@ -4,17 +4,15 @@ return {
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:red}Original{} form",
-                    "{C:inactive}Placeholder Sprite{}",
                 }
             },
             c_fg_atonal = {
                 name = "Atonal",
                 text = {
-                    "Converts {C:attention}1{} selected Jokers", -- should be 3, change this to 3 leftmost later
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
                     "to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
                 }
             },
             c_fg_accelerando = {
@@ -23,27 +21,26 @@ return {
                     "Changes {C:attention}3{} selected cards",
                     "and turns their editions, seals and,",
                     "enhancements to their {C:purple}Alternate{} form",
-                    "{C:inactive}Placeholder Sprite{}"
                 }
             },
             c_fg_treble = {
                 name = "Treble",
                 text = {
-                    "Turns all Common Jokers in hand",
+                    "Turns all {C:blue}Common{} Jokers in hand",
                     "into their {C:purple}Alternate{} form"
                 }
             },
             c_fg_bass = {
                 name = "Bass",
                 text = {
-                    "Turns all Uncommon Jokers in hand",
+                    "Turns all {C:green}Uncommon{} Jokers in hand",
                     "into their {C:purple}Alternate{} form"
                 }
             },
             c_fg_alto = {
                 name = "Alto",
                 text = {
-                    "Turns all Rare Jokers in hand",
+                    "Turns all {C:red}Rare{} Jokers in hand",
                     "into their {C:purple}Alternate{} form"
                 }
             },
@@ -61,7 +58,43 @@ return {
                     "Gives {C:money}$#1#{} for every",
                     "owned {C:purple}Alternate{} Joker",
                 }
-            }
+            },
+            -- alts
+            c_fg_tonal_alt = {
+                name = "Tonal?",
+                text = {
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
+                    "to their {C:red}Original{} form",
+                }
+            },
+            c_fg_atonal_alt = {
+                name = "Atonal?",
+                text = {
+                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
+                    "to their {C:purple}Alternate{} form",
+                }
+            },
+            c_fg_treble_alt = {
+                name = "Treble?",
+                text = {
+                    "Turns all {C:blue}Common{} Jokers in hand",
+                    "into their {C:red}Original{} form"
+                }
+            },
+            c_fg_bass_alt = {
+                name = "Bass?",
+                text = {
+                    "Turns all {C:green}Uncommon{} Jokers in hand",
+                    "into their {C:red}Original{} form"
+                }
+            },
+            c_fg_alto_alt = {
+                name = "Alto?",
+                text = {
+                    "Turns all {C:red}Rare{} Jokers in hand",
+                    "into their {C:red}Original{} form"
+                }
+            },
         },
         Back={},
         Blind={},
@@ -604,7 +637,7 @@ return {
                 name = "Red Card?",
                 text = {
                     "Gains {C:mult}+#2#{} Mult when",
-                    "skipping a blind is {C:attention}skipped{}",
+                    "a blind is {C:attention}skipped{}",
                     "{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
                 }
             },
@@ -728,7 +761,7 @@ return {
                 }
             },
             j_fg_selzer = {
-                name = "Seltzer",
+                name = "Seltzer?",
                 text = {
                     "Retrigger all played",
                     "cards {C:attention}#1#{} time(s) for the",
@@ -742,7 +775,7 @@ return {
                 }
             },
             j_fg_smiley = {
-                name = "Smiley Face?",
+                name = "Smiley face?",
                 text = {
                     "Gains {C:mult}+#2#{} Mult for",
                     "each scored {C:attention}face{} card",
@@ -887,7 +920,7 @@ return {
                 }
             },
             j_fg_drivers_license = {
-                name = "Driver's License?",
+                name = "Driver's license?",
                 text = {
                     "{C:white,X:mult}X#1#{} Mult if at least",
                     "{C:attention}half{C:inactive} ({C:attention}#2#{C:inactive}/#3#){} if your {C:attention}full deck{}",
@@ -1058,16 +1091,32 @@ return {
                 text = { 
                     "Choose {C:attention}#1#{} of up to ",
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
-                    "be used instantly."
-                }
+                    "be used immediately."
+                },
             },
             p_fg_aberration2 = {
                 name = 'Melody Pack',
                 text = {
                     "Choose {C:attention}#1#{} of up to ",
                     "{C:attention}#2#{} {C:purple}aberration{} cards to",
-                    "be used instantly."
-                }
+                    "be used immediately."
+                },
+            },
+            p_fg_aberration3 = {
+                name = 'Jumbo Melody Pack',
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:purple}aberration{} cards to",
+                    "be used immediately."
+                },
+            },
+            p_fg_aberration4 = {
+                name = 'Mega Melody Pack',
+                text = {
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2#{} {C:purple}aberration{} cards to",
+                    "be used immediately."
+                },
             }
         },
         Planet={},
@@ -1201,7 +1250,7 @@ return {
                 }
             },
             c_fg_lovers = {
-                name = "The lovers?",
+                name = "The Lovers?",
                 text = {
                     "Replaces the enhancement of",
                     "up to {C:attention}#1#{} selected cards",
@@ -1273,7 +1322,7 @@ return {
                 }
             },
             c_fg_tower = {
-                name = "The tower?",
+                name = "The Tower?",
                 text = {
                     "Replaces the enhancement of",
                     "up to {C:attention}#1#{} selected cards",
@@ -1306,8 +1355,44 @@ return {
             v_fg_violin = {
                 name = "Violin",
                 text = {
-                    "{C:attention}+1{} option and {C:attention}+1{} select in every",
-                    "{C:purple}Melody{} Pack"
+                    "{C:attention}+1{} available choice",
+                    "in every {C:purple}Melody Pack{}",
+                }
+            },
+            v_fg_cello = {
+                name = "Cello",
+                text = {
+                    "{C:attention}+1{} select choice",
+                    "in every {C:purple}Melody Pack{}",
+                }
+            },
+            v_fg_change_of_pace = {
+                name = "Change of Pace",
+                text = {
+                    "{C:purple}Alternate{} Jokers appear",
+                    "{C:attention}X2{} more frequently",
+                }
+            },
+            v_fg_modulation = {
+                name = "Metric Modulation",
+                text = {
+                    "{C:purple}Alternate{} Jokers appear",
+                    "{C:attention}X3{} more frequently",
+                }
+            },
+            v_fg_music_merchant = {
+                name = "Music Merchant",
+                text = {
+                    "{C:purple}Aberration{} cards can",
+                    "now appear in the shop"
+                }
+            },
+            v_fg_music_tycoon = {
+                name = "Music Tycoon",
+                text = {
+                    "{C:purple}Aberration{} cards appear",
+                    "{C:attention}X3{} more frequently",
+                    "in the shop"
                 }
             }
         },
@@ -1405,6 +1490,12 @@ return {
                 },
             }
         },
+        language_adaptations = {
+            w_joker_singular = "Joker",
+            w_joker_plural = "Jokers",
+            w_consumable_singular = "Consumable",
+            w_consumable_plural = "Consumables"
+        }
     },
     misc = {
         -- This one is very important. I have moved every localization key we might need for FG here. 
@@ -1422,7 +1513,12 @@ return {
         challenge_names={},
         collabs={},
         dictionary={
+            k_fg_common_alt = "Common?",
+            k_fg_uncommon_alt = "Uncommon?",
+            k_fg_rare_alt = "Rare?",
+            k_fg_legendary_alt = "Legendary?",
             k_fg_collective = "Collective",
+            k_fg_collective_alt = "Collective?",
             k_aberration = "Aberration",
             b_aberration_cards= "Aberration Cards",
             k_chipMult="Multiplied!",
@@ -1433,15 +1529,33 @@ return {
             k_unchangeable_warning = "This card can't be alternated",
             k_fg_active = "Active!",
             k_fg_none = "None",
+            k_fg_aberration2 = { group_name = "fuck"}
         },
         high_scores={},
         labels={
+            fg_common_alt = "Common?",
+            fg_uncommon_alt = "Uncommon?",
+            fg_rare_alt = "Rare?",
+            fg_legendary_alt = "Legendary?",
             fg_collective = "Collective",
-            fg_aberration = "Aberration"
+            fg_collective_alt = "Collective?",
+            fg_unchangeable = "Unchangeable"
         },
         poker_hand_descriptions={},
         poker_hands={},
-        quips={},
+        quips={
+            fg_jogla_w1 = {
+                "WIZ"
+            },
+            fg_goldenleaf_wq = {
+                "Travis scott, lock into a stud",
+                "NOW!"
+            },
+            fg_goldenleaf_lq = {
+                "How the fuck do you lose",
+                "with a collective joker????"
+            }
+        },
         ranks={},
         suits_plural={},
         suits_singular={},

@@ -181,7 +181,7 @@ G.FUNCS.FG_credits = function (e,page,from_callback)
 								},
 								scale = 0.3,
 								align = "tm",
-							},			
+							},	
 						}},
 					}},
 					{n = G.UIT.R, config = {align = "tm", padding = 0}, nodes = {

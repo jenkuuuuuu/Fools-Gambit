@@ -5,7 +5,7 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
-if FG.config.debug_mode then
+
 SMODS.Seal{
     key = "red",
     atlas = "enhanced",
@@ -58,7 +58,7 @@ SMODS.Seal{
         }
     end
 }
-end
+
 --[[
 SMODS.Seal {
     name = "Tune",
