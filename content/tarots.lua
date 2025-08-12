@@ -861,7 +861,7 @@ SMODS.Consumable{
             }
         }
     end,
-    can_use = function (self, card) if G.jokers and #G.jokers.cards > 0 and type(FG.FUNCS.get_card_info(G.jokers.cards[1].rarity)) == "number" then return G.jokers.config.card_count - 1 < G.jokers.config.card_limit end end,
+    can_use = function (self, card) if G.jokers and #G.jokers.cards > 0 and type(FG.FUNCS.get_card_info(G.jokers.cards[1]).rarity) == "number" then return G.jokers.config.card_count - 1 < G.jokers.config.card_limit end end,
     use = function (self, card, area, copier)
         local function clamp(min,n,max)
             if n < min then n = min end
