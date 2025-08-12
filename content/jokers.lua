@@ -1981,6 +1981,7 @@ SMODS.Joker {
 	blueprint_compat = true,
 	calculate = function(self, card, context)
 		if context.selling_card and not context.repetition and not context.blueprint then
+			if not string.find(FG.FUNCS.get_card_info(context.card).key,"j_") then return end
 			card.ability.extra.sold = card.ability.extra.sold + 1
 			card.ability.extra.mult = card.ability.extra.mult_gain * card.ability.extra.sold
 			return {
