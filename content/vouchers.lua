@@ -29,7 +29,7 @@ SMODS.Voucher{
 SMODS.Voucher{
     key = "music_merchant",
     atlas = "vouchers",
-    pos = { x = 1, y = 0},
+    pos = { x = 0, y = 0},
     redeem = function (self, voucher)
         G.GAME.aberration_rate = 4
     end
@@ -38,7 +38,7 @@ SMODS.Voucher{
 SMODS.Voucher{
     key = "music_tycoon",
     atlas = "vouchers",
-    pos = { x = 1, y = 1},
+    pos = { x = 0, y = 1},
     requires = {"v_fg_music_merchant"},
     redeem = function (self, voucher)
         G.GAME.aberration_rate = 12
