@@ -506,9 +506,10 @@ return {
             j_fg_fist = {
                 name = 'Raised Fist?',
                 text = {
-                    "Adds {C:attention}#1#{} the rank",
-                    "of {C:attention}highest{} ranked card",
+                    "Gains {C:attention}half{} the rank",
+                    "of {C:attention}lowest{} ranked card",
                     "held in hand to Mult",
+                    '{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult){}'
                 }
             },
             j_fg_fibonacci = {

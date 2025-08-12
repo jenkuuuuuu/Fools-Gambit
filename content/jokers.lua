@@ -1519,11 +1519,10 @@ SMODS.Joker {
 	end
 }
 -- Fist
---Non existent!!
---[[
+
 SMODS.Joker {
     key = 'fist',
-    config = { extra = {mult = 0.5} },
+    config = { extra = {mult = 0} },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.mult } }
     end,
@@ -1531,30 +1530,19 @@ SMODS.Joker {
     atlas = 'jokers_alt',
     pos = { x = 8, y = 2 },
     cost = 2,
-	
-	
     calculate = function(self, card, context)
-        if context.cardarea == G.hand then
-            local temp_Mult = 1
-			local temp_ID = 1
-			local raised_card = nil
-			for i=1, #G.hand.cards do
-					if temp_ID <= G.hand.cards[i].base.id and G.hand.cards[i].ability.effect ~= 'Stone Card' then
-					temp_Mult = G.hand.cards[i].base.nominal
-					temp_ID = G.hand.cards[i].base.id
-					raised_card = G.hand.cards[i]
-				end
+        if context.before and not context.blueprint then
+            local rank
+			for _,v in ipairs(G.hand.cards) do
+				if not rank then rank = FG.FUNCS.get_card_info(v).id end
+				if rank > FG.FUNCS.get_card_info(v).id then rank = FG.FUNCS.get_card_info(v).id end
 			end
-			if raised_card and context.repetition and context.cardarea == G.play then
-				return {
-					h_mult = card.ability.extra.mult/2,
-					card = card,
-				}
-        	end
+			card.ability.extra.mult = card.ability.extra.mult + math.ceil(rank/2)
     	end
+		if context.joker_main then return {mult = card.ability.extra.mult} end
 	end
 }
-]]
+
 -- Fibonacci
 SMODS.Joker {
 	key = 'fibonacci',

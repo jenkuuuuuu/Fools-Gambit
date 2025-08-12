@@ -495,9 +495,10 @@ return {
             j_fg_fist = {
                 name = '¿Puño en alto?',
                 text = {
-                    "Añade {C:attention}#1#{} del rango",
+                    "Añade {C:attention}la mitad{} del rango",
                     "de la carta con el número más{C:attention}alto{}",
                     "en la mano como Multi",
+                    '{C:inactive}Actualmente {C:mult}+#1#{C:inactive} multi{}'
                 }
             },
             j_fg_fibonacci = {
@@ -506,7 +507,7 @@ return {
                     "Reactica cada {C:attention}As{}, {C:attention}2{}, {C:attention}3{}, {C:attention}5{},",
                     "{C:attention}8{} y {C:attention}rey{} jugado {C:attention}1{} vez y mejora",
                     "permanentemente la carta al siguiente número",
-                    "{C:inactive}(ej: As a 2, 8 a Rey, Rey to As){}",
+                    "{C:inactive}(ej: Ás a 2, 8 a Rey, Rey a Ás){}",
                 },
             },
             j_fg_scary_face = {
@@ -514,7 +515,7 @@ return {
                 text = {
                     'Gana {C:chips}+#2#{} Fichas por cada',
                     '{C:attention}figura{} que anote',
-                    '{C:inactive}Actualmente {C:chips}+#1#{C:inactive} Fichas{}'
+                    '{C:inactive}Actualmente {C:chips}+#1#{C:inactive} fichas{}'
                 },
             },
             j_fg_gros_michel = {
