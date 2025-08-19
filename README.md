@@ -13,20 +13,6 @@
 
 > [!WARNING]
 > This mod is in a very early state! Certain additions may be broken or unbalanced, which may lead to crashes or generally a less fair experience. This will be remedied in future updates! :)
-<<<<<<< HEAD
-=======
-
-> [!IMPORTANT]
-> Unfinished, or currently broken content, can be toggled in settings, behind debug mode. 
-
-Fool's Gambit is an unused title for Balatro. This mod aims to add (some)new jokers, packs and alternate effects to basically every Balatro gimmick, including:
-- Alternative effects for ~~all~~ some jokers, tarots and spectrals
-- New jokers (with alternate counter-parts)
-- A new consumable type.
-- New seal~~s~~
-- Alternate editions
-- An alternate ~~soundtrack and~~ SFX
->>>>>>> 16450272f1577c1f646fab8ab00476994b93bac0
 
 > [!IMPORTANT]
 > Unfinished, or currently broken content, can be toggled in settings, behind debug mode. 

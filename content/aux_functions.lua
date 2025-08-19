@@ -56,23 +56,33 @@ end
 ---@param card table|card The card instance itself.
 ---@param ref? table The table to compare the card when alternating it.
 ---@return table|card table A table containing the old card and the new card.
-function FG.FUNCS.alternate_card(card,ref)
+function FG.FUNCS.alternate_card(card)
+	local legacy = false -- Temporary thing for legacy code
+	local key = card.ability.fg_data.alternate_card or "j_joker"
+	local found = FG.FUNCS.check_exists(key)
 
-	if not ref or type(ref) ~= "table" then ref = FG.FUNCS.full_search_alternate() end
+	if not found then key = "j_joker" end
 
-	local key = FG.FUNCS.get_card_info(card).key
-	local convert_to = FG.FUNCS.get_alternate(key,ref)
-	local new_card = SMODS.add_card({
-		--set = 'Joker',
-		skip_materialize = true,
-		key = tostring(convert_to),
-	})
-	card:start_dissolve(nil,false,0,true)
+	local new_card = SMODS.add_card{
+		key = key,
+		skip_materialize = true
+	}
+	card:start_dissolve(nil,true,0)
 
 	return {
 		original = card,
 		alternate = new_card
 	}
+end
+
+---Iterates through G.P_CENTERS and returns if the key exists.
+---@param key string The key of the card to check for
+---@return boolean
+function FG.FUNCS.check_exists (key)
+	for k, v in pairs(G.P_CENTERS) do 
+		if k == key then return true; end
+	end
+	return false
 end
 
 --- Transfers the edition from the old card to the new card.
@@ -132,9 +142,9 @@ function FG.FUNCS.alternate_seal(source,target) end
 ---@param source table|card is the old card, that is being deleted
 ---@param target table|card is the new card created for alternating.
 function FG.FUNCS.update_alternate_values(source,target,mode)
-	if not source.ability.fg_alternate then sendWarnMessage("This card lacks fg_alternate table inside it's ability table!","FG.FUNCS.update_alternate_values") return end
-	if not target.ability.fg_alternate then sendWarnMessage("The target card lacks fg_alternate table") return end
-	target.ability.fg_alternate = source.ability.fg_alternate
+	if not source.ability.fg_data or not source.ability.fg_data.vars then sendWarnMessage("This card lacks fg_alternate table inside it's ability table!","FG.FUNCS.update_alternate_values") return end
+	if not target.ability.fg_data or not target.ability.fg_data.vars then sendWarnMessage("The target card lacks fg_alternate table") return end
+	target.ability.fg_data.vars = source.ability.fg_data.vars
 end
 
 --- Allows to integrate original<>alternate entries to the mod's tables.

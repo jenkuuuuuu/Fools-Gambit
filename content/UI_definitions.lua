@@ -129,6 +129,7 @@ G.FUNCS.FG_credits = function (e,page,from_callback)
 									FG.FUNCS.localize{"FG","credits","names","jenku"},
 									FG.FUNCS.localize{"FG","credits","names","deathmodereal"},
 									FG.FUNCS.localize{"FG","credits","names","poker_the_poker"},
+									FG.FUNCS.localize{"FG","credits","names","astrojoot"},
 								},
 								scale = 0.3,
 								align = "tm",
