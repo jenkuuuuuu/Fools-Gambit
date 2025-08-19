@@ -30,6 +30,7 @@ SMODS.Sticker{
         end
     end,
 }
+--[[
 SMODS.JimboQuip{
     key = 'fg_goldenleaf_wq',
     type = 'win',
@@ -52,6 +53,7 @@ SMODS.JimboQuip{
         return false
     end
 }
+]]
 
 SMODS.Stake{
     key = "pink",

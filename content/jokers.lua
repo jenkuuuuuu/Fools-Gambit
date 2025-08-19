@@ -100,6 +100,7 @@ FG.ALTS.joker_equivalents = {
 	j_troubadour = "j_fg_troubadour",
 	j_throwback = "j_fg_throwback",
 	j_smiley = "j_fg_smiley",
+	j_raised_fist = "j_fg_fist",
 	j_hanging_chad = "j_fg_hanging_chad",
 	j_rough_gem = "j_fg_gem",
 	j_bloodstone = "j_fg_bloodstone",
@@ -648,10 +649,16 @@ SMODS.Joker{
 	key = "oscillator",
 	atlas = "oscillator_atlas",
 	pos = { x = 0, y = 1},
-	rarity = "fg_common_alt",
+	rarity = 1,
 	cost = 3,
 	
 	config = {
+		fg_data = {
+			alternate_card = "j_joker",
+			vars = {
+				chips = 50
+			}
+		},
 		fg_alternate = {
 			chips = 50
 		},
@@ -1794,7 +1801,7 @@ SMODS.Joker{
 	
 	config = {
 		extra = {
-			chips_i = 13, -- Chips increase
+			chips_i = 8, -- Chips increase
 			chips_t = 0  -- Chips total
 		}
 	},
@@ -1811,7 +1818,7 @@ SMODS.Joker{
 		if context.individual and context.cardarea == G.play then
 			local id = FG.FUNCS.get_card_info(context.other_card).id
 			local value = FG.FUNCS.get_card_info(context.other_card).rank
-			if (id == 1 or id == 3 or id == 5 or id == 7 or id == 9) then
+			if (id == 14 or id == 3 or id == 5 or id == 7 or id == 9) then
 				card.ability.extra.chips_t = card.ability.extra.chips_t + card.ability.extra.chips_i
 				FG.FUNCS.card_eval_status_text{
 					card = card,
@@ -2749,16 +2756,15 @@ SMODS.Joker{
 			local cards = {}
 			local suit = true -- True means wild card
 			for i,v in ipairs(context.scoring_hand) do
-				if FG.FUNCS.get_card_info(v).rank ~= "Queen" then if false then print("No queen found, iter:"..tostring(i)) end return end
+				if FG.FUNCS.get_card_info(v).rank ~= "Queen" then return end
 				if FG.FUNCS.get_card_info(v).key ~= "m_wild" then cards[i] = FG.FUNCS.get_card_info(v).suit else cards[i] = true end
 			end
-			if #cards ~= 5 then if false then print("Card count less than 5: "..tostring(#cards)) end return end
+			if #cards ~= 5 then return end
 			for _,v in ipairs(cards) do
 				if v ~= true then
-					if suit ~= v and suit ~= true then if false then print("Suits don't match. "..tostring(suit).." | "..tostring(v)) end return end
-					suit = v; if false then print("Updated suit to "..suit) end
+					if suit ~= v and suit ~= true then return end
+					suit = v
 				end
-				if false then print("Loop completed with suit: "..tostring(suit)) end
 			end
 			return {xmult = card.ability.extra.xmult}
 		end

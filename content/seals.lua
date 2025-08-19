@@ -5,7 +5,7 @@ SMODS.Atlas {
     px = 71,
     py = 95
 }
-
+--[[
 SMODS.Seal{
     key = "red",
     atlas = "enhanced",
@@ -58,7 +58,7 @@ SMODS.Seal{
         }
     end
 }
-
+]]
 --[[
 SMODS.Seal {
     name = "Tune",

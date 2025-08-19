@@ -1012,7 +1012,7 @@ return {
                 text = {
                     "Crea {C:attention}#1#{} copias {C:dark_edition}Negativa{} del consumible",
                     "que poseas de más a la {C:attention}izquierda{}",
-                    "al salirde la{C:attention} tienda{}",
+                    "al salir de la{C:attention} tienda{}",
                     "{C:inactive}(Actualmente copiando {C:attention}#2#{C:inactive})",
                     "{C:inactive,s:0.7}\"NO soy un mago\""
                 },

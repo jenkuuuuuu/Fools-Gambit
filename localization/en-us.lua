@@ -1036,8 +1036,8 @@ return {
                 name = 'Jogla',
                 text = {
                     "Create {C:attention}#1# {C:dark_edition}Negative{} copies of",
-                    "the {C:attention}leftmost{} consumable in posession",
-                    "at the end of the{C:attention} shop{}.",
+                    "the {C:attention}leftmost{} consumable in possession",
+                    "at the end of the {C:attention}shop{}.",
                     "{C:inactive}(Currently copying {C:attention}#2#{C:inactive})",
                     "{C:inactive,s:0.7}\"I am NOT a wizard\""
                 },
@@ -1327,7 +1327,7 @@ return {
                 text = {
                     "Replaces the enhancement of",
                     "up to {C:attention}#1#{} selected cards",
-                    "into {C:attention}Wild? Cards{}",
+                    "into {C:attention}Stone? Cards{}",
                     "Create a copy of each card",
                     "{C:attention}without{} any enhancement",
                     "{C:inactive}(Copied cards must have{}",
