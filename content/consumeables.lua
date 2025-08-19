@@ -478,7 +478,7 @@ SMODS.Consumable{
     end,
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
-            if v.config.center.rarity == 1 and FG.FUNCS.is_alternate(v.config.center_key) then return true end
+            if v.config.center.rarity == "fg_common_alt" and FG.FUNCS.is_alternate(v.config.center_key) then return true end
         end
     end,
     use = function(card, area, copier)
@@ -514,7 +514,7 @@ SMODS.Consumable{
     end,
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
-            if v.config.center.rarity == 2 and FG.FUNCS.is_alternate(v.config.center_key) then return true end
+            if v.config.center.rarity == "fg_uncommon_alt" and FG.FUNCS.is_alternate(v.config.center_key) then return true end
         end
     end,
     use = function(card, area, copier)
@@ -550,7 +550,7 @@ SMODS.Consumable{
     end,
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
-            if v.config.center.rarity == 3 and FG.FUNCS.is_alternate(v.config.center_key) then return true end
+            if v.config.center.rarity == "fg_rare_alt" and FG.FUNCS.is_alternate(v.config.center_key) then return true end
         end
     end,
     use = function(card, area, copier)
