@@ -564,11 +564,11 @@ SMODS.Consumable{
         G.E_MANAGER:add_event(Event{
             trigger = 'after', delay = 0.2,
             func = function ()
-                local lefthmost, rightmost = G.hand.highlighted[1], G.hand.highlighted[1]
-                for i=1, #G.hand.highlighted do if G.hand.highlighted[i].T.x < lefthmost.T.x then lefthmost = G.hand.highlighted[i] end end
+                local leftmost, rightmost = G.hand.highlighted[1], G.hand.highlighted[1]
+                for i=1, #G.hand.highlighted do if G.hand.highlighted[i].T.x < leftmost.T.x then leftmost = G.hand.highlighted[i] end end
                 for i=1, #G.hand.highlighted do if G.hand.highlighted[i].T.x > rightmost.T.x then rightmost = G.hand.highlighted[i] end end
                 for i=1, (card.ability.extra.ranks) or 2 do
-                    local fuck, you = SMODS.change_base(lefthmost,nil,SMODS.Ranks[FG.FUNCS.get_card_info(lefthmost).rank].next[1])
+                    local fuck, you = SMODS.change_base(leftmost,nil,SMODS.Ranks[FG.FUNCS.get_card_info(leftmost).rank].next[1])
                     local fuck, you = SMODS.change_base(rightmost,nil,SMODS.Ranks[FG.FUNCS.get_card_info(rightmost).rank].prev[1])
                 end
                 return true
@@ -697,12 +697,12 @@ SMODS.Consumable{
         }}
     end,
     can_use = function (self, card)
-        return true
+        if G.consumeables and #G.consumeables.cards > 1 then return true end
     end,
     use = function (self, card, area, copier)
         card.ability.extra.value = 0
         for _,v in pairs(G.consumeables.cards) do
-            card.ability.extra.value = card.ability.extra.value + v.config.center.cost
+            card.ability.extra.value = card.ability.extra.value + v.config.center.cost * 2
         end
         if card.ability.extra.value == 0 then return
         elseif card.ability.extra.value <= card.ability.extra.max then ease_dollars(card.ability.extra.value)
@@ -756,7 +756,7 @@ SMODS.Consumable{
         }
     },
     loc_vars = function (self, info_queue, card)
-        info_queue[#info_queue+1] = G.P_CENTERS.m_fg_wild
+        info_queue[#info_queue+1] = G.P_CENTERS.m_fg_stone
         return {
             vars = {
                 card.ability.extra.convert,
@@ -861,16 +861,16 @@ SMODS.Consumable{
             }
         }
     end,
-    can_use = function (self, card) return G.jokers and G.jokers.config.card_count - 1 < G.jokers.config.card_limit and #G.jokers.highlighted == 1 end,
+    can_use = function (self, card) if G.jokers and #G.jokers.cards > 0 and type(FG.FUNCS.get_card_info(G.jokers.cards[1]).rarity) == "number" then return G.jokers.config.card_count - 1 < G.jokers.config.card_limit end end,
     use = function (self, card, area, copier)
         local function clamp(min,n,max)
             if n < min then n = min end
             if n > max then n = max end
             return n
         end
-        local rarity = FG.FUNCS.get_card_info(G.jokers.highlighted[1]).rarity
+        local rarity = FG.FUNCS.get_card_info(G.jokers.cards[1]).rarity
         play_sound("tarot2")
-        G.jokers.highlighted[1]:start_dissolve()
+        G.jokers.cards[1]:start_dissolve()
         if FG.FUNCS.random_chance(card.ability.extra.low_chance or 2) then
             rarity = rarity - 1
             for i=1, math.max(math.min((card.ability.extra.count or 2), G.jokers.config.card_limit-G.jokers.config.card_count)) do

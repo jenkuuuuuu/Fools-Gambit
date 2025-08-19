@@ -70,7 +70,7 @@ SMODS.current_mod.config_tab = function()
 								major = G.SPLASH_LOGO,
 								type = 'cm',
 								bond = 'Strong',
-								offset = {x=12,y=8}
+								offset = {x=50,y=20}
 							})
 						end
 					end
@@ -181,8 +181,11 @@ G.FUNCS.FG_credits = function (e,page,from_callback)
 								},
 								scale = 0.3,
 								align = "tm",
-							},			
+							},	
 						}},
+					}},
+					{n = G.UIT.R, config = {minw = 0, align = "tm", padding = 0}, nodes = {
+						-- standalone text
 					}},
 					{n = G.UIT.R, config = {align = "tm", padding = 0}, nodes = {
 						FG.FUNCS.UIBox_text{
