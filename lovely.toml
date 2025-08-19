@@ -4,27 +4,24 @@ priority = 0
 
 [[patches]]
 [patches.pattern]
-target = "UI_definitions.lua"
+target = "game.lua"
 pattern = '''
-for _, v in ipairs({
-    {type = 'Joker', val = G.GAME.joker_rate},
-    {type = 'Tarot', val = G.GAME.tarot_rate},
-    {type = 'Planet', val = G.GAME.planet_rate},
-    {type = (G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.6) and 'Enhanced' or 'Base', val = G.GAME.playing_card_rate},
-    {type = 'Spectral', val = G.GAME.spectral_rate},
-}) do
+for i = 1, 4 do 
+    table.sort(self.P_JOKER_RARITY_POOLS[i], function (a, b) return a.order < b.order end)
+end
 '''
 position = "after"
 payload = '''
-    for _, v in ipairs({
-        {type = 'Joker', val = G.GAME.joker_rate},
-        {type = 'Tarot', val = G.GAME.tarot_rate},
-        {type = 'Planet', val = G.GAME.planet_rate},
-        {type = (G.GAME.used_vouchers["v_illusion"] and pseudorandom(pseudoseed('illusion')) > 0.6) and 'Enhanced' or 'Base', val = G.GAME.playing_card_rate},
-        {type = 'Spectral', val = G.GAME.spectral_rate},
-        {type = 'fg_aberration', val = G.GAME.fg_data.aberration_rate},
-        
-    }) do"
+for k,v in pairs(self.P_CENTERS) do
+    print(k)
+    v.config = v.config or {}
+    v.config.fg_data = {
+        is_alternate = false,
+        alternate_card = string.sub(k,1,1).."_fg_"..string.sub(k,3),
+        vars = {}
+    }
+
+end
 '''
 match_indent = false
 times = 1
