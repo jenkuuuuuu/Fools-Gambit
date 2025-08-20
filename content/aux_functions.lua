@@ -129,11 +129,7 @@ function FG.FUNCS.alternate_seal(source,target) end
 --- Transfers and updates the values from any given card to any other card.
 ---@param source table|card is the old card, that is being deleted
 ---@param target table|card is the new card created for alternating.
-function FG.FUNCS.update_alternate_values(source,target,mode)
-	if not source.ability.fg_data or not source.ability.fg_data.vars then sendWarnMessage("This card lacks fg_alternate table inside it's ability table!","FG.FUNCS.update_alternate_values") return end
-	if not target.ability.fg_data or not target.ability.fg_data.vars then sendWarnMessage("The target card lacks fg_alternate table") return end
-	target.ability.fg_data.vars = source.ability.fg_data.vars
-end
+function FG.FUNCS.update_alternate_values(source,target,mode) target.ability.fg_data.vars = source.ability.fg_data.vars end
 
 --- Allows to integrate original<>alternate entries to the mod's tables.
 ---@param target_table table The table you are adding entries to.

@@ -58,7 +58,7 @@ local function tonal_can (param,extra)
         for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G[cardarea].cards) do
             if G[cardarea].cards[i].ability.fg_data and G[cardarea].cards[i].ability.fg_data.is_alternate == extra.alt
             and not FG.FUNCS.get_card_info(G[cardarea].cards[i]).stickers.unchangeable
-            and FG.FUNCS.check_exists(FG.FUNCS.get_card_info(G[cardarea].cards[i]).key) then return true end
+            and FG.FUNCS.check_exists(G[cardarea].cards[i].ability.fg_data.alternate_card) then return true end
         end
     end
 end
@@ -84,6 +84,7 @@ local function tonal_use (param,extra)
                     local c = FG.FUNCS.alternate_card(G[cardarea].cards[i])
                     FG.FUNCS.update_edition(c.original,c.alternate)
                     FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    c.alternate:juice_up()
                 end
             end
             return true
@@ -142,6 +143,7 @@ local function bulk_use (param,extra)
                 local c = FG.FUNCS.alternate_card(v)
                 FG.FUNCS.update_edition(c.original,c.alternate)
                 FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                c.alternate:juice_up()
             end
         end
         return true
@@ -356,6 +358,7 @@ SMODS.Consumable{
             if v.ability.fg_data and FG.FUNCS.is_alternate(v) then
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 play_sound('timpani')
+                card:juice_up()
                 v:juice_up(0.3, 0.5)
                 ease_dollars(card.ability.extra.dollars, true)
                 return true end }))
