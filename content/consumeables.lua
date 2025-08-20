@@ -66,9 +66,10 @@ end
 ---@param param {}
 ---@param extra {area:"jokers"|"consumeables"|string,alt:boolean}
 local function tonal_use (param,extra)
-    local card = param[1]
-    local p_area = param[2]
-    local copier = param[3]
+    local self = param[1]
+    local card = param[2]
+    local p_area = param[3]
+    local copier = param[4]
     local cardarea = extra.area
 
     G.E_MANAGER:add_event(Event({
@@ -127,9 +128,10 @@ end
 ---@param param {}
 ---@param extra {area:"jokers"|"consumeables"|string,alt:boolean,rarity:1|2|3|4|"fg_common_alt"|"fg_uncommon_alt"|"fg_rare_alt"|"fg_legendary_alt"|"fg_collective"|"fg_collective_alt"|string}
 local function bulk_use (param,extra)
-    local card = param[1]
-    local p_area = param[2]
-    local copier = param[3]
+    local self = param[1]
+    local card = param[2]
+    local p_area = param[3]
+    local copier = param[4]
     local cardarea = extra.area
 
     G.E_MANAGER:add_event(Event({
@@ -164,7 +166,7 @@ SMODS.Consumable{
     }},
     loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "jokers", loc = {"w_joker_singular","w_joker_plural"}, alt = true}) end,
     can_use = function(self, card) return tonal_can({self,card},{area = "jokers", alt = true})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "jokers", alt = true}) end
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "jokers", alt = true}) end
 }
 
 SMODS.Consumable{
@@ -181,7 +183,7 @@ SMODS.Consumable{
     }},
     loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "jokers", loc = {"w_joker_singular","w_joker_plural"}, alt = false}) end,
     can_use = function(self, card) return tonal_can({self,card},{area = "jokers", alt = false})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "jokers", alt = false}) end
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "jokers", alt = false}) end
 }
 
 if FG.config.debug_mode then
@@ -252,7 +254,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = false, rarity = 1}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = false, rarity = 1}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = false, rarity = 1}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = false, rarity = 1}) end
 }
 
 SMODS.Consumable{
@@ -268,7 +270,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = false, rarity = 2}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = false, rarity = 2}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = false, rarity = 2}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = false, rarity = 2}) end
 }
 
 SMODS.Consumable{
@@ -284,7 +286,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = false, rarity = 3}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = false, rarity = 3}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = false, rarity = 3}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = false, rarity = 3}) end
 }
 
 SMODS.Consumable{
@@ -306,7 +308,7 @@ SMODS.Consumable{
 	loc_vars = function(self,info_queue, card)
          return {vars = {card.ability.extra.cards}}
 	end,
-    use = function(card, area, copier)
+    use = function(self, card, area, copier)
         if #G.consumeables.cards < G.consumeables.config.card_limit then
         for i = 1, math.min(card.config.extra.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
@@ -346,7 +348,7 @@ SMODS.Consumable{
 	loc_vars = function(self,info_queue, card)
          return {vars = {card.ability.extra.dollars}}
 	end,
-    use = function(card, area, copier)
+    use = function(self, card, area, copier)
         for _,v in ipairs(G.jokers.cards) do
             if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(v).key) then
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
@@ -379,7 +381,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "consumeables", loc = {"w_consumable_singular","w_consumable_plural"}, alt = true}) end,
     can_use = function(self, card) return tonal_can({self,card},{area = "consumeables", alt = true})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "consumeables", alt = true}) end
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "consumeables", alt = true}) end
 }
 
 SMODS.Consumable{
@@ -396,7 +398,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "consumeables", loc = {"w_consumable_singular","w_consumable_plural"}, alt = false}) end,
     can_use = function(self, card) return tonal_can({self,card},{area = "consumeables", alt = false})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "consumeables", alt = false}) end
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "consumeables", alt = false}) end
 }
 
 
@@ -413,7 +415,7 @@ SMODS.Consumable{
 	pos = { x = 2, y = 0 },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end
 }
 
 SMODS.Consumable{
@@ -429,7 +431,7 @@ SMODS.Consumable{
 	pos = { x = 0, y = 0 },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end
 }
 
 SMODS.Consumable{
@@ -445,5 +447,5 @@ SMODS.Consumable{
 	pos = { x = 1, y = 0 },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end
 }
