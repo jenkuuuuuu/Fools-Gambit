@@ -350,7 +350,7 @@ SMODS.Consumable{
 	end,
     use = function(self, card, area, copier)
         for _,v in ipairs(G.jokers.cards) do
-            if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(v).key) then
+            if v.ability.fg_data and v.ability.fg_data.is_alternate then
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 play_sound('timpani')
                 v:juice_up(0.3, 0.5)

@@ -838,7 +838,7 @@ return {
                     "{C:inactive,s:0.8}(Effect applies after scoring){}"
                 },
             },
-            j_fg_gem = {
+            j_fg_rough_gem = {
                 name = "Rough Gem?",
                 text = {
                     "If poker hand contains a {C:attention}#1#{}",
@@ -877,7 +877,7 @@ return {
                     "{C:inactive}(Currently {C:chips}+#3#{}{C:inactive} Chips)",
                 },
             },
-            j_fg_agate = {
+            j_fg_onyx_agate = {
                 name = "Onyx Agate?",
                 text = {
                     "If poker hand contains a {C:attention}#1#{}",

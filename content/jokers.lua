@@ -898,7 +898,7 @@ SMODS.Joker {
 }
 -- Lusty
 SMODS.Joker {
-	key = 'j_lusty_joker',
+	key = 'lusty_joker',
 	atlas = 'jokers_alt',
 	pos = { x = 7, y = 1 },
 	rarity = "fg_common_alt",
