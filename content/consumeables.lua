@@ -310,6 +310,7 @@ SMODS.Consumable{
 	end,
     use = function(self, card, area, copier)
         if #G.consumeables.cards < G.consumeables.config.card_limit then
+        if not card.config.extra then card.config.extra = {cards = 2} end
         for i = 1, math.min(card.config.extra.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         G.E_MANAGER:add_event(Event({
@@ -338,23 +339,25 @@ SMODS.Consumable{
             dollars = 5
         }
     },
+    loc_vars = function(self,info_queue, card)
+        local cur = 0
+        if G.jokers and G.jokers.cards then for _,v in ipairs(G.jokers.cards) do if FG.FUNCS.is_alternate(v) then cur = cur + card.ability.extra.dollars end end end
+        return {vars = {card.ability.extra.dollars, cur}}
+	end,
     can_use = function(self, card)
         for _,v in pairs(G.jokers.cards) do
-            if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(v).key) then 
+            if FG.FUNCS.is_alternate(v) then 
                 return true
             end
         end
     end,
-	loc_vars = function(self,info_queue, card)
-         return {vars = {card.ability.extra.dollars}}
-	end,
     use = function(self, card, area, copier)
         for _,v in ipairs(G.jokers.cards) do
-            if v.ability.fg_data and v.ability.fg_data.is_alternate then
+            if v.ability.fg_data and FG.FUNCS.is_alternate(v) then
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                 play_sound('timpani')
                 v:juice_up(0.3, 0.5)
-                ease_dollars(card.config.extra.dollars, true)
+                ease_dollars(card.ability.extra.dollars, true)
                 return true end }))
                 delay(0.2)
             end

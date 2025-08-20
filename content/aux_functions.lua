@@ -13,21 +13,9 @@ end
 
 
 --- Checks if a card is an alternate or not in the given table. Stops at the first instance of it's key.
---- @param key string
---- @param table? table
---- @return boolean|nil
-function FG.FUNCS.is_alternate(key,table)
-	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
-
-    for k, v in pairs(table) do
-        if key == v then
-            return true
-		elseif key == tostring(k) then
-			return false
-        end
-    end
-    return nil
-end
+--- @param card table
+--- @return boolean
+function FG.FUNCS.is_alternate(card) return (card.ability and card.ability.fg_data and card.ability.fg_data.is_alternate) or false end
 
 --- Gets the key/value pair associated with the passing data.
 ---@param key string The provided card key.

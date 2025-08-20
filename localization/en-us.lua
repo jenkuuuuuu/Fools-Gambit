@@ -57,6 +57,7 @@ return {
                 text = {
                     "Gives {C:money}$#1#{} for every",
                     "owned {C:purple}Alternate{} Joker",
+                    "{C:inactive}(Currently {C:money}$#2#{C:inactive}){}"
                 }
             },
             -- alts
