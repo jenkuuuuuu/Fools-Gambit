@@ -172,7 +172,7 @@ SMODS.Joker {
 	end
 }
 ]]
--- Flipped Script
+--[[ Flipped Script
 SMODS.Joker {
 	key = 'flipped_script',
 	config = { extra = {} },
@@ -256,7 +256,7 @@ SMODS.Joker {
 			}))
 		end
 	end
-}
+}]]
 ----------------
 ---NEW JOKERS---
 ----------------
