@@ -4,15 +4,15 @@ return {
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
-                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
-                    "to their {C:red}Original{} form",
+                    "Alternates the {C:attention}#1#{}",
+                    "leftmost #2#", -- should be 3, change this to 3 leftmost later
                 }
             },
             c_fg_atonal = {
                 name = "Atonal",
                 text = {
-                    "Converts the {C:attention}#1#{} leftmost #2#", -- should be 3, change this to 3 leftmost later
-                    "to their {C:purple}Alternate{} form",
+                    "Alternates the {C:attention}#1#{}",
+                    "leftmost #2#", -- should be 3, change this to 3 leftmost later
                 }
             },
             c_fg_accelerando = {
@@ -26,22 +26,22 @@ return {
             c_fg_treble = {
                 name = "Treble",
                 text = {
-                    "Turns all {C:blue}Common{} Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
+                    "Alternates all {C:blue}Common{}",
+                    "Jokers in possession"
                 }
             },
             c_fg_bass = {
                 name = "Bass",
                 text = {
-                    "Turns all {C:green}Uncommon{} Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
+                    "Alternates all {C:green}Uncommon{}",
+                    "Jokers in possession"
                 }
             },
             c_fg_alto = {
                 name = "Alto",
                 text = {
-                    "Turns all {C:red}Rare{} Jokers in hand",
-                    "into their {C:purple}Alternate{} form"
+                    "Alternates all {C:red}Rare{}",
+                    "Jokers in possession"
                 }
             },
             c_fg_stake = {
@@ -55,9 +55,9 @@ return {
             c_fg_fil_di_voce = {
                 name = "Fil Di Voce",
                 text = {
-                    "Gives {C:money}$#1#{} for every",
-                    "owned {C:purple}Alternate{} Joker",
-                    "{C:inactive}(Currently {C:money}$#2#{C:inactive}){}"
+                    "{C:money}+$#1#{} for each owned {C:purple}Alternate{} Joker",
+                    "{C:money}+$#2#{} for each owned {C:red}Original{} Joker",
+                    "{C:inactive}(Currently {C:money}$#3#{C:inactive}){}"
                 }
             },
             -- alts
@@ -78,21 +78,21 @@ return {
             c_fg_treble_alt = {
                 name = "Treble?",
                 text = {
-                    "Turns all {C:blue}Common{} Jokers in hand",
+                    "Turns all {C:blue}Common{C:inactive}?{} Jokers in hand",
                     "into their {C:red}Original{} form"
                 }
             },
             c_fg_bass_alt = {
                 name = "Bass?",
                 text = {
-                    "Turns all {C:green}Uncommon{} Jokers in hand",
+                    "Turns all {C:green}Uncommon{C:inactive}?{} Jokers in hand",
                     "into their {C:red}Original{} form"
                 }
             },
             c_fg_alto_alt = {
                 name = "Alto?",
                 text = {
-                    "Turns all {C:red}Rare{} Jokers in hand",
+                    "Turns all {C:red}Rare{C:inactive}?{} Jokers in hand",
                     "into their {C:red}Original{} form"
                 }
             },

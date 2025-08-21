@@ -4,15 +4,15 @@ return {
             c_fg_tonal = {
                 name = "Tonal",
                 text = {
-                    "Convierte {C:attention}#1#{} #2# de más a la",
-                    "izquierda a su versión {C:red}alternativa{}"
+                    "Alterna {C:attention}#1#{} #2# de",
+                    "más a la izquierda"
                 }
             },
             c_fg_atonal = {
                 name = "Atonal",
                 text = {
-                    "Convierte {C:attention}#1#{} #2# de más a la",
-                    "izquierda a su versión {C:purple}alternativa{}"
+                    "Alterna {C:attention}#1#{} #2# de",
+                    "más a la izquierda"
                 }
             },
             c_fg_accelerando = {
@@ -25,22 +25,24 @@ return {
             c_fg_treble = {
                 name = "Clave de Sol",
                 text = {
-                    "Convierte todos los comodines {C:blue}comunes{}",
-                    "en sus versiones {C:purple}alternativas{}"
+                    "Alterna todos los",
+                    "comodines {C:blue}comunes{}",
+
                 }
             },
             c_fg_bass = {
                 name = "Clave de Fa",
                 text = {
-                    "Convierte todos los comodines {C:green}inusuales{}",
-                    "en sus versiones {C:purple}alternativas{}"
+                    "Alterna todos los",
+                    "comodines {C:green}inusuales{}",
+
                 }
             },
             c_fg_alto = {
                 name = "Clave de Do",
                 text = {
-                    "Convierte todos los comodines {C:red}raros{}",
-                    "en sus versiones {C:purple}alternativas{}"
+                    "Alterna todos los",
+                    "comodines {C:red}raros{}",
                 }
             },
             c_fg_stake = {
@@ -53,8 +55,10 @@ return {
             c_fg_fil_di_voce = {
                 name = "Fil Di Voce",
                 text = {
-                    "Da {C:money}$#1#{} dólares por",
-                    "cada comodín {C:purple}alternativo{}"
+                    "{C:money}+$#1#{} dólares por cada comodín {C:purple}alternativo{}",
+                    "{C:money}+$#2#{} dólares por cada comodín {C:red}original{}",
+                    "{C:inactive}(Actualmente {C:money}$#3#{C:inactive}){}"
+                    
                 }
             },
             c_fg_tonal_alt = {
@@ -315,7 +319,7 @@ return {
                     "da {C:mult}+#1#{} Multi"
                 }
             },
-            j_fg_greedy = {
+            j_fg_greedy_joker = {
                 name = '¿Comodín codicioso?',
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
@@ -324,7 +328,7 @@ return {
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
-            j_fg_lusty = {
+            j_fg_lusty_joker = {
                 name = '¿Comodín lujurioso?',
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
@@ -333,7 +337,7 @@ return {
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
-            j_fg_wrathful = {
+            j_fg_wrathful_joker = {
                 name = '¿Comodín irascible?',
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
@@ -342,7 +346,7 @@ return {
                     "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Multi)",
                 }
             },
-            j_fg_gluttenous = {
+            j_fg_gluttenous_joker = {
                 name = "¿Comodín glotón?",
                 text = {
                     "Gana {C:mult}+#1#{} multi por cada carta",
@@ -813,7 +817,7 @@ return {
                     "{C:inactive,s:0.8}(Se aplica tras jugar las cartas){}"
                 }
             },
-			 j_fg_gem = {
+			 j_fg_rough_gem = {
                 name = "¿Gema en bruto?",
                 text = {
                     "Si la mano de poker contiene un {C:attention}#1#{}",
@@ -874,7 +878,7 @@ return {
                     "{C:inactive}(Actualmente {C:chips}+#3#{}{C:inactive} Fichas)",
                 },
 			},
-			j_fg_agate ={
+			j_fg_onyx_agate ={
                 name = "¿Ágata onix?",
                 text = {
                     "Si la mano de poker contiene un {C:attention}#1#{}",
