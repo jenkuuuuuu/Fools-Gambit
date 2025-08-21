@@ -13,21 +13,9 @@ end
 
 
 --- Checks if a card is an alternate or not in the given table. Stops at the first instance of it's key.
---- @param key string
---- @param table? table
---- @return boolean|nil
-function FG.FUNCS.is_alternate(key,table)
-	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
-
-    for k, v in pairs(table) do
-        if key == v then
-            return true
-		elseif key == tostring(k) then
-			return false
-        end
-    end
-    return nil
-end
+--- @param card table
+--- @return boolean
+function FG.FUNCS.is_alternate(card) return (card and card.ability and card.ability.fg_data and card.ability.fg_data.is_alternate) or false end
 
 --- Gets the key/value pair associated with the passing data.
 ---@param key string The provided card key.
@@ -38,7 +26,7 @@ function FG.FUNCS.get_alternate(key,table)
 	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
 
 	local _passing = "k" 
-	if FG.FUNCS.is_alternate(key,table) then _passing = "v" end
+	--if FG.FUNCS.is_alternate(key,table) then _passing = "v" end
 	if not table then return false end
 
 	if _passing == "k" then -- passing key, returning value
@@ -141,11 +129,7 @@ function FG.FUNCS.alternate_seal(source,target) end
 --- Transfers and updates the values from any given card to any other card.
 ---@param source table|card is the old card, that is being deleted
 ---@param target table|card is the new card created for alternating.
-function FG.FUNCS.update_alternate_values(source,target,mode)
-	if not source.ability.fg_data or not source.ability.fg_data.vars then sendWarnMessage("This card lacks fg_alternate table inside it's ability table!","FG.FUNCS.update_alternate_values") return end
-	if not target.ability.fg_data or not target.ability.fg_data.vars then sendWarnMessage("The target card lacks fg_alternate table") return end
-	target.ability.fg_data.vars = source.ability.fg_data.vars
-end
+function FG.FUNCS.update_alternate_values(source,target,mode) target.ability.fg_data.vars = source.ability.fg_data.vars end
 
 --- Allows to integrate original<>alternate entries to the mod's tables.
 ---@param target_table table The table you are adding entries to.
@@ -288,7 +272,7 @@ function FG.FUNCS.allow_duplicate (card)
 	local found_alternate = false
 	for _,v in ipairs(G.jokers.cards) do
 		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true end -- Find showman
-		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key) then found_alternate = true end -- Find alternate card
+		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(card) then found_alternate = true end -- Find alternate card
 	end
 	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
 end

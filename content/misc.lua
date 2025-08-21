@@ -31,6 +31,22 @@ SMODS.Sticker{
     end,
 }
 --[[
+SMODS.Sticker{
+    key = "alternate_mark",
+    hide_badge = true,
+    default_compat = false,
+    sets = {},
+    rate = 0,
+    loc_txt = {
+        name = "Alternate",
+        text = {
+            "This is an",
+            "{C:purple}alternate{} card"
+        }
+    }
+}
+]]
+--[[
 SMODS.JimboQuip{
     key = 'fg_goldenleaf_wq',
     type = 'win',

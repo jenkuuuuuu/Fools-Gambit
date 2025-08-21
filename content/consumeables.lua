@@ -19,11 +19,11 @@ SMODS.ConsumableType{
     default = "c_fg_atonal",
     primary_colour = G.C.RED,
     secondary_colour = G.C.PURPLE,
-    collection_rows = {7, 7}
+    collection_rows = {4, 4}
 }
 
 ---@param params {}
----@param extra {area:"jokers"|"consumeables"|string,alt:boolean,loc:string[]}
+---@param extra {area:"jokers"|"consumeables"|string,loc:string[]}
 local function tonal_loc_vars (params,extra)
     local self = params[1]
     local info_queue = params[2]
@@ -37,7 +37,6 @@ local function tonal_loc_vars (params,extra)
     for i=1, math.min(math.ceil(card.ability.extra.cards),#G[cardarea].cards) do
         if not card.fake_card and #G[cardarea].cards >= 1
         and G[cardarea].cards[i].ability.fg_data
-        and G[cardarea].cards[i].ability.fg_data.is_alternate == extra.alt
         and not FG.FUNCS.get_card_info(G[cardarea].cards[i]).stickers.unchangeable then
             info_queue[#info_queue+1] = G.P_CENTERS[G[cardarea].cards[i].ability.fg_data.alternate_card]
         end
@@ -47,7 +46,7 @@ local function tonal_loc_vars (params,extra)
 end
 
 ---@param param {}
----@param extra {area:"jokers"|"consumeables"|string,alt:boolean}
+---@param extra {area:"jokers"|"consumeables"|string}
 local function tonal_can (param,extra)
     local self = param[1]
     local card = param[2]
@@ -56,35 +55,37 @@ local function tonal_can (param,extra)
     if G[cardarea] and #G[cardarea].cards >= 1 then
         if not card.ability then card.ability = {extra = { cards = 1}} end
         for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G[cardarea].cards) do
-            if G[cardarea].cards[i].ability.fg_data and G[cardarea].cards[i].ability.fg_data.is_alternate == extra.alt
+            if G[cardarea].cards[i].ability.fg_data
             and not FG.FUNCS.get_card_info(G[cardarea].cards[i]).stickers.unchangeable
-            and FG.FUNCS.check_exists(FG.FUNCS.get_card_info(G[cardarea].cards[i]).key) then return true end
+            and FG.FUNCS.check_exists(G[cardarea].cards[i].ability.fg_data.alternate_card) then return true end
         end
     end
 end
 
 ---@param param {}
----@param extra {area:"jokers"|"consumeables"|string,alt:boolean}
+---@param extra {area:"jokers"|"consumeables"|string}
 local function tonal_use (param,extra)
-    local card = param[1]
-    local p_area = param[2]
-    local copier = param[3]
+    local self = param[1]
+    local card = param[2]
+    local p_area = param[3]
+    local copier = param[4]
     local cardarea = extra.area
 
+    
     G.E_MANAGER:add_event(Event({
         trigger = 'after',
         delay = 0.4,
         func = function()
-            if not card.ability then card.ability = {extra = { cards = 1}} end
             for i=1, math.min(math.ceil(card.ability.extra.cards or 1),#G[cardarea].cards) do
-                if G[cardarea].cards[i].ability.fg_data.is_alternate == extra.alt
-                and not FG.FUNCS.get_card_info(G[cardarea].cards[i]).stickers.unchangeable
-                and FG.FUNCS.check_exists(FG.FUNCS.get_card_info(G[cardarea].cards[i]).key) then
+                if not FG.FUNCS.get_card_info(G[cardarea].cards[i]).stickers.unchangeable
+                and FG.FUNCS.check_exists(G[cardarea].cards[i].ability.fg_data.alternate_card) then
                     local c = FG.FUNCS.alternate_card(G[cardarea].cards[i])
                     FG.FUNCS.update_edition(c.original,c.alternate)
                     FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    card:juice_up()        
                 end
             end
+            play_sound("tarot1")
             return true
         end
     }))
@@ -92,7 +93,7 @@ end
 
 
 ---@param param {}
----@param extra {area:"jokers"|"consumeables"|string,alt:boolean,rarity:1|2|3|4|"fg_common_alt"|"fg_uncommon_alt"|"fg_rare_alt"|"fg_legendary_alt"|"fg_collective"|"fg_collective_alt"|string}
+---@param extra {area:"jokers"|"consumeables"|string,alt:boolean,rarity:string[]|number[]}
 local function bulk_loc (param,extra)
     local self = param[1]
     local info_queue = param[2]
@@ -102,47 +103,57 @@ local function bulk_loc (param,extra)
     if not G[cardarea] then return end
 
     for _,v in ipairs(G[cardarea].cards) do
-        if v.ability.fg_data and v.ability.fg_data.is_alternate == extra.alt
-        and not FG.FUNCS.get_card_info(v).stickers.unchangeable
-        and FG.FUNCS.get_card_info(v).rarity == extra.rarity then
+        local can = false
+        for _,vv in ipairs(extra.rarity) do if FG.FUNCS.get_card_info(v).rarity == vv then can = true end end
+        for _,vv in ipairs(extra.rarity) do if FG.FUNCS.get_card_info(v).rarity == vv then can = true end end
+        if not FG.FUNCS.get_card_info(v).stickers.unchangeable and can then
             info_queue[#info_queue+1] = G.P_CENTERS[v.ability.fg_data.alternate_card]
         end
     end
 end
 
 ---@param param {}
----@param extra {area:"jokers"|"consumeables"|string,alt:boolean,rarity:1|2|3|4|"fg_common_alt"|"fg_uncommon_alt"|"fg_rare_alt"|"fg_legendary_alt"|"fg_collective"|"fg_collective_alt"|string}
+---@param extra {area:"jokers"|"consumeables"|string,alt:boolean,rarity:string[]|number[]}
 local function bulk_can (param,extra)
     local self = param[1]
     local card = param[2]
     local cardarea = extra.area
 
     for _,v in ipairs(G.jokers.cards) do
-        if FG.FUNCS.get_card_info(v).rarity == extra.rarity
-        and v.ability.fg_data and v.ability.fg_data.is_alternate == extra.alt
-        and FG.FUNCS.check_exists(FG.FUNCS.get_card_info(v).key) then return true end
+        local can = false
+        for _,vv in ipairs(extra.rarity) do if FG.FUNCS.get_card_info(v).rarity == vv then can = true end end
+        if can and FG.FUNCS.check_exists(FG.FUNCS.get_card_info(v).key) and not FG.FUNCS.get_card_info(v).stickers.unchangeable then return true end
     end
 end
 
 ---@param param {}
----@param extra {area:"jokers"|"consumeables"|string,alt:boolean,rarity:1|2|3|4|"fg_common_alt"|"fg_uncommon_alt"|"fg_rare_alt"|"fg_legendary_alt"|"fg_collective"|"fg_collective_alt"|string}
+---@param extra {area:"jokers"|"consumeables"|string,alt:boolean,rarity:string[]|number[]}
 local function bulk_use (param,extra)
-    local card = param[1]
-    local p_area = param[2]
-    local copier = param[3]
+    local self = param[1]
+    local card = param[2]
+    local p_area = param[3]
+    local copier = param[4]
     local cardarea = extra.area
 
     G.E_MANAGER:add_event(Event({
-    func = function()
-        for i,v in ipairs(G[cardarea].cards) do
-            if v.ability.fg_data and v.ability.fg_data.is_alternate == extra.alt and FG.FUNCS.get_card_info(v).rarity == extra.rarity 
-            and FG.FUNCS.check_exists(FG.FUNCS.get_card_info(v).key)then
-                local c = FG.FUNCS.alternate_card(v)
-                FG.FUNCS.update_edition(c.original,c.alternate)
-                FG.FUNCS.update_alternate_values(c.original,c.alternate)
+        trigger = 'after',
+        delay = 0.4,
+        func = function()
+            for i=1, #G[cardarea].cards do
+                local can = false
+                for _,vv in ipairs(extra.rarity) do if FG.FUNCS.get_card_info(G[cardarea].cards[i]).rarity == vv then can = true end end
+
+                if not FG.FUNCS.get_card_info(G[cardarea].cards[i]).stickers.unchangeable
+                and FG.FUNCS.check_exists(G[cardarea].cards[i].ability.fg_data.alternate_card)
+                and can then
+                    local c = FG.FUNCS.alternate_card(G[cardarea].cards[i])
+                    FG.FUNCS.update_edition(c.original,c.alternate)
+                    FG.FUNCS.update_alternate_values(c.original,c.alternate)
+                    card:juice_up()   
+                end
             end
-        end
-        return true
+            play_sound("tarot1")
+            return true
         end
     }))
 end
@@ -162,9 +173,9 @@ SMODS.Consumable{
         },
         extra = {cards = 1
     }},
-    loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "jokers", loc = {"w_joker_singular","w_joker_plural"}, alt = true}) end,
-    can_use = function(self, card) return tonal_can({self,card},{area = "jokers", alt = true})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "jokers", alt = true}) end
+    loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "jokers", loc = {"w_joker_singular","w_joker_plural"}}) end,
+    can_use = function(self, card) return tonal_can({self,card},{area = "jokers"})end,
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "jokers"}) end
 }
 
 SMODS.Consumable{
@@ -179,9 +190,9 @@ SMODS.Consumable{
         },
         extra = {cards = 1
     }},
-    loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "jokers", loc = {"w_joker_singular","w_joker_plural"}, alt = false}) end,
-    can_use = function(self, card) return tonal_can({self,card},{area = "jokers", alt = false})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "jokers", alt = false}) end
+    loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "consumeables", loc = {"w_consumable_singular","w_consumable_plural"}}) end,
+    can_use = function(self, card) return tonal_can({self,card},{area = "consumeables"})end,
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "consumeables"}) end
 }
 
 if FG.config.debug_mode then
@@ -250,9 +261,9 @@ SMODS.Consumable{
             alternate_card = "c_fg_treble_alt"
         },
     },
-    loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = false, rarity = 1}) end,
-    can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = false, rarity = 1}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = false, rarity = 1}) end
+    loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", rarity = {1,"fg_common_alt"}}) end,
+    can_use = function(self, card) return bulk_can({self,card},{area = "jokers", rarity = {1,"fg_common_alt"}}) end,
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", rarity = {1,"fg_common_alt"}}) end
 }
 
 SMODS.Consumable{
@@ -266,9 +277,9 @@ SMODS.Consumable{
             alternate_card = "c_fg_bass_alt"
         },
     },
-    loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = false, rarity = 2}) end,
-    can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = false, rarity = 2}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = false, rarity = 2}) end
+    loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", rarity = {2,"fg_uncommon_alt"}}) end,
+    can_use = function(self, card) return bulk_can({self,card},{area = "jokers", rarity = {2,"fg_uncommon_alt"}}) end,
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", rarity = {2,"fg_uncommon_alt"}}) end
 }
 
 SMODS.Consumable{
@@ -282,9 +293,9 @@ SMODS.Consumable{
             alternate_card = "c_fg_alto_alt"
         },
     },
-    loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = false, rarity = 3}) end,
-    can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = false, rarity = 3}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = false, rarity = 3}) end
+    loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", rarity = {3,"fg_rare_alt"}}) end,
+    can_use = function(self, card) return bulk_can({self,card},{area = "jokers", rarity = {3,"fg_rare_alt"}}) end,
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", rarity = {3,"fg_rare_alt"}}) end
 }
 
 SMODS.Consumable{
@@ -306,8 +317,9 @@ SMODS.Consumable{
 	loc_vars = function(self,info_queue, card)
          return {vars = {card.ability.extra.cards}}
 	end,
-    use = function(card, area, copier)
+    use = function(self, card, area, copier)
         if #G.consumeables.cards < G.consumeables.config.card_limit then
+        if not card.config.extra then card.config.extra = {cards = 2} end
         for i = 1, math.min(card.config.extra.cards, G.consumeables.config.card_limit - #G.consumeables.cards) do
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         G.E_MANAGER:add_event(Event({
@@ -333,28 +345,37 @@ SMODS.Consumable{
 	pos = { x = 3, y = 0 },
 	 config = {
         extra = {
-            dollars = 5
+            dollars = 3,
+            dollars_b = 1
         }
     },
-    can_use = function(self, card)
-        for _,v in pairs(G.jokers.cards) do
-            if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(v).key) then 
-                return true
-            end
-        end
-    end,
-	loc_vars = function(self,info_queue, card)
-         return {vars = {card.ability.extra.dollars}}
+    loc_vars = function(self,info_queue, card)
+        local cur = 0
+        if G.jokers and G.jokers.cards then for _,v in ipairs(G.jokers.cards) do 
+            if FG.FUNCS.is_alternate(v) then cur = cur + card.ability.extra.dollars
+            else cur = cur + (card.ability.extra.dollars_b or 0) end 
+        end end
+        return {vars = {card.ability.extra.dollars, card.ability.extra.dollars_b, cur}}
 	end,
-    use = function(card, area, copier)
+    can_use = function(self, card) return G.jokers and G.jokers.cards and #G.jokers.cards > 0 end,
+    use = function(self, card, area, copier)
         for _,v in ipairs(G.jokers.cards) do
-            if FG.FUNCS.is_alternate(FG.FUNCS.get_card_info(v).key) then
-                G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
+            if v.ability.fg_data and FG.FUNCS.is_alternate(v) then
+                G.E_MANAGER:add_event(Event({func = function()
                 play_sound('timpani')
+                card:juice_up()
                 v:juice_up(0.3, 0.5)
-                ease_dollars(card.config.extra.dollars, true)
+                ease_dollars(card.ability.extra.dollars, true)
                 return true end }))
-                delay(0.2)
+                delay(0.4)
+            else
+                G.E_MANAGER:add_event(Event({func = function()
+                play_sound('timpani')
+                card:juice_up()
+                v:juice_up(0.3, 0.5)
+                ease_dollars(card.ability.extra.dollars_b, true)
+                return true end }))
+                delay(0.4)
             end
         end
     end
@@ -364,7 +385,7 @@ SMODS.Consumable{
 -----------------------------
 --- Alternate aberrations ---
 -----------------------------
-
+--[[
 SMODS.Consumable{
     key = "tonal_alt",
     set = "aberration",
@@ -379,7 +400,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "consumeables", loc = {"w_consumable_singular","w_consumable_plural"}, alt = true}) end,
     can_use = function(self, card) return tonal_can({self,card},{area = "consumeables", alt = true})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "consumeables", alt = true}) end
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "consumeables", alt = true}) end
 }
 
 SMODS.Consumable{
@@ -396,7 +417,7 @@ SMODS.Consumable{
     },
     loc_vars = function (self, info_queue, card) return tonal_loc_vars({self,info_queue,card},{area = "consumeables", loc = {"w_consumable_singular","w_consumable_plural"}, alt = false}) end,
     can_use = function(self, card) return tonal_can({self,card},{area = "consumeables", alt = false})end,
-    use = function(card, area, copier) return tonal_use({card,area,copier},{area = "consumeables", alt = false}) end
+    use = function(self, card, area, copier) return tonal_use({self,card,area,copier},{area = "consumeables", alt = false}) end
 }
 
 
@@ -413,7 +434,7 @@ SMODS.Consumable{
 	pos = { x = 2, y = 0 },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = true, rarity = "fg_common_alt"}) end
 }
 
 SMODS.Consumable{
@@ -429,7 +450,7 @@ SMODS.Consumable{
 	pos = { x = 0, y = 0 },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = true, rarity = "fg_uncommon_alt"}) end
 }
 
 SMODS.Consumable{
@@ -445,5 +466,5 @@ SMODS.Consumable{
 	pos = { x = 1, y = 0 },
     loc_vars = function (self, info_queue, card) return bulk_loc({self,info_queue,card},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end,
     can_use = function(self, card) return bulk_can({self,card},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end,
-    use = function(card, area, copier) return bulk_use({card,area,copier},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end
-}
+    use = function(self, card, area, copier) return bulk_use({self,card,area,copier},{area = "jokers", alt = true, rarity = "fg_rare_alt"}) end
+}]]
