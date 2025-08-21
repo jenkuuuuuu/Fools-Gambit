@@ -15,7 +15,7 @@ end
 --- Checks if a card is an alternate or not in the given table. Stops at the first instance of it's key.
 --- @param card table
 --- @return boolean
-function FG.FUNCS.is_alternate(card) return (card.ability and card.ability.fg_data and card.ability.fg_data.is_alternate) or false end
+function FG.FUNCS.is_alternate(card) return (card and card.ability and card.ability.fg_data and card.ability.fg_data.is_alternate) or false end
 
 --- Gets the key/value pair associated with the passing data.
 ---@param key string The provided card key.
@@ -26,7 +26,7 @@ function FG.FUNCS.get_alternate(key,table)
 	if not table or type(table) ~= "table" then table = FG.FUNCS.full_search_alternate() end
 
 	local _passing = "k" 
-	if FG.FUNCS.is_alternate(key,table) then _passing = "v" end
+	--if FG.FUNCS.is_alternate(key,table) then _passing = "v" end
 	if not table then return false end
 
 	if _passing == "k" then -- passing key, returning value
@@ -272,7 +272,7 @@ function FG.FUNCS.allow_duplicate (card)
 	local found_alternate = false
 	for _,v in ipairs(G.jokers.cards) do
 		if FG.FUNCS.get_card_info(v).key == "j_ring_master" then found_showman = true end -- Find showman
-		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(FG.FUNCS.get_card_info(card).key) then found_alternate = true end -- Find alternate card
+		if FG.FUNCS.get_card_info(v).key == FG.FUNCS.get_alternate(card) then found_alternate = true end -- Find alternate card
 	end
 	if FG.config.duplicated_jokers or found_showman or not found_alternate then return true else return false end
 end
