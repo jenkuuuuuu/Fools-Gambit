@@ -4872,17 +4872,19 @@ SMODS.Joker {
 		soul_pos = { x = 1, y = 1 },
 		cost = 30,
 		calculate = function(self, card, context)
-			if card.ability.extra.repetitions == 0 then
-				card.ability.extra.repetitions = 1
+			if not context.blueprint then	
+				if card.ability.extra.repetitions == 0 then
+					card.ability.extra.repetitions = 1
+				end
+				if context.end_of_round and not context.repetition and not context.individual and G.GAME.blind.boss then
+					card.ability.extra.repetitions = card.ability.extra.repetitions + 1
+				end
+				if context.retrigger_joker_check and not context.retrigger_joker and card ~= self then
+					return { 
+						repetitions = card.ability.extra.repetitions
+					} 
+				end
 			end
-			if context.end_of_round and not context.repetition and not context.individual and G.GAME.blind.boss then
-				card.ability.extra.repetitions = card.ability.extra.repetitions + 1
-			end
-			if context.retrigger_joker_check and not context.retrigger_joker and card ~= self then
-				return { 
-					repetitions = card.ability.extra.repetitions
-				 } 
-			   end
 		end
 	}
 	-- Jenku alt
@@ -4980,42 +4982,43 @@ SMODS.Joker {
 			}
 		end,
 		calculate = function(self, card, context)
-
-			local debuffing = false
-			if context.before then
-                if pseudorandom('jenker') < (G.GAME.probabilities.normal or 1) / self.config.extra.odds then
-					debuffing = true
-					card.ability.extra.name = "janku"
-					card.children.center:set_sprite_pos({x = 5, y = 0})
-					card.children.floating_sprite:set_sprite_pos({x = 5, y = 1})
-					card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Nope!" })
-					
-					for i in ipairs(context.scoring_hand) do
-						SMODS.debuff_card(context.scoring_hand[i], true, "jenkerdebuff")
+			if not context.blueprint then	
+				local debuffing = false
+				if context.before then
+					if pseudorandom('jenker') < (G.GAME.probabilities.normal or 1) / self.config.extra.odds then
+						debuffing = true
+						card.ability.extra.name = "janku"
+						card.children.center:set_sprite_pos({x = 5, y = 0})
+						card.children.floating_sprite:set_sprite_pos({x = 5, y = 1})
+						card_eval_status_text(card, 'extra', nil, nil, nil, { message = "Nope!" })
+						
+						for i in ipairs(context.scoring_hand) do
+							SMODS.debuff_card(context.scoring_hand[i], true, "jenkerdebuff")
+						end
 					end
 				end
-			end
-			-- random repetition logic
-			if context.repetition and context.cardarea == G.play then
-				if not debuffing then
-					local random_repetitions = pseudorandom('jenker', 1, card.ability.extra.repetitions)
-					return {
-						message = localize('k_again_ex'),
-						repetitions = random_repetitions,
-						card = card
-					}
+				-- random repetition logic
+				if context.repetition and context.cardarea == G.play then
+					if not debuffing then
+						local random_repetitions = pseudorandom('jenker', 1, card.ability.extra.repetitions)
+						return {
+							message = localize('k_again_ex'),
+							repetitions = random_repetitions,
+							card = card
+						}
+					end
 				end
-			end
-			-- reset card to default at end of round, go thru playing cards and un-debuff them all
-			-- i spent an hour and 20 minutes debugging this. my indentation was goofed. oh my god.
-			if context.end_of_round then
-				debuffing = nil
-				card.ability.extra.name = "jenku"
-				card.children.center:set_sprite_pos({x = 1, y = 0})
-				card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
-				
-				for _, playing_card in pairs(G.playing_cards) do
-						SMODS.debuff_card(playing_card, false, "jenkerdebuff")
+				-- reset card to default at end of round, go thru playing cards and un-debuff them all
+				-- i spent an hour and 20 minutes debugging this. my indentation was goofed. oh my god.
+				if context.end_of_round then
+					debuffing = nil
+					card.ability.extra.name = "jenku"
+					card.children.center:set_sprite_pos({x = 1, y = 0})
+					card.children.floating_sprite:set_sprite_pos({x = 1, y = 1})
+					
+					for _, playing_card in pairs(G.playing_cards) do
+							SMODS.debuff_card(playing_card, false, "jenkerdebuff")
+					end
 				end
 			end
 		end
