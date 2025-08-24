@@ -151,7 +151,7 @@ SMODS.Edition({
 
 --
 -- POLYCHROME
---[[
+--
 
 SMODS.Shader {
     key = 'polychrome',
@@ -180,19 +180,17 @@ SMODS.Edition({
         return { vars = { self.config.extra.xmult, (G.GAME.probabilities.normal or 1), self.config.extra.odds } }
     end,
 	calculate = function(self, card, context)
-        if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
+		if context.post_joker or (context.main_scoring and context.cardarea == G.play) then
             if pseudorandom('polychrome') < G.GAME.probabilities.normal / self.config.extra.odds then
-                self.config.extra.retriggered = true
-                return { repetitions = 1, message = localize('k_again_ex'), Xmult_mod = self.config.extra.xmult }
-            else
-                return { repetitions = 1, message = localize('k_again_ex')}
+                return {repetitions = 1, Xmult_mod = self.config.extra.xmult}
             end
-	    end
-      
+        end
+        if (context.repetition or context.retrigger_joker_check) and context.other_card == card then
+            return {repetitions = 1}
+        end
 	end
 })
 
-]]
 
 --
 -- NEGATIVE
